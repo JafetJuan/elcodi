@@ -113,7 +113,7 @@ abstract class Purchasable implements PurchasableInterface
     /**
      * @var Collection
      *
-     * Many-to-Many association between products and categories.
+     * Many-to-Many association between products and categories
      */
     protected $categories;
 

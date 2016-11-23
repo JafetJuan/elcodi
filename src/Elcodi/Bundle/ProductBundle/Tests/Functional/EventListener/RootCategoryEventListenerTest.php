@@ -29,7 +29,7 @@ class RootCategoryEventListenerTest extends WebTestCase
     /**
      * @var ObjectDirector
      *
-     * The category director.
+     * The category director
      */
     protected $categoryDirector;
 

@@ -31,7 +31,7 @@ class CategoryIntegrityEventListener
     /**
      * @var CategoryIntegrityFixer
      *
-     * A category integrity fixer.
+     * A category integrity fixer
      */
     private $categoryIntegrityFixer;
 
@@ -48,7 +48,7 @@ class CategoryIntegrityEventListener
     /**
      * Before the flush we check that the product categories are right.
      *
-     * @param PreFlushEventArgs $args The pre flush event arguments.
+     * @param PreFlushEventArgs $args The pre flush event arguments
      */
     public function preFlush(PreFlushEventArgs $args)
     {
@@ -65,7 +65,7 @@ class CategoryIntegrityEventListener
     /**
      * Before an update we check that the product categories are right.
      *
-     * @param PreUpdateEventArgs $event The pre update event.
+     * @param PreUpdateEventArgs $event The pre update event
      */
     public function preUpdate(PreUpdateEventArgs $event)
     {

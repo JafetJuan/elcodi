@@ -78,7 +78,7 @@ class ObjectDirector
     /**
      * Finds an object by its primary key / identifier.
      *
-     * @param mixed $id The identifier.
+     * @param mixed $id The identifier
      *
      * @return object|null Fetched object
      */
@@ -136,7 +136,7 @@ class ObjectDirector
     /**
      * Finds a single object given a criteria.
      *
-     * @param array $criteria The criteria.
+     * @param array $criteria The criteria
      *
      * @return object|null Fetched object
      */

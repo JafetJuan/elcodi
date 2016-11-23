@@ -67,7 +67,7 @@ final class ElcodiMediaImageResizeTypes
      * @var int
      *
      * Resize mode 5 sets the image to the desired size.
-     * Preserves original aspect ratio and crops image for only get this area.
+     * Preserves original aspect ratio and crops image for only get this area
      */
     const OUTBOUND_CROP = 5;
 }

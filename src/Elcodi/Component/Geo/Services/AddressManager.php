@@ -63,7 +63,7 @@ class AddressManager
      *
      * @param AddressInterface $address The address to save
      *
-     * @return AddressInterface saved address.
+     * @return AddressInterface saved address
      */
     public function saveAddress(AddressInterface $address)
     {

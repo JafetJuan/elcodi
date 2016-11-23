@@ -17,17 +17,16 @@
 
 namespace Elcodi\Bundle\FixturesBoosterBundle;
 
-use Mmoreram\SymfonyBundleDependencies\DependentBundleInterface;
+use Mmoreram\BaseBundle\BaseBundle;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 use Elcodi\Bundle\FixturesBoosterBundle\DependencyInjection\ElcodiFixturesBoosterExtension;
 
 /**
  * Class ElcodiFixturesBoosterBundle.
  */
-class ElcodiFixturesBoosterBundle extends AbstractElcodiBundle implements DependentBundleInterface
+class ElcodiFixturesBoosterBundle extends BaseBundle
 {
     /**
      * Returns the bundle's container extension.

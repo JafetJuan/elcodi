@@ -27,8 +27,7 @@ use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
 /**
  * Interface CategoryInterface.
  */
-interface CategoryInterface
-    extends
+interface CategoryInterface extends
     IdentifiableInterface,
     DateTimeInterface,
     MetaDataInterface,

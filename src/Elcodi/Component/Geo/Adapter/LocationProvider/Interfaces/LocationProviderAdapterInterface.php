@@ -34,7 +34,7 @@ interface LocationProviderAdapterInterface
     /**
      * Get the children given a location id.
      *
-     * @param string $id The location Id.
+     * @param string $id The location Id
      *
      * @return LocationData[] Collection of locations
      */
@@ -43,7 +43,7 @@ interface LocationProviderAdapterInterface
     /**
      * Get the parents given a location id.
      *
-     * @param string $id The location Id.
+     * @param string $id The location Id
      *
      * @return LocationData[] Collection of locations
      */
@@ -52,7 +52,7 @@ interface LocationProviderAdapterInterface
     /**
      * Get the full location info given it's id.
      *
-     * @param string $id The location id.
+     * @param string $id The location id
      *
      * @return LocationData Location info
      */
@@ -62,7 +62,7 @@ interface LocationProviderAdapterInterface
      * Get the hierarchy given a location sorted from root to the given
      * location.
      *
-     * @param string $id The location id.
+     * @param string $id The location id
      *
      * @return LocationData[] Collection of locations
      */

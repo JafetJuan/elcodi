@@ -46,7 +46,7 @@ class AddressViewFactory
     /**
      * Builds a new address view.
      *
-     * @param AddressInterface $address The address to be converted on view.
+     * @param AddressInterface $address The address to be converted on view
      *
      * @return AddressView
      */

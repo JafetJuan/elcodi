@@ -17,17 +17,16 @@
 
 namespace Elcodi\Bundle\SitemapBundle;
 
-use Mmoreram\SymfonyBundleDependencies\DependentBundleInterface;
+use Mmoreram\BaseBundle\BaseBundle;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 use Elcodi\Bundle\SitemapBundle\DependencyInjection\ElcodiSitemapExtension;
 
 /**
  * ElcodiSitemapBundle.
  */
-class ElcodiSitemapBundle extends AbstractElcodiBundle implements DependentBundleInterface
+class ElcodiSitemapBundle extends BaseBundle
 {
     /**
      * Returns the bundle's container extension.

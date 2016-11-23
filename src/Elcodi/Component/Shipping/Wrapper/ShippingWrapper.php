@@ -75,7 +75,6 @@ class ShippingWrapper
                 $foundShippingMethod,
                 ShippingMethod $shippingMethod
             ) use ($shippingMethodId) {
-
                 return ($shippingMethodId === $shippingMethod->getId())
                     ? $shippingMethod
                     : $foundShippingMethod;

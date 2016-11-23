@@ -23,8 +23,7 @@ use Elcodi\Component\Product\Entity\Interfaces\DimensionableInterface;
 /**
  * Interface OrderLineInterface.
  */
-interface OrderLineInterface
-    extends
+interface OrderLineInterface extends
     IdentifiableInterface,
     PurchasableWrapperInterface,
     PriceInterface,

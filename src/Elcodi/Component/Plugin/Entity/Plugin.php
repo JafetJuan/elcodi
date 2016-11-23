@@ -293,7 +293,6 @@ class Plugin
         return array_reduce(
             $requiredFields,
             function ($canBeUsed, $checkableField) {
-
                 return
                     $canBeUsed &&
                     $this->hasField($checkableField) &&

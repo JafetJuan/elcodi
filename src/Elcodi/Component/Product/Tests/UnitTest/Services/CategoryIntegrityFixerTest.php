@@ -118,7 +118,7 @@ class CategoryIntegrityFixerTest extends PHPUnit_Framework_TestCase
     /**
      * Gets a new categorizable purchasable.
      *
-     * @param int $id The purchasable id.
+     * @param int $id The purchasable id
      *
      * @return ProductInterface
      */

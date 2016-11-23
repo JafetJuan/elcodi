@@ -17,9 +17,9 @@
 
 namespace Elcodi\Bundle\CoreBundle;
 
+use Mmoreram\BaseBundle\BaseBundle;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 use Elcodi\Bundle\CoreBundle\DependencyInjection\ElcodiCoreExtension;
 
 /**
@@ -29,7 +29,7 @@ use Elcodi\Bundle\CoreBundle\DependencyInjection\ElcodiCoreExtension;
  * All available bundles in this suite could have this bundle as a main
  * dependency.
  */
-class ElcodiCoreBundle extends AbstractElcodiBundle
+class ElcodiCoreBundle extends BaseBundle
 {
     /**
      * Returns the bundle's container extension.

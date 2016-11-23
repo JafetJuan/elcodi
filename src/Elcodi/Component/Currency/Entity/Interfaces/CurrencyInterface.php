@@ -23,8 +23,7 @@ use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 /**
  * Interface CurrencyInterface.
  */
-interface CurrencyInterface
-    extends
+interface CurrencyInterface extends
     DateTimeInterface,
     EnabledInterface
 {

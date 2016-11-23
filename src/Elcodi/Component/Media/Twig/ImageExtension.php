@@ -230,9 +230,9 @@ class ImageExtension extends Twig_Extension
      * Gets the reference type depending on the option and the generated route
      * host.
      *
-     * @param bool $absoluteUrlOption The received absolute url option.
+     * @param bool $absoluteUrlOption The received absolute url option
      *
-     * @return bool The reference type.
+     * @return bool The reference type
      */
     private function getReferenceType($absoluteUrlOption = false)
     {

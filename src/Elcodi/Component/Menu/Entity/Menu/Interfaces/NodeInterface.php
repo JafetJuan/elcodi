@@ -23,8 +23,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 /**
  * Interface NodeInterface.
  */
-interface NodeInterface
-    extends
+interface NodeInterface extends
     IdentifiableInterface,
     EnabledInterface,
     SubnodesAwareInterface
@@ -96,7 +95,7 @@ interface NodeInterface
     /**
      * Add an active url.
      *
-     * @param string $activeUrl The active url.
+     * @param string $activeUrl The active url
      *
      * @return $this Self object
      */
@@ -105,7 +104,7 @@ interface NodeInterface
     /**
      * Remove an active url.
      *
-     * @param string $activeUrl The active url.
+     * @param string $activeUrl The active url
      *
      * @return $this Self object
      */

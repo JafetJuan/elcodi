@@ -27,8 +27,7 @@ use Elcodi\Component\Rule\Entity\Interfaces\RuleInterface;
 /**
  * Interface CouponInterface.
  */
-interface CouponInterface
-    extends
+interface CouponInterface extends
     IdentifiableInterface,
     DateTimeInterface,
     EnabledInterface,

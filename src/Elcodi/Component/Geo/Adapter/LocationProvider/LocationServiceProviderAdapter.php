@@ -76,7 +76,7 @@ class LocationServiceProviderAdapter implements LocationProviderAdapterInterface
     /**
      * Get the children given a location id.
      *
-     * @param string $id The location Id.
+     * @param string $id The location Id
      *
      * @return LocationData[] Collection of locations
      *
@@ -102,7 +102,7 @@ class LocationServiceProviderAdapter implements LocationProviderAdapterInterface
     /**
      * Get the parents given a location id.
      *
-     * @param string $id The location Id.
+     * @param string $id The location Id
      *
      * @return LocationData[] Collection of locations
      *
@@ -128,7 +128,7 @@ class LocationServiceProviderAdapter implements LocationProviderAdapterInterface
     /**
      * Get the full location info given it's id.
      *
-     * @param string $id The location id.
+     * @param string $id The location id
      *
      * @return LocationData Location info
      *
@@ -156,7 +156,7 @@ class LocationServiceProviderAdapter implements LocationProviderAdapterInterface
      * Get the hierarchy given a location sorted from root to the given
      * location.
      *
-     * @param string $id The location id.
+     * @param string $id The location id
      *
      * @return LocationData[] Collection of locations
      *
@@ -219,7 +219,7 @@ class LocationServiceProviderAdapter implements LocationProviderAdapterInterface
      * Given a group of locations, return a simplified output using the
      * ValueObject LocationData, ready to be serialized.
      *
-     * @param array|Collection $locations The locations to format.
+     * @param array|Collection $locations The locations to format
      *
      * @return LocationData[] Formatted mode of Locations
      */
@@ -241,7 +241,7 @@ class LocationServiceProviderAdapter implements LocationProviderAdapterInterface
      * Given a location, return a simplified output using the
      * ValueObject LocationData, ready to be serialized.
      *
-     * @param LocationInterface $location The location to format.
+     * @param LocationInterface $location The location to format
      *
      * @return LocationData Formatted mode of Location
      */

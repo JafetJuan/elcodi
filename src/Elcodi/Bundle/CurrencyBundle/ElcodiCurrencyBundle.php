@@ -17,30 +17,19 @@
 
 namespace Elcodi\Bundle\CurrencyBundle;
 
-use Mmoreram\SymfonyBundleDependencies\DependentBundleInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Mmoreram\BaseBundle\BaseBundle;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 use Elcodi\Bundle\CurrencyBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\CurrencyBundle\DependencyInjection\ElcodiCurrencyExtension;
 
 /**
  * ElcodiCurrencyBundle Bundle.
  */
-class ElcodiCurrencyBundle extends AbstractElcodiBundle implements DependentBundleInterface
+class ElcodiCurrencyBundle extends BaseBundle
 {
-    /**
-     * @param ContainerBuilder $container
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new MappingCompilerPass());
-    }
-
     /**
      * Returns the bundle's container extension.
      *
@@ -49,6 +38,18 @@ class ElcodiCurrencyBundle extends AbstractElcodiBundle implements DependentBund
     public function getContainerExtension()
     {
         return new ElcodiCurrencyExtension();
+    }
+
+    /**
+     * Return a CompilerPass instance array.
+     *
+     * @return CompilerPassInterface[]
+     */
+    public function getCompilerPasses()
+    {
+        return [
+            new MappingCompilerPass(),
+        ];
     }
 
     /**

@@ -94,7 +94,6 @@ class MenuFilterer extends AbstractMenuModifier implements MenuChangerInterface
         $stage
     ) {
         return $menuNodes->filter(function (NodeInterface $menuNode) use ($menuCode, $stage) {
-
             if ($this->applyFiltersToMenuNode(
                 $menuNode,
                 $menuCode,
@@ -138,7 +137,6 @@ class MenuFilterer extends AbstractMenuModifier implements MenuChangerInterface
         return array_reduce(
             $menuFilters,
             function ($isValid, MenuFilterInterface $menuFilter) use ($menuNode) {
-
                 return
                     $isValid &&
                     $menuFilter->filter($menuNode);

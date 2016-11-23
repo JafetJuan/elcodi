@@ -163,7 +163,6 @@ class GeonamesLocationPopulatorAdapter implements LocationPopulatorAdapterInterf
         $interpreter->unstrict();
         $nbItems = 0;
         $interpreter->addObserver(function (array $columns) use ($country, &$nbItems) {
-
             if (
             isset(
                 $columns[1],

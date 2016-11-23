@@ -53,25 +53,21 @@ class APIMetricExtension extends Twig_Extension
     {
         return [
             new Twig_SimpleFunction('metric_beacon_unique', function ($token, $event, $dates) {
-
                 return $this
                     ->metricBucket
                     ->getBeaconsUnique($token, $event, $dates);
             }),
             new Twig_SimpleFunction('metric_beacon_total', function ($token, $event, $dates) {
-
                 return $this
                     ->metricBucket
                     ->getBeaconsTotal($token, $event, $dates);
             }),
             new Twig_SimpleFunction('metric_accumulation', function ($token, $event, $dates) {
-
                 return $this
                     ->metricBucket
                     ->getAccumulation($token, $event, $dates);
             }),
             new Twig_SimpleFunction('metric_distributions', function ($token, $event, $dates) {
-
                 return $this
                     ->metricBucket
                     ->getDistributions($token, $event, $dates);

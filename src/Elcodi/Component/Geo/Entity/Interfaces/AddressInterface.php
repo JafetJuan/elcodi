@@ -24,8 +24,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 /**
  * Interface AddressInterface.
  */
-interface AddressInterface
-    extends
+interface AddressInterface extends
     IdentifiableInterface,
     DateTimeInterface,
     EnabledInterface

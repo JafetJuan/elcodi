@@ -92,7 +92,6 @@ class MenuModifier extends AbstractMenuModifier implements MenuChangerInterface
         $stage
     ) {
         $menuNodes->map(function (NodeInterface $menuNode) use ($menuCode, $stage) {
-
             $this->applyModifiersToMenuNodes(
                 $menuNode->getSubnodes(),
                 $menuCode,

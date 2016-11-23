@@ -23,8 +23,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 /**
  * Interface VoteInterface.
  */
-interface VoteInterface
-    extends
+interface VoteInterface extends
     IdentifiableInterface,
     DateTimeInterface
 {

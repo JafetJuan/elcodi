@@ -26,8 +26,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 /**
  * Interface CommentInterface.
  */
-interface CommentInterface
-    extends
+interface CommentInterface extends
     IdentifiableInterface,
     DateTimeInterface,
     EnabledInterface

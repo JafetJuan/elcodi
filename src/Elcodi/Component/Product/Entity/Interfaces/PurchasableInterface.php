@@ -39,8 +39,7 @@ use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
  * these features (such as CartManager) will have a shallow dependency
  * with more concrete product classes or interfaces
  */
-interface PurchasableInterface
-    extends
+interface PurchasableInterface extends
     IdentifiableInterface,
     DateTimeInterface,
     ETaggableInterface,

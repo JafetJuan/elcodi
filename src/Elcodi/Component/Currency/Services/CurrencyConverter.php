@@ -33,7 +33,7 @@ class CurrencyConverter
     /**
      * @var ExchangeRateCalculator
      *
-     * The exchange rate calculator.
+     * The exchange rate calculator
      */
     private $exchangeRateCalculator;
 

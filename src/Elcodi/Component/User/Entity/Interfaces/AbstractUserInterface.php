@@ -27,8 +27,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 /**
  * Interface AbstractUserInterface.
  */
-interface AbstractUserInterface
-    extends
+interface AbstractUserInterface extends
     IdentifiableInterface,
     UserInterface,
     LastLoginInterface,

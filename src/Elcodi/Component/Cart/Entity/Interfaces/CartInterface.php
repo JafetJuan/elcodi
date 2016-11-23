@@ -29,8 +29,7 @@ use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
 /**
  * Interface CartInterface.
  */
-interface CartInterface
-    extends
+interface CartInterface extends
         DateTimeInterface,
         DimensionableInterface,
         IdentifiableInterface

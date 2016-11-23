@@ -32,8 +32,7 @@ use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
  * @author Damien Gavard <damien.gavard@gmail.com>
  * @author Berny Cantos <be@rny.cc>
  */
-interface PageInterface
-    extends
+interface PageInterface extends
     IdentifiableInterface,
     MetaDataInterface,
     DateTimeInterface,

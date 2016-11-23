@@ -28,8 +28,7 @@ use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 /**
  * Interface StoreInterface.
  */
-interface StoreInterface
-    extends
+interface StoreInterface extends
     IdentifiableInterface,
     DateTimeInterface,
     EnabledInterface

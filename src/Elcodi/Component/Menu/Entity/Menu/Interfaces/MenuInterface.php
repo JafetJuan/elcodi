@@ -23,8 +23,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 /**
  * Interface MenuInterface.
  */
-interface MenuInterface
-    extends
+interface MenuInterface extends
     IdentifiableInterface,
     EnabledInterface,
     SubnodesAwareInterface

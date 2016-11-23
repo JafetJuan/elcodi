@@ -100,7 +100,6 @@ trait SubnodesTrait
         return $this
             ->getSubnodes()
             ->filter(function (\Elcodi\Component\Menu\Entity\Menu\Interfaces\NodeInterface $menuNode) use ($tag) {
-
                 return $menuNode->getTag() == $tag;
             });
     }

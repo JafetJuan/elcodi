@@ -33,14 +33,14 @@ class ExchangeRateCalculatorTest extends PHPUnit_Framework_TestCase
     /**
      * @var string
      *
-     * The currency ISO that we are using as default exchange rate ISO.
+     * The currency ISO that we are using as default exchange rate ISO
      */
     const DEFAULT_EXCHANGE_CURRENCY_ISO = 'USD';
 
     /**
      * @var ExchangeRateCalculator
      *
-     * The object being tested.
+     * The object being tested
      */
     protected static $exchangeRateCalculator;
 
@@ -100,9 +100,9 @@ class ExchangeRateCalculatorTest extends PHPUnit_Framework_TestCase
     /**
      * Tests all the possible conversion methods.
      *
-     * @param string $convertFromIso       The ISO we are converting from.
-     * @param string $convertToIso         The ISO we are converting to.
-     * @param float  $expectedExchangeRate The expectex exchange rate.
+     * @param string $convertFromIso       The ISO we are converting from
+     * @param string $convertToIso         The ISO we are converting to
+     * @param float  $expectedExchangeRate The expectex exchange rate
      *
      * @dataProvider correctConversionsProvider
      */
@@ -152,8 +152,8 @@ class ExchangeRateCalculatorTest extends PHPUnit_Framework_TestCase
     /**
      * Tests the exchange cases when the we receive an invalid currency.
      *
-     * @param string $convertFromIso The ISO we are converting from.
-     * @param string $convertToIso   The ISO we are converting to.
+     * @param string $convertFromIso The ISO we are converting from
+     * @param string $convertToIso   The ISO we are converting to
      *
      * @dataProvider nonExistentCurrencyConversionsProvider
      */
@@ -199,7 +199,7 @@ class ExchangeRateCalculatorTest extends PHPUnit_Framework_TestCase
     /**
      * Creates a currency.
      *
-     * @param string $iso The currency ISO.
+     * @param string $iso The currency ISO
      *
      * @return CurrencyInterface
      */

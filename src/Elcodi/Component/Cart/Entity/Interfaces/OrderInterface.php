@@ -31,8 +31,7 @@ use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
 /**
  * Interface OrderInterface.
  */
-interface OrderInterface
-    extends
+interface OrderInterface extends
     PriceInterface,
     DimensionableInterface,
     IdentifiableInterface

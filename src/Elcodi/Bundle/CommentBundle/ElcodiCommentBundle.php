@@ -17,38 +17,19 @@
 
 namespace Elcodi\Bundle\CommentBundle;
 
-use Mmoreram\SymfonyBundleDependencies\DependentBundleInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Mmoreram\BaseBundle\BaseBundle;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 use Elcodi\Bundle\CommentBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\CommentBundle\DependencyInjection\ElcodiCommentExtension;
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 
 /**
  * ElcodiCommentBundle Class.
  */
-class ElcodiCommentBundle extends AbstractElcodiBundle implements DependentBundleInterface
+class ElcodiCommentBundle extends BaseBundle
 {
-    /**
-     * Builds the bundle.
-     *
-     * It is only ever called once when the cache is empty.
-     *
-     * This method can be overridden to register compilation passes,
-     * other extensions, ...
-     *
-     * @param ContainerBuilder $container A ContainerBuilder instance
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new MappingCompilerPass());
-    }
-
     /**
      * Returns the bundle's container extension.
      *
@@ -57,6 +38,18 @@ class ElcodiCommentBundle extends AbstractElcodiBundle implements DependentBundl
     public function getContainerExtension()
     {
         return new ElcodiCommentExtension();
+    }
+
+    /**
+     * Return a CompilerPass instance array.
+     *
+     * @return CompilerPassInterface[]
+     */
+    public function getCompilerPasses()
+    {
+        return [
+            new MappingCompilerPass(),
+        ];
     }
 
     /**

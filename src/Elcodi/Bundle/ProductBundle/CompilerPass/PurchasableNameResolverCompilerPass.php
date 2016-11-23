@@ -17,12 +17,12 @@
 
 namespace Elcodi\Bundle\ProductBundle\CompilerPass;
 
-use Elcodi\Bundle\CoreBundle\CompilerPass\Abstracts\AbstractTagCompilerPass;
+use Mmoreram\BaseBundle\CompilerPass\TagCompilerPass;
 
 /**
  * Class PurchasableNameResolverCompilerPass.
  */
-class PurchasableNameResolverCompilerPass extends AbstractTagCompilerPass
+class PurchasableNameResolverCompilerPass extends TagCompilerPass
 {
     /**
      * Get collector service name.

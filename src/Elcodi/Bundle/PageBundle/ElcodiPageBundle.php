@@ -17,30 +17,19 @@
 
 namespace Elcodi\Bundle\PageBundle;
 
-use Mmoreram\SymfonyBundleDependencies\DependentBundleInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Mmoreram\BaseBundle\BaseBundle;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 use Elcodi\Bundle\PageBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\PageBundle\DependencyInjection\ElcodiPageExtension;
 
 /**
  * Class ElcodiPageBundle.
  */
-class ElcodiPageBundle extends AbstractElcodiBundle implements DependentBundleInterface
+class ElcodiPageBundle extends BaseBundle
 {
-    /**
-     * @param ContainerBuilder $container
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new MappingCompilerPass());
-    }
-
     /**
      * Returns the bundle's container extension.
      *
@@ -49,6 +38,18 @@ class ElcodiPageBundle extends AbstractElcodiBundle implements DependentBundleIn
     public function getContainerExtension()
     {
         return new ElcodiPageExtension();
+    }
+
+    /**
+     * Return a CompilerPass instance array.
+     *
+     * @return CompilerPassInterface[]
+     */
+    public function getCompilerPasses()
+    {
+        return [
+            new MappingCompilerPass(),
+        ];
     }
 
     /**

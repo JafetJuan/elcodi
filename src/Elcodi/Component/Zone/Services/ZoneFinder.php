@@ -67,7 +67,6 @@ class ZoneFinder
             ->zoneRepository
             ->getActiveZones()
             ->filter(function (ZoneInterface $zone) use ($address) {
-
                 return $this
                     ->zoneMatcher
                     ->isAddressContainedInZone(

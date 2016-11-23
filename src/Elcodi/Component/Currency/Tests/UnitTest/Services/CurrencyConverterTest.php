@@ -119,7 +119,7 @@ class CurrencyConverterTest extends PHPUnit_Framework_TestCase
     /**
      * Creates a currency.
      *
-     * @param string $iso The currency ISO.
+     * @param string $iso The currency ISO
      *
      * @return CurrencyInterface
      */

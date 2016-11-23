@@ -80,7 +80,6 @@ class MoneyProvider implements ExpressionFunctionProviderInterface
                     );
                 },
                 function (array $context, $amount, $currencyIso = null) {
-
                     if ($currencyIso === null) {
                         $currency = $this
                             ->defaultCurrencyWrapper

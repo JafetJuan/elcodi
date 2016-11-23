@@ -17,16 +17,16 @@
 
 namespace Elcodi\Bundle\PaymentBundle;
 
+use Mmoreram\BaseBundle\BaseBundle;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 use Elcodi\Bundle\PaymentBundle\DependencyInjection\ElcodiPaymentExtension;
 
 /**
  * Class ElcodiPaymentBundle.
  */
-class ElcodiPaymentBundle extends AbstractElcodiBundle
+class ElcodiPaymentBundle extends BaseBundle
 {
     /**
      * Returns the bundle's container extension.

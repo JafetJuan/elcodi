@@ -95,7 +95,6 @@ trait ImagesContainerTrait
                 \Elcodi\Component\Media\Entity\Interfaces\ImageInterface $a,
                 \Elcodi\Component\Media\Entity\Interfaces\ImageInterface $b
             ) use ($orderCollection) {
-
                 $aPos = array_search($a->getId(), $orderCollection);
                 $bPos = array_search($b->getId(), $orderCollection);
 

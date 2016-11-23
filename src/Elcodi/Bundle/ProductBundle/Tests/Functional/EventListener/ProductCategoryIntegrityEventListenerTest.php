@@ -37,7 +37,7 @@ class ProductCategoryIntegrityEventListenerTest extends WebTestCase
     /**
      * @var ObjectDirector
      *
-     * The product director.
+     * The product director
      */
     protected $productDirector;
 

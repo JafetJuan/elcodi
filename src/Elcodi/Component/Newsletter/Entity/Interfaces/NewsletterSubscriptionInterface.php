@@ -25,8 +25,7 @@ use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 /**
  * Interface NewsletterSubscriptionInterface.
  */
-interface NewsletterSubscriptionInterface
-    extends
+interface NewsletterSubscriptionInterface extends
     IdentifiableInterface,
     DateTimeInterface,
     EnabledInterface

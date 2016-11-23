@@ -30,7 +30,7 @@ class ExchangeRateCalculator
     /**
      * @var CurrencyManager
      *
-     * The currency manager.
+     * The currency manager
      */
     private $currencyManager;
 
@@ -56,8 +56,8 @@ class ExchangeRateCalculator
     /**
      * Calculates the exchange rate.
      *
-     * @param CurrencyInterface $currencyFrom The currency we are converting from.
-     * @param CurrencyInterface $currencyTo   The currency we are converting to.
+     * @param CurrencyInterface $currencyFrom The currency we are converting from
+     * @param CurrencyInterface $currencyTo   The currency we are converting to
      *
      * @return float
      *
@@ -84,8 +84,8 @@ class ExchangeRateCalculator
     /**
      * Calculates the exchange rate between ISOs.
      *
-     * @param string $currencyFromIso The currency ISO we are converting from.
-     * @param string $currencyToIso   The currency ISO we are converting to.
+     * @param string $currencyFromIso The currency ISO we are converting from
+     * @param string $currencyToIso   The currency ISO we are converting to
      *
      * @return float
      *

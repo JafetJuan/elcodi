@@ -17,8 +17,8 @@
 
 namespace Elcodi\Bundle\CartCouponBundle;
 
-use Mmoreram\SymfonyBundleDependencies\DependentBundleInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Mmoreram\BaseBundle\BaseBundle;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -26,25 +26,12 @@ use Elcodi\Bundle\CartCouponBundle\CompilerPass\CartCouponApplicatorCompilerPass
 use Elcodi\Bundle\CartCouponBundle\CompilerPass\CartCouponApplicatorFunctionCompilerPass;
 use Elcodi\Bundle\CartCouponBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\CartCouponBundle\DependencyInjection\ElcodiCartCouponExtension;
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 
 /**
  * Class ElcodiCartCouponBundle.
  */
-class ElcodiCartCouponBundle extends AbstractElcodiBundle implements DependentBundleInterface
+class ElcodiCartCouponBundle extends BaseBundle
 {
-    /**
-     * @param ContainerBuilder $container
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new MappingCompilerPass());
-        $container->addCompilerPass(new CartCouponApplicatorCompilerPass());
-        $container->addCompilerPass(new CartCouponApplicatorFunctionCompilerPass());
-    }
-
     /**
      * Returns the bundle's container extension.
      *
@@ -53,6 +40,20 @@ class ElcodiCartCouponBundle extends AbstractElcodiBundle implements DependentBu
     public function getContainerExtension()
     {
         return new ElcodiCartCouponExtension();
+    }
+
+    /**
+     * Return a CompilerPass instance array.
+     *
+     * @return CompilerPassInterface[]
+     */
+    public function getCompilerPasses()
+    {
+        return [
+            new MappingCompilerPass(),
+            new CartCouponApplicatorCompilerPass(),
+            new CartCouponApplicatorFunctionCompilerPass(),
+        ];
     }
 
     /**

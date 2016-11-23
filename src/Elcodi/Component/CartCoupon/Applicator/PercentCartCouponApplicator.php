@@ -58,7 +58,7 @@ class PercentCartCouponApplicator implements CartCouponApplicatorInterface
      * @param CartInterface   $cart   Cart
      * @param CouponInterface $coupon Coupon
      *
-     * @return MoneyInterface|false Absolute value for this coupon in this cart.
+     * @return MoneyInterface|false Absolute value for this coupon in this cart
      */
     public function getCouponAbsoluteValue(
         CartInterface $cart,

@@ -31,14 +31,14 @@ class AddressView
     /**
      * @var LocationProviderAdapterInterface
      *
-     * A location provider interface.
+     * A location provider interface
      */
     protected $locationProvider;
 
     /**
      * @var AddressInterface
      *
-     * An address.
+     * An address
      */
     protected $address;
 
@@ -46,7 +46,7 @@ class AddressView
      * Builds a new view.
      *
      * @param AddressInterface                 $address          The address to
-     *                                                           convert to a view.
+     *                                                           convert to a view
      * @param LocationProviderAdapterInterface $locationProvider A location provider
      */
     public function __construct(

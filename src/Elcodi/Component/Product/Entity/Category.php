@@ -67,7 +67,7 @@ class Category implements CategoryInterface
      * @var Collection
      *
      * Many-to-Many association between categories
-     * and products. The resulting collection could be huge.
+     * and products. The resulting collection could be huge
      */
     protected $purchasables;
 

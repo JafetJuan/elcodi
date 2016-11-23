@@ -31,8 +31,7 @@ use Elcodi\Bundle\CoreBundle\DependencyInjection\Interfaces\EntitiesOverridableE
 /**
  * Class AbstractExtension.
  */
-abstract class AbstractExtension
-    implements
+abstract class AbstractExtension implements
     ExtensionInterface,
     ConfigurationExtensionInterface,
     PrependExtensionInterface

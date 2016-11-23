@@ -81,7 +81,6 @@ class StackableCouponValidator
         $appliedCouponsCanBeStacked = array_reduce(
             $cartCoupons,
             function ($previousCouponsAreStackable, CartCouponInterface $cartCoupon) {
-
                 return
                     $previousCouponsAreStackable &&
                     $cartCoupon

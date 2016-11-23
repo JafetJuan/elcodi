@@ -61,7 +61,7 @@ abstract class AbstractUser implements AbstractUserInterface
 
     /**
      * Allowed user genders.
-     * 
+     *
      * @var array
      */
     private static $genders = [
@@ -129,7 +129,7 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * @var string
      *
-     * One time login hash.
+     * One time login hash
      */
     protected $oneTimeLoginHash;
 

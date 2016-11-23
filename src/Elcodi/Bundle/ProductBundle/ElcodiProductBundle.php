@@ -17,12 +17,11 @@
 
 namespace Elcodi\Bundle\ProductBundle;
 
-use Mmoreram\SymfonyBundleDependencies\DependentBundleInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Mmoreram\BaseBundle\BaseBundle;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 use Elcodi\Bundle\ProductBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\ProductBundle\CompilerPass\PurchasableImageResolverCompilerPass;
 use Elcodi\Bundle\ProductBundle\CompilerPass\PurchasableNameResolverCompilerPass;
@@ -33,22 +32,8 @@ use Elcodi\Bundle\ProductBundle\DependencyInjection\ElcodiProductExtension;
 /**
  * ElcodiProductBundle Bundle.
  */
-class ElcodiProductBundle extends AbstractElcodiBundle implements DependentBundleInterface
+class ElcodiProductBundle extends BaseBundle
 {
-    /**
-     * @param ContainerBuilder $container
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new MappingCompilerPass());
-        $container->addCompilerPass(new PurchasableNameResolverCompilerPass());
-        $container->addCompilerPass(new PurchasableStockValidatorCompilerPass());
-        $container->addCompilerPass(new PurchasableStockUpdaterCompilerPass());
-        $container->addCompilerPass(new PurchasableImageResolverCompilerPass());
-    }
-
     /**
      * Returns the bundle's container extension.
      *
@@ -57,6 +42,22 @@ class ElcodiProductBundle extends AbstractElcodiBundle implements DependentBundl
     public function getContainerExtension()
     {
         return new ElcodiProductExtension();
+    }
+
+    /**
+     * Return a CompilerPass instance array.
+     *
+     * @return CompilerPassInterface[]
+     */
+    public function getCompilerPasses()
+    {
+        return [
+            new MappingCompilerPass(),
+            new PurchasableNameResolverCompilerPass(),
+            new PurchasableStockValidatorCompilerPass(),
+            new PurchasableStockUpdaterCompilerPass(),
+            new PurchasableImageResolverCompilerPass(),
+        ];
     }
 
     /**

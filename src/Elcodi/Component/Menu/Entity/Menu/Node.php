@@ -183,7 +183,7 @@ class Node implements NodeInterface
     /**
      * Add an active url.
      *
-     * @param string $activeUrl The active url.
+     * @param string $activeUrl The active url
      *
      * @return $this Self object
      */
@@ -199,7 +199,7 @@ class Node implements NodeInterface
     /**
      * Remove an active url.
      *
-     * @param string $activeUrl The active url.
+     * @param string $activeUrl The active url
      *
      * @return $this Self object
      */
@@ -304,7 +304,6 @@ class Node implements NodeInterface
         return $this
             ->subnodes
             ->exists(function ($_, NodeInterface $node) use ($currentUrl) {
-
                 return
                     $node->isActive($currentUrl) ||
                     $node->isExpanded($currentUrl);

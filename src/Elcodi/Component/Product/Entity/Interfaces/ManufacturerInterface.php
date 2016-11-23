@@ -26,8 +26,7 @@ use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
 /**
  * Interface ManufacturerInterface.
  */
-interface ManufacturerInterface
-    extends
+interface ManufacturerInterface extends
     IdentifiableInterface,
     DateTimeInterface,
     EnabledInterface,

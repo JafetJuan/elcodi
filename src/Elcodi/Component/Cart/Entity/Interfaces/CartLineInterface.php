@@ -23,8 +23,7 @@ use Elcodi\Component\Product\Entity\Interfaces\DimensionableInterface;
 /**
  * Interface CartLineInterface.
  */
-interface CartLineInterface
-    extends
+interface CartLineInterface extends
     IdentifiableInterface,
     PurchasableWrapperInterface,
     PriceInterface,

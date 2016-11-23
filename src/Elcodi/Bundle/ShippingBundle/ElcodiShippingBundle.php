@@ -17,17 +17,16 @@
 
 namespace Elcodi\Bundle\ShippingBundle;
 
-use Mmoreram\SymfonyBundleDependencies\DependentBundleInterface;
+use Mmoreram\BaseBundle\BaseBundle;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 use Elcodi\Bundle\ShippingBundle\DependencyInjection\ElcodiShippingExtension;
 
 /**
  * ElcodiShippingBundle.
  */
-class ElcodiShippingBundle extends AbstractElcodiBundle implements DependentBundleInterface
+class ElcodiShippingBundle extends BaseBundle
 {
     /**
      * Returns the bundle's container extension.

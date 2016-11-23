@@ -50,7 +50,7 @@ class CurrencyManager
     /**
      * @var string
      *
-     * The exchange currency ISO.
+     * The exchange currency ISO
      */
     private $exchangeCurrencyIso;
 

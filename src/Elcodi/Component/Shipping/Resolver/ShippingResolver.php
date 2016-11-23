@@ -54,7 +54,6 @@ class ShippingResolver
         return array_reduce(
             $shippingMethods,
             function ($lowestPriceShippingMethod, ShippingMethod $shippingMethod) {
-
                 $shippingMethodPrice = $shippingMethod->getPrice();
                 if (
                     !($lowestPriceShippingMethod instanceof ShippingMethod) ||

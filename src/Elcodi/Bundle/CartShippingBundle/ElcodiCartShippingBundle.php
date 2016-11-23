@@ -17,17 +17,16 @@
 
 namespace Elcodi\Bundle\CartShippingBundle;
 
-use Mmoreram\SymfonyBundleDependencies\DependentBundleInterface;
+use Mmoreram\BaseBundle\BaseBundle;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 use Elcodi\Bundle\CartShippingBundle\DependencyInjection\ElcodiCartShippingExtension;
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 
 /**
  * Class ElcodiCartShippingBundle.
  */
-class ElcodiCartShippingBundle extends AbstractElcodiBundle implements DependentBundleInterface
+class ElcodiCartShippingBundle extends BaseBundle
 {
     /**
      * Returns the bundle's container extension.

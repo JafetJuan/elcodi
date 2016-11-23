@@ -17,30 +17,19 @@
 
 namespace Elcodi\Bundle\TaxBundle;
 
-use Mmoreram\SymfonyBundleDependencies\DependentBundleInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Mmoreram\BaseBundle\BaseBundle;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 use Elcodi\Bundle\TaxBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\TaxBundle\DependencyInjection\ElcodiTaxExtension;
 
 /**
  * ElcodiTaxBundle Bundle.
  */
-class ElcodiTaxBundle extends AbstractElcodiBundle implements DependentBundleInterface
+class ElcodiTaxBundle extends BaseBundle
 {
-    /**
-     * @param ContainerBuilder $container
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new MappingCompilerPass());
-    }
-
     /**
      * Returns the bundle's container extension.
      *
@@ -49,6 +38,18 @@ class ElcodiTaxBundle extends AbstractElcodiBundle implements DependentBundleInt
     public function getContainerExtension()
     {
         return new ElcodiTaxExtension();
+    }
+
+    /**
+     * Return a CompilerPass instance array.
+     *
+     * @return CompilerPassInterface[]
+     */
+    public function getCompilerPasses()
+    {
+        return [
+            new MappingCompilerPass(),
+        ];
     }
 
     /**

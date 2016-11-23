@@ -137,7 +137,7 @@ class CategoryTreeTest extends PHPUnit_Framework_TestCase
      *
      * @param array $allCategoriesSortedResponse All the categories that the repository returns
      *
-     * @return CategoryRepository The mocked category repository.
+     * @return CategoryRepository The mocked category repository
      */
     protected function buildCategoryRepositoryMock(array $allCategoriesSortedResponse)
     {
@@ -164,7 +164,7 @@ class CategoryTreeTest extends PHPUnit_Framework_TestCase
      *
      * @param CategoryRepository $mockedCategoryRepository A mocked category repository
      *
-     * @return CategoryTree The category tree class.
+     * @return CategoryTree The category tree class
      */
     protected function buildCategoryTreeClass($mockedCategoryRepository)
     {
@@ -174,8 +174,8 @@ class CategoryTreeTest extends PHPUnit_Framework_TestCase
     /**
      * Gets a new category entity class.
      *
-     * @param int           $id             The id to set to the entity.
-     * @param bool          $isRoot         If the category is a root category.
+     * @param int           $id             The id to set to the entity
+     * @param bool          $isRoot         If the category is a root category
      * @param Category|null $parentCategory The category to set as parent
      *
      * @return Category

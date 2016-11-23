@@ -26,8 +26,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 /**
  * Interface BannerInterface.
  */
-interface BannerInterface
-    extends
+interface BannerInterface extends
     IdentifiableInterface,
     EnabledInterface,
     DateTimeInterface

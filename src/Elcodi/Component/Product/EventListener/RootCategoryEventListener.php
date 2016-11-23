@@ -30,7 +30,7 @@ class RootCategoryEventListener
     /**
      * Pre update event listener.
      *
-     * @param PreUpdateEventArgs $eventArgs The pre update event args.
+     * @param PreUpdateEventArgs $eventArgs The pre update event args
      *
      * @return $this Self object
      */
@@ -47,7 +47,7 @@ class RootCategoryEventListener
     /**
      * Pre flush event listener.
      *
-     * @param PreFlushEventArgs $args The pre flush event args.
+     * @param PreFlushEventArgs $args The pre flush event args
      *
      * @return $this Self object
      */
@@ -70,7 +70,7 @@ class RootCategoryEventListener
     /**
      * Removes the parent category for a root category.
      *
-     * @param CategoryInterface $category The category.
+     * @param CategoryInterface $category The category
      */
     private function removeParentCategoryForRootCategory(CategoryInterface $category)
     {

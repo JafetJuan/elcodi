@@ -17,14 +17,12 @@
 
 namespace Elcodi\Bundle\MenuBundle;
 
-use Mmoreram\SymfonyBundleDependencies\DependentBundleInterface;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Mmoreram\BaseBundle\BaseBundle;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CoreBundle\Abstracts\AbstractElcodiBundle;
 use Elcodi\Bundle\MenuBundle\CompilerPass\MappingCompilerPass;
-use Elcodi\Bundle\MenuBundle\CompilerPass\MenuBuilderCompilerPass;
 use Elcodi\Bundle\MenuBundle\CompilerPass\MenuChangerCompilerPass;
 use Elcodi\Bundle\MenuBundle\CompilerPass\MenuFilterCompilerPass;
 use Elcodi\Bundle\MenuBundle\CompilerPass\MenuModifierCompilerPass;
@@ -33,22 +31,8 @@ use Elcodi\Bundle\MenuBundle\DependencyInjection\ElcodiMenuExtension;
 /**
  * Class ElcodiMenuBundle.
  */
-class ElcodiMenuBundle extends AbstractElcodiBundle implements DependentBundleInterface
+class ElcodiMenuBundle extends BaseBundle
 {
-    /**
-     * @param ContainerBuilder $container
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new MappingCompilerPass());
-        $container->addCompilerPass(new MenuFilterCompilerPass());
-        $container->addCompilerPass(new MenuBuilderCompilerPass());
-        $container->addCompilerPass(new MenuModifierCompilerPass());
-        $container->addCompilerPass(new MenuChangerCompilerPass());
-    }
-
     /**
      * Returns the bundle's container extension.
      *
@@ -57,6 +41,22 @@ class ElcodiMenuBundle extends AbstractElcodiBundle implements DependentBundleIn
     public function getContainerExtension()
     {
         return new ElcodiMenuExtension();
+    }
+
+    /**
+     * Return a CompilerPass instance array.
+     *
+     * @return CompilerPassInterface[]
+     */
+    public function getCompilerPasses()
+    {
+        return [
+            new MappingCompilerPass(),
+            new MenuFilterCompilerPass(),
+            new MenuFilterCompilerPass(),
+            new MenuModifierCompilerPass(),
+            new MenuChangerCompilerPass(),
+        ];
     }
 
     /**

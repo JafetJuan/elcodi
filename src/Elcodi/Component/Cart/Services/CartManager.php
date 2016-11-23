@@ -198,7 +198,6 @@ class CartManager
         $cart
             ->getCartLines()
             ->map(function (CartLineInterface $cartLine) use ($cart) {
-
                 $this->silentRemoveLine($cart, $cartLine);
             });
 

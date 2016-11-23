@@ -29,8 +29,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
  * Attributes are a key-value structure used to describe
  * product features or options.
  */
-interface AttributeInterface
-    extends
+interface AttributeInterface extends
     IdentifiableInterface,
     EnabledInterface,
     DateTimeInterface

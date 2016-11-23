@@ -24,8 +24,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 /**
  * Interface MediaInterface.
  */
-interface MediaInterface
-    extends
+interface MediaInterface extends
     IdentifiableInterface,
     EnabledInterface,
     DateTimeInterface
