@@ -17,10 +17,10 @@
 
 namespace Elcodi\Component\User\EventListener;
 
+use Mmoreram\BaseBundle\Provider\ObjectManagerProvider;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 use Elcodi\Component\Core\Factory\DateTimeFactory;
-use Elcodi\Component\Core\Services\ManagerProvider;
 use Elcodi\Component\User\Entity\Interfaces\LastLoginInterface;
 
 /**
@@ -29,9 +29,9 @@ use Elcodi\Component\User\Entity\Interfaces\LastLoginInterface;
 class UpdateLastLoginEventListener
 {
     /**
-     * @var ManagerProvider
+     * @var ObjectManagerProvider
      *
-     * Object Manager provider
+     * Entity Manager provider
      */
     private $objectManagerProvider;
 
@@ -45,11 +45,11 @@ class UpdateLastLoginEventListener
     /**
      * Construct.
      *
-     * @param ManagerProvider $objectManagerProvider Object manager provider
-     * @param DateTimeFactory $dateTimeFactory       DateTime factory
+     * @param ObjectManagerProvider $objectManagerProvider Object manager provider
+     * @param DateTimeFactory       $dateTimeFactory       DateTime factory
      */
     public function __construct(
-        ManagerProvider $objectManagerProvider,
+        ObjectManagerProvider $objectManagerProvider,
         DateTimeFactory $dateTimeFactory
     ) {
         $this->objectManagerProvider = $objectManagerProvider;
@@ -78,7 +78,7 @@ class UpdateLastLoginEventListener
 
             $this
                 ->objectManagerProvider
-                ->getManagerByEntityNamespace(get_class($user))
+                ->getObjectManagerByEntityNamespace(get_class($user))
                 ->flush($user);
         }
 

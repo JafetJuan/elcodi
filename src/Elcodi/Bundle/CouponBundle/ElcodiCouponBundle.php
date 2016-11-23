@@ -63,6 +63,7 @@ class ElcodiCouponBundle extends BaseBundle
             'Elcodi\Bundle\CurrencyBundle\ElcodiCurrencyBundle',
             'Elcodi\Bundle\RuleBundle\ElcodiRuleBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

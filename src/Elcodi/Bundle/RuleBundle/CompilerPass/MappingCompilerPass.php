@@ -24,7 +24,7 @@ use Elcodi\Bundle\CoreBundle\CompilerPass\Abstracts\AbstractElcodiMappingCompile
 /**
  * Class MappingCompilerPass.
  */
-class MappingCompilerPass extends AbstractElcodiMappingCompilerPass
+final class MappingCompilerPass extends AbstractElcodiMappingCompilerPass
 {
     /**
      * You can modify the container here before it is dumped to PHP code.
@@ -36,7 +36,7 @@ class MappingCompilerPass extends AbstractElcodiMappingCompilerPass
     public function process(ContainerBuilder $container)
     {
         $this
-            ->addEntityMappings(
+            ->addElcodiEntityMappings(
                 $container,
                 [
                     'rule',

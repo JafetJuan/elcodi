@@ -1,5 +1,6 @@
 imports:
     - { resource: '@ElcodiCoreBundle/Resources/config/test/parameters.test.yml' }
+    - { resource: '@BaseBundle/Resources/config/providers.yml' }
 
 framework:
     test:            ~

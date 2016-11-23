@@ -75,6 +75,7 @@ class ElcodiProductBundle extends BaseBundle
             'Elcodi\Bundle\AttributeBundle\ElcodiAttributeBundle',
             'Elcodi\Bundle\StoreBundle\ElcodiStoreBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

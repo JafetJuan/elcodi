@@ -95,8 +95,6 @@ class ElcodiTaxExtension extends AbstractExtension implements EntitiesOverridabl
     {
         return [
             'factories',
-            'repositories',
-            'objectManagers',
             'directors',
         ];
     }

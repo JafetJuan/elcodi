@@ -126,8 +126,6 @@ class ElcodiProductExtension extends AbstractExtension implements EntitiesOverri
         return [
             'services',
             'factories',
-            'repositories',
-            'objectManagers',
             'twig',
             'directors',
             'eventListeners',

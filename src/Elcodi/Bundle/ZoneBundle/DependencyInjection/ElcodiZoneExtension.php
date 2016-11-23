@@ -95,8 +95,6 @@ class ElcodiZoneExtension extends AbstractExtension implements EntitiesOverridab
     {
         return [
             'factories',
-            'repositories',
-            'objectManagers',
             'services',
             'directors',
         ];

@@ -83,9 +83,7 @@ class ElcodiPageExtension extends AbstractExtension implements EntitiesOverridab
         return [
             'controllers',
             'factories',
-            'objectManagers',
             'renderers',
-            'repositories',
             'transformers',
             'directors',
         ];

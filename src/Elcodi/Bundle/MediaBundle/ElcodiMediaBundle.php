@@ -62,6 +62,7 @@ class ElcodiMediaBundle extends BaseBundle
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
             'Knp\Bundle\GaufretteBundle\KnpGaufretteBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

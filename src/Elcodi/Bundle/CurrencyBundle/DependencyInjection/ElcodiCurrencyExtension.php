@@ -111,8 +111,6 @@ class ElcodiCurrencyExtension extends AbstractExtension implements EntitiesOverr
             'adapters',
             'expressionLanguage',
             'factories',
-            'objectManagers',
-            'repositories',
             'twig',
             'directors',
         ];

@@ -101,8 +101,6 @@ class ElcodiEntityTranslatorExtension extends AbstractExtension implements Entit
     {
         return [
             'factories',
-            'repositories',
-            'objectManagers',
             'services',
             'eventDispatchers',
             'eventListeners',

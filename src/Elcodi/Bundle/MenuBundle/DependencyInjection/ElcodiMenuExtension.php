@@ -104,8 +104,6 @@ class ElcodiMenuExtension extends AbstractExtension implements EntitiesOverridab
             'services',
             'factories',
             'twig',
-            'repositories',
-            'objectManagers',
             'directors',
             'menu',
         ];

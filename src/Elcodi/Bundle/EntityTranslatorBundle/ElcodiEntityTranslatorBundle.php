@@ -63,6 +63,7 @@ class ElcodiEntityTranslatorBundle extends BaseBundle
             'Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle',
             'Elcodi\Bundle\LanguageBundle\ElcodiLanguageBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

@@ -125,8 +125,6 @@ class ElcodiPluginExtension extends AbstractExtension
     {
         return [
             'services',
-            'repositories',
-            'objectManagers',
             'commands',
             'eventDispatchers',
             'formTypes',

@@ -67,6 +67,7 @@ class ElcodiCartBundle extends BaseBundle
             'Elcodi\Bundle\ShippingBundle\ElcodiShippingBundle',
             'Elcodi\Bundle\StoreBundle\ElcodiStoreBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

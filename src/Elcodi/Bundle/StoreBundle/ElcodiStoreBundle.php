@@ -65,6 +65,7 @@ class ElcodiStoreBundle extends BaseBundle
             'Elcodi\Bundle\LanguageBundle\ElcodiLanguageBundle',
             'Elcodi\Bundle\CurrencyBundle\ElcodiCurrencyBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

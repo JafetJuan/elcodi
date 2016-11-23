@@ -62,6 +62,7 @@ class ElcodiZoneBundle extends BaseBundle
         return [
             'Elcodi\Bundle\GeoBundle\ElcodiGeoBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

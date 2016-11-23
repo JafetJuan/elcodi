@@ -101,8 +101,6 @@ class ElcodiBannerExtension extends AbstractExtension implements EntitiesOverrid
         return [
             'factories',
             'services',
-            'repositories',
-            'objectManagers',
             'directors',
         ];
     }

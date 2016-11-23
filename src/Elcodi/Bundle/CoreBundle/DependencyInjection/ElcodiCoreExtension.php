@@ -95,7 +95,6 @@ class ElcodiCoreExtension extends AbstractExtension
             'eventListeners',
             'generators',
             'encoders',
-            'services',
             'extractor',
             'factories',
             'guzzle',

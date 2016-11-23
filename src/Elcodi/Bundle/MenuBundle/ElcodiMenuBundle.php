@@ -69,6 +69,7 @@ class ElcodiMenuBundle extends BaseBundle
         return [
             'Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

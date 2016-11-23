@@ -95,9 +95,7 @@ class ElcodiLanguageExtension extends AbstractExtension implements EntitiesOverr
     {
         return [
             'factories',
-            'repositories',
             'services',
-            'objectManagers',
             'directors',
         ];
     }

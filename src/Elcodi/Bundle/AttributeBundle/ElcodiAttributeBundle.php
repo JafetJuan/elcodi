@@ -61,6 +61,7 @@ class ElcodiAttributeBundle extends BaseBundle
     {
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

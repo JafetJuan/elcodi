@@ -106,8 +106,6 @@ class ElcodiGeoExtension extends AbstractExtension implements EntitiesOverridabl
             'controllers',
             'directors',
             'factories',
-            'objectManagers',
-            'repositories',
             'services',
             'transformers',
             'eventDispatchers',

@@ -151,8 +151,8 @@ trait ContainerAccessorTrait
          * @var ObjectManager $objectManager
          */
         $objectManager = $this
-            ->get('elcodi.provider.manager')
-            ->getManagerByEntityNamespace(get_class($entity));
+            ->get('base.object_manager_provider')
+            ->getObjectManagerByEntityNamespace(get_class($entity));
 
         $objectManager->persist($entity);
         $objectManager->flush($entity);
@@ -173,8 +173,8 @@ trait ContainerAccessorTrait
          * @var ObjectManager $objectManager
          */
         $objectManager = $this
-            ->get('elcodi.provider.manager')
-            ->getManagerByEntityNamespace(get_class($entity));
+            ->get('base.object_manager_provider')
+            ->getObjectManagerByEntityNamespace(get_class($entity));
 
         $objectManager->clear($entity);
 

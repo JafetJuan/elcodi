@@ -104,8 +104,6 @@ class ElcodiCommentExtension extends AbstractExtension implements EntitiesOverri
             'controllers',
             'services',
             'factories',
-            'repositories',
-            'objectManagers',
             'directors',
             'eventListeners',
             'eventDispatchers',

@@ -17,13 +17,15 @@
 
 namespace Elcodi\Bundle\CoreBundle\CompilerPass\Abstracts;
 
-use Mmoreram\SimpleDoctrineMapping\CompilerPass\Abstracts\AbstractMappingCompilerPass;
+use Mmoreram\BaseBundle\CompilerPass\MappingBag;
+use Mmoreram\BaseBundle\CompilerPass\MappingBagCollection;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * Class AbstractElcodiMappingCompilerPass.
  */
-abstract class AbstractElcodiMappingCompilerPass extends AbstractMappingCompilerPass
+abstract class AbstractElcodiMappingCompilerPass extends MappingCompilerPass
 {
     /**
      * Add entity mapping given the entity name, given that all entity
@@ -32,24 +34,31 @@ abstract class AbstractElcodiMappingCompilerPass extends AbstractMappingCompiler
      *
      * @param ContainerBuilder $container Container
      * @param array            $entities  Name of the entities
-     *
-     * @return $this Self object
      */
-    protected function addEntityMappings(
+    protected function addElcodiEntityMappings(
         ContainerBuilder $container,
         array $entities
     ) {
+        $mappingBagCollection = new MappingBagCollection();
         foreach ($entities as $entity) {
-            $this
-                ->addEntityMapping(
-                    $container,
-                    'elcodi.entity.' . $entity . '.manager',
-                    'elcodi.entity.' . $entity . '.class',
-                    'elcodi.entity.' . $entity . '.mapping_file',
-                    'elcodi.entity.' . $entity . '.enabled'
+            $mappingBagCollection
+                ->addMappingBag(
+                    new MappingBag(
+                        'elcodi',
+                        $entity,
+                        'elcodi.entity.' . $entity . '.manager',
+                        'elcodi.entity.' . $entity . '.class',
+                        'elcodi.entity.' . $entity . '.mapping_file',
+                        'elcodi.entity.' . $entity . '.enabled',
+                        'object_manager',
+                        'repository'
+                    )
                 );
         }
 
-        return $this;
+        $this->addEntityMappings(
+            $container,
+            $mappingBagCollection
+        );
     }
 }

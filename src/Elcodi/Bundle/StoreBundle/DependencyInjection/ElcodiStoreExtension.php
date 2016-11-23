@@ -94,8 +94,6 @@ class ElcodiStoreExtension extends AbstractExtension implements EntitiesOverrida
     public function getConfigFiles(array $config)
     {
         return [
-            'repositories',
-            'objectManagers',
             'directors',
             'factories',
             'wrappers',
