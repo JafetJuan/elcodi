@@ -78,7 +78,7 @@ class SameCategoryRelatedPurchasablesProviderTest extends WebTestCase
         /**
          * Testing with a non valid purchasable instance.
          */
-        $purchasable3 = $this->getMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
+        $purchasable3 = $this->createMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
         $this->assertCount(0, $relatedPurchasablesProvider
             ->getRelatedPurchasables($purchasable3, 1)
         );

@@ -17,8 +17,8 @@
 
 namespace Elcodi\Component\Currency\Entity;
 
-use SebastianBergmann\Money\Currency as WrappedCurrency;
-use SebastianBergmann\Money\Money as WrappedMoney;
+use Money\Currency as WrappedCurrency;
+use Money\Money as WrappedMoney;
 
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
@@ -122,7 +122,7 @@ class Money implements MoneyInterface
     {
         return $this
             ->wrappedMoney
-            ->compareTo($this->newWrappedMoneyFromMoney($other));
+            ->compare($this->newWrappedMoneyFromMoney($other));
     }
 
     /**

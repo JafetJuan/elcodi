@@ -28,7 +28,7 @@ use Elcodi\Component\Currency\Entity\Money;
 class MoneyTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Money
+     * @var Currency
      *
      * currencyMockUSD
      */
@@ -46,7 +46,7 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
      */
     public function setup()
     {
-        $this->currencyMockUSD = $this->getMock(
+        $this->currencyMockUSD = $this->createPartialMock(
             'Elcodi\Component\Currency\Entity\Currency',
             ['getIso']
         );
@@ -186,11 +186,11 @@ class MoneyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @expectedException \SebastianBergmann\Money\CurrencyMismatchException
+     * @expectedException \InvalidArgumentException
      */
     public function testCurrencyMismatchException()
     {
-        $currencyMockEUR = $this->getMock(
+        $currencyMockEUR = $this->createPartialMock(
             'Elcodi\Component\Currency\Entity\Currency',
             ['getIso']
         );

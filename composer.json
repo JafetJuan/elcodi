@@ -31,7 +31,7 @@
         }
     ],
     "require": {
-        "php": "^5.4|^7.0",
+        "php": "^7.1",
 
         "symfony/http-kernel": "^2.7|^3.0",
         "symfony/dependency-injection": "^2.7|^3.0",
@@ -63,7 +63,7 @@
         "mmoreram/simple-doctrine-mapping": "^1.0",
         "mmoreram/symfony-bundle-dependencies": "^1.1.1",
 
-        "sebastian/money": "^1.5",
+        "moneyphp/money": "^3.0",
         "knplabs/knp-gaufrette-bundle": "^0.3.0",
         "predis/predis": "^1.0.1",
         "ircmaxell/password-compat": "^1.0",
@@ -133,9 +133,9 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^2.2",
-        "fabpot/php-cs-fixer": "1.11",
+        "friendsofphp/php-cs-fixer": "1.12.4",
         "mmoreram/php-formatter": "1.1.0",
-        "phpunit/phpunit": "4.8.19"
+        "phpunit/phpunit": "^5.6.5"
     },
     "autoload": {
         "exclude-from-classmap": [
@@ -152,10 +152,10 @@
     },
     "scripts": {
         "check-style": [
-            "bin/php-cs-fixer fix --config-file=.php_cs || true",
-            "bin/php-formatter f:h:f src || true",
-            "bin/php-formatter f:u:s src || true"
+            "vendor/bin/php-cs-fixer fix --config-file=.php_cs || true",
+            "vendor/bin/php-formatter f:h:f src || true",
+            "vendor/bin/php-formatter f:u:s src || true"
         ],
-        "test": "phpunit"
+        "test": "vendor/bin/phpunit"
     }
 }
