@@ -37,7 +37,7 @@ class ElcodiLanguageBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiLanguageExtension();
+        return new ElcodiLanguageExtension($this);
     }
 
     /**

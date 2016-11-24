@@ -17,15 +17,14 @@
 
 namespace Elcodi\Bundle\TaxBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
+use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Interfaces\EntitiesOverridableExtensionInterface;
 
 /**
  * This class loads and manages your bundle configuration.
  */
-class ElcodiTaxExtension extends AbstractExtension implements EntitiesOverridableExtensionInterface
+class ElcodiTaxExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
      * @var string

@@ -17,16 +17,15 @@
 
 namespace Elcodi\Bundle\CurrencyBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
+use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Interfaces\EntitiesOverridableExtensionInterface;
 
 /**
  * This is the class that loads and manages your bundle configuration.
  */
-class ElcodiCurrencyExtension extends AbstractExtension implements EntitiesOverridableExtensionInterface
+class ElcodiCurrencyExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
      * @var string

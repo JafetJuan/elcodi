@@ -37,7 +37,7 @@ class ElcodiStateTransitionMachineBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiStateTransitionMachineExtension();
+        return new ElcodiStateTransitionMachineExtension($this);
     }
 
     /**

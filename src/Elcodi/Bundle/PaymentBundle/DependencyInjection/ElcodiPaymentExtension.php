@@ -17,12 +17,12 @@
 
 namespace Elcodi\Bundle\PaymentBundle\DependencyInjection;
 
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 
 /**
  * Class ElcodiPaymentExtension.
  */
-class ElcodiPaymentExtension extends AbstractExtension
+class ElcodiPaymentExtension extends BaseExtension
 {
     /**
      * @var string

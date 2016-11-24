@@ -17,13 +17,13 @@
 
 namespace Elcodi\Bundle\PluginBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Yaml\Yaml;
 
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
 use Elcodi\Component\Plugin\Services\Traits\PluginUtilsTrait;
 
 /**
@@ -31,7 +31,7 @@ use Elcodi\Component\Plugin\Services\Traits\PluginUtilsTrait;
  *
  * @author Berny Cantos <be@rny.cc>
  */
-class ElcodiPluginExtension extends AbstractExtension
+class ElcodiPluginExtension extends BaseExtension
 {
     use PluginUtilsTrait;
 

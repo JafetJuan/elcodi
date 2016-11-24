@@ -37,7 +37,7 @@ class ElcodiMediaBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiMediaExtension();
+        return new ElcodiMediaExtension($this);
     }
 
     /**

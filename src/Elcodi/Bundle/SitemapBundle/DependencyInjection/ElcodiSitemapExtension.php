@@ -17,17 +17,16 @@
 
 namespace Elcodi\Bundle\SitemapBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
-
 /**
  * Class ElcodiSitemapExtension.
  */
-class ElcodiSitemapExtension extends AbstractExtension
+class ElcodiSitemapExtension extends BaseExtension
 {
     /**
      * @var string

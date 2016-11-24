@@ -17,15 +17,14 @@
 
 namespace Elcodi\Bundle\CartCouponBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
+use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Interfaces\EntitiesOverridableExtensionInterface;
 
 /**
  * Class ElcodiCartCouponExtension.
  */
-class ElcodiCartCouponExtension extends AbstractExtension implements EntitiesOverridableExtensionInterface
+class ElcodiCartCouponExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
      * @var string

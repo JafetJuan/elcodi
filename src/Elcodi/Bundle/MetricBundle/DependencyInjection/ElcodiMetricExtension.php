@@ -17,16 +17,15 @@
 
 namespace Elcodi\Bundle\MetricBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
+use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
-
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Interfaces\EntitiesOverridableExtensionInterface;
 
 /**
  * Class ElcodiMetricExtension.
  */
-class ElcodiMetricExtension extends AbstractExtension implements EntitiesOverridableExtensionInterface
+class ElcodiMetricExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
      * @var string

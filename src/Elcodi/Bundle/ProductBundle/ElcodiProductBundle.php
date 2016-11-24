@@ -41,7 +41,7 @@ class ElcodiProductBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiProductExtension();
+        return new ElcodiProductExtension($this);
     }
 
     /**

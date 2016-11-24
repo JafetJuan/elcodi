@@ -38,6 +38,6 @@ class ElcodiCoreBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiCoreExtension();
+        return new ElcodiCoreExtension($this);
     }
 }

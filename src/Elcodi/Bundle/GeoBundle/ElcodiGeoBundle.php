@@ -37,7 +37,7 @@ class ElcodiGeoBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiGeoExtension();
+        return new ElcodiGeoExtension($this);
     }
 
     /**

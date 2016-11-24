@@ -17,19 +17,18 @@
 
 namespace Elcodi\Bundle\PageBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
+use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
-
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Interfaces\EntitiesOverridableExtensionInterface;
 
 /**
  * Class ElcodiPageExtension.
  *
  * @author Berny Cantos <be@rny.cc>
  */
-class ElcodiPageExtension extends AbstractExtension implements EntitiesOverridableExtensionInterface
+class ElcodiPageExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
      * @var string

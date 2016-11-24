@@ -17,15 +17,14 @@
 
 namespace Elcodi\Bundle\RuleBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
+use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Interfaces\EntitiesOverridableExtensionInterface;
 
 /**
  * Class ElcodiRuleExtension.
  */
-class ElcodiRuleExtension extends AbstractExtension implements EntitiesOverridableExtensionInterface
+class ElcodiRuleExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
      * @var string

@@ -37,7 +37,7 @@ class ElcodiCurrencyBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiCurrencyExtension();
+        return new ElcodiCurrencyExtension($this);
     }
 
     /**

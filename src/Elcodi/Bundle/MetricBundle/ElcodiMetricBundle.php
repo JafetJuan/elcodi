@@ -37,7 +37,7 @@ class ElcodiMetricBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiMetricExtension();
+        return new ElcodiMetricExtension($this);
     }
 
     /**

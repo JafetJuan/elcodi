@@ -35,7 +35,7 @@ class ElcodiPaymentBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiPaymentExtension();
+        return new ElcodiPaymentExtension($this);
     }
 
     /**

@@ -17,15 +17,14 @@
 
 namespace Elcodi\Bundle\NewsletterBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
+use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Interfaces\EntitiesOverridableExtensionInterface;
 
 /**
  * This class loads and manages your bundle configuration.
  */
-class ElcodiNewsletterExtension extends AbstractExtension implements EntitiesOverridableExtensionInterface
+class ElcodiNewsletterExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
      * @var string

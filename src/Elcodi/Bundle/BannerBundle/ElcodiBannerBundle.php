@@ -37,7 +37,7 @@ class ElcodiBannerBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiBannerExtension();
+        return new ElcodiBannerExtension($this);
     }
 
     /**

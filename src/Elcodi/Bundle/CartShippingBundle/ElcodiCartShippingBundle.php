@@ -35,7 +35,7 @@ class ElcodiCartShippingBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiCartShippingExtension();
+        return new ElcodiCartShippingExtension($this);
     }
 
     /**

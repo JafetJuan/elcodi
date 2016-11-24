@@ -39,7 +39,7 @@ class ElcodiRuleBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiRuleExtension();
+        return new ElcodiRuleExtension($this);
     }
 
     /**

@@ -37,7 +37,7 @@ class ElcodiNewsletterBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiNewsletterExtension();
+        return new ElcodiNewsletterExtension($this);
     }
 
     /**

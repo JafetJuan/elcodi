@@ -17,14 +17,13 @@
 
 namespace Elcodi\Bundle\CoreBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
 
 /**
  * This is the class that loads and manages your bundle configuration.
  */
-class ElcodiCoreExtension extends AbstractExtension
+class ElcodiCoreExtension extends BaseExtension
 {
     /**
      * @var string

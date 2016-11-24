@@ -37,7 +37,7 @@ class ElcodiZoneBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiZoneExtension();
+        return new ElcodiZoneExtension($this);
     }
 
     /**

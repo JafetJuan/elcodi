@@ -17,12 +17,12 @@
 
 namespace Elcodi\Bundle\CartShippingBundle\DependencyInjection;
 
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 
 /**
  * Class ElcodiCartShippingExtension.
  */
-class ElcodiCartShippingExtension extends AbstractExtension
+class ElcodiCartShippingExtension extends BaseExtension
 {
     /**
      * @var string

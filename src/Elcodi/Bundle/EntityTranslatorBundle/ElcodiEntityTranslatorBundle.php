@@ -37,7 +37,7 @@ class ElcodiEntityTranslatorBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiEntityTranslatorExtension();
+        return new ElcodiEntityTranslatorExtension($this);
     }
 
     /**

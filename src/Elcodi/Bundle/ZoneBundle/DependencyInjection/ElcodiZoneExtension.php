@@ -17,15 +17,14 @@
 
 namespace Elcodi\Bundle\ZoneBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
+use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
-
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Interfaces\EntitiesOverridableExtensionInterface;
 
 /**
  * This is the class that loads and manages your bundle configuration.
  */
-class ElcodiZoneExtension extends AbstractExtension implements EntitiesOverridableExtensionInterface
+class ElcodiZoneExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
      * @var string

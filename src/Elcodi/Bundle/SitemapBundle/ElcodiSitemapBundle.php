@@ -35,7 +35,7 @@ class ElcodiSitemapBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiSitemapExtension();
+        return new ElcodiSitemapExtension($this);
     }
 
     /**

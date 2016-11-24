@@ -40,7 +40,7 @@ class ElcodiMenuBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiMenuExtension();
+        return new ElcodiMenuExtension($this);
     }
 
     /**

@@ -35,7 +35,7 @@ class ElcodiFixturesBoosterBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiFixturesBoosterExtension();
+        return new ElcodiFixturesBoosterExtension($this);
     }
 
     /**

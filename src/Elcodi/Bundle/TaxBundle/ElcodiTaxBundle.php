@@ -37,7 +37,7 @@ class ElcodiTaxBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiTaxExtension();
+        return new ElcodiTaxExtension($this);
     }
 
     /**

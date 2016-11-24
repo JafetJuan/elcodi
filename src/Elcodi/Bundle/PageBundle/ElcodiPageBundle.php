@@ -37,7 +37,7 @@ class ElcodiPageBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiPageExtension();
+        return new ElcodiPageExtension($this);
     }
 
     /**

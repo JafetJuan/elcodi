@@ -17,12 +17,12 @@
 
 namespace Elcodi\Bundle\FixturesBoosterBundle\DependencyInjection;
 
-use Elcodi\Bundle\CoreBundle\DependencyInjection\Abstracts\AbstractExtension;
+use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 
 /**
  * Class ElcodiFixturesBoosterExtension.
  */
-class ElcodiFixturesBoosterExtension extends AbstractExtension
+class ElcodiFixturesBoosterExtension extends BaseExtension
 {
     /**
      * @var string
