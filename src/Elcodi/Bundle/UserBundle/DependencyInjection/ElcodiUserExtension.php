@@ -17,28 +17,32 @@
 
 namespace Elcodi\Bundle\UserBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseConfiguration;
 use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This class loads and manages your bundle configuration.
+ * Class ElcodiUserExtension.
  */
 class ElcodiUserExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_user';
+    public function getAlias()
+    {
+        return 'elcodi_user';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,42 +59,12 @@ class ElcodiUserExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
-    }
-
-    /**
-     * Load Parametrization definition.
-     *
-     * return array(
-     *      'parameter1' => $config['parameter1'],
-     *      'parameter2' => $config['parameter2'],
-     *      ...
-     * );
-     *
-     * @param array $config Bundles config values
-     *
-     * @return array Parametrization values
-     */
-    protected function getParametrizationValues(array $config)
-    {
-        return [
-            'elcodi.entity.abstract_user.class' => $config['mapping']['abstract_user']['class'],
-            'elcodi.entity.abstract_user.mapping_file' => $config['mapping']['abstract_user']['mapping_file'],
-            'elcodi.entity.abstract_user.manager' => $config['mapping']['abstract_user']['manager'],
-            'elcodi.entity.abstract_user.enabled' => $config['mapping']['abstract_user']['enabled'],
-
-            'elcodi.entity.admin_user.class' => $config['mapping']['admin_user']['class'],
-            'elcodi.entity.admin_user.mapping_file' => $config['mapping']['admin_user']['mapping_file'],
-            'elcodi.entity.admin_user.manager' => $config['mapping']['admin_user']['manager'],
-            'elcodi.entity.admin_user.enabled' => $config['mapping']['admin_user']['enabled'],
-
-            'elcodi.entity.customer.class' => $config['mapping']['customer']['class'],
-            'elcodi.entity.customer.mapping_file' => $config['mapping']['customer']['mapping_file'],
-            'elcodi.entity.customer.manager' => $config['mapping']['customer']['manager'],
-            'elcodi.entity.customer.enabled' => $config['mapping']['customer']['enabled'],
-        ];
+        return new BaseConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -100,7 +74,7 @@ class ElcodiUserExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'eventListeners',
@@ -116,21 +90,11 @@ class ElcodiUserExtension extends BaseExtension implements EntitiesOverridableEx
     /**
      * @return array
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\User\Entity\Interfaces\CustomerInterface' => 'elcodi.entity.customer.class',
             'Elcodi\Component\User\Entity\Interfaces\AdminUserInterface' => 'elcodi.entity.admin_user.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

@@ -18,16 +18,17 @@
 namespace Elcodi\Bundle\ProductBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\ProductBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\ProductBundle\CompilerPass\PurchasableImageResolverCompilerPass;
 use Elcodi\Bundle\ProductBundle\CompilerPass\PurchasableNameResolverCompilerPass;
 use Elcodi\Bundle\ProductBundle\CompilerPass\PurchasableStockUpdaterCompilerPass;
 use Elcodi\Bundle\ProductBundle\CompilerPass\PurchasableStockValidatorCompilerPass;
 use Elcodi\Bundle\ProductBundle\DependencyInjection\ElcodiProductExtension;
+use Elcodi\Bundle\ProductBundle\Mapping\ElcodiProductMappingBagProvider;
 
 /**
  * ElcodiProductBundle Bundle.
@@ -41,7 +42,9 @@ class ElcodiProductBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiProductExtension($this);
+        return new ElcodiProductExtension(
+            new ElcodiProductMappingBagProvider()
+        );
     }
 
     /**
@@ -52,7 +55,9 @@ class ElcodiProductBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiProductMappingBagProvider()
+            ),
             new PurchasableNameResolverCompilerPass(),
             new PurchasableStockValidatorCompilerPass(),
             new PurchasableStockUpdaterCompilerPass(),
@@ -75,7 +80,6 @@ class ElcodiProductBundle extends BaseBundle
             'Elcodi\Bundle\AttributeBundle\ElcodiAttributeBundle',
             'Elcodi\Bundle\StoreBundle\ElcodiStoreBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

@@ -18,17 +18,16 @@
 namespace Elcodi\Bundle\PluginBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\PluginBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\PluginBundle\DependencyInjection\ElcodiPluginExtension;
+use Elcodi\Bundle\PluginBundle\Mapping\ElcodiPluginMappingBagProvider;
 
 /**
  * Class ElcodiPluginBundle.
- *
- * @author Berny Cantos <be@rny.cc>
  */
 class ElcodiPluginBundle extends BaseBundle
 {
@@ -37,7 +36,7 @@ class ElcodiPluginBundle extends BaseBundle
      *
      * Kernel
      */
-    protected $kernel;
+    private $kernel;
 
     /**
      * Construct.
@@ -56,7 +55,10 @@ class ElcodiPluginBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiPluginExtension($this->kernel);
+        return new ElcodiPluginExtension(
+            $this->kernel,
+            new ElcodiPluginMappingBagProvider()
+        );
     }
 
     /**
@@ -67,7 +69,9 @@ class ElcodiPluginBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiPluginMappingBagProvider()
+            ),
         ];
     }
 
@@ -80,7 +84,6 @@ class ElcodiPluginBundle extends BaseBundle
     {
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

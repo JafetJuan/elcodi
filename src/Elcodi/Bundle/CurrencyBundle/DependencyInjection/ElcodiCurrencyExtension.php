@@ -28,18 +28,21 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ElcodiCurrencyExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_currency';
+    public function getAlias()
+    {
+        return 'elcodi_currency';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -56,9 +59,12 @@ class ElcodiCurrencyExtension extends BaseExtension implements EntitiesOverridab
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
+        return new ElcodiCurrencyConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -74,19 +80,9 @@ class ElcodiCurrencyExtension extends BaseExtension implements EntitiesOverridab
      *
      * @return array Parametrization values
      */
-    protected function getParametrizationValues(array $config)
+    protected function getParametrizationValues(array $config) : array
     {
         $result = [
-            'elcodi.entity.currency.class' => $config['mapping']['currency']['class'],
-            'elcodi.entity.currency.mapping_file' => $config['mapping']['currency']['mapping_file'],
-            'elcodi.entity.currency.manager' => $config['mapping']['currency']['manager'],
-            'elcodi.entity.currency.enabled' => $config['mapping']['currency']['enabled'],
-
-            'elcodi.entity.currency_exchange_rate.class' => $config['mapping']['currency_exchange_rate']['class'],
-            'elcodi.entity.currency_exchange_rate.mapping_file' => $config['mapping']['currency_exchange_rate']['mapping_file'],
-            'elcodi.entity.currency_exchange_rate.manager' => $config['mapping']['currency_exchange_rate']['manager'],
-            'elcodi.entity.currency_exchange_rate.enabled' => $config['mapping']['currency_exchange_rate']['enabled'],
-
             'elcodi.default_currency' => $config['currency']['default_currency'],
             'elcodi.currency_session_field_name' => $config['currency']['session_field_name'],
         ];
@@ -101,7 +97,7 @@ class ElcodiCurrencyExtension extends BaseExtension implements EntitiesOverridab
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'services',
@@ -124,7 +120,7 @@ class ElcodiCurrencyExtension extends BaseExtension implements EntitiesOverridab
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface' => 'elcodi.entity.currency.class',
@@ -146,15 +142,5 @@ class ElcodiCurrencyExtension extends BaseExtension implements EntitiesOverridab
                 'elcodi.adapter.currency_exchange_rate',
                 $config['rates_provider']['adapter']
             );
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

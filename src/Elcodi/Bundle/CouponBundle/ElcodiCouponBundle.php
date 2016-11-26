@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\CouponBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CouponBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\CouponBundle\DependencyInjection\ElcodiCouponExtension;
+use Elcodi\Bundle\CouponBundle\Mapping\ElcodiCouponMappingBagProvider;
 
 /**
  * ElcodiCouponBundle Bundle.
@@ -37,7 +38,9 @@ class ElcodiCouponBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiCouponExtension($this);
+        return new ElcodiCouponExtension(
+            new ElcodiCouponMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiCouponBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiCouponMappingBagProvider()
+            ),
         ];
     }
 
@@ -63,7 +68,6 @@ class ElcodiCouponBundle extends BaseBundle
             'Elcodi\Bundle\CurrencyBundle\ElcodiCurrencyBundle',
             'Elcodi\Bundle\RuleBundle\ElcodiRuleBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

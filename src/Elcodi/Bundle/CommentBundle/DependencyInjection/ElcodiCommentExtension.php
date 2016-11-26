@@ -27,18 +27,23 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class ElcodiCommentExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the recommended alias to use in XML.
      *
-     * Extension name
+     * This alias is also the mandatory prefix to use when using YAML.
+     *
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_comment';
+    public function getAlias()
+    {
+        return 'elcodi_comment';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,9 +60,12 @@ class ElcodiCommentExtension extends BaseExtension implements EntitiesOverridabl
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
+        return new ElcodiCommentConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -73,19 +81,9 @@ class ElcodiCommentExtension extends BaseExtension implements EntitiesOverridabl
      *
      * @return array Parametrization values
      */
-    protected function getParametrizationValues(array $config)
+    protected function getParametrizationValues(array $config) : array
     {
         return [
-            'elcodi.entity.comment.class' => $config['mapping']['comment']['class'],
-            'elcodi.entity.comment.mapping_file' => $config['mapping']['comment']['mapping_file'],
-            'elcodi.entity.comment.manager' => $config['mapping']['comment']['manager'],
-            'elcodi.entity.comment.enabled' => $config['mapping']['comment']['enabled'],
-
-            'elcodi.entity.comment_vote.class' => $config['mapping']['comment_vote']['class'],
-            'elcodi.entity.comment_vote.mapping_file' => $config['mapping']['comment_vote']['mapping_file'],
-            'elcodi.entity.comment_vote.manager' => $config['mapping']['comment_vote']['manager'],
-            'elcodi.entity.comment_vote.enabled' => $config['mapping']['comment_vote']['enabled'],
-
             'elcodi.comment.cache_key' => $config['comments']['cache_key'],
         ];
     }
@@ -97,7 +95,7 @@ class ElcodiCommentExtension extends BaseExtension implements EntitiesOverridabl
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'controllers',
@@ -118,34 +116,11 @@ class ElcodiCommentExtension extends BaseExtension implements EntitiesOverridabl
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Comment\Entity\Interfaces\CommentInterface' => 'elcodi.entity.comment.class',
             'Elcodi\Component\Comment\Entity\Interfaces\VoteInterface' => 'elcodi.entity.comment_vote.class',
         ];
-    }
-
-    /**
-     * Returns the recommended alias to use in XML.
-     *
-     * This alias is also the mandatory prefix to use when using YAML.
-     *
-     * This convention is to remove the "Extension" postfix from the class
-     * name and then lowercase and underscore the result. So:
-     *
-     *     AcmeHelloExtension
-     *
-     * becomes
-     *
-     *     acme_hello
-     *
-     * This can be overridden in a sub-class to specify the alias manually.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

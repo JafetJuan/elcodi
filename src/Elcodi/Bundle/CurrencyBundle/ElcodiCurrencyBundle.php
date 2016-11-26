@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\CurrencyBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CurrencyBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\CurrencyBundle\DependencyInjection\ElcodiCurrencyExtension;
+use Elcodi\Bundle\CurrencyBundle\Mapping\ElcodiCurrencyMappingBagProvider;
 
 /**
  * ElcodiCurrencyBundle Bundle.
@@ -37,7 +38,9 @@ class ElcodiCurrencyBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiCurrencyExtension($this);
+        return new ElcodiCurrencyExtension(
+            new ElcodiCurrencyMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiCurrencyBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiCurrencyMappingBagProvider()
+            ),
         ];
     }
 
@@ -62,7 +67,6 @@ class ElcodiCurrencyBundle extends BaseBundle
         return [
             'Elcodi\Bundle\LanguageBundle\ElcodiLanguageBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

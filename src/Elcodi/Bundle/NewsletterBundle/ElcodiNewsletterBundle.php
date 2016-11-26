@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\NewsletterBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\NewsletterBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\NewsletterBundle\DependencyInjection\ElcodiNewsletterExtension;
+use Elcodi\Bundle\NewsletterBundle\Mapping\ElcodiNewsletterMappingBagProvider;
 
 /**
  * Class ElcodiNewsletterBundle.
@@ -37,7 +38,9 @@ class ElcodiNewsletterBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiNewsletterExtension($this);
+        return new ElcodiNewsletterExtension(
+            new ElcodiNewsletterMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiNewsletterBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiNewsletterMappingBagProvider()
+            ),
         ];
     }
 
@@ -62,7 +67,6 @@ class ElcodiNewsletterBundle extends BaseBundle
         return [
             'Elcodi\Bundle\LanguageBundle\ElcodiLanguageBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

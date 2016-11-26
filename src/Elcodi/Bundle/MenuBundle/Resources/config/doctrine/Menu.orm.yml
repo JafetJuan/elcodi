@@ -1,4 +1,4 @@
-Elcodi\Component\Menu\Entity\Menu\Menu:
+Elcodi\Component\Menu\Entity\Menu:
     type: entity
     repositoryClass: Elcodi\Component\Menu\Repository\MenuRepository
     table: menu

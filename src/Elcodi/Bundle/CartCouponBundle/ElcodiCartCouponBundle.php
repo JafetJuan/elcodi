@@ -18,14 +18,15 @@
 namespace Elcodi\Bundle\CartCouponBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 use Elcodi\Bundle\CartCouponBundle\CompilerPass\CartCouponApplicatorCompilerPass;
 use Elcodi\Bundle\CartCouponBundle\CompilerPass\CartCouponApplicatorFunctionCompilerPass;
-use Elcodi\Bundle\CartCouponBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\CartCouponBundle\DependencyInjection\ElcodiCartCouponExtension;
+use Elcodi\Bundle\CartCouponBundle\Mapping\ElcodiCartCouponMappingBagProvider;
 
 /**
  * Class ElcodiCartCouponBundle.
@@ -39,7 +40,9 @@ class ElcodiCartCouponBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiCartCouponExtension($this);
+        return new ElcodiCartCouponExtension(
+            new ElcodiCartCouponMappingBagProvider()
+        );
     }
 
     /**
@@ -50,7 +53,9 @@ class ElcodiCartCouponBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiCartCouponMappingBagProvider()
+            ),
             new CartCouponApplicatorCompilerPass(),
             new CartCouponApplicatorFunctionCompilerPass(),
         ];
@@ -68,7 +73,6 @@ class ElcodiCartCouponBundle extends BaseBundle
             'Elcodi\Bundle\CouponBundle\ElcodiCouponBundle',
             'Elcodi\Bundle\RuleBundle\ElcodiRuleBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

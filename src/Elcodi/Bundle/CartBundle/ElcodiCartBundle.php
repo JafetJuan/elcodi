@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\CartBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CartBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\CartBundle\DependencyInjection\ElcodiCartExtension;
+use Elcodi\Bundle\CartBundle\Mapping\ElcodiCartMappingBagProvider;
 
 /**
  * ElcodiCartBundle Bundle.
@@ -37,7 +38,9 @@ class ElcodiCartBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiCartExtension($this);
+        return new ElcodiCartExtension(
+            new ElcodiCartMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiCartBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiCartMappingBagProvider()
+            ),
         ];
     }
 
@@ -67,7 +72,6 @@ class ElcodiCartBundle extends BaseBundle
             'Elcodi\Bundle\ShippingBundle\ElcodiShippingBundle',
             'Elcodi\Bundle\StoreBundle\ElcodiStoreBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

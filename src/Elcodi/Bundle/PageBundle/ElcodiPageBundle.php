@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\PageBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\PageBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\PageBundle\DependencyInjection\ElcodiPageExtension;
+use Elcodi\Bundle\PageBundle\Mapping\ElcodiPageMappingBagProvider;
 
 /**
  * Class ElcodiPageBundle.
@@ -37,7 +38,9 @@ class ElcodiPageBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiPageExtension($this);
+        return new ElcodiPageExtension(
+            new ElcodiPageMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiPageBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiPageMappingBagProvider()
+            ),
         ];
     }
 
@@ -61,7 +66,6 @@ class ElcodiPageBundle extends BaseBundle
     {
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

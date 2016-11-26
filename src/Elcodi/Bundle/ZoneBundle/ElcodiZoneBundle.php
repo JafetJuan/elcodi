@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\ZoneBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\ZoneBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\ZoneBundle\DependencyInjection\ElcodiZoneExtension;
+use Elcodi\Bundle\ZoneBundle\Mapping\ElcodiZoneMappingBagProvider;
 
 /**
  * Class ElcodiZoneBundle.
@@ -37,7 +38,9 @@ class ElcodiZoneBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiZoneExtension($this);
+        return new ElcodiZoneExtension(
+            new ElcodiZoneMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiZoneBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiZoneMappingBagProvider()
+            ),
         ];
     }
 
@@ -62,7 +67,6 @@ class ElcodiZoneBundle extends BaseBundle
         return [
             'Elcodi\Bundle\GeoBundle\ElcodiGeoBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

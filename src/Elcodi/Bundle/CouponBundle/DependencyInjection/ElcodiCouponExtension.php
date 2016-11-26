@@ -27,18 +27,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class ElcodiCouponExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_coupon';
+    public function getAlias()
+    {
+        return 'elcodi_coupon';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,32 +58,12 @@ class ElcodiCouponExtension extends BaseExtension implements EntitiesOverridable
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
-    }
-
-    /**
-     * Load Parametrization definition.
-     *
-     * return array(
-     *      'parameter1' => $config['parameter1'],
-     *      'parameter2' => $config['parameter2'],
-     *      ...
-     * );
-     *
-     * @param array $config Bundles config values
-     *
-     * @return array Parametrization values
-     */
-    protected function getParametrizationValues(array $config)
-    {
-        return [
-            'elcodi.entity.coupon.class' => $config['mapping']['coupon']['class'],
-            'elcodi.entity.coupon.mapping_file' => $config['mapping']['coupon']['mapping_file'],
-            'elcodi.entity.coupon.manager' => $config['mapping']['coupon']['manager'],
-            'elcodi.entity.coupon.enabled' => $config['mapping']['coupon']['enabled'],
-        ];
+        return new ElcodiCouponConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -90,7 +73,7 @@ class ElcodiCouponExtension extends BaseExtension implements EntitiesOverridable
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'services',
@@ -110,20 +93,10 @@ class ElcodiCouponExtension extends BaseExtension implements EntitiesOverridable
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface' => 'elcodi.entity.coupon.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

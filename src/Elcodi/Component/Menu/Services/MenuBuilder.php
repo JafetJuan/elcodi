@@ -18,7 +18,7 @@
 namespace Elcodi\Component\Menu\Services;
 
 use Elcodi\Component\Menu\Builder\Interfaces\MenuBuilderInterface;
-use Elcodi\Component\Menu\Entity\Menu\Interfaces\MenuInterface;
+use Elcodi\Component\Menu\Entity\Interfaces\MenuInterface;
 use Elcodi\Component\Menu\Services\Abstracts\AbstractMenuModifier;
 use Elcodi\Component\Menu\Services\Interfaces\MenuChangerInterface;
 

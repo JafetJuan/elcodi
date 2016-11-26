@@ -23,23 +23,26 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * This is the class that loads and manages your bundle configuration.
+ * Class ElcodiProductExtension.
  */
 class ElcodiProductExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_product';
+    public function getAlias()
+    {
+        return 'elcodi_product';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -48,17 +51,20 @@ class ElcodiProductExtension extends BaseExtension implements EntitiesOverridabl
      * Return a new Configuration instance.
      *
      * If object returned by this method is an instance of
-     * ConfigurationInterface, extension will use the Configuration to read allpurchasable_pack
-     * bundle config definitions.
+     * ConfigurationInterface, extension will use the Configuration to read all
+     * purchasable_pack bundle config definitions.
      *
      * Also will call getParametrizationValues method to load some config values
      * to internal parameters.
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
+        return new ElcodiProductConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -74,39 +80,9 @@ class ElcodiProductExtension extends BaseExtension implements EntitiesOverridabl
      *
      * @return array Parametrization values
      */
-    protected function getParametrizationValues(array $config)
+    protected function getParametrizationValues(array $config) : array
     {
         return [
-            'elcodi.entity.purchasable.class' => $config['mapping']['purchasable']['class'],
-            'elcodi.entity.purchasable.mapping_file' => $config['mapping']['purchasable']['mapping_file'],
-            'elcodi.entity.purchasable.manager' => $config['mapping']['purchasable']['manager'],
-            'elcodi.entity.purchasable.enabled' => $config['mapping']['purchasable']['enabled'],
-
-            'elcodi.entity.product.class' => $config['mapping']['product']['class'],
-            'elcodi.entity.product.mapping_file' => $config['mapping']['product']['mapping_file'],
-            'elcodi.entity.product.manager' => $config['mapping']['product']['manager'],
-            'elcodi.entity.product.enabled' => $config['mapping']['product']['enabled'],
-
-            'elcodi.entity.product_variant.class' => $config['mapping']['product_variant']['class'],
-            'elcodi.entity.product_variant.mapping_file' => $config['mapping']['product_variant']['mapping_file'],
-            'elcodi.entity.product_variant.manager' => $config['mapping']['product_variant']['manager'],
-            'elcodi.entity.product_variant.enabled' => $config['mapping']['product_variant']['enabled'],
-
-            'elcodi.entity.purchasable_pack.class' => $config['mapping']['purchasable_pack']['class'],
-            'elcodi.entity.purchasable_pack.mapping_file' => $config['mapping']['purchasable_pack']['mapping_file'],
-            'elcodi.entity.purchasable_pack.manager' => $config['mapping']['purchasable_pack']['manager'],
-            'elcodi.entity.purchasable_pack.enabled' => $config['mapping']['purchasable_pack']['enabled'],
-
-            'elcodi.entity.category.class' => $config['mapping']['category']['class'],
-            'elcodi.entity.category.mapping_file' => $config['mapping']['category']['mapping_file'],
-            'elcodi.entity.category.manager' => $config['mapping']['category']['manager'],
-            'elcodi.entity.category.enabled' => $config['mapping']['category']['enabled'],
-
-            'elcodi.entity.manufacturer.class' => $config['mapping']['manufacturer']['class'],
-            'elcodi.entity.manufacturer.mapping_file' => $config['mapping']['manufacturer']['mapping_file'],
-            'elcodi.entity.manufacturer.manager' => $config['mapping']['manufacturer']['manager'],
-            'elcodi.entity.manufacturer.enabled' => $config['mapping']['manufacturer']['enabled'],
-
             'elcodi.core.product.use_stock' => $config['products']['use_stock'],
             'elcodi.core.product.load_only_categories_with_products' => $config['categories']['load_only_categories_with_products'],
             'elcodi.core.product.cache_key' => $config['categories']['cache_key'],
@@ -120,7 +96,7 @@ class ElcodiProductExtension extends BaseExtension implements EntitiesOverridabl
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'services',
@@ -145,7 +121,7 @@ class ElcodiProductExtension extends BaseExtension implements EntitiesOverridabl
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface' => 'elcodi.entity.purchasable.class',
@@ -172,15 +148,5 @@ class ElcodiProductExtension extends BaseExtension implements EntitiesOverridabl
             'elcodi.related_purchasables_provider',
             $relatedProductsAdapterId
         );
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

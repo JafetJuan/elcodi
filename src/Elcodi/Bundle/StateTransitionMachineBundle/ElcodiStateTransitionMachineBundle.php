@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\StateTransitionMachineBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\StateTransitionMachineBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\StateTransitionMachineBundle\DependencyInjection\ElcodiStateTransitionMachineExtension;
+use Elcodi\Bundle\StateTransitionMachineBundle\Mapping\ElcodiStateTransitionMachineMappingBagProvider;
 
 /**
  * ElcodiStateTransitionMachineBundle.
@@ -37,7 +38,9 @@ class ElcodiStateTransitionMachineBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiStateTransitionMachineExtension($this);
+        return new ElcodiStateTransitionMachineExtension(
+            new ElcodiStateTransitionMachineMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiStateTransitionMachineBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiStateTransitionMachineMappingBagProvider()
+            ),
         ];
     }
 
@@ -61,7 +66,6 @@ class ElcodiStateTransitionMachineBundle extends BaseBundle
     {
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

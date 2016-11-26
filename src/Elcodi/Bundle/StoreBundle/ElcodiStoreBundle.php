@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\StoreBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\StoreBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\StoreBundle\DependencyInjection\ElcodiStoreExtension;
+use Elcodi\Bundle\StoreBundle\Mapping\ElcodiStoreMappingBagProvider;
 
 /**
  * ElcodiStoreBundle Bundle.
@@ -37,7 +38,9 @@ class ElcodiStoreBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiStoreExtension($this);
+        return new ElcodiStoreExtension(
+            new ElcodiStoreMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiStoreBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiStoreMappingBagProvider()
+            ),
         ];
     }
 
@@ -65,7 +70,6 @@ class ElcodiStoreBundle extends BaseBundle
             'Elcodi\Bundle\LanguageBundle\ElcodiLanguageBundle',
             'Elcodi\Bundle\CurrencyBundle\ElcodiCurrencyBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

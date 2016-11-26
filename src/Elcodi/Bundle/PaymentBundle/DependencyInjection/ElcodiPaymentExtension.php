@@ -36,7 +36,7 @@ class ElcodiPaymentExtension extends BaseExtension
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -54,7 +54,7 @@ class ElcodiPaymentExtension extends BaseExtension
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'services',

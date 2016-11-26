@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\GeoBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\GeoBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\GeoBundle\DependencyInjection\ElcodiGeoExtension;
+use Elcodi\Bundle\GeoBundle\Mapping\ElcodiGeoMappingBagProvider;
 
 /**
  * ElcodiGeoBundle Bundle.
@@ -37,7 +38,9 @@ class ElcodiGeoBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiGeoExtension($this);
+        return new ElcodiGeoExtension(
+            new ElcodiGeoMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiGeoBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiGeoMappingBagProvider()
+            ),
         ];
     }
 
@@ -61,7 +66,6 @@ class ElcodiGeoBundle extends BaseBundle
     {
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

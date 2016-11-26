@@ -60,7 +60,7 @@ class MenuManagerTest extends WebTestCase
     public function testLoadAdminMenu()
     {
         $this->assertInstanceOf(
-            'Elcodi\Component\Menu\Entity\Menu\Interfaces\MenuInterface',
+            'Elcodi\Component\Menu\Entity\Interfaces\MenuInterface',
             $this
                 ->menuManager
                 ->loadMenuByCode('menu-admin')
@@ -73,7 +73,7 @@ class MenuManagerTest extends WebTestCase
     public function testLoadFrontMenu()
     {
         $this->assertInstanceOf(
-            'Elcodi\Component\Menu\Entity\Menu\Interfaces\MenuInterface',
+            'Elcodi\Component\Menu\Entity\Interfaces\MenuInterface',
             $this
                 ->menuManager
                 ->loadMenuByCode('menu-front')

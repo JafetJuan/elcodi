@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\MetricBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\MetricBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\MetricBundle\DependencyInjection\ElcodiMetricExtension;
+use Elcodi\Bundle\MetricBundle\Mapping\ElcodiMetricMappingBagProvider;
 
 /**
  * Class ElcodiMenuBundle.
@@ -37,7 +38,9 @@ class ElcodiMetricBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiMetricExtension($this);
+        return new ElcodiMetricExtension(
+            new ElcodiMetricMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiMetricBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiMetricMappingBagProvider()
+            ),
         ];
     }
 
@@ -61,7 +66,6 @@ class ElcodiMetricBundle extends BaseBundle
     {
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

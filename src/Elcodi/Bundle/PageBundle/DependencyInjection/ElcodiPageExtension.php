@@ -25,24 +25,25 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * Class ElcodiPageExtension.
- *
- * @author Berny Cantos <be@rny.cc>
  */
 class ElcodiPageExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_page';
+    public function getAlias()
+    {
+        return 'elcodi_page';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -59,9 +60,12 @@ class ElcodiPageExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
+        return new ElcodiPageConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -77,7 +81,7 @@ class ElcodiPageExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'controllers',
@@ -85,29 +89,6 @@ class ElcodiPageExtension extends BaseExtension implements EntitiesOverridableEx
             'renderers',
             'transformers',
             'directors',
-        ];
-    }
-
-    /**
-     * Load Parametrization definition.
-     *
-     * return array(
-     *      'parameter1' => $config['parameter1'],
-     *      'parameter2' => $config['parameter2'],
-     *      ...
-     * );
-     *
-     * @param array $config Bundles config values
-     *
-     * @return array Parametrization values
-     */
-    protected function getParametrizationValues(array $config)
-    {
-        return [
-            'elcodi.entity.page.class' => $config['mapping']['page']['class'],
-            'elcodi.entity.page.mapping_file' => $config['mapping']['page']['mapping_file'],
-            'elcodi.entity.page.manager' => $config['mapping']['page']['manager'],
-            'elcodi.entity.page.enabled' => $config['mapping']['page']['enabled'],
         ];
     }
 
@@ -120,21 +101,11 @@ class ElcodiPageExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Page\Entity\Interfaces\PageInterface' => 'elcodi.entity.page.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 
     /**

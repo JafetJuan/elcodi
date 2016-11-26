@@ -19,6 +19,7 @@ namespace Elcodi\Bundle\CoreBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 use Elcodi\Bundle\CoreBundle\DependencyInjection\ElcodiCoreExtension;
 
@@ -38,6 +39,19 @@ class ElcodiCoreBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiCoreExtension($this);
+        return new ElcodiCoreExtension();
+    }
+
+    /**
+     * Create instance of current bundle, and return dependent bundle namespaces.
+     *
+     * @return array Bundle instances
+     */
+    public static function getBundleDependencies(KernelInterface $kernel)
+    {
+        return [
+            'Symfony\Bundle\FrameworkBundle\FrameworkBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
+        ];
     }
 }

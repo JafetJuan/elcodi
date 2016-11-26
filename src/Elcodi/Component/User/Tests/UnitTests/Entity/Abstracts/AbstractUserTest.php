@@ -19,7 +19,7 @@ namespace Elcodi\Component\User\Tests\UnitTests\Entity\Abstracts;
 
 use PHPUnit_Framework_TestCase;
 
-use Elcodi\Component\User\Entity\Abstracts\AbstractUser;
+use Elcodi\Component\User\Entity\AbstractUser;
 use Elcodi\Component\User\Exception\InvalidPasswordException;
 
 /**
@@ -37,11 +37,11 @@ class AbstractUserTest extends PHPUnit_Framework_TestCase
      */
     public function testGender($gender, $expected)
     {
-        $user = $this->getMockForAbstractClass('Elcodi\Component\User\Entity\Abstracts\AbstractUser');
+        $user = $this->getMockForAbstractClass('Elcodi\Component\User\Entity\AbstractUser');
         $setterOutput = $user->setGender($gender);
 
         $this->assertInstanceOf(
-            'Elcodi\Component\User\Entity\Abstracts\AbstractUser',
+            'Elcodi\Component\User\Entity\AbstractUser',
             $setterOutput
         );
 
@@ -70,7 +70,7 @@ class AbstractUserTest extends PHPUnit_Framework_TestCase
      */
     public function testSetPassword()
     {
-        $user = $this->getMockForAbstractClass('Elcodi\Component\User\Entity\Abstracts\AbstractUser');
+        $user = $this->getMockForAbstractClass('Elcodi\Component\User\Entity\AbstractUser');
         $user->setPassword('00000');
         $this->assertEquals(
             '00000',
@@ -89,7 +89,7 @@ class AbstractUserTest extends PHPUnit_Framework_TestCase
      */
     public function testSetPasswordWithoutException()
     {
-        $user = $this->getMockForAbstractClass('Elcodi\Component\User\Entity\Abstracts\AbstractUser');
+        $user = $this->getMockForAbstractClass('Elcodi\Component\User\Entity\AbstractUser');
         $user->setPassword('  1  ');
         $user->setPassword('1234');
         $user->setPassword('blabla');
@@ -102,7 +102,7 @@ class AbstractUserTest extends PHPUnit_Framework_TestCase
      */
     public function testSetPasswordWithException($value)
     {
-        $user = $this->getMockForAbstractClass('Elcodi\Component\User\Entity\Abstracts\AbstractUser');
+        $user = $this->getMockForAbstractClass('Elcodi\Component\User\Entity\AbstractUser');
         $user->setPassword('00000');
         try {
             $user->setPassword($value);

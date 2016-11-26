@@ -25,18 +25,21 @@ use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 class ElcodiCartShippingExtension extends BaseExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_cart_shipping';
+    public function getAlias()
+    {
+        return 'elcodi_cart_shipping';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -54,21 +57,11 @@ class ElcodiCartShippingExtension extends BaseExtension
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'services',
             'eventListeners',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

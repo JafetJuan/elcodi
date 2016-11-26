@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\RuleBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\RuleBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\RuleBundle\DependencyInjection\ElcodiRuleExtension;
+use Elcodi\Bundle\RuleBundle\Mapping\ElcodiRuleMappingBagProvider;
 use Elcodi\Component\Rule\CompilerPass\ContextCompilerPass;
 use Elcodi\Component\Rule\CompilerPass\ExpressionLanguageCompilerPass;
 
@@ -39,7 +40,9 @@ class ElcodiRuleBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiRuleExtension($this);
+        return new ElcodiRuleExtension(
+            new ElcodiRuleMappingBagProvider()
+        );
     }
 
     /**
@@ -50,7 +53,9 @@ class ElcodiRuleBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiRuleMappingBagProvider()
+            ),
             new ContextCompilerPass(),
             new ExpressionLanguageCompilerPass(),
         ];
@@ -65,7 +70,6 @@ class ElcodiRuleBundle extends BaseBundle
     {
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

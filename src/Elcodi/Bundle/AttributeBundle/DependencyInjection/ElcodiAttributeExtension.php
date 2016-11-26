@@ -27,18 +27,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class ElcodiAttributeExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_attribute';
+    public function getAlias()
+    {
+        return 'elcodi_attribute';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,37 +58,12 @@ class ElcodiAttributeExtension extends BaseExtension implements EntitiesOverrida
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
-    }
-
-    /**
-     * Load Parametrization definition.
-     *
-     * return array(
-     *      'parameter1' => $config['parameter1'],
-     *      'parameter2' => $config['parameter2'],
-     *      ...
-     * );
-     *
-     * @param array $config Bundles config values
-     *
-     * @return array Parametrization values
-     */
-    protected function getParametrizationValues(array $config)
-    {
-        return [
-            'elcodi.entity.attribute.class' => $config['mapping']['attribute']['class'],
-            'elcodi.entity.attribute.mapping_file' => $config['mapping']['attribute']['mapping_file'],
-            'elcodi.entity.attribute.manager' => $config['mapping']['attribute']['manager'],
-            'elcodi.entity.attribute.enabled' => $config['mapping']['attribute']['enabled'],
-
-            'elcodi.entity.attribute_value.class' => $config['mapping']['value']['class'],
-            'elcodi.entity.attribute_value.mapping_file' => $config['mapping']['value']['mapping_file'],
-            'elcodi.entity.attribute_value.manager' => $config['mapping']['value']['manager'],
-            'elcodi.entity.attribute_value.enabled' => $config['mapping']['value']['enabled'],
-        ];
+        return new ElcodiAttributeConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -95,7 +73,7 @@ class ElcodiAttributeExtension extends BaseExtension implements EntitiesOverrida
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'factories',
@@ -112,21 +90,11 @@ class ElcodiAttributeExtension extends BaseExtension implements EntitiesOverrida
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Attribute\Entity\Interfaces\AttributeInterface' => 'elcodi.entity.attribute.class',
             'Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface' => 'elcodi.entity.attribute_value.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

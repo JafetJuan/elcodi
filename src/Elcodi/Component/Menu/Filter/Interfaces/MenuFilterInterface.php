@@ -17,7 +17,7 @@
 
 namespace Elcodi\Component\Menu\Filter\Interfaces;
 
-use Elcodi\Component\Menu\Entity\Menu\Interfaces\NodeInterface;
+use Elcodi\Component\Menu\Entity\Interfaces\NodeInterface;
 
 /**
  * Interface MenuFilterInterface.

@@ -28,18 +28,21 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ElcodiMetricExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_metric';
+    public function getAlias()
+    {
+        return 'elcodi_metric';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -56,9 +59,12 @@ class ElcodiMetricExtension extends BaseExtension implements EntitiesOverridable
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
+        return new ElcodiMetricConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -74,14 +80,9 @@ class ElcodiMetricExtension extends BaseExtension implements EntitiesOverridable
      *
      * @return array Parametrization values
      */
-    protected function getParametrizationValues(array $config)
+    protected function getParametrizationValues(array $config) : array
     {
         return [
-            'elcodi.entity.metric_entry.class' => $config['mapping']['metric_entry']['class'],
-            'elcodi.entity.metric_entry.mapping_file' => $config['mapping']['metric_entry']['mapping_file'],
-            'elcodi.entity.metric_entry.manager' => $config['mapping']['metric_entry']['manager'],
-            'elcodi.entity.metric_entry.enabled' => $config['mapping']['metric_entry']['enabled'],
-
             'elcodi.core.metric.bucket_client' => $config['bucket']['client'],
         ];
     }
@@ -93,7 +94,7 @@ class ElcodiMetricExtension extends BaseExtension implements EntitiesOverridable
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'services',
@@ -114,7 +115,7 @@ class ElcodiMetricExtension extends BaseExtension implements EntitiesOverridable
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Metric\Core\Entity\Interfaces\EntryInterface' => 'elcodi.entity.metric_entry.class',
@@ -133,15 +134,5 @@ class ElcodiMetricExtension extends BaseExtension implements EntitiesOverridable
 
         $metricsBucketId = $config['bucket']['client'];
         $container->setAlias('elcodi.metrics_bucket', $metricsBucketId);
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

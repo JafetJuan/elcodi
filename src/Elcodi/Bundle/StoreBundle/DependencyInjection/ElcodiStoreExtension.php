@@ -17,6 +17,7 @@
 
 namespace Elcodi\Bundle\StoreBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseConfiguration;
 use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -27,18 +28,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class ElcodiStoreExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_store';
+    public function getAlias()
+    {
+        return 'elcodi_store';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,32 +59,12 @@ class ElcodiStoreExtension extends BaseExtension implements EntitiesOverridableE
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
-    }
-
-    /**
-     * Load Parametrization definition.
-     *
-     * return array(
-     *      'parameter1' => $config['parameter1'],
-     *      'parameter2' => $config['parameter2'],
-     *      ...
-     * );
-     *
-     * @param array $config Bundles config values
-     *
-     * @return array Parametrization values
-     */
-    protected function getParametrizationValues(array $config)
-    {
-        return [
-            'elcodi.entity.store.class' => $config['mapping']['store']['class'],
-            'elcodi.entity.store.mapping_file' => $config['mapping']['store']['mapping_file'],
-            'elcodi.entity.store.manager' => $config['mapping']['store']['manager'],
-            'elcodi.entity.store.enabled' => $config['mapping']['store']['enabled'],
-        ];
+        return new BaseConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -90,7 +74,7 @@ class ElcodiStoreExtension extends BaseExtension implements EntitiesOverridableE
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'directors',
@@ -103,20 +87,10 @@ class ElcodiStoreExtension extends BaseExtension implements EntitiesOverridableE
     /**
      * @return array
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Store\Entity\Interfaces\StoreInterface' => 'elcodi.entity.store.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

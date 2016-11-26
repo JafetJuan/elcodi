@@ -33,7 +33,7 @@ class MenuDisabledFilterTest extends PHPUnit_Framework_TestCase
      */
     public function testFilterDisabled($enabled)
     {
-        $node = $this->prophesize('Elcodi\Component\Menu\Entity\Menu\Interfaces\NodeInterface');
+        $node = $this->prophesize('Elcodi\Component\Menu\Entity\Interfaces\NodeInterface');
         $node
             ->isEnabled()
             ->willReturn($enabled)

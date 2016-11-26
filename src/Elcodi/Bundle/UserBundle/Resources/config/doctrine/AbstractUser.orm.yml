@@ -1,4 +1,4 @@
-Elcodi\Component\User\Entity\Abstracts\AbstractUser:
+Elcodi\Component\User\Entity\AbstractUser:
     type: mappedSuperclass
     fields:
         gender:

@@ -19,7 +19,6 @@ namespace Elcodi\Component\User\Entity;
 
 use Symfony\Component\Security\Core\Role\Role;
 
-use Elcodi\Component\User\Entity\Abstracts\AbstractUser;
 use Elcodi\Component\User\Entity\Interfaces\AdminUserInterface;
 
 /**

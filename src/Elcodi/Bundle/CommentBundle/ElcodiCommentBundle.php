@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\CommentBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\CommentBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\CommentBundle\DependencyInjection\ElcodiCommentExtension;
+use Elcodi\Bundle\CommentBundle\Mapping\ElcodiCommentMappingBagProvider;
 
 /**
  * ElcodiCommentBundle Class.
@@ -37,7 +38,9 @@ class ElcodiCommentBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiCommentExtension($this);
+        return new ElcodiCommentExtension(
+            new ElcodiCommentMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiCommentBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiCommentMappingBagProvider()
+            ),
         ];
     }
 
@@ -62,7 +67,6 @@ class ElcodiCommentBundle extends BaseBundle
         return [
             'Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

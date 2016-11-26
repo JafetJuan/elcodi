@@ -19,8 +19,8 @@ namespace Elcodi\Component\Menu\Services;
 
 use Doctrine\Common\Collections\Collection;
 
-use Elcodi\Component\Menu\Entity\Menu\Interfaces\MenuInterface;
-use Elcodi\Component\Menu\Entity\Menu\Interfaces\NodeInterface;
+use Elcodi\Component\Menu\Entity\Interfaces\MenuInterface;
+use Elcodi\Component\Menu\Entity\Interfaces\NodeInterface;
 use Elcodi\Component\Menu\Modifier\Interfaces\MenuModifierInterface;
 use Elcodi\Component\Menu\Services\Abstracts\AbstractMenuModifier;
 use Elcodi\Component\Menu\Services\Interfaces\MenuChangerInterface;

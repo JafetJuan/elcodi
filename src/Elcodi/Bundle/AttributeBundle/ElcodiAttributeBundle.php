@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\AttributeBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\AttributeBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\AttributeBundle\DependencyInjection\ElcodiAttributeExtension;
+use Elcodi\Bundle\AttributeBundle\Mapping\ElcodiAttributeMappingBagProvider;
 
 /**
  * Class ElcodiAttributeBundle.
@@ -37,7 +38,9 @@ class ElcodiAttributeBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiAttributeExtension($this);
+        return new ElcodiAttributeExtension(
+            new ElcodiAttributeMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiAttributeBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiAttributeMappingBagProvider()
+            ),
         ];
     }
 
@@ -61,7 +66,6 @@ class ElcodiAttributeBundle extends BaseBundle
     {
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

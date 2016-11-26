@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\EntityTranslatorBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\EntityTranslatorBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\EntityTranslatorBundle\DependencyInjection\ElcodiEntityTranslatorExtension;
+use Elcodi\Bundle\EntityTranslatorBundle\Mapping\ElcodiTranslatorMappingBagProvider;
 
 /**
  * ElcodiEntityTranslatorBundle Bundle.
@@ -37,7 +38,9 @@ class ElcodiEntityTranslatorBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiEntityTranslatorExtension($this);
+        return new ElcodiEntityTranslatorExtension(
+            new ElcodiTranslatorMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiEntityTranslatorBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiTranslatorMappingBagProvider()
+            ),
         ];
     }
 
@@ -63,7 +68,6 @@ class ElcodiEntityTranslatorBundle extends BaseBundle
             'Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle',
             'Elcodi\Bundle\LanguageBundle\ElcodiLanguageBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

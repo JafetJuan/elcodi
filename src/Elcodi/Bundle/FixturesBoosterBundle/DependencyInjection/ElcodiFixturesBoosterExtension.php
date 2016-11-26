@@ -25,16 +25,19 @@ use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 class ElcodiFixturesBoosterExtension extends BaseExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'fixtures_booster';
+    public function getAlias()
+    {
+        return 'fixtures_booster';
+    }
 
     /**
      * @return string
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -44,20 +47,10 @@ class ElcodiFixturesBoosterExtension extends BaseExtension
      *
      * @return array
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'commands',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return self::EXTENSION_NAME;
     }
 }

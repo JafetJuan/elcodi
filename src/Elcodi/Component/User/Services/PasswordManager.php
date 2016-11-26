@@ -21,7 +21,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 use Elcodi\Component\Core\Generator\Interfaces\GeneratorInterface;
-use Elcodi\Component\User\Entity\Abstracts\AbstractUser;
+use Elcodi\Component\User\Entity\AbstractUser;
 use Elcodi\Component\User\EventDispatcher\Interfaces\PasswordEventDispatcherInterface;
 use Elcodi\Component\User\Repository\Interfaces\UserEmaileableInterface;
 

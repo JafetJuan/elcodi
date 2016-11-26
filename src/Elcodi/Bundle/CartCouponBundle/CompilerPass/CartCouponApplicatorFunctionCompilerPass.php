@@ -29,7 +29,7 @@ class CartCouponApplicatorFunctionCompilerPass extends TagCompilerPass
      *
      * @return string Collector service name
      */
-    public function getCollectorServiceName()
+    public function getCollectorServiceName() : string
     {
         return 'elcodi.cart_coupon_applicator_function_collector';
     }
@@ -39,7 +39,7 @@ class CartCouponApplicatorFunctionCompilerPass extends TagCompilerPass
      *
      * @return string Collector method name
      */
-    public function getCollectorMethodName()
+    public function getCollectorMethodName() : string
     {
         return 'addExpressionLanguageFunction';
     }
@@ -49,7 +49,7 @@ class CartCouponApplicatorFunctionCompilerPass extends TagCompilerPass
      *
      * @return string Tag name
      */
-    public function getTagName()
+    public function getTagName() : string
     {
         return 'elcodi.cart_coupon_applicator_function';
     }

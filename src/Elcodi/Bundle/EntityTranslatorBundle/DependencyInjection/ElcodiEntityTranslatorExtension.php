@@ -27,18 +27,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class ElcodiEntityTranslatorExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_entity_translator';
+    public function getAlias()
+    {
+        return 'elcodi_entity_translator';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,9 +58,12 @@ class ElcodiEntityTranslatorExtension extends BaseExtension implements EntitiesO
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
+        return new ElcodiEntityTranslatorConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -73,14 +79,9 @@ class ElcodiEntityTranslatorExtension extends BaseExtension implements EntitiesO
      *
      * @return array Parametrization values
      */
-    protected function getParametrizationValues(array $config)
+    protected function getParametrizationValues(array $config) : array
     {
         return [
-            'elcodi.entity.entity_translation.class' => $config['mapping']['translation']['class'],
-            'elcodi.entity.entity_translation.mapping_file' => $config['mapping']['translation']['mapping_file'],
-            'elcodi.entity.entity_translation.manager' => $config['mapping']['translation']['manager'],
-            'elcodi.entity.entity_translation.enabled' => $config['mapping']['translation']['enabled'],
-
             'elcodi.entity_translator_configuration' => $config['configuration'],
             'elcodi.entity_translator_cache_prefix' => $config['cache_prefix'],
             'elcodi.entity_translator_auto_translate' => $config['auto_translate'],
@@ -96,7 +97,7 @@ class ElcodiEntityTranslatorExtension extends BaseExtension implements EntitiesO
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'factories',
@@ -112,20 +113,10 @@ class ElcodiEntityTranslatorExtension extends BaseExtension implements EntitiesO
     /**
      * @return array
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\EntityTranslator\Entity\Interfaces\EntityTranslationInterface' => 'elcodi.entity.entity_translation.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\UserBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\UserBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\UserBundle\DependencyInjection\ElcodiUserExtension;
+use Elcodi\Bundle\UserBundle\Mapping\ElcodiUserMappingBagProvider;
 
 /**
  * ElcodiUserBundle Bundle.
@@ -37,7 +38,9 @@ class ElcodiUserBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiUserExtension($this);
+        return new ElcodiUserExtension(
+            new ElcodiUserMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiUserBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiUserMappingBagProvider()
+            ),
         ];
     }
 
@@ -64,7 +69,6 @@ class ElcodiUserBundle extends BaseBundle
             'Elcodi\Bundle\LanguageBundle\ElcodiLanguageBundle',
             'Elcodi\Bundle\CartBundle\ElcodiCartBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\LanguageBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\LanguageBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\LanguageBundle\DependencyInjection\ElcodiLanguageExtension;
+use Elcodi\Bundle\LanguageBundle\Mapping\ElcodiLanguageMappingBagProvider;
 
 /**
  * ElcodiLanguageBundle Bundle.
@@ -37,7 +38,9 @@ class ElcodiLanguageBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiLanguageExtension($this);
+        return new ElcodiLanguageExtension(
+            new ElcodiLanguageMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiLanguageBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiLanguageMappingBagProvider()
+            ),
         ];
     }
 
@@ -61,7 +66,6 @@ class ElcodiLanguageBundle extends BaseBundle
     {
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

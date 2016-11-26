@@ -27,18 +27,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class ElcodiCartExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_cart';
+    public function getAlias()
+    {
+        return 'elcodi_cart';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,9 +58,12 @@ class ElcodiCartExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
+        return new ElcodiCartConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -73,29 +79,9 @@ class ElcodiCartExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return array Parametrization values
      */
-    protected function getParametrizationValues(array $config)
+    protected function getParametrizationValues(array $config) : array
     {
         return [
-            'elcodi.entity.cart.class' => $config['mapping']['cart']['class'],
-            'elcodi.entity.cart.mapping_file' => $config['mapping']['cart']['mapping_file'],
-            'elcodi.entity.cart.manager' => $config['mapping']['cart']['manager'],
-            'elcodi.entity.cart.enabled' => $config['mapping']['cart']['enabled'],
-
-            'elcodi.entity.order.class' => $config['mapping']['order']['class'],
-            'elcodi.entity.order.mapping_file' => $config['mapping']['order']['mapping_file'],
-            'elcodi.entity.order.manager' => $config['mapping']['order']['manager'],
-            'elcodi.entity.order.enabled' => $config['mapping']['order']['enabled'],
-
-            'elcodi.entity.cart_line.class' => $config['mapping']['cart_line']['class'],
-            'elcodi.entity.cart_line.mapping_file' => $config['mapping']['cart_line']['mapping_file'],
-            'elcodi.entity.cart_line.manager' => $config['mapping']['cart_line']['manager'],
-            'elcodi.entity.cart_line.enabled' => $config['mapping']['cart_line']['enabled'],
-
-            'elcodi.entity.order_line.class' => $config['mapping']['order_line']['class'],
-            'elcodi.entity.order_line.mapping_file' => $config['mapping']['order_line']['mapping_file'],
-            'elcodi.entity.order_line.manager' => $config['mapping']['order_line']['manager'],
-            'elcodi.entity.order_line.enabled' => $config['mapping']['order_line']['enabled'],
-
             'elcodi.cart_save_in_session' => $config['cart']['save_in_session'],
             'elcodi.cart_session_field_name' => $config['cart']['session_field_name'],
 
@@ -116,7 +102,7 @@ class ElcodiCartExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'eventListeners',
@@ -139,7 +125,7 @@ class ElcodiCartExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Cart\Entity\Interfaces\CartInterface' => 'elcodi.entity.cart.class',
@@ -147,15 +133,5 @@ class ElcodiCartExtension extends BaseExtension implements EntitiesOverridableEx
             'Elcodi\Component\Cart\Entity\Interfaces\CartLineInterface' => 'elcodi.entity.cart_line.class',
             'Elcodi\Component\Cart\Entity\Interfaces\OrderLineInterface' => 'elcodi.entity.order_line.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

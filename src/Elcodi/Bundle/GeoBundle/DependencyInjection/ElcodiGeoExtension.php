@@ -28,18 +28,21 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ElcodiGeoExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_geo';
+    public function getAlias()
+    {
+        return 'elcodi_geo';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -56,9 +59,12 @@ class ElcodiGeoExtension extends BaseExtension implements EntitiesOverridableExt
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
+        return new ElcodiGeoConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -74,19 +80,9 @@ class ElcodiGeoExtension extends BaseExtension implements EntitiesOverridableExt
      *
      * @return array Parametrization values
      */
-    protected function getParametrizationValues(array $config)
+    protected function getParametrizationValues(array $config) : array
     {
         return [
-            'elcodi.entity.address.class' => $config['mapping']['address']['class'],
-            'elcodi.entity.address.mapping_file' => $config['mapping']['address']['mapping_file'],
-            'elcodi.entity.address.manager' => $config['mapping']['address']['manager'],
-            'elcodi.entity.address.enabled' => $config['mapping']['address']['enabled'],
-
-            'elcodi.entity.location.class' => $config['mapping']['location']['class'],
-            'elcodi.entity.location.mapping_file' => $config['mapping']['location']['mapping_file'],
-            'elcodi.entity.location.manager' => $config['mapping']['location']['manager'],
-            'elcodi.entity.location.enabled' => $config['mapping']['location']['enabled'],
-
             'elcodi.location_api_host' => $config['location']['api_host'],
         ];
     }
@@ -98,7 +94,7 @@ class ElcodiGeoExtension extends BaseExtension implements EntitiesOverridableExt
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'commands',
@@ -123,7 +119,7 @@ class ElcodiGeoExtension extends BaseExtension implements EntitiesOverridableExt
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Geo\Entity\Interfaces\AddressInterface' => 'elcodi.entity.address.class',
@@ -149,15 +145,5 @@ class ElcodiGeoExtension extends BaseExtension implements EntitiesOverridableExt
 
         $locatorLoaderAdapterId = $config['location']['loader_adapter'];
         $container->setAlias('elcodi.location_loader_adapter', $locatorLoaderAdapterId);
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

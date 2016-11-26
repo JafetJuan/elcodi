@@ -17,6 +17,7 @@
 
 namespace Elcodi\Bundle\StateTransitionMachineBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseConfiguration;
 use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -27,18 +28,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class ElcodiStateTransitionMachineExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_state_transition_machine';
+    public function getAlias()
+    {
+        return 'elcodi_state_transition_machine';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,32 +59,12 @@ class ElcodiStateTransitionMachineExtension extends BaseExtension implements Ent
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
-    }
-
-    /**
-     * Load Parametrization definition.
-     *
-     * return array(
-     *      'parameter1' => $config['parameter1'],
-     *      'parameter2' => $config['parameter2'],
-     *      ...
-     * );
-     *
-     * @param array $config Bundles config values
-     *
-     * @return array Parametrization values
-     */
-    protected function getParametrizationValues(array $config)
-    {
-        return [
-            'elcodi.entity.state_transition_machine_state_line.class' => $config['mapping']['state_line']['class'],
-            'elcodi.entity.state_transition_machine_state_line.mapping_file' => $config['mapping']['state_line']['mapping_file'],
-            'elcodi.entity.state_transition_machine_state_line.manager' => $config['mapping']['state_line']['manager'],
-            'elcodi.entity.state_transition_machine_state_line.enabled' => $config['mapping']['state_line']['enabled'],
-        ];
+        return new BaseConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -90,7 +74,7 @@ class ElcodiStateTransitionMachineExtension extends BaseExtension implements Ent
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'factories',
@@ -102,20 +86,10 @@ class ElcodiStateTransitionMachineExtension extends BaseExtension implements Ent
     /**
      * @return array
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\StateTransitionMachine\Entity\Interfaces\StateLineInterface' => 'elcodi.entity.state_transition_machine_state_line.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

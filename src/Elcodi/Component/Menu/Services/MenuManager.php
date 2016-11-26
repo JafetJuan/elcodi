@@ -22,7 +22,7 @@ use Exception;
 
 use Elcodi\Component\Core\Wrapper\Abstracts\AbstractCacheWrapper;
 use Elcodi\Component\Menu\ElcodiMenuStages;
-use Elcodi\Component\Menu\Entity\Menu\Interfaces\MenuInterface;
+use Elcodi\Component\Menu\Entity\Interfaces\MenuInterface;
 use Elcodi\Component\Menu\Repository\MenuRepository;
 use Elcodi\Component\Menu\Services\Interfaces\MenuChangerInterface;
 

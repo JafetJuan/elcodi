@@ -27,18 +27,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class ElcodiMenuExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_menu';
+    public function getAlias()
+    {
+        return 'elcodi_menu';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,9 +58,12 @@ class ElcodiMenuExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
+        return new ElcodiMenuConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -73,19 +79,9 @@ class ElcodiMenuExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return array Parametrization values
      */
-    protected function getParametrizationValues(array $config)
+    protected function getParametrizationValues(array $config) : array
     {
         return [
-            'elcodi.entity.menu.class' => $config['mapping']['menu']['class'],
-            'elcodi.entity.menu.mapping_file' => $config['mapping']['menu']['mapping_file'],
-            'elcodi.entity.menu.manager' => $config['mapping']['menu']['manager'],
-            'elcodi.entity.menu.enabled' => $config['mapping']['menu']['enabled'],
-
-            'elcodi.entity.menu_node.class' => $config['mapping']['menu_node']['class'],
-            'elcodi.entity.menu_node.mapping_file' => $config['mapping']['menu_node']['mapping_file'],
-            'elcodi.entity.menu_node.manager' => $config['mapping']['menu_node']['manager'],
-            'elcodi.entity.menu_node.enabled' => $config['mapping']['menu_node']['enabled'],
-
             'elcodi.menu_cache_key' => $config['menus']['cache_key'],
         ];
     }
@@ -97,7 +93,7 @@ class ElcodiMenuExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'services',
@@ -117,21 +113,11 @@ class ElcodiMenuExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Menu\Entity\Menu\Interfaces\NodeInterface' => 'elcodi.entity.menu_node.class',
             'Elcodi\Component\Menu\Entity\Menu\Interfaces\MenuInterface' => 'elcodi.entity.menu.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

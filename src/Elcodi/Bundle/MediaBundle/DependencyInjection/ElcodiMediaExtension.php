@@ -28,18 +28,21 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 class ElcodiMediaExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_media';
+    public function getAlias()
+    {
+        return 'elcodi_media';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -56,9 +59,12 @@ class ElcodiMediaExtension extends BaseExtension implements EntitiesOverridableE
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
+        return new ElcodiMediaConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -74,7 +80,7 @@ class ElcodiMediaExtension extends BaseExtension implements EntitiesOverridableE
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'services',
@@ -101,14 +107,9 @@ class ElcodiMediaExtension extends BaseExtension implements EntitiesOverridableE
      *
      * @return array Parametrization values
      */
-    protected function getParametrizationValues(array $config)
+    protected function getParametrizationValues(array $config) : array
     {
         return [
-            'elcodi.entity.image.class' => $config['mapping']['image']['class'],
-            'elcodi.entity.image.mapping_file' => $config['mapping']['image']['mapping_file'],
-            'elcodi.entity.image.manager' => $config['mapping']['image']['manager'],
-            'elcodi.entity.image.enabled' => $config['mapping']['image']['enabled'],
-
             'elcodi.media_filesystem_service' => $config['filesystem'],
 
             'elcodi.image_generated_route_host' => $config['images']['generated_route_host'],
@@ -151,20 +152,10 @@ class ElcodiMediaExtension extends BaseExtension implements EntitiesOverridableE
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Media\Entity\Interfaces\ImageInterface' => 'elcodi.entity.image.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

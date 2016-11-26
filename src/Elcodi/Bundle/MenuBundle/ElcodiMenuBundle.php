@@ -18,15 +18,16 @@
 namespace Elcodi\Bundle\MenuBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\MenuBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\MenuBundle\CompilerPass\MenuChangerCompilerPass;
 use Elcodi\Bundle\MenuBundle\CompilerPass\MenuFilterCompilerPass;
 use Elcodi\Bundle\MenuBundle\CompilerPass\MenuModifierCompilerPass;
 use Elcodi\Bundle\MenuBundle\DependencyInjection\ElcodiMenuExtension;
+use Elcodi\Bundle\MenuBundle\Mapping\ElcodiMenuMappingBagProvider;
 
 /**
  * Class ElcodiMenuBundle.
@@ -40,7 +41,9 @@ class ElcodiMenuBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiMenuExtension($this);
+        return new ElcodiMenuExtension(
+            new ElcodiMenuMappingBagProvider()
+        );
     }
 
     /**
@@ -51,7 +54,9 @@ class ElcodiMenuBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiMenuMappingBagProvider()
+            ),
             new MenuFilterCompilerPass(),
             new MenuFilterCompilerPass(),
             new MenuModifierCompilerPass(),
@@ -69,7 +74,6 @@ class ElcodiMenuBundle extends BaseBundle
         return [
             'Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

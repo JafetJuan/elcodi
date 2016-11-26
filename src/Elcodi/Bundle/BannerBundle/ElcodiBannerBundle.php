@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\BannerBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\BannerBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\BannerBundle\DependencyInjection\ElcodiBannerExtension;
+use Elcodi\Bundle\BannerBundle\Mapping\ElcodiBannerMappingBagProvider;
 
 /**
  * ElcodiBannerBundle Bundle.
@@ -37,7 +38,9 @@ class ElcodiBannerBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiBannerExtension($this);
+        return new ElcodiBannerExtension(
+            new ElcodiBannerMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiBannerBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiBannerMappingBagProvider()
+            ),
         ];
     }
 
@@ -63,7 +68,6 @@ class ElcodiBannerBundle extends BaseBundle
             'Elcodi\Bundle\LanguageBundle\ElcodiLanguageBundle',
             'Elcodi\Bundle\MediaBundle\ElcodiMediaBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

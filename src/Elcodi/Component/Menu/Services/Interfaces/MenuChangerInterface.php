@@ -17,7 +17,7 @@
 
 namespace Elcodi\Component\Menu\Services\Interfaces;
 
-use Elcodi\Component\Menu\Entity\Menu\Interfaces\MenuInterface;
+use Elcodi\Component\Menu\Entity\Interfaces\MenuInterface;
 
 /**
  * Interface MenuChangerInterface.

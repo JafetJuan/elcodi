@@ -18,12 +18,13 @@
 namespace Elcodi\Bundle\MediaBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\MediaBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\MediaBundle\DependencyInjection\ElcodiMediaExtension;
+use Elcodi\Bundle\MediaBundle\Mapping\ElcodiMediaMappingBagProvider;
 
 /**
  * Class MediaBundle.
@@ -37,7 +38,9 @@ class ElcodiMediaBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiMediaExtension($this);
+        return new ElcodiMediaExtension(
+            new ElcodiMediaMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +51,9 @@ class ElcodiMediaBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new MappingCompilerPass(
+                new ElcodiMediaMappingBagProvider()
+            ),
         ];
     }
 
@@ -62,7 +67,6 @@ class ElcodiMediaBundle extends BaseBundle
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
             'Knp\Bundle\GaufretteBundle\KnpGaufretteBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

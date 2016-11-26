@@ -20,7 +20,7 @@ namespace Elcodi\Component\Menu\Tests\UnitTest\Entity\Menu;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit_Framework_TestCase;
 
-use Elcodi\Component\Menu\Entity\Menu\Node;
+use Elcodi\Component\Menu\Entity\Node;
 
 /**
  * Class NodeTest.

@@ -22,23 +22,26 @@ use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 /**
- * This is the class that loads and manages your bundle configuration.
+ * Class ElcodiBannerExtension.
  */
 class ElcodiBannerExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_banner';
+    public function getAlias()
+    {
+        return 'elcodi_banner';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,37 +58,12 @@ class ElcodiBannerExtension extends BaseExtension implements EntitiesOverridable
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
-    }
-
-    /**
-     * Load Parametrization definition.
-     *
-     * return array(
-     *      'parameter1' => $config['parameter1'],
-     *      'parameter2' => $config['parameter2'],
-     *      ...
-     * );
-     *
-     * @param array $config Bundles config values
-     *
-     * @return array Parametrization values
-     */
-    protected function getParametrizationValues(array $config)
-    {
-        return [
-            'elcodi.entity.banner.class' => $config['mapping']['banner']['class'],
-            'elcodi.entity.banner.mapping_file' => $config['mapping']['banner']['mapping_file'],
-            'elcodi.entity.banner.manager' => $config['mapping']['banner']['manager'],
-            'elcodi.entity.banner.enabled' => $config['mapping']['banner']['enabled'],
-
-            'elcodi.entity.banner_zone.class' => $config['mapping']['banner_zone']['class'],
-            'elcodi.entity.banner_zone.mapping_file' => $config['mapping']['banner_zone']['mapping_file'],
-            'elcodi.entity.banner_zone.manager' => $config['mapping']['banner_zone']['manager'],
-            'elcodi.entity.banner_zone.enabled' => $config['mapping']['banner_zone']['enabled'],
-        ];
+        return new ElcodiBannerConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -95,7 +73,7 @@ class ElcodiBannerExtension extends BaseExtension implements EntitiesOverridable
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'factories',
@@ -113,21 +91,11 @@ class ElcodiBannerExtension extends BaseExtension implements EntitiesOverridable
      *
      * @return array Overrides definition
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Banner\Entity\Interfaces\BannerInterface' => 'elcodi.entity.banner.class',
             'Elcodi\Component\Banner\Entity\Interfaces\BannerZoneInterface' => 'elcodi.entity.banner_zone.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

@@ -17,6 +17,7 @@
 
 namespace Elcodi\Bundle\TaxBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseConfiguration;
 use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -27,18 +28,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class ElcodiTaxExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_tax';
+    public function getAlias()
+    {
+        return 'elcodi_tax';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,32 +59,12 @@ class ElcodiTaxExtension extends BaseExtension implements EntitiesOverridableExt
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
-    }
-
-    /**
-     * Load Parametrization definition.
-     *
-     * return array(
-     *      'parameter1' => $config['parameter1'],
-     *      'parameter2' => $config['parameter2'],
-     *      ...
-     * );
-     *
-     * @param array $config Bundles config values
-     *
-     * @return array Parametrization values
-     */
-    protected function getParametrizationValues(array $config)
-    {
-        return [
-            'elcodi.entity.tax.class' => $config['mapping']['tax']['class'],
-            'elcodi.entity.tax.mapping_file' => $config['mapping']['tax']['mapping_file'],
-            'elcodi.entity.tax.manager' => $config['mapping']['tax']['manager'],
-            'elcodi.entity.tax.enabled' => $config['mapping']['tax']['enabled'],
-        ];
+        return new BaseConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -90,7 +74,7 @@ class ElcodiTaxExtension extends BaseExtension implements EntitiesOverridableExt
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'factories',
@@ -101,20 +85,10 @@ class ElcodiTaxExtension extends BaseExtension implements EntitiesOverridableExt
     /**
      * @return array
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Tax\Entity\Interfaces\TaxInterface' => 'elcodi.entity.tax.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

@@ -29,18 +29,21 @@ use Symfony\Component\DependencyInjection\Reference;
 class ElcodiSitemapExtension extends BaseExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_sitemap';
+    public function getAlias()
+    {
+        return 'elcodi_sitemap';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -57,9 +60,11 @@ class ElcodiSitemapExtension extends BaseExtension
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
+        return new ElcodiSitemapConfiguration(
+            $this->getAlias()
+        );
     }
 
     /**
@@ -75,7 +80,7 @@ class ElcodiSitemapExtension extends BaseExtension
      *
      * @return array Parametrization values
      */
-    protected function getParametrizationValues(array $config)
+    protected function getParametrizationValues(array $config) : array
     {
         return [];
     }
@@ -283,7 +288,7 @@ class ElcodiSitemapExtension extends BaseExtension
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'renderers',
@@ -293,15 +298,5 @@ class ElcodiSitemapExtension extends BaseExtension
             'factories',
             'dumpers',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

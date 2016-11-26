@@ -22,8 +22,8 @@ use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-use Elcodi\Bundle\TaxBundle\CompilerPass\MappingCompilerPass;
 use Elcodi\Bundle\TaxBundle\DependencyInjection\ElcodiTaxExtension;
+use Elcodi\Bundle\TaxBundle\Mapping\ElcodiTaxMappingBagProvider;
 
 /**
  * ElcodiTaxBundle Bundle.
@@ -37,7 +37,9 @@ class ElcodiTaxBundle extends BaseBundle
      */
     public function getContainerExtension()
     {
-        return new ElcodiTaxExtension($this);
+        return new ElcodiTaxExtension(
+            new ElcodiTaxMappingBagProvider()
+        );
     }
 
     /**
@@ -48,7 +50,7 @@ class ElcodiTaxBundle extends BaseBundle
     public function getCompilerPasses()
     {
         return [
-            new MappingCompilerPass(),
+            new ElcodiTaxMappingBagProvider(),
         ];
     }
 
@@ -61,7 +63,6 @@ class ElcodiTaxBundle extends BaseBundle
     {
         return [
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
-            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

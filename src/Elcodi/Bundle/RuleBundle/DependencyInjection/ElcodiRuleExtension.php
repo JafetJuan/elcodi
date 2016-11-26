@@ -17,6 +17,7 @@
 
 namespace Elcodi\Bundle\RuleBundle\DependencyInjection;
 
+use Mmoreram\BaseBundle\DependencyInjection\BaseConfiguration;
 use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -27,18 +28,21 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class ElcodiRuleExtension extends BaseExtension implements EntitiesOverridableExtension
 {
     /**
-     * @var string
+     * Returns the extension alias, same value as extension name.
      *
-     * Extension name
+     * @return string The alias
      */
-    const EXTENSION_NAME = 'elcodi_rule';
+    public function getAlias()
+    {
+        return 'elcodi_rule';
+    }
 
     /**
      * Get the Config file location.
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -55,32 +59,12 @@ class ElcodiRuleExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration(static::EXTENSION_NAME);
-    }
-
-    /**
-     * Load Parametrization definition.
-     *
-     * return array(
-     *      'parameter1' => $config['parameter1'],
-     *      'parameter2' => $config['parameter2'],
-     *      ...
-     * );
-     *
-     * @param array $config Bundles config values
-     *
-     * @return array Parametrization values
-     */
-    protected function getParametrizationValues(array $config)
-    {
-        return [
-            'elcodi.entity.rule.class' => $config['mapping']['rule']['class'],
-            'elcodi.entity.rule.mapping_file' => $config['mapping']['rule']['mapping_file'],
-            'elcodi.entity.rule.manager' => $config['mapping']['rule']['manager'],
-            'elcodi.entity.rule.enabled' => $config['mapping']['rule']['enabled'],
-        ];
+        return new BaseConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -90,7 +74,7 @@ class ElcodiRuleExtension extends BaseExtension implements EntitiesOverridableEx
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'services',
@@ -103,20 +87,10 @@ class ElcodiRuleExtension extends BaseExtension implements EntitiesOverridableEx
     /**
      * @return array
      */
-    public function getEntitiesOverrides()
+    public function getEntitiesOverrides() : array
     {
         return [
             'Elcodi\Component\Rule\Entity\Interfaces\RuleInterface' => 'elcodi.entity.rule.class',
         ];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return static::EXTENSION_NAME;
     }
 }

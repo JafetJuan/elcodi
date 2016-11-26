@@ -18,6 +18,7 @@
 namespace Elcodi\Bundle\PluginBundle\DependencyInjection;
 
 use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
+use Mmoreram\BaseBundle\Mapping\MappingBagProvider;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -28,19 +29,10 @@ use Elcodi\Component\Plugin\Services\Traits\PluginUtilsTrait;
 
 /**
  * Class ElcodiPluginExtension.
- *
- * @author Berny Cantos <be@rny.cc>
  */
 class ElcodiPluginExtension extends BaseExtension
 {
     use PluginUtilsTrait;
-
-    /**
-     * @var string
-     *
-     * Extension name
-     */
-    const EXTENSION_NAME = 'elcodi_plugin';
 
     /**
      * @var KernelInterface
@@ -50,13 +42,28 @@ class ElcodiPluginExtension extends BaseExtension
     protected $kernel;
 
     /**
-     * Constructor.
+     * BaseExtension constructor.
      *
-     * @param KernelInterface $kernel Kernel
+     * @param KernelInterface    $kernel             Kernel
+     * @param MappingBagProvider $mappingBagProvider
      */
-    public function __construct(KernelInterface $kernel)
+    public function __construct(
+        KernelInterface $kernel,
+        MappingBagProvider $mappingBagProvider = null
+    ) {
+        parent::__construct($mappingBagProvider);
+
+        $this->mappingBagProvider = $mappingBagProvider;
+    }
+
+    /**
+     * Returns the extension alias, same value as extension name.
+     *
+     * @return string The alias
+     */
+    public function getAlias()
     {
-        $this->kernel = $kernel;
+        return 'elcodi_plugin';
     }
 
     /**
@@ -64,7 +71,7 @@ class ElcodiPluginExtension extends BaseExtension
      *
      * @return string Config file location
      */
-    public function getConfigFilesLocation()
+    public function getConfigFilesLocation() : string
     {
         return __DIR__ . '/../Resources/config';
     }
@@ -81,37 +88,12 @@ class ElcodiPluginExtension extends BaseExtension
      *
      * @return ConfigurationInterface Configuration file
      */
-    protected function getConfigurationInstance()
+    protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new Configuration($this->getAlias());
-    }
-
-    /**
-     * Load Parametrization definition.
-     *
-     * return array(
-     *      'parameter1' => $config['parameter1'],
-     *      'parameter2' => $config['parameter2'],
-     *      ...
-     * );
-     *
-     * @param array $config Bundles config values
-     *
-     * @return array Parametrization values
-     */
-    protected function getParametrizationValues(array $config)
-    {
-        return [
-            'elcodi.entity.plugin.class' => $config['mapping']['plugin']['class'],
-            'elcodi.entity.plugin.mapping_file' => $config['mapping']['plugin']['mapping_file'],
-            'elcodi.entity.plugin.manager' => $config['mapping']['plugin']['manager'],
-            'elcodi.entity.plugin.enabled' => $config['mapping']['plugin']['enabled'],
-
-            'elcodi.entity.plugin_configuration.class' => $config['mapping']['plugin_configuration']['class'],
-            'elcodi.entity.plugin_configuration.mapping_file' => $config['mapping']['plugin_configuration']['mapping_file'],
-            'elcodi.entity.plugin_configuration.manager' => $config['mapping']['plugin_configuration']['manager'],
-            'elcodi.entity.plugin_configuration.enabled' => $config['mapping']['plugin_configuration']['enabled'],
-        ];
+        return new ElcodiPluginConfiguration(
+            $this->getAlias(),
+            $this->mappingBagProvider
+        );
     }
 
     /**
@@ -121,7 +103,7 @@ class ElcodiPluginExtension extends BaseExtension
      *
      * @return array Config files
      */
-    public function getConfigFiles(array $config)
+    public function getConfigFiles(array $config) : array
     {
         return [
             'services',
@@ -133,13 +115,12 @@ class ElcodiPluginExtension extends BaseExtension
     }
 
     /**
-     * Override Doctrine entities.
+     * Hook after load the full container.
      *
+     * @param array            $config    Configuration
      * @param ContainerBuilder $container Container
-     *
-     * @return $this Self object
      */
-    protected function overrideEntities(ContainerBuilder $container)
+    protected function postLoad(array $config, ContainerBuilder $container)
     {
         $plugins = $this->getInstalledPluginBundles($this->kernel);
 
@@ -153,8 +134,6 @@ class ElcodiPluginExtension extends BaseExtension
                     );
             }
         }
-
-        return $this;
     }
 
     /**
@@ -164,22 +143,12 @@ class ElcodiPluginExtension extends BaseExtension
      *
      * @return array Plugin configuration
      */
-    protected function processPlugin(Bundle $plugin)
+    private function processPlugin(Bundle $plugin)
     {
         $resourcePath = $plugin->getPath() . '/Resources/config/external.yml';
 
         return file_exists($resourcePath)
             ? Yaml::parse(file_get_contents($resourcePath))
             : [];
-    }
-
-    /**
-     * Returns the extension alias, same value as extension name.
-     *
-     * @return string The alias
-     */
-    public function getAlias()
-    {
-        return self::EXTENSION_NAME;
     }
 }
