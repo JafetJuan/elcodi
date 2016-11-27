@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\User\Factory;
 
@@ -22,7 +23,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 use Elcodi\Component\Core\Generator\Interfaces\GeneratorInterface;
 use Elcodi\Component\User\ElcodiUserProperties;
-use Elcodi\Component\User\Entity\Customer;
+use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
 
 /**
  * Class CustomerFactory.
@@ -51,25 +52,24 @@ class CustomerFactory extends AbstractFactory
      *
      * This method must return always an empty instance
      *
-     * @return Customer Empty entity
+     * @return CustomerInterface Empty entity
      */
     public function create()
     {
         /**
-         * @var Customer $customer
+         * @var CustomerInterface $customer
          */
         $classNamespace = $this->getEntityNamespace();
         $customer = new $classNamespace();
-        $customer
-            ->setGender(ElcodiUserProperties::GENDER_UNKNOWN)
-            ->setGuest(false)
-            ->setNewsletter(false)
-            ->setAddresses(new ArrayCollection())
-            ->setCarts(new ArrayCollection())
-            ->setOrders(new ArrayCollection())
-            ->setToken($this->generator->generate(2))
-            ->setEnabled(true)
-            ->setCreatedAt($this->now());
+        $customer->setGender(ElcodiUserProperties::GENDER_UNKNOWN);
+        $customer->setGuest(false);
+        $customer->setNewsletter(false);
+        $customer->setAddresses(new ArrayCollection());
+        $customer->setCarts(new ArrayCollection());
+        $customer->setOrders(new ArrayCollection());
+        $customer->setToken($this->generator->generate(2));
+        $customer->enable();
+        $customer->setCreatedAt($this->now());
 
         return $customer;
     }

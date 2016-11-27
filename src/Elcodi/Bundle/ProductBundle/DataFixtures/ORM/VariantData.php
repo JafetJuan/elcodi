@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\DataFixtures\ORM;
 
@@ -27,6 +28,7 @@ use Elcodi\Component\Core\Services\ObjectDirector;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Currency\Entity\Money;
 use Elcodi\Component\Product\Entity\Interfaces\ProductInterface;
+use Elcodi\Component\Product\Entity\Interfaces\VariantInterface;
 
 class VariantData extends AbstractFixture implements DependentFixtureInterface
 {
@@ -61,20 +63,21 @@ class VariantData extends AbstractFixture implements DependentFixtureInterface
 
         /**
          * Variant White-Small.
+         *
+         * @var VariantInterface $variantWhiteSmall
          */
-        $variantWhiteSmall = $variantDirector
-            ->create()
-            ->setSku('variant-white-small-sku')
-            ->setStock(100)
-            ->setProduct($productWithVariants)
-            ->addOption($optionWhite)
-            ->addOption($optionSmall)
-            ->setPrice(Money::create(1500, $currency))
-            ->setHeight(13)
-            ->setWidth(12)
-            ->setDepth(19)
-            ->setWeight(125)
-            ->setEnabled(true);
+        $variantWhiteSmall = $variantDirector->create();
+        $variantWhiteSmall->setSku('variant-white-small-sku');
+        $variantWhiteSmall->setStock(100);
+        $variantWhiteSmall->setProduct($productWithVariants);
+        $variantWhiteSmall->addOption($optionWhite);
+        $variantWhiteSmall->addOption($optionSmall);
+        $variantWhiteSmall->setPrice(Money::create(1500, $currency));
+        $variantWhiteSmall->setHeight(13);
+        $variantWhiteSmall->setWidth(12);
+        $variantWhiteSmall->setDepth(19);
+        $variantWhiteSmall->setWeight(125);
+        $variantWhiteSmall->setEnabled(true);
 
         $productWithVariants->setPrincipalVariant($variantWhiteSmall);
 
@@ -83,40 +86,42 @@ class VariantData extends AbstractFixture implements DependentFixtureInterface
 
         /**
          * Variant White-Large.
+         *
+         * @var VariantInterface $variantWhiteLarge
          */
-        $variantWhiteLarge = $variantDirector
-            ->create()
-            ->setSku('variant-white-large-sku')
-            ->setStock(100)
-            ->setProduct($productWithVariants)
-            ->addOption($optionWhite)
-            ->addOption($optionLarge)
-            ->setPrice(Money::create(1800, $currency))
-            ->setHeight(12)
-            ->setWidth(11)
-            ->setDepth(45)
-            ->setWeight(155)
-            ->setEnabled(true);
+        $variantWhiteLarge = $variantDirector->create();
+        $variantWhiteLarge->setSku('variant-white-large-sku');
+        $variantWhiteLarge->setStock(100);
+        $variantWhiteLarge->setProduct($productWithVariants);
+        $variantWhiteLarge->addOption($optionWhite);
+        $variantWhiteLarge->addOption($optionLarge);
+        $variantWhiteLarge->setPrice(Money::create(1800, $currency));
+        $variantWhiteLarge->setHeight(12);
+        $variantWhiteLarge->setWidth(11);
+        $variantWhiteLarge->setDepth(45);
+        $variantWhiteLarge->setWeight(155);
+        $variantWhiteLarge->setEnabled(true);
 
         $variantDirector->save($variantWhiteLarge);
         $this->addReference('variant-white-large', $variantWhiteLarge);
 
         /**
          * Variant Red-Small.
+         *
+         * @var VariantInterface $variantRedSmall
          */
-        $variantRedSmall = $variantDirector
-            ->create()
-            ->setSku('variant-red-small-sku')
-            ->setStock(100)
-            ->setProduct($productWithVariants)
-            ->addOption($optionRed)
-            ->addOption($optionSmall)
-            ->setPrice(Money::create(1500, $currency))
-            ->setHeight(19)
-            ->setWidth(9)
-            ->setDepth(33)
-            ->setWeight(1000)
-            ->setEnabled(true);
+        $variantRedSmall = $variantDirector->create();
+        $variantRedSmall->setSku('variant-red-small-sku');
+        $variantRedSmall->setStock(100);
+        $variantRedSmall->setProduct($productWithVariants);
+        $variantRedSmall->addOption($optionRed);
+        $variantRedSmall->addOption($optionSmall);
+        $variantRedSmall->setPrice(Money::create(1500, $currency));
+        $variantRedSmall->setHeight(19);
+        $variantRedSmall->setWidth(9);
+        $variantRedSmall->setDepth(33);
+        $variantRedSmall->setWeight(1000);
+        $variantRedSmall->setEnabled(true);
 
         $this->storeProductImage(
             $variantRedSmall,
@@ -128,20 +133,21 @@ class VariantData extends AbstractFixture implements DependentFixtureInterface
 
         /**
          * Variant Red-Large.
+         *
+         * @var VariantInterface $variantRedLarge
          */
-        $variantRedLarge = $variantDirector
-            ->create()
-            ->setSku('variant-red-large-sku')
-            ->setStock(100)
-            ->setProduct($productWithVariants)
-            ->addOption($optionRed)
-            ->addOption($optionLarge)
-            ->setPrice(Money::create(1800, $currency))
-            ->setHeight(50)
-            ->setWidth(30)
-            ->setDepth(18)
-            ->setWeight(70)
-            ->setEnabled(true);
+        $variantRedLarge = $variantDirector->create();
+        $variantRedLarge->setSku('variant-red-large-sku');
+        $variantRedLarge->setStock(100);
+        $variantRedLarge->setProduct($productWithVariants);
+        $variantRedLarge->addOption($optionRed);
+        $variantRedLarge->addOption($optionLarge);
+        $variantRedLarge->setPrice(Money::create(1800, $currency));
+        $variantRedLarge->setHeight(50);
+        $variantRedLarge->setWidth(30);
+        $variantRedLarge->setDepth(18);
+        $variantRedLarge->setWeight(70);
+        $variantRedLarge->setEnabled(true);
 
         $variantDirector->save($variantRedLarge);
         $this->addReference('variant-red-large', $variantRedLarge);

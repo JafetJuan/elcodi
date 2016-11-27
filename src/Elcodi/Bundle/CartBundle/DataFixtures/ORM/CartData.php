@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\CartBundle\DataFixtures\ORM;
 
@@ -70,9 +71,8 @@ class CartData extends AbstractFixture implements DependentFixtureInterface
         /**
          * Empty cart.
          */
-        $emptyCart = $cartDirector
-            ->create()
-            ->setCustomer($customer1);
+        $emptyCart = $cartDirector->create();
+        $emptyCart->setCustomer($customer1);
 
         $cartDirector->save($emptyCart);
         $this->addReference('empty-cart', $emptyCart);
@@ -80,29 +80,25 @@ class CartData extends AbstractFixture implements DependentFixtureInterface
         /**
          * Full cart.
          */
-        $fullCart = $cartDirector
-            ->create()
-            ->setCustomer($customer2);
+        $fullCart = $cartDirector->create();
+        $fullCart->setCustomer($customer2);
 
-        $cartLine1 = $cartLineDirector
-            ->create()
-            ->setPurchasable($product)
-            ->setPurchasableAmount($product->getPrice())
-            ->setAmount($product->getPrice())
-            ->setQuantity(2)
-            ->setCart($fullCart);
+        $cartLine1 = $cartLineDirector->create();
+        $cartLine1->setPurchasable($product);
+        $cartLine1->setPurchasableAmount($product->getPrice());
+        $cartLine1->setAmount($product->getPrice());
+        $cartLine1->setQuantity(2);
+        $cartLine1->setCart($fullCart);
 
-        $cartLine2 = $cartLineDirector
-            ->create()
-            ->setPurchasable($productReduced)
-            ->setPurchasableAmount($productReduced->getPrice())
-            ->setAmount($productReduced->getPrice())
-            ->setQuantity(2)
-            ->setCart($fullCart);
+        $cartLine2 = $cartLineDirector->create();
+        $cartLine2->setPurchasable($productReduced);
+        $cartLine2->setPurchasableAmount($productReduced->getPrice());
+        $cartLine2->setAmount($productReduced->getPrice());
+        $cartLine2->setQuantity(2);
+        $cartLine2->setCart($fullCart);
 
-        $fullCart
-            ->addCartLine($cartLine1)
-            ->addCartLine($cartLine2);
+        $fullCart->addCartLine($cartLine1);
+        $fullCart->addCartLine($cartLine2);
 
         $fullCart->setBillingAddress($address1);
         $fullCart->setDeliveryAddress($address2);

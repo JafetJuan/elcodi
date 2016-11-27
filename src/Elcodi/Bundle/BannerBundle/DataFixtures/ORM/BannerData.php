@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\BannerBundle\DataFixtures\ORM;
 
@@ -47,12 +48,11 @@ class BannerData extends AbstractFixture implements DependentFixtureInterface
          * @var BannerZoneInterface $bannerZone
          */
         $bannerZone = $this->getReference('banner-zone');
-        $banner = $bannerDirector
-            ->create()
-            ->setName('banner')
-            ->setDescription('Simple banner')
-            ->addBannerZone($bannerZone)
-            ->setUrl('http://myurl.com');
+        $banner = $bannerDirector->create();
+        $banner->setName('banner');
+        $banner->setDescription('Simple banner');
+        $banner->addBannerZone($bannerZone);
+        $banner->setUrl('http://myurl.com');
 
         $bannerDirector->save($banner);
         $this->addReference('banner', $banner);
@@ -60,15 +60,14 @@ class BannerData extends AbstractFixture implements DependentFixtureInterface
         /**
          * Banner no language.
          *
-         * @var BannerZoneInterface $bannerZone
+         * @var BannerZoneInterface $bannerZoneNoLanguage
          */
         $bannerZoneNoLanguage = $this->getReference('banner-zone-nolanguage');
-        $bannerNoLanguage = $bannerDirector
-            ->create()
-            ->setName('banner-nolanguage')
-            ->setDescription('Simple banner no language')
-            ->addBannerZone($bannerZoneNoLanguage)
-            ->setUrl('http://myurl.com');
+        $bannerNoLanguage = $bannerDirector->create();
+        $bannerNoLanguage->setName('banner-nolanguage');
+        $bannerNoLanguage->setDescription('Simple banner no language');
+        $bannerNoLanguage->addBannerZone($bannerZoneNoLanguage);
+        $bannerNoLanguage->setUrl('http://myurl.com');
 
         $bannerDirector->save($bannerNoLanguage);
         $this->addReference('banner-nolanguage', $bannerNoLanguage);

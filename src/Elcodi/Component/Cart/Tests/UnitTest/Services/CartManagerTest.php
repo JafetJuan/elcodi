@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Cart\Tests\UnitTest\Services;
 
@@ -78,7 +79,7 @@ class CartManagerTest extends PHPUnit_Framework_TestCase
          * @var CartLineFactory         $cartLineFactory
          * @var CartWrapper             $cartWrapper
          */
-        $emptyMoneyWrapper = $this->getMock('Elcodi\Component\Currency\Wrapper\EmptyMoneyWrapper', [], [], '', false);
+        $emptyMoneyWrapper = $this->createMock('Elcodi\Component\Currency\Wrapper\EmptyMoneyWrapper');
         $currency = new Currency();
         $currency->setIso('EUR');
         $emptyMoneyWrapper
@@ -86,10 +87,19 @@ class CartManagerTest extends PHPUnit_Framework_TestCase
             ->method('get')
             ->willReturn(Money::create(0, $currency));
 
-        $cartEventDispatcher = $this->getMock('Elcodi\Component\Cart\EventDispatcher\CartEventDispatcher', [], [], '', false);
-        $cartLineEventDispatcher = $this->getMock('Elcodi\Component\Cart\EventDispatcher\CartLineEventDispatcher', [], [], '', false);
-        $cartFactory = $this->getMock('Elcodi\Component\Cart\Factory\CartFactory', ['create'], [$emptyMoneyWrapper]);
-        $cartLineFactory = $this->getMock('Elcodi\Component\Cart\Factory\CartLineFactory', ['create'], [$emptyMoneyWrapper]);
+        $cartEventDispatcher = $this->createMock('Elcodi\Component\Cart\EventDispatcher\CartEventDispatcher');
+        $cartLineEventDispatcher = $this->createMock('Elcodi\Component\Cart\EventDispatcher\CartLineEventDispatcher');
+        $cartFactory = $this
+            ->getMockBuilder('Elcodi\Component\Cart\Factory\CartFactory')
+            ->setMethods(['create'])
+            ->setConstructorArgs([$emptyMoneyWrapper])
+            ->getMock();
+
+        $cartLineFactory = $this
+            ->getMockBuilder('Elcodi\Component\Cart\Factory\CartLineFactory')
+            ->setMethods(['create'])
+            ->setConstructorArgs([$emptyMoneyWrapper])
+            ->getMock();
 
         $this->cartManager = new CartManager(
             $cartEventDispatcher,
@@ -112,7 +122,7 @@ class CartManagerTest extends PHPUnit_Framework_TestCase
         $cart = new Cart();
         $cart->setCartLines(new ArrayCollection());
         $this->assertEquals(0, $cart->getTotalItemNumber());
-        $purchaseable = $this->getMock(
+        $purchaseable = $this->createMock(
             'Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface'
         );
 
@@ -136,7 +146,7 @@ class CartManagerTest extends PHPUnit_Framework_TestCase
     {
         $cart = new Cart();
         $cart->setCartLines(new ArrayCollection());
-        $purchaseable = $this->getMock('Elcodi\Component\Product\Entity\Product', ['getId']);
+        $purchaseable = $this->createPartialMock('Elcodi\Component\Product\Entity\Product', ['getId']);
 
         $this->cartLineFactory
             ->expects($this->exactly(1))
@@ -241,7 +251,7 @@ class CartManagerTest extends PHPUnit_Framework_TestCase
         /**
          * @var PurchasableInterface $purchasable
          */
-        $purchasable = $this->getMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
+        $purchasable = $this->createMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
         $cartLine->setQuantity($initialQuantity);
         $cartLine->setPurchasable($purchasable);
         $cart->setCartLines(new ArrayCollection([
@@ -380,7 +390,7 @@ class CartManagerTest extends PHPUnit_Framework_TestCase
         /**
          * @var PurchasableInterface $purchasable
          */
-        $purchasable = $this->getMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
+        $purchasable = $this->createMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
         $cart = new Cart();
         $cart->setCartLines(new ArrayCollection());
 
@@ -430,8 +440,8 @@ class CartManagerTest extends PHPUnit_Framework_TestCase
         /**
          * @var PurchasableInterface $purchasable
          */
-        $purchasable = $this->getMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
-        $purchasableToRemove = $this->getMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
+        $purchasable = $this->createMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
+        $purchasableToRemove = $this->createMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
 
         $purchasable
             ->expects($this->any())

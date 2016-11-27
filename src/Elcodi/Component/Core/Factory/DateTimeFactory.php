@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Factory;
 
@@ -29,7 +30,7 @@ class DateTimeFactory
      *
      * @return DateTime Now
      */
-    public function create()
+    public function create() : DateTime
     {
         return new DateTime();
     }

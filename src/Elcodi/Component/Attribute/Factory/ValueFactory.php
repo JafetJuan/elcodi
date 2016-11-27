@@ -12,12 +12,13 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Attribute\Factory;
 
-use Elcodi\Component\Attribute\Entity\Value;
+use Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface;
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 
 /**
@@ -28,12 +29,12 @@ class ValueFactory extends AbstractFactory
     /**
      * Creates a Value instance.
      *
-     * @return Value New Value entity
+     * @return ValueInterface New Value entity
      */
     public function create()
     {
         /**
-         * @var Value $value
+         * @var ValueInterface $value
          */
         $classNamespace = $this->getEntityNamespace();
         $value = new $classNamespace();

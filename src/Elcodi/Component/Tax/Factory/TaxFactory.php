@@ -12,13 +12,14 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Tax\Factory;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
-use Elcodi\Component\Tax\Entity\Tax;
+use Elcodi\Component\Tax\Entity\Interfaces\TaxInterface;
 
 /**
  * Class TaxFactory.
@@ -30,20 +31,19 @@ class TaxFactory extends AbstractFactory
      *
      * This method must return always an empty instance
      *
-     * @return Tax Empty entity
+     * @return TaxInterface Empty entity
      */
     public function create()
     {
         /**
-         * @var Tax $tax
+         * @var TaxInterface $tax
          */
         $classNamespace = $this->getEntityNamespace();
         $tax = new $classNamespace();
-        $tax
-            ->setName('')
-            ->setDescription('')
-            ->setValue(0)
-            ->setEnabled(false);
+        $tax->setName('');
+        $tax->setDescription('');
+        $tax->setValue(0);
+        $tax->disable();
 
         return $tax;
     }

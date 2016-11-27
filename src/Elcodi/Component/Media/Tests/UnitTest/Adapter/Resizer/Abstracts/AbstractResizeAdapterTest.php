@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Tests\UnitTest\Adapter\Resizer\Abstracts;
 
@@ -65,8 +66,8 @@ abstract class AbstractResizeAdapterTest extends PHPUnit_Framework_TestCase
         $this->assertNotEmpty($convertedImageData);
         $resizedImagePath = tempnam(sys_get_temp_dir(), '_test');
         $temporaryFile = new File($resizedImagePath);
-        file_put_contents($temporaryFile, $convertedImageData);
-        list($width, $height) = getimagesize($temporaryFile);
+        file_put_contents($temporaryFile->getRealPath(), $convertedImageData);
+        list($width, $height) = getimagesize($temporaryFile->getRealPath());
 
         $this->assertEquals($expectedHeight, $height);
         $this->assertEquals($expectedWidth, $width);

@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Cart\Transformer;
 
@@ -115,20 +116,19 @@ class CartOrderTransformer
         /**
          * @var OrderInterface $order
          */
-        $order
-            ->setCustomer($cart->getCustomer())
-            ->setCart($cart)
-            ->setQuantity($cart->getTotalItemNumber())
-            ->setPurchasableAmount($cart->getPurchasableAmount())
-            ->setShippingAmount($cart->getShippingAmount())
-            ->setAmount($cart->getAmount())
-            ->setHeight($cart->getHeight())
-            ->setWidth($cart->getWidth())
-            ->setDepth($cart->getDepth())
-            ->setWeight($cart->getWeight())
-            ->setBillingAddress($cart->getBillingAddress())
-            ->setDeliveryAddress($cart->getDeliveryAddress())
-            ->setOrderLines($orderLines);
+        $order->setCustomer($cart->getCustomer());
+        $order->setCart($cart);
+        $order->setQuantity($cart->getTotalItemNumber());
+        $order->setPurchasableAmount($cart->getPurchasableAmount());
+        $order->setShippingAmount($cart->getShippingAmount());
+        $order->setAmount($cart->getAmount());
+        $order->setHeight($cart->getHeight());
+        $order->setWidth($cart->getWidth());
+        $order->setDepth($cart->getDepth());
+        $order->setWeight($cart->getWeight());
+        $order->setBillingAddress($cart->getBillingAddress());
+        $order->setDeliveryAddress($cart->getDeliveryAddress());
+        $order->setOrderLines($orderLines);
 
         $couponAmount = $cart->getCouponAmount();
         if ($couponAmount instanceof MoneyInterface) {

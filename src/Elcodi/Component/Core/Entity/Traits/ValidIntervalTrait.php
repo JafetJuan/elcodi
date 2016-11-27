@@ -12,10 +12,13 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
 
+declare(strict_types=1);
+
 namespace Elcodi\Component\Core\Entity\Traits;
+
+use DateTime;
 
 /**
  * trait for add Entity valid interval.
@@ -23,14 +26,14 @@ namespace Elcodi\Component\Core\Entity\Traits;
 trait ValidIntervalTrait
 {
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * valid from
      */
     protected $validFrom;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * Valid to
      */
@@ -39,23 +42,19 @@ trait ValidIntervalTrait
     /**
      * Set valid from.
      *
-     * @param \DateTime $validFrom Valid from
-     *
-     * @return $this Self object
+     * @param DateTime $validFrom Valid from
      */
-    public function setValidFrom(\DateTime $validFrom)
+    public function setValidFrom(DateTime $validFrom)
     {
         $this->validFrom = $validFrom;
-
-        return $this;
     }
 
     /**
      * Get valid from.
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getValidFrom()
+    public function getValidFrom() : DateTime
     {
         return $this->validFrom;
     }
@@ -63,23 +62,19 @@ trait ValidIntervalTrait
     /**
      * Set valid to.
      *
-     * @param \DateTime $validTo Valid to
-     *
-     * @return $this Self object
+     * @param DateTime|null $validTo Valid to
      */
-    public function setValidTo(\DateTime $validTo = null)
+    public function setValidTo( ? DateTime $validTo)
     {
         $this->validTo = $validTo;
-
-        return $this;
     }
 
     /**
      * Get valid to.
      *
-     * @return \DateTime Valid to
+     * @return DateTime|null Valid to
      */
-    public function getValidTo()
+    public function getValidTo() : ? DateTime
     {
         return $this->validTo;
     }

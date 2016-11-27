@@ -12,14 +12,15 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Attribute\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Elcodi\Component\Attribute\Entity\Attribute;
+use Elcodi\Component\Attribute\Entity\Interfaces\AttributeInterface;
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 
 /**
@@ -30,18 +31,18 @@ class AttributeFactory extends AbstractFactory
     /**
      * Creates an Attribute instance.
      *
-     * @return Attribute New Attribute entity
+     * @return AttributeInterface New Attribute entity
      */
     public function create()
     {
         /**
-         * @var Attribute $attribute
+         * @var AttributeInterface $attribute
          */
         $classNamespace = $this->getEntityNamespace();
         $attribute = new $classNamespace();
-        $attribute->setEnabled(true)
-            ->setValues(new ArrayCollection())
-            ->setCreatedAt($this->now());
+        $attribute->enable();
+        $attribute->setValues(new ArrayCollection());
+        $attribute->setCreatedAt($this->now());
 
         return $attribute;
     }

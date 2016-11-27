@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Currency\Tests\UnitTest\Services;
 
@@ -48,8 +49,8 @@ class MoneyPrinterTest extends PHPUnit_Framework_TestCase
         $currencyFactory->setDateTimeFactory(new DateTimeFactory());
 
         $priceExtension = new MoneyPrinter(
-            $this->getMock('Elcodi\Component\Currency\Services\CurrencyConverter', [], [], '', false),
-            $this->getMock('Elcodi\Component\Currency\Wrapper\CurrencyWrapper', [], [], '', false),
+            $this->createMock('Elcodi\Component\Currency\Services\CurrencyConverter'),
+            $this->createMock('Elcodi\Component\Currency\Wrapper\CurrencyWrapper'),
             Locale::create($locale)
         );
 
@@ -91,14 +92,14 @@ class MoneyPrinterTest extends PHPUnit_Framework_TestCase
      */
     public function testCurrencyRateNotFoundThrowsException()
     {
-        $locale = $this->getMock('Elcodi\Component\Language\Entity\Interfaces\LocaleInterface');
+        $locale = $this->createMock('Elcodi\Component\Language\Entity\Interfaces\LocaleInterface');
         $locale
             ->expects($this->any())
             ->method('getIso')
             ->willReturn('es_ES');
         $priceExtension = new MoneyPrinter(
-            $this->getMock('Elcodi\Component\Currency\Services\CurrencyConverter', [], [], '', false),
-            $this->getMock('Elcodi\Component\Currency\Wrapper\CurrencyWrapper', [], [], '', false),
+            $this->createMock('Elcodi\Component\Currency\Services\CurrencyConverter'),
+            $this->createMock('Elcodi\Component\Currency\Wrapper\CurrencyWrapper'),
             Locale::create($locale)
         );
         $currencyFactory = new CurrencyFactory();
@@ -110,8 +111,7 @@ class MoneyPrinterTest extends PHPUnit_Framework_TestCase
                 $currencyFactory
                     ->create()
                     ->setIso('US1')
-            ),
-            'US1'
+            )
         );
     }
 }

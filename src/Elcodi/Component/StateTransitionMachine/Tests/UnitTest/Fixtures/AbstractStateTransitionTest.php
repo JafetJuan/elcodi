@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\StateTransitionMachine\Tests\UnitTest\Fixtures;
 
@@ -88,7 +89,7 @@ abstract class AbstractStateTransitionTest extends PHPUnit_Framework_TestCase
         /**
          * @var EventDispatcherInterface $eventDispatcher
          */
-        $eventDispatcher = $this->getMock('Elcodi\Component\StateTransitionMachine\EventDispatcher\MachineEventDispatcher', [], [], '', false);
+        $eventDispatcher = $this->createMock('Elcodi\Component\StateTransitionMachine\EventDispatcher\MachineEventDispatcher');
 
         $machineManager = new MachineManager(
             $machine,

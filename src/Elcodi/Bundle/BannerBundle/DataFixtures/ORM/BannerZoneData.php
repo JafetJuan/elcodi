@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\BannerBundle\DataFixtures\ORM;
 
@@ -47,13 +48,12 @@ class BannerZoneData extends AbstractFixture implements DependentFixtureInterfac
          * @var LanguageInterface $language
          */
         $language = $this->getReference('language-es');
-        $bannerZone = $bannerZoneDirector
-            ->create()
-            ->setName('bannerzone')
-            ->setCode('bannerzone-code')
-            ->setLanguage($language)
-            ->setHeight(300)
-            ->setWidth(400);
+        $bannerZone = $bannerZoneDirector->create();
+        $bannerZone->setName('bannerzone');
+        $bannerZone->setCode('bannerzone-code');
+        $bannerZone->setLanguage($language);
+        $bannerZone->setHeight(300);
+        $bannerZone->setWidth(400);
 
         $bannerZoneDirector->save($bannerZone);
         $this->addReference('banner-zone', $bannerZone);
@@ -61,13 +61,12 @@ class BannerZoneData extends AbstractFixture implements DependentFixtureInterfac
         /**
          * BannerZone with no language.
          */
-        $bannerZoneNoLanguage = $bannerZoneDirector
-            ->create()
-            ->setName('bannerzone-nolanguage')
-            ->setCode('bannerzone-code-nolanguage')
-            ->setLanguage(null)
-            ->setHeight(300)
-            ->setWidth(400);
+        $bannerZoneNoLanguage = $bannerZoneDirector->create();
+        $bannerZoneNoLanguage->setName('bannerzone-nolanguage');
+        $bannerZoneNoLanguage->setCode('bannerzone-code-nolanguage');
+        $bannerZoneNoLanguage->setLanguage(null);
+        $bannerZoneNoLanguage->setHeight(300);
+        $bannerZoneNoLanguage->setWidth(400);
 
         $bannerZoneDirector->save($bannerZoneNoLanguage);
         $this->addReference('banner-zone-nolanguage', $bannerZoneNoLanguage);

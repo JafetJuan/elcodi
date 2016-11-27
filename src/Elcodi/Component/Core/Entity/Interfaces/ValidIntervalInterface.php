@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Entity\Interfaces;
 
@@ -28,8 +29,6 @@ interface ValidIntervalInterface
      * Set valid from.
      *
      * @param DateTime $validFrom Valid from
-     *
-     * @return $this Self object
      */
     public function setValidFrom(DateTime $validFrom);
 
@@ -38,21 +37,19 @@ interface ValidIntervalInterface
      *
      * @return DateTime
      */
-    public function getValidFrom();
+    public function getValidFrom() : ? DateTime;
 
     /**
      * Set valid to.
      *
      * @param DateTime $validTo Valid to
-     *
-     * @return $this Self object
      */
-    public function setValidTo(DateTime $validTo = null);
+    public function setValidTo( ? DateTime $validTo);
 
     /**
      * Get valid to.
      *
      * @return DateTime Valid to
      */
-    public function getValidTo();
+    public function getValidTo() : ? DateTime;
 }

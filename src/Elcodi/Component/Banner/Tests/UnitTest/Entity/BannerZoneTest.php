@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Banner\Tests\UnitTest\Entity;
 
@@ -66,21 +67,21 @@ class BannerZoneTest extends AbstractEntityTest
                 'type' => $this::GETTER_SETTER,
                 'getter' => 'getName',
                 'setter' => 'setName',
-                'value' => sha1(rand()),
+                'value' => sha1((string) rand()),
                 'nullable' => false,
             ]],
             [[
                 'type' => $this::GETTER_SETTER,
                 'getter' => 'getCode',
                 'setter' => 'setCode',
-                'value' => sha1(rand()),
+                'value' => sha1((string) rand()),
                 'nullable' => false,
             ]],
             [[
                 'type' => $this::GETTER_SETTER,
                 'getter' => 'getLanguage',
                 'setter' => 'setLanguage',
-                'value' => $this->getMock('Elcodi\Component\Language\Entity\Interfaces\LanguageInterface'),
+                'value' => $this->createMock('Elcodi\Component\Language\Entity\Interfaces\LanguageInterface'),
                 'nullable' => false,
             ]],
             [[

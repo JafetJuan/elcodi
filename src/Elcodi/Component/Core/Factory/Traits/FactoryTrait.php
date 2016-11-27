@@ -12,10 +12,13 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
 
+declare(strict_types=1);
+
 namespace Elcodi\Component\Core\Factory\Traits;
+
+use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 
 /**
  * Trait FactoryTrait.
@@ -23,33 +26,29 @@ namespace Elcodi\Component\Core\Factory\Traits;
 trait FactoryTrait
 {
     /**
-     * @var \Elcodi\Component\Core\Factory\Abstracts\AbstractFactory
+     * @var AbstractFactory
      *
      * Factory
      */
     private $factory;
 
     /**
-     * Get Factory.
+     * Sets Factory.
      *
-     * @return \Elcodi\Component\Core\Factory\Abstracts\AbstractFactory Factory
+     * @param AbstractFactory $factory Factory
      */
-    public function getFactory()
+    public function setFactory(AbstractFactory $factory)
     {
-        return $this->factory;
+        $this->factory = $factory;
     }
 
     /**
-     * Sets Factory.
+     * Get Factory.
      *
-     * @param \Elcodi\Component\Core\Factory\Abstracts\AbstractFactory $factory Factory
-     *
-     * @return $this Self object
+     * @return AbstractFactory Factory
      */
-    public function setFactory(\Elcodi\Component\Core\Factory\Abstracts\AbstractFactory $factory)
+    public function getFactory() : AbstractFactory
     {
-        $this->factory = $factory;
-
-        return $this;
+        return $this->factory;
     }
 }

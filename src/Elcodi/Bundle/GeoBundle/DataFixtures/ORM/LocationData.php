@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\GeoBundle\DataFixtures\ORM;
 
@@ -37,69 +38,61 @@ class LocationData extends AbstractFixture
          */
         $locationDirector = $this->getDirector('location');
 
-        $locationSpain = $locationDirector
-            ->create()
-            ->setId('ES')
-            ->setName('Spain')
-            ->setCode('ES')
-            ->setType('country');
+        $locationSpain = $locationDirector->create();
+        $locationSpain->setId('ES');
+        $locationSpain->setName('Spain');
+        $locationSpain->setCode('ES');
+        $locationSpain->setType('country');
 
-        $locationCatalunya = $locationDirector
-            ->create()
-            ->setId('ES_CA')
-            ->setName('Catalunya')
-            ->setCode('CA')
-            ->setType('provincia')
-            ->addParent($locationSpain);
+        $locationCatalunya = $locationDirector->create();
+        $locationCatalunya->setId('ES_CA');
+        $locationCatalunya->setName('Catalunya');
+        $locationCatalunya->setCode('CA');
+        $locationCatalunya->setType('provincia');
+        $locationCatalunya->addParent($locationSpain);
 
-        $locationVallesOriental = $locationDirector
-            ->create()
-            ->setId('ES_CA_VO')
-            ->setName('Valles Oriental')
-            ->setCode('VO')
-            ->setType('comarca')
-            ->addParent($locationCatalunya);
+        $locationVallesOriental = $locationDirector->create();
+        $locationVallesOriental->setId('ES_CA_VO');
+        $locationVallesOriental->setName('Valles Oriental');
+        $locationVallesOriental->setCode('VO');
+        $locationVallesOriental->setType('comarca');
+        $locationVallesOriental->addParent($locationCatalunya);
 
-        $locationLaBatlloria = $locationDirector
-            ->create()
-            ->setId('ES_CA_VO_LaBatlloria')
-            ->setName('La batlloria')
-            ->setCode('LaBatlloria')
-            ->setType('city')
-            ->addParent($locationVallesOriental);
+        $locationLaBatlloria = $locationDirector->create();
+        $locationLaBatlloria->setId('ES_CA_VO_LaBatlloria');
+        $locationLaBatlloria->setName('La batlloria');
+        $locationLaBatlloria->setCode('LaBatlloria');
+        $locationLaBatlloria->setType('city');
+        $locationLaBatlloria->addParent($locationVallesOriental);
 
-        $locationSantCeloni = $locationDirector
-            ->create()
-            ->setId('ES_CA_VO_SantCeloni')
-            ->setName('Sant Celoni')
-            ->setCode('SantCeloni')
-            ->setType('city')
-            ->addParent($locationVallesOriental);
+        $locationSantCeloni = $locationDirector->create();
+        $locationSantCeloni->setId('ES_CA_VO_SantCeloni');
+        $locationSantCeloni->setName('Sant Celoni');
+        $locationSantCeloni->setCode('SantCeloni');
+        $locationSantCeloni->setType('city');
+        $locationSantCeloni->addParent($locationVallesOriental);
 
-        $locationViladecavalls = $locationDirector
-            ->create()
-            ->setId('ES_CA_VO_Viladecavalls')
-            ->setName('Viladecavalls')
-            ->setCode('Viladecavalls')
-            ->setType('city')
-            ->addParent($locationVallesOriental);
+        $locationViladecavalls = $locationDirector->create();
+        $locationViladecavalls->setId('ES_CA_VO_Viladecavalls');
+        $locationViladecavalls->setName('Viladecavalls');
+        $locationViladecavalls->setCode('Viladecavalls');
+        $locationViladecavalls->setType('city');
+        $locationViladecavalls->addParent($locationVallesOriental);
 
-        $location08021 = $locationDirector
-            ->create()
-            ->setId('ES_CA_VO_Viladecavalls_08021')
-            ->setName('08021')
-            ->setCode('08021')
-            ->setType('postalcode')
-            ->addParent($locationViladecavalls);
+        $location08021 = $locationDirector->create();
+        $location08021->setId('ES_CA_VO_Viladecavalls_08021');
+        $location08021->setName('08021');
+        $location08021->setCode('08021');
+        $location08021->setType('postalcode');
+        $location08021->addParent($locationViladecavalls);
 
-        $location08470 = $locationDirector
-            ->create()
-            ->setId('ES_CA_VO_SantCeloni_08470')
-            ->setName('08470')
-            ->setCode('08470')
-            ->setType('postalcode')
-            ->addParent($locationLaBatlloria)
-            ->addParent($locationSantCeloni);
+        $location08470 = $locationDirector->create();
+        $location08470->setId('ES_CA_VO_SantCeloni_08470');
+        $location08470->setName('08470');
+        $location08470->setCode('08470');
+        $location08470->setType('postalcode');
+        $location08470->addParent($locationLaBatlloria);
+        $location08470->addParent($locationSantCeloni);
 
         $locationDirector->save([
             $locationSpain,

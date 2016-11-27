@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\MenuBundle\DataFixtures\ORM;
 
@@ -43,11 +44,10 @@ class MenuData extends AbstractFixture implements DependentFixtureInterface
         /**
          * Admin menu.
          */
-        $menuAdmin = $menuDirector
-            ->create()
-            ->setCode('menu-admin')
-            ->setEnabled(true)
-            ->addSubnode($this->getReference('menu-node-vogue'));
+        $menuAdmin = $menuDirector->create();
+        $menuAdmin->setCode('menu-admin');
+        $menuAdmin->enable();
+        $menuAdmin->addSubnode($this->getReference('menu-node-vogue'));
 
         $menuDirector->save($menuAdmin);
         $this->addReference('menu-admin', $menuAdmin);
@@ -55,12 +55,11 @@ class MenuData extends AbstractFixture implements DependentFixtureInterface
         /**
          * Front menu.
          */
-        $menuFront = $menuDirector
-            ->create()
-            ->setCode('menu-front')
-            ->setEnabled(true)
-            ->addSubnode($this->getReference('menu-node-him'))
-            ->addSubnode($this->getReference('menu-node-her'));
+        $menuFront = $menuDirector->create();
+        $menuFront->setCode('menu-front');
+        $menuFront->enable();
+        $menuFront->addSubnode($this->getReference('menu-node-him'));
+        $menuFront->addSubnode($this->getReference('menu-node-her'));
 
         $menuDirector->save($menuFront);
         $this->addReference('menu-front', $menuFront);

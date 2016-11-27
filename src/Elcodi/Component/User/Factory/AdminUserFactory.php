@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\User\Factory;
 
@@ -58,11 +59,10 @@ class AdminUserFactory extends AbstractFactory
          */
         $classNamespace = $this->getEntityNamespace();
         $adminUser = new $classNamespace();
-        $adminUser
-            ->setGender(ElcodiUserProperties::GENDER_UNKNOWN)
-            ->setToken($this->generator->generate(2))
-            ->setEnabled(true)
-            ->setCreatedAt($this->now());
+        $adminUser->setGender(ElcodiUserProperties::GENDER_UNKNOWN);
+        $adminUser->setToken($this->generator->generate(2));
+        $adminUser->enable();
+        $adminUser->setCreatedAt($this->now());
 
         return $adminUser;
     }

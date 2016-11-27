@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Factory\Traits;
 
@@ -33,14 +34,10 @@ trait EntityNamespaceTrait
      * Set Entity Namespace.
      *
      * @param string $entityNamespace Entity namespace
-     *
-     * @return $this Self object
      */
-    public function setEntityNamespace($entityNamespace)
+    public function setEntityNamespace(string $entityNamespace)
     {
         $this->entityNamespace = $entityNamespace;
-
-        return $this;
     }
 
     /**
@@ -48,7 +45,7 @@ trait EntityNamespaceTrait
      *
      * @return string Entity Namespace
      */
-    public function getEntityNamespace()
+    public function getEntityNamespace() : string
     {
         return $this->entityNamespace;
     }

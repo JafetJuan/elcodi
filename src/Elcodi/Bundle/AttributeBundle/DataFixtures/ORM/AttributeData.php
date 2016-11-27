@@ -12,14 +12,16 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\AttributeBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
 use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Component\Attribute\Entity\Interfaces\AttributeInterface;
 use Elcodi\Component\Core\Services\ObjectDirector;
 
 /**
@@ -41,74 +43,45 @@ class AttributeData extends AbstractFixture
         $attributeDirector = $this->getDirector('attribute');
         $attributeValueDirector = $this->getDirector('attribute_value');
 
-        /**
-         * Sizes.
-         */
-        $sizeAttribute = $attributeDirector
-            ->create()
-            ->setName('Size')
-            ->setEnabled(true);
+        foreach ($this->getAttributesData() as $attributeName => $values) {
 
-        $attributeDirector->save($sizeAttribute);
-        $this->addReference('attribute-size', $sizeAttribute);
+            /**
+             * @var AttributeInterface $attribute
+             */
+            $attribute = $attributeDirector->create();
+            $attribute->setName($attributeName);
+            $attribute->enable();
+            $attributeDirector->save($attribute);
+            $this->addReference("attribute-$attributeName", $attribute);
 
-        $smallValue = $attributeValueDirector
-            ->create()
-            ->setValue('Small')
-            ->setAttribute($sizeAttribute);
+            foreach ($values as $valueName) {
+                $value = $attributeValueDirector->create();
+                $value->setValue($valueName);
+                $value->setAttribute($attribute);
+                $attributeValueDirector->save($value);
+                $this->addReference("value-$attributeName-$valueName", $value);
+            }
+        }
+    }
 
-        $attributeValueDirector->save($smallValue);
-        $this->addReference('value-size-small', $smallValue);
-
-        $mediumValue = $attributeValueDirector
-            ->create()
-            ->setValue('Medium')
-            ->setAttribute($sizeAttribute);
-
-        $attributeValueDirector->save($mediumValue);
-        $this->addReference('value-size-medium', $mediumValue);
-
-        $largeValue = $attributeValueDirector
-            ->create()
-            ->setValue('Large')
-            ->setAttribute($sizeAttribute);
-
-        $attributeValueDirector->save($largeValue);
-        $this->addReference('value-size-large', $largeValue);
-
-        /**
-         * Colors.
-         */
-        $colorAttribute = $attributeDirector
-            ->create()
-            ->setName('Color')
-            ->setEnabled(true);
-
-        $attributeDirector->save($colorAttribute);
-        $this->addReference('attribute-color', $colorAttribute);
-
-        $blueValue = $attributeValueDirector
-            ->create()
-            ->setValue('Blue')
-            ->setAttribute($colorAttribute);
-
-        $attributeValueDirector->save($blueValue);
-        $this->addReference('value-color-blue', $blueValue);
-
-        $whiteValue = $attributeValueDirector
-            ->create()
-            ->setValue('White')
-            ->setAttribute($colorAttribute);
-
-        $attributeValueDirector->save($whiteValue);
-        $this->addReference('value-color-white', $whiteValue);
-
-        $redValue = $attributeValueDirector
-            ->create()
-            ->setValue('Red')
-            ->setAttribute($colorAttribute);
-
-        $attributeValueDirector->save($redValue);
-        $this->addReference('value-color-red', $redValue);
+    /**
+     * Get attributes data.
+     *
+     * @return array
+     */
+    private function getAttributesData() : array
+    {
+        return [
+            'size' => [
+                'small',
+                'medium',
+                'large',
+            ],
+            'color' => [
+                'blue',
+                'white',
+                'red',
+            ],
+        ];
     }
 }

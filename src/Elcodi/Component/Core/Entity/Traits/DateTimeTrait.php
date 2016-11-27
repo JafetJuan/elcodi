@@ -12,10 +12,13 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
 
+declare(strict_types=1);
+
 namespace Elcodi\Component\Core\Entity\Traits;
+
+use DateTime;
 
 /**
  * trait for DateTime common variables and methods.
@@ -23,14 +26,14 @@ namespace Elcodi\Component\Core\Entity\Traits;
 trait DateTimeTrait
 {
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * Created at
      */
     protected $createdAt;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * Updated at
      */
@@ -39,23 +42,19 @@ trait DateTimeTrait
     /**
      * Set locally created at value.
      *
-     * @param \DateTime $createdAt Created at value
-     *
-     * @return $this Self object
+     * @param DateTime $createdAt Created at value
      */
-    public function setCreatedAt(\DateTime $createdAt)
+    public function setCreatedAt(DateTime $createdAt)
     {
         $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**
      * Return created_at value.
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreatedAt()
+    public function getCreatedAt() : ? DateTime
     {
         return $this->createdAt;
     }
@@ -63,23 +62,21 @@ trait DateTimeTrait
     /**
      * Set locally updated at value.
      *
-     * @param \DateTime $updatedAt Updated at value
+     * @param DateTime $updatedAt Updated at value
      *
      * @return $this Self object
      */
-    public function setUpdatedAt(\DateTime $updatedAt)
+    public function setUpdatedAt(DateTime $updatedAt)
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
     }
 
     /**
      * Return updated_at value.
      *
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt() : ? DateTime
     {
         return $this->updatedAt;
     }
@@ -90,6 +87,6 @@ trait DateTimeTrait
      */
     public function loadUpdateAt()
     {
-        $this->setUpdatedAt(new \DateTime());
+        $this->setUpdatedAt(new DateTime());
     }
 }

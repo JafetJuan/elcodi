@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Coupon\Services;
 
@@ -120,21 +121,20 @@ class CouponManager
             ->couponCodeGenerator
             ->generate(10);
 
-        $couponGenerated
-            ->setCode($couponCode)
-            ->setName($coupon->getName())
-            ->setType($coupon->getType())
-            ->setPrice($coupon->getPrice())
-            ->setDiscount($coupon->getDiscount())
-            ->setCount($coupon->getCount())
-            ->setPriority($coupon->getPriority())
-            ->setMinimumPurchase($coupon->getMinimumPurchase())
-            ->setValidFrom($dateFrom)
-            ->setValidTo($dateTo)
-            ->setValue($coupon->getValue())
-            ->setRule($coupon->getRule())
-            ->setEnforcement($coupon->getEnforcement())
-            ->setEnabled(true);
+        $couponGenerated->setCode($couponCode);
+        $couponGenerated->setName($coupon->getName());
+        $couponGenerated->setType($coupon->getType());
+        $couponGenerated->setPrice($coupon->getPrice());
+        $couponGenerated->setDiscount($coupon->getDiscount());
+        $couponGenerated->setCount($coupon->getCount());
+        $couponGenerated->setPriority($coupon->getPriority());
+        $couponGenerated->setMinimumPurchase($coupon->getMinimumPurchase());
+        $couponGenerated->setValidFrom($dateFrom);
+        $couponGenerated->setValidTo($dateTo);
+        $couponGenerated->setValue($coupon->getValue());
+        $couponGenerated->setRule($coupon->getRule());
+        $couponGenerated->setEnforcement($coupon->getEnforcement());
+        $couponGenerated->enable();
 
         return $couponGenerated;
     }
@@ -150,7 +150,7 @@ class CouponManager
      */
     public function checkCoupon(CouponInterface $coupon)
     {
-        if (!$this->IsActive($coupon)) {
+        if (!$this->isActive($coupon)) {
             throw new CouponNotActiveException();
         }
 

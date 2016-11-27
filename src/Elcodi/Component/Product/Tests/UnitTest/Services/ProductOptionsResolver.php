@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Product\Tests\UnitTest\Services;
 
@@ -33,9 +34,9 @@ class ProductOptionsResolverTest extends PHPUnit_Framework_TestCase
      */
     public function testAvailableOptions()
     {
-        $product = $this->getMock('Elcodi\Component\Product\Entity\Product', [], [], '', false);
-        $variant = $this->getMock('Elcodi\Component\Product\Entity\Variant', [], [], '', false);
-        $attribute = $this->getMock('Elcodi\Component\Attribute\Entity\Attribute', [], [], '', false);
+        $product = $this->createMock('Elcodi\Component\Product\Entity\Product');
+        $variant = $this->createMock('Elcodi\Component\Product\Entity\Variant');
+        $attribute = $this->createMock('Elcodi\Component\Attribute\Entity\Attribute');
 
         $option = new Value();
         $option->setId(111);

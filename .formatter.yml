@@ -6,6 +6,7 @@ use-sort:
     sort-type: alph
     sort-direction: asc
 
+strict: true
 header: |
     /*
      * This file is part of the Elcodi package.
@@ -19,5 +20,4 @@ header: |
      *
      * @author Marc Morera <yuhu@mmoreram.com>
      * @author Aldo Chiecchia <zimage@tiscali.it>
-     * @author Elcodi Team <tech@elcodi.com>
      */

@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\User\Tests\UnitTests\Wrapper;
 
@@ -126,7 +127,7 @@ class CustomerWrapperTest extends \PHPUnit_Framework_TestCase
      */
     protected function mockCustomer()
     {
-        return $this->getMock('Elcodi\Component\User\Entity\Interfaces\CustomerInterface');
+        return $this->createMock('Elcodi\Component\User\Entity\Interfaces\CustomerInterface');
     }
 
     /**
@@ -134,7 +135,7 @@ class CustomerWrapperTest extends \PHPUnit_Framework_TestCase
      */
     protected function mockCustomerFactory()
     {
-        return $this->getMock('Elcodi\Component\User\Factory\CustomerFactory');
+        return $this->createMock('Elcodi\Component\User\Factory\CustomerFactory');
     }
 
     /**
@@ -142,7 +143,7 @@ class CustomerWrapperTest extends \PHPUnit_Framework_TestCase
      */
     protected function mockTokenStorage()
     {
-        return $this->getMock('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface');
+        return $this->createMock('Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface');
     }
 
     /**
@@ -150,6 +151,6 @@ class CustomerWrapperTest extends \PHPUnit_Framework_TestCase
      */
     protected function mockSecurityToken()
     {
-        return $this->getMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
+        return $this->createMock('Symfony\Component\Security\Core\Authentication\Token\TokenInterface');
     }
 }

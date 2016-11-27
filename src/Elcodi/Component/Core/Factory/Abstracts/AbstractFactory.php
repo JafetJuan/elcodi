@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Factory\Abstracts;
 
@@ -46,14 +47,10 @@ abstract class AbstractFactory
      * Sets DateTimeFactory.
      *
      * @param DateTimeFactory $dateTimeFactory DateTimeFactory
-     *
-     * @return $this Self object
      */
     public function setDateTimeFactory(DateTimeFactory $dateTimeFactory)
     {
         $this->dateTimeFactory = $dateTimeFactory;
-
-        return $this;
     }
 
     /**
@@ -61,7 +58,7 @@ abstract class AbstractFactory
      *
      * @return DateTime Now
      */
-    public function now()
+    public function now() : DateTime
     {
         return $this
             ->dateTimeFactory

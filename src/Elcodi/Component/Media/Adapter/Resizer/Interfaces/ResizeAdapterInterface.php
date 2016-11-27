@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Adapter\Resizer\Interfaces;
 
@@ -35,9 +36,9 @@ interface ResizeAdapterInterface
      * @return string Resized image data
      */
     public function resize(
-        $imageData,
-        $height,
-        $width,
-        $type = ElcodiMediaImageResizeTypes::FORCE_MEASURES
-    );
+        string $imageData,
+        int $height,
+        int $width,
+        int $type = ElcodiMediaImageResizeTypes::FORCE_MEASURES
+    ) : string;
 }

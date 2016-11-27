@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Entity\Traits;
 
@@ -30,26 +31,22 @@ trait IdentifiableTrait
     protected $id;
 
     /**
-     * Get Id.
-     *
-     * @return int Id
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
      * Sets Id.
      *
-     * @param int $id Id
-     *
-     * @return $this Self object
+     * @param mixed $id
      */
     public function setId($id)
     {
         $this->id = $id;
+    }
 
-        return $this;
+    /**
+     * Get Id.
+     *
+     * @return mixed Id
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

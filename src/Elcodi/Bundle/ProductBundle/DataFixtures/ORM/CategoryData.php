@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\DataFixtures\ORM;
 
@@ -45,12 +46,11 @@ class CategoryData extends AbstractFixture
          *
          * @var CategoryInterface $rootCategory
          */
-        $rootCategory = $categoryDirector
-            ->create()
-            ->setName('root-category')
-            ->setSlug('root-category')
-            ->setEnabled(true)
-            ->setRoot(true);
+        $rootCategory = $categoryDirector->create();
+        $rootCategory->setName('root-category');
+        $rootCategory->setSlug('root-category');
+        $rootCategory->setEnabled(true);
+        $rootCategory->setRoot(true);
 
         $categoryDirector->save($rootCategory);
         $this->addReference('rootCategory', $rootCategory);
@@ -60,13 +60,12 @@ class CategoryData extends AbstractFixture
          *
          * @var CategoryInterface $category
          */
-        $category = $categoryDirector
-            ->create()
-            ->setName('category')
-            ->setSlug('category')
-            ->setEnabled(true)
-            ->setParent($rootCategory)
-            ->setRoot(false);
+        $category = $categoryDirector->create();
+        $category->setName('category');
+        $category->setSlug('category');
+        $category->setEnabled(true);
+        $category->setParent($rootCategory);
+        $category->setRoot(false);
 
         $categoryDirector->save($category);
         $this->addReference('category', $category);
@@ -76,13 +75,12 @@ class CategoryData extends AbstractFixture
          *
          * @var CategoryInterface $secondLevelCategory
          */
-        $secondLevelCategory = $categoryDirector
-            ->create()
-            ->setName('Second level category')
-            ->setSlug('second-level-category')
-            ->setEnabled(true)
-            ->setParent($category)
-            ->setRoot(false);
+        $secondLevelCategory = $categoryDirector->create();
+        $secondLevelCategory->setName('Second level category');
+        $secondLevelCategory->setSlug('second-level-category');
+        $secondLevelCategory->setEnabled(true);
+        $secondLevelCategory->setParent($category);
+        $secondLevelCategory->setRoot(false);
 
         $categoryDirector->save($secondLevelCategory);
         $this->addReference('secondLevelCategory', $secondLevelCategory);

@@ -12,12 +12,13 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Cart\Factory;
 
-use Elcodi\Component\Cart\Entity\OrderLine;
+use Elcodi\Component\Cart\Entity\Interfaces\OrderLineInterface;
 use Elcodi\Component\Currency\Factory\Abstracts\AbstractPurchasableFactory;
 
 /**
@@ -30,23 +31,22 @@ class OrderLineFactory extends AbstractPurchasableFactory
      *
      * This method must return always an empty instance for related entity
      *
-     * @return OrderLine New OrderLine instance
+     * @return OrderLineInterface New OrderLine instance
      */
     public function create()
     {
         /**
-         * @var OrderLine $orderLine
+         * @var OrderLineInterface $orderLine
          */
         $classNamespace = $this->getEntityNamespace();
         $orderLine = new $classNamespace();
 
-        $orderLine
-            ->setWidth(0)
-            ->setHeight(0)
-            ->setWidth(0)
-            ->setWeight(0)
-            ->setAmount($this->createZeroAmountMoney())
-            ->setPurchasableAmount($this->createZeroAmountMoney());
+        $orderLine->setWidth(0);
+        $orderLine->setHeight(0);
+        $orderLine->setWidth(0);
+        $orderLine->setWeight(0);
+        $orderLine->setAmount($this->createZeroAmountMoney());
+        $orderLine->setPurchasableAmount($this->createZeroAmountMoney());
 
         return $orderLine;
     }

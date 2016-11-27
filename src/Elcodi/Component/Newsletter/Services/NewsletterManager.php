@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Newsletter\Services;
 
@@ -112,13 +113,12 @@ class NewsletterManager
 
         if (!($newsletterSubscription instanceof NewsletterSubscriptionInterface)) {
             $newsletterSubscription = $this->newsletterSubscriptionFactory->create();
-            $newsletterSubscription
-                ->setEmail($email)
-                ->setHash($this->hashGenerator->generate())
-                ->setLanguage($language);
+            $newsletterSubscription->setEmail($email);
+            $newsletterSubscription->setHash($this->hashGenerator->generate());
+            $newsletterSubscription->setLanguage($language);
         }
 
-        $newsletterSubscription->setEnabled(true);
+        $newsletterSubscription->enable();
 
         $this
             ->newsletterEventDispatcher
@@ -162,9 +162,8 @@ class NewsletterManager
             throw new NewsletterCannotBeRemovedException();
         }
 
-        $newsletterSubscription
-            ->setEnabled(false)
-            ->setReason($reason);
+        $newsletterSubscription->disable();
+        $newsletterSubscription->setReason($reason);
 
         $this
             ->newsletterEventDispatcher

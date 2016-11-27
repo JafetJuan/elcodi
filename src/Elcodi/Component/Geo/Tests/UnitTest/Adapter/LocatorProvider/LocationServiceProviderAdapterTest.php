@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Geo\Tests\UnitTest\Adapter\LocatorProvider;
 
@@ -542,7 +543,7 @@ class LocationServiceProviderAdapterTest extends PHPUnit_Framework_TestCase
         ArrayCollection $parents = null,
         ArrayCollection $children = null
     ) {
-        $mock = $this->getMock(
+        $mock = $this->createMock(
             'Elcodi\Component\Geo\Entity\Location'
         );
         $mock

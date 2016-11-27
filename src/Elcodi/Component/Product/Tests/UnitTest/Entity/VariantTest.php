@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Product\Tests\UnitTest\Entity;
 
@@ -56,13 +57,13 @@ class VariantTest extends PHPUnit_Framework_TestCase
         /**
          * @var Product $product
          */
-        $product = $this->getMock('Elcodi\Component\Product\Entity\Product', null);
+        $product = $this->createPartialMock('Elcodi\Component\Product\Entity\Product', []);
         $product->setAttributes(new ArrayCollection());
 
         /**
          * @var Variant $variant
          */
-        $variant = $this->getMock('Elcodi\Component\Product\Entity\Variant', null);
+        $variant = $this->createPartialMock('Elcodi\Component\Product\Entity\Variant', []);
         $variant->setProduct($product);
         $variant->setOptions(new ArrayCollection());
 
@@ -103,7 +104,7 @@ class VariantTest extends PHPUnit_Framework_TestCase
         /**
          * @var Variant $variant
          */
-        $variant = $this->getMock('Elcodi\Component\Product\Entity\Variant', null);
+        $variant = $this->createPartialMock('Elcodi\Component\Product\Entity\Variant', []);
         $variant->addOption(new Value());
     }
 
@@ -135,13 +136,13 @@ class VariantTest extends PHPUnit_Framework_TestCase
         /**
          * @var Product $product
          */
-        $product = $this->getMock('Elcodi\Component\Product\Entity\Product', null);
+        $product = $this->createPartialMock('Elcodi\Component\Product\Entity\Product', []);
         $product->setAttributes(new ArrayCollection());
 
         /**
          * @var Variant $variant
          */
-        $variant = $this->getMock('Elcodi\Component\Product\Entity\Variant', null);
+        $variant = $this->createPartialMock('Elcodi\Component\Product\Entity\Variant', []);
         $variant->setProduct($product);
 
         if ($initializeCollection) {

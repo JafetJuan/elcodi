@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\DataFixtures\ORM;
 
@@ -39,11 +40,10 @@ class ManufacturerData extends AbstractFixture
          */
         $manufacturerDirector = $this->getDirector('manufacturer');
 
-        $manufacturer = $manufacturerDirector
-            ->create()
-            ->setName('manufacturer')
-            ->setSlug('manufacturer')
-            ->setDescription('manufacturer description');
+        $manufacturer = $manufacturerDirector->create();
+        $manufacturer->setName('manufacturer');
+        $manufacturer->setSlug('manufacturer');
+        $manufacturer->setDescription('manufacturer description');
 
         $manufacturerDirector->save($manufacturer);
         $this->addReference('manufacturer', $manufacturer);

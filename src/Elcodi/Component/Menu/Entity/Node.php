@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Menu\Entity;
 
@@ -177,7 +178,9 @@ class Node implements NodeInterface
      */
     public function getActiveUrls()
     {
-        return json_decode($this->activeUrls, true);
+        return !is_null($this->activeUrls)
+            ? json_decode($this->activeUrls, true)
+            : [];
     }
 
     /**
@@ -189,9 +192,9 @@ class Node implements NodeInterface
      */
     public function addActiveUrl($activeUrl)
     {
-        $activeUrls = json_decode($this->activeUrls, true);
+        $activeUrls = $this->getActiveUrls();
         $activeUrls[] = $activeUrl;
-        $this->activeUrls = json_encode($activeUrls);
+        $this->setActiveUrls($activeUrls);
 
         return $this;
     }
@@ -205,11 +208,11 @@ class Node implements NodeInterface
      */
     public function removeActiveUrl($activeUrl)
     {
-        $activeUrls = json_decode($this->activeUrls, true);
+        $activeUrls = $this->getActiveUrls();
         $positionFound = array_search($activeUrl, $activeUrls);
         if ($positionFound) {
             unset($activeUrls[$positionFound]);
-            $this->activeUrls = json_encode($activeUrls);
+            $this->setActiveUrls($activeUrls);
         }
 
         return $this;

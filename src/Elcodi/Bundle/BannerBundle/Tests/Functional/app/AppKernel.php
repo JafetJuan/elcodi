@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\BannerBundle\Tests\Functional\app;
 
@@ -52,7 +53,7 @@ class AppKernel extends AbstractElcodiKernel
     protected function getContainerClass()
     {
         return  $this->name .
-                ucfirst($this->environment) .
-                'DebugProjectContainerBanner';
+            ucfirst($this->environment) .
+            'DebugProjectContainerBanner';
     }
 }

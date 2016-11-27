@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Tests\UnitTest\Entity;
 
@@ -132,18 +133,13 @@ abstract class AbstractEntityTest extends PHPUnit_Framework_TestCase
      */
     private function checkGetterSetter(array $field)
     {
-        $classNamespace = $this->getEntityNamespace();
-        $class = $this->getMock($classNamespace, null, [], '', false);
+        $class = $this->createPartialMock($this->getEntityNamespace(), []);
 
         $setter = $field['setter'];
         $getter = $field['getter'];
         $value = $this->getFieldValue($field);
 
-        $this->assertSame(
-            $class,
-            $class->$setter($value)
-        );
-
+        $class->$setter($value);
         $this->assertEquals(
             $value,
             $class->$getter()
@@ -162,10 +158,7 @@ abstract class AbstractEntityTest extends PHPUnit_Framework_TestCase
      */
     private function checkAdderRemover(array $field)
     {
-        $class = $this->getMock(
-            $this->getEntityNamespace(),
-            null, [], '', false
-        );
+        $class = $this->createPartialMock($this->getEntityNamespace(), []);
 
         $setter = $field['setter'];
         $getter = $field['getter'];
@@ -217,7 +210,7 @@ abstract class AbstractEntityTest extends PHPUnit_Framework_TestCase
     {
         $value = $field['value'];
         if (is_string($value) && (class_exists($value) || interface_exists($value))) {
-            $value = $this->getMock($value, [], [], '', false);
+            $value = $this->createMock($value);
         }
 
         return $value;
@@ -267,7 +260,7 @@ abstract class AbstractEntityTest extends PHPUnit_Framework_TestCase
                 'type' => $this::GETTER_SETTER,
                 'getter' => 'isEnabled',
                 'setter' => 'setEnabled',
-                'value' => '\DateTime',
+                'value' => true,
                 'nullable' => false,
             ]];
         }

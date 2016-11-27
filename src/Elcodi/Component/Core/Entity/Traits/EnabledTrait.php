@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Entity\Traits;
 
@@ -27,49 +28,44 @@ trait EnabledTrait
      *
      * Enabled
      */
-    protected $enabled;
+    protected $enabled = false;
 
     /**
      * Set if is enabled.
      *
      * @param bool $enabled enabled value
-     *
-     * @return $this Self object
      */
-    public function setEnabled($enabled)
+    public function setEnabled(bool $enabled)
     {
         $this->enabled = $enabled;
-
-        return $this;
     }
 
     /**
      * Get is enabled.
      *
+     * This method controls as well when the field is not set yet, treating it
+     * as a simple false
+     *
      * @return bool is enabled
      */
-    public function isEnabled()
+    public function isEnabled() : bool
     {
-        return $this->enabled;
+        return $this->enabled ?? false;
     }
 
     /**
      * Enable.
-     *
-     * @return $this Self object
      */
     public function enable()
     {
-        return $this->setEnabled(true);
+        $this->setEnabled(true);
     }
 
     /**
      * Disable.
-     *
-     * @return $this Self object
      */
     public function disable()
     {
-        return $this->setEnabled(false);
+        $this->setEnabled(false);
     }
 }

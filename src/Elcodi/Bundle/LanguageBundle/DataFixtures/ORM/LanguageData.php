@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\LanguageBundle\DataFixtures\ORM;
 
@@ -21,6 +22,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 
 use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
 use Elcodi\Component\Core\Services\ObjectDirector;
+use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 
 /**
  * AdminData class.
@@ -35,53 +37,35 @@ class LanguageData extends AbstractFixture
     public function load(ObjectManager $manager)
     {
         /**
-         * @var ObjectDirector $languageDirector
+         * @var ObjectDirector    $languageDirector
+         * @var LanguageInterface $language
          */
         $languageDirector = $this->getDirector('language');
 
-        $languageEs = $languageDirector
-            ->create()
-            ->setIso('es')
-            ->setname('Español')
-            ->setEnabled(true);
+        foreach ($this->getLanguages() as $iso => $name) {
+            $language = $languageDirector->create();
+            $language->setIso($iso);
+            $language->setName($name);
+            $language->enable();
 
-        $languageDirector->save($languageEs);
-        $this->addReference('language-es', $languageEs);
+            $languageDirector->save($language);
+            $this->addReference('language-' . $iso, $language);
+        }
+    }
 
-        $languageEn = $languageDirector
-            ->create()
-            ->setIso('en')
-            ->setname('English')
-            ->setEnabled(true);
-
-        $languageDirector->save($languageEn);
-        $this->addReference('language-en', $languageEn);
-
-        $languageFr = $languageDirector
-            ->create()
-            ->setIso('fr')
-            ->setname('Français')
-            ->setEnabled(true);
-
-        $languageDirector->save($languageFr);
-        $this->addReference('language-fr', $languageFr);
-
-        $languageIt = $languageDirector
-            ->create()
-            ->setIso('it')
-            ->setname('Italiano')
-            ->setEnabled(true);
-
-        $languageDirector->save($languageIt);
-        $this->addReference('language-it', $languageIt);
-
-        $languageDe = $languageDirector
-            ->create()
-            ->setIso('de')
-            ->setname('Deutch')
-            ->setEnabled(true);
-
-        $languageDirector->save($languageDe);
-        $this->addReference('language-de', $languageDe);
+    /**
+     * Get languages.
+     *
+     * @return array
+     */
+    private function getLanguages() : array
+    {
+        return [
+            'es' => 'Español',
+            'en' => 'English',
+            'fr' => 'Français',
+            'it' => 'Italiano',
+            'de' => 'Deutch',
+        ];
     }
 }

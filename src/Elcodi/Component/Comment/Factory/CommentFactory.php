@@ -12,14 +12,15 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Comment\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Elcodi\Component\Comment\Entity\Comment;
+use Elcodi\Component\Comment\Entity\Interfaces\CommentInterface;
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 
 /**
@@ -30,20 +31,19 @@ class CommentFactory extends AbstractFactory
     /**
      * Creates an instance of Comment.
      *
-     * @return Comment New Cart entity
+     * @return CommentInterface New Cart entity
      */
     public function create()
     {
         /**
-         * @var Comment $comment
+         * @var CommentInterface $comment
          */
         $classNamespace = $this->getEntityNamespace();
         $comment = new $classNamespace();
-        $comment
-            ->setParent(null)
-            ->setChildren(new ArrayCollection())
-            ->setEnabled(true)
-            ->setCreatedAt($this->now());
+        $comment->setParent(null);
+        $comment->setChildren(new ArrayCollection());
+        $comment->enable();
+        $comment->setCreatedAt($this->now());
 
         return $comment;
     }

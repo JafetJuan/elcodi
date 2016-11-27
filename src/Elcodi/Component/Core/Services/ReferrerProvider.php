@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Services;
 
@@ -56,11 +57,13 @@ class ReferrerProvider
     /**
      * Get referrer.
      *
-     * @return string Referrer
+     * @return string|false Referrer
      */
     public function getReferrerDomain()
     {
-        return parse_url($this->getReferrer(), PHP_URL_HOST);
+        return is_string($this->getReferrer())
+            ? parse_url($this->getReferrer(), PHP_URL_HOST)
+            : false;
     }
 
     /**
@@ -70,7 +73,12 @@ class ReferrerProvider
      */
     public function referrerIsSearchEngine()
     {
-        $referrerHostExploded = explode('.', $this->getReferrerDomain());
+        $referrerDomain = $this->getReferrerDomain();
+        if (!is_string($referrerDomain)) {
+            return false;
+        }
+
+        $referrerHostExploded = explode('.', $referrerDomain);
         $numberOfPieces = count($referrerHostExploded);
         $positionToCheck = $numberOfPieces - 2;
 

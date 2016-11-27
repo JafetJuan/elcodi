@@ -12,13 +12,14 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Page\Factory;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
-use Elcodi\Component\Page\Entity\Page;
+use Elcodi\Component\Page\Entity\Interfaces\PageInterface;
 
 /**
  * Class PageFactory.
@@ -35,23 +36,22 @@ class PageFactory extends AbstractFactory
      *
      * Queries should be implemented in a repository class
      *
-     * @return Page entity
+     * @return PageInterface entity
      */
     public function create()
     {
         $now = $this->now();
 
         /**
-         * @var Page $page
+         * @var PageInterface $page
          */
         $classNamespace = $this->getEntityNamespace();
         $page = new $classNamespace();
-        $page
-            ->setEnabled(true)
-            ->setPersistent(false)
-            ->setPublicationDate($now)
-            ->setCreatedAt($now)
-            ->setUpdatedAt($now);
+        $page->enable();
+        $page->setPersistent(false);
+        $page->setPublicationDate($now);
+        $page->setCreatedAt($now);
+        $page->setUpdatedAt($now);
 
         return $page;
     }

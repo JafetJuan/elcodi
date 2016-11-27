@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Plugin\Tests\Entity;
 
@@ -228,13 +229,13 @@ class PluginTest extends PHPUnit_Framework_TestCase
 
         $configuration->setFieldValue('field1', 'Value');
         $configuration->setFieldValue('field2', true);
-        $plugin->setEnabled(true);
+        $plugin->enable();
         $this->assertTrue($plugin->isUsable([
             'field1',
             'field2',
         ]));
 
-        $plugin->setEnabled(false);
+        $plugin->disable();
         $this->assertFalse($plugin->isUsable());
         $this->assertFalse($plugin->isUsable(['field3']));
         $this->assertFalse($plugin->isUsable(['field1']));
@@ -256,7 +257,7 @@ class PluginTest extends PHPUnit_Framework_TestCase
         $plugin = $this->plugin;
 
         $this->assertFalse($plugin->guessIsUsable());
-        $plugin->setEnabled(true);
+        $plugin->enable();
         $this->assertFalse($plugin->guessIsUsable());
         $plugin->setFieldValues([
             'field1' => 'lala',
@@ -359,9 +360,9 @@ class PluginTest extends PHPUnit_Framework_TestCase
      */
     public function testPluginExists()
     {
-        $plugin = $this->getMock('Elcodi\Component\Plugin\Entity\Plugin', [
+        $plugin = $this->createPartialMock('Elcodi\Component\Plugin\Entity\Plugin', [
             'getNamespace',
-        ], [], '', false);
+        ]);
 
         $plugin
             ->method('getNamespace')
@@ -377,9 +378,9 @@ class PluginTest extends PHPUnit_Framework_TestCase
      */
     public function testPluginNotExists()
     {
-        $plugin = $this->getMock('Elcodi\Component\Plugin\Entity\Plugin', [
+        $plugin = $this->createPartialMock('Elcodi\Component\Plugin\Entity\Plugin', [
             'getNamespace',
-        ], [], '', false);
+        ]);
 
         $plugin
             ->method('getNamespace')

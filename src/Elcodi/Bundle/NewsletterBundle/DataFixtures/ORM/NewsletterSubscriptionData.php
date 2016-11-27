@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\NewsletterBundle\DataFixtures\ORM;
 
@@ -41,11 +42,10 @@ class NewsletterSubscriptionData extends AbstractFixture implements DependentFix
         $newsletterSubscriptionDirector = $this->getDirector('newsletter_subscription');
         $languageEs = $this->getReference('language-es');
 
-        $newsletterSubscription = $newsletterSubscriptionDirector
-            ->create()
-            ->setEmail('someemail@something.org')
-            ->setLanguage($languageEs)
-            ->setHash('123456789');
+        $newsletterSubscription = $newsletterSubscriptionDirector->create();
+        $newsletterSubscription->setEmail('someemail@something.org');
+        $newsletterSubscription->setLanguage($languageEs);
+        $newsletterSubscription->setHash('123456789');
 
         $newsletterSubscriptionDirector->save($newsletterSubscription);
         $this->setReference(
@@ -53,10 +53,9 @@ class NewsletterSubscriptionData extends AbstractFixture implements DependentFix
             $newsletterSubscription
         );
 
-        $newsletterSubscriptionNoLanguage = $newsletterSubscriptionDirector
-            ->create()
-            ->setEmail('otheemail@something.org')
-            ->setHash('0000');
+        $newsletterSubscriptionNoLanguage = $newsletterSubscriptionDirector->create();
+        $newsletterSubscriptionNoLanguage->setEmail('otheemail@something.org');
+        $newsletterSubscriptionNoLanguage->setHash('0000');
 
         $newsletterSubscriptionDirector->save($newsletterSubscriptionNoLanguage);
         $this->setReference(

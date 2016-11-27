@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\EntityTranslator\Factory;
 
@@ -33,7 +34,7 @@ class EntityTranslationFactory extends AbstractFactory
      * This method must always returns an empty instance of the related Entity
      * and initializes it in a consistent state
      *
-     * @return object Empty entity
+     * @return EntityTranslationInterface Empty entity
      */
     public function create()
     {

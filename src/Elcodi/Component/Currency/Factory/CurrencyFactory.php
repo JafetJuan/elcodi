@@ -12,13 +12,14 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Currency\Factory;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
-use Elcodi\Component\Currency\Entity\Currency;
+use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 
 /**
  * Class CurrencyFactory.
@@ -28,18 +29,17 @@ class CurrencyFactory extends AbstractFactory
     /**
      * Creates an instance of Currency entity.
      *
-     * @return Currency Empty entity
+     * @return CurrencyInterface Empty entity
      */
     public function create()
     {
         /**
-         * @var Currency $currency
+         * @var CurrencyInterface $currency
          */
         $classNamespace = $this->getEntityNamespace();
         $currency = new $classNamespace();
-        $currency
-            ->setEnabled(true)
-            ->setCreatedAt($this->now());
+        $currency->enable();
+        $currency->setCreatedAt($this->now());
 
         return $currency;
     }

@@ -12,14 +12,16 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Product\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
+use Elcodi\Component\Product\Entity\Interfaces\ManufacturerInterface;
 use Elcodi\Component\Product\Entity\Manufacturer;
 
 /**
@@ -30,20 +32,19 @@ class ManufacturerFactory extends AbstractFactory
     /**
      * Creates an instance of Manufacturer.
      *
-     * @return Manufacturer New Manufacturer entity
+     * @return ManufacturerInterface New Manufacturer entity
      */
     public function create()
     {
         /**
-         * @var Manufacturer $manufacturer
+         * @var ManufacturerInterface $manufacturer
          */
         $classNamespace = $this->getEntityNamespace();
         $manufacturer = new $classNamespace();
-        $manufacturer
-            ->setImages(new ArrayCollection())
-            ->setImagesSort('')
-            ->setEnabled(true)
-            ->setCreatedAt($this->now());
+        $manufacturer->setImages(new ArrayCollection());
+        $manufacturer->setImagesSort('');
+        $manufacturer->enable();
+        $manufacturer->setCreatedAt($this->now());
 
         return $manufacturer;
     }

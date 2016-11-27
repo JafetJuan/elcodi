@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Product\Entity\Interfaces;
 
@@ -33,22 +34,6 @@ interface CategoryInterface extends
     MetaDataInterface,
     EnabledInterface
 {
-    /**
-     * Set id.
-     *
-     * @param string $id Id
-     *
-     * @return $this Self object
-     */
-    public function setId($id);
-
-    /**
-     * Get id.
-     *
-     * @return string Id
-     */
-    public function getId();
-
     /**
      * Set name.
      *

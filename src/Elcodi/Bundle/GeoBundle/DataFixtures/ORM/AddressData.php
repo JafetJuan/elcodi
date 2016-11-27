@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\GeoBundle\DataFixtures\ORM;
 
@@ -39,36 +40,34 @@ class AddressData extends AbstractFixture implements DependentFixtureInterface
          */
         $addressDirector = $this->getDirector('address');
 
-        $addressSantCeloni = $addressDirector
-            ->create()
-            ->setName('Some address')
-            ->setRecipientName('user name')
-            ->setRecipientSurname('user surname')
-            ->setAddress('Some street 123')
-            ->setAddressMore('1-2')
-            ->setPhone('123-456789')
-            ->setMobile('000-123456')
-            ->setComments('Some comments')
-            ->setCity($this->getReference('location-sant-celoni')->getId())
-            ->setPostalcode('08021')
-            ->setEnabled(true);
+        $addressSantCeloni = $addressDirector->create();
+        $addressSantCeloni->setName('Some address');
+        $addressSantCeloni->setRecipientName('user name');
+        $addressSantCeloni->setRecipientSurname('user surname');
+        $addressSantCeloni->setAddress('Some street 123');
+        $addressSantCeloni->setAddressMore('1-2');
+        $addressSantCeloni->setPhone('123-456789');
+        $addressSantCeloni->setMobile('000-123456');
+        $addressSantCeloni->setComments('Some comments');
+        $addressSantCeloni->setCity($this->getReference('location-sant-celoni')->getId());
+        $addressSantCeloni->setPostalcode('08021');
+        $addressSantCeloni->setEnabled(true);
 
         $addressDirector->save($addressSantCeloni);
         $this->addReference('address-sant-celoni', $addressSantCeloni);
 
-        $addressViladecavalls = $addressDirector
-            ->create()
-            ->setName('Some other address')
-            ->setRecipientName('user2 name')
-            ->setRecipientSurname('user2 surname')
-            ->setAddress('Some other street 123')
-            ->setAddressMore('3-4')
-            ->setPhone('123-456789')
-            ->setMobile('000-123456')
-            ->setComments('Some other comments')
-            ->setCity($this->getReference('location-viladecavalls')->getId())
-            ->setPostalcode('08232')
-            ->setEnabled(true);
+        $addressViladecavalls = $addressDirector->create();
+        $addressViladecavalls->setName('Some other address');
+        $addressViladecavalls->setRecipientName('user2 name');
+        $addressViladecavalls->setRecipientSurname('user2 surname');
+        $addressViladecavalls->setAddress('Some other street 123');
+        $addressViladecavalls->setAddressMore('3-4');
+        $addressViladecavalls->setPhone('123-456789');
+        $addressViladecavalls->setMobile('000-123456');
+        $addressViladecavalls->setComments('Some other comments');
+        $addressViladecavalls->setCity($this->getReference('location-viladecavalls')->getId());
+        $addressViladecavalls->setPostalcode('08232');
+        $addressViladecavalls->setEnabled(true);
 
         $addressDirector->save($addressViladecavalls);
         $this->addReference('address-viladecavalls', $addressViladecavalls);

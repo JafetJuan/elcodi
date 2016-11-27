@@ -12,15 +12,16 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Geo\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
-use Elcodi\Component\Geo\Entity\Location;
+use Elcodi\Component\Geo\Entity\Interfaces\LocationInterface;
 
 /**
  * Class LocationFactory.
@@ -32,18 +33,17 @@ class LocationFactory extends AbstractFactory
      *
      * This method must return always an empty instance
      *
-     * @return Location Empty entity
+     * @return LocationInterface Empty entity
      */
     public function create()
     {
         /**
-         * @var Location $location
+         * @var LocationInterface $location
          */
         $classNamespace = $this->getEntityNamespace();
         $location = new $classNamespace();
-        $location
-            ->setChildren(new ArrayCollection())
-            ->setParents(new ArrayCollection());
+        $location->setChildren(new ArrayCollection());
+        $location->setParents(new ArrayCollection());
 
         return $location;
     }

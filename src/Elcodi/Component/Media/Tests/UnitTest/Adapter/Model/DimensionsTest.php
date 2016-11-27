@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Tests\UnitTest\Adapter\Model;
 
@@ -183,7 +184,7 @@ class DimensionsTest extends PHPUnit_Framework_TestCase
         );
 
         $this->assertEquals(0, $dimensions->getSrcX());
-        $this->assertEquals(112.5, $dimensions->getSrcY());
+        $this->assertEquals(112, $dimensions->getSrcY());
         $this->assertEquals(450, $dimensions->getSrcWidth());
         $this->assertEquals(225, $dimensions->getSrcHeight());
 

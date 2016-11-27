@@ -12,13 +12,14 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\StateTransitionMachine\Factory;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
-use Elcodi\Component\StateTransitionMachine\Entity\StateLine;
+use Elcodi\Component\StateTransitionMachine\Entity\Interfaces\StateLineInterface;
 
 /**
  * Class StateLineFactory.
@@ -28,12 +29,12 @@ class StateLineFactory extends AbstractFactory
     /**
      * Creates an instance of StateLine entity.
      *
-     * @return StateLine Empty entity
+     * @return StateLineInterface Empty entity
      */
     public function create()
     {
         /**
-         * @var StateLine $stateLine
+         * @var StateLineInterface $stateLine
          */
         $classNamespace = $this->getEntityNamespace();
         $stateLine = new $classNamespace();

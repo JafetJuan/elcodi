@@ -12,13 +12,14 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Store\Factory;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
-use Elcodi\Component\Store\Entity\Store;
+use Elcodi\Component\Store\Entity\Interfaces\StoreInterface;
 use Elcodi\Component\Store\StoreRoutingStrategy;
 
 /**
@@ -31,20 +32,19 @@ class StoreFactory extends AbstractFactory
      *
      * This method must return always an empty instance
      *
-     * @return Store Empty entity
+     * @return StoreInterface Empty entity
      */
     public function create()
     {
         /**
-         * @var Store $store
+         * @var StoreInterface $store
          */
         $classNamespace = $this->getEntityNamespace();
         $store = new $classNamespace();
-        $store
-            ->setIsCompany(true)
-            ->setRoutingStrategy(StoreRoutingStrategy::STRATEGY_PREFIX_EXCEPT_DEFAULT)
-            ->setEnabled(true)
-            ->setCreatedAt($this->now());
+        $store->setIsCompany(true);
+        $store->setRoutingStrategy(StoreRoutingStrategy::STRATEGY_PREFIX_EXCEPT_DEFAULT);
+        $store->enable();
+        $store->setCreatedAt($this->now());
 
         return $store;
     }

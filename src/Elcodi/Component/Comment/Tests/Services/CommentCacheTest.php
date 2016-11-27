@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Comment\Tests\Services;
 
@@ -59,9 +60,9 @@ class CommentCacheTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->commentRepository = $this->getMock('Elcodi\Component\Comment\Repository\CommentRepository', [], [], '', false);
-        $this->voteManager = $this->getMock('Elcodi\Component\Comment\Services\VoteManager', [], [], '', false);
-        $commentVotes = $this->getMock('Elcodi\Component\Comment\Entity\VotePackage', [], [], '', false);
+        $this->commentRepository = $this->createMock('Elcodi\Component\Comment\Repository\CommentRepository');
+        $this->voteManager = $this->createMock('Elcodi\Component\Comment\Services\VoteManager');
+        $commentVotes = $this->createMock('Elcodi\Component\Comment\Entity\VotePackage');
 
         $commentVotes
             ->expects($this->any())
@@ -84,12 +85,6 @@ class CommentCacheTest extends PHPUnit_Framework_TestCase
             ->method('getCommentVotes')
             ->will($this->returnValue($commentVotes));
 
-        $this
-            ->voteManager
-            ->expects($this->any())
-            ->method('create')
-            ->will($this->returnValue(new Vote()));
-
         $this->commentCache = new CommentCache(
             $this->commentRepository,
             $this->voteManager,
@@ -99,7 +94,7 @@ class CommentCacheTest extends PHPUnit_Framework_TestCase
         $this
             ->commentCache
             ->setCache($this->getMockForAbstractClass('Doctrine\Common\Cache\CacheProvider'))
-            ->setEncoder($this->getMock('Elcodi\Component\Core\Encoder\Interfaces\EncoderInterface'));
+            ->setEncoder($this->createMock('Elcodi\Component\Core\Encoder\Interfaces\EncoderInterface'));
     }
 
     /**
@@ -207,69 +202,65 @@ class CommentCacheTest extends PHPUnit_Framework_TestCase
     protected function getCommentsStructure()
     {
         $comment1 = new Comment();
-        $comment1
-            ->setId(1)
-            ->setSource('source')
-            ->setContext('admin')
-            ->setParent(null)
-            ->setAuthorName('Marc Morera')
-            ->setAuthorEmail('engonga@engonga.com')
-            ->setAuthorToken('12345')
-            ->setContent('comment1')
-            ->setCreatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'))
-            ->setUpdatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
+        $comment1->setId(1);
+        $comment1->setSource('source');
+        $comment1->setContext('admin');
+        $comment1->setParent(null);
+        $comment1->setAuthorName('Marc Morera');
+        $comment1->setAuthorEmail('engonga@engonga.com');
+        $comment1->setAuthorToken('12345');
+        $comment1->setContent('comment1');
+        $comment1->setCreatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
+        $comment1->setUpdatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
 
         $comment2 = new Comment();
-        $comment2
-            ->setId(2)
-            ->setSource('source')
-            ->setContext('admin')
-            ->setParent($comment1)
-            ->setAuthorName('Marc Morera')
-            ->setAuthorEmail('engonga@engonga.com')
-            ->setAuthorToken('12345')
-            ->setContent('comment2')
-            ->setCreatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'))
-            ->setUpdatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
+        $comment2->setId(2);
+        $comment2->setSource('source');
+        $comment2->setContext('admin');
+        $comment2->setParent($comment1);
+        $comment2->setAuthorName('Marc Morera');
+        $comment2->setAuthorEmail('engonga@engonga.com');
+        $comment2->setAuthorToken('12345');
+        $comment2->setContent('comment2');
+        $comment2->setCreatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
+        $comment2->setUpdatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
 
         $comment3 = new Comment();
         $comment3
-            ->setId(3)
-            ->setSource('source')
-            ->setContext('admin')
-            ->setParent($comment1)
-            ->setAuthorName('Another guy')
-            ->setAuthorEmail('lala@lala.com')
-            ->setAuthorToken('12345')
-            ->setContent('comment3')
-            ->setCreatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'))
-            ->setUpdatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
+            ->setId(3);
+        $comment3->setSource('source');
+        $comment3->setContext('admin');
+        $comment3->setParent($comment1);
+        $comment3->setAuthorName('Another guy');
+        $comment3->setAuthorEmail('lala@lala.com');
+        $comment3->setAuthorToken('12345');
+        $comment3->setContent('comment3');
+        $comment3->setCreatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
+        $comment3->setUpdatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
 
         $comment4 = new Comment();
-        $comment4
-            ->setId(4)
-            ->setSource('source')
-            ->setContext('admin')
-            ->setParent(null)
-            ->setAuthorName('Marc Morera')
-            ->setAuthorEmail('engonga@engonga.com')
-            ->setAuthorToken('12345')
-            ->setContent('comment4')
-            ->setCreatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'))
-            ->setUpdatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
+        $comment4->setId(4);
+        $comment4->setSource('source');
+        $comment4->setContext('admin');
+        $comment4->setParent(null);
+        $comment4->setAuthorName('Marc Morera');
+        $comment4->setAuthorEmail('engonga@engonga.com');
+        $comment4->setAuthorToken('12345');
+        $comment4->setContent('comment4');
+        $comment4->setCreatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
+        $comment4->setUpdatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
 
         $comment5 = new Comment();
-        $comment5
-            ->setId(5)
-            ->setSource('source')
-            ->setContext('admin')
-            ->setParent($comment4)
-            ->setAuthorName('Marc Morera')
-            ->setAuthorEmail('engonga@engonga.com')
-            ->setAuthorToken('12345')
-            ->setContent('comment5')
-            ->setCreatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'))
-            ->setUpdatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
+        $comment5->setId(5);
+        $comment5->setSource('source');
+        $comment5->setContext('admin');
+        $comment5->setParent($comment4);
+        $comment5->setAuthorName('Marc Morera');
+        $comment5->setAuthorEmail('engonga@engonga.com');
+        $comment5->setAuthorToken('12345');
+        $comment5->setContent('comment5');
+        $comment5->setCreatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
+        $comment5->setUpdatedAt(DateTime::createFromFormat('Y-m-d H:i:s', '2015-01-01 00:00:00'));
 
         return new ArrayCollection([
             $comment1,

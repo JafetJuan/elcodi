@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Product\Tests\UnitTest\Services;
 
@@ -144,13 +145,7 @@ class CategoryTreeTest extends PHPUnit_Framework_TestCase
         /**
          * All this params are set to avoid original constructor to be called.
          */
-        $categoryRepositoryMock = $this->getMock(
-            'Elcodi\Component\Product\Repository\CategoryRepository',
-            [],
-            [],
-            '',
-            false
-        );
+        $categoryRepositoryMock = $this->createMock('Elcodi\Component\Product\Repository\CategoryRepository');
         $categoryRepositoryMock
             ->expects($this->once())
             ->method('getAllCategoriesSortedByParentAndPositionAsc')

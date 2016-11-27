@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Cart\Tests\UnitTest\Entity;
 
@@ -86,7 +87,7 @@ class CartLineTest extends AbstractEntityTest
      */
     public function testGetSpaceDimensions($method)
     {
-        $purchasable = $this->getMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
+        $purchasable = $this->createMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
         $purchasable
             ->method($method)
             ->will($this->returnValue(5));
@@ -95,21 +96,6 @@ class CartLineTest extends AbstractEntityTest
         $cartLine->setPurchasable($purchasable);
         $this->assertEquals(
             5,
-            $cartLine->$method()
-        );
-
-        $variant = $this->getMock('Elcodi\Component\Product\Entity\Interfaces\VariantInterface');
-        $variant
-            ->method('getPurchasable')
-            ->will($this->returnValue($purchasable));
-        $variant
-            ->method($method)
-            ->will($this->returnValue(10));
-
-        $cartLine = new CartLine();
-        $cartLine->setPurchasable($variant);
-        $this->assertEquals(
-            10,
             $cartLine->$method()
         );
     }
@@ -131,7 +117,7 @@ class CartLineTest extends AbstractEntityTest
      */
     public function testGetWeight()
     {
-        $purchasable = $this->getMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
+        $purchasable = $this->createMock('Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface');
         $purchasable
             ->method('getWeight')
             ->will($this->returnValue(5));
@@ -141,22 +127,6 @@ class CartLineTest extends AbstractEntityTest
         $cartLine->setQuantity(2);
         $this->assertEquals(
             10,
-            $cartLine->getWeight()
-        );
-
-        $variant = $this->getMock('Elcodi\Component\Product\Entity\Interfaces\VariantInterface');
-        $variant
-            ->method('getPurchasable')
-            ->will($this->returnValue($purchasable));
-        $variant
-            ->method('getWeight')
-            ->will($this->returnValue(10));
-
-        $cartLine = new CartLine();
-        $cartLine->setPurchasable($variant);
-        $cartLine->setQuantity(3);
-        $this->assertEquals(
-            30,
             $cartLine->getWeight()
         );
     }

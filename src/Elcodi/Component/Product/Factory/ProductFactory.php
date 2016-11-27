@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Product\Factory;
 
@@ -22,7 +23,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Elcodi\Component\Currency\Factory\Abstracts\AbstractPurchasableFactory;
 use Elcodi\Component\Product\ElcodiProductStock;
 use Elcodi\Component\Product\ElcodiProductTypes;
-use Elcodi\Component\Product\Entity\Product;
+use Elcodi\Component\Product\Entity\Interfaces\ProductInterface;
 
 /**
  * Factory for Product entities.
@@ -56,14 +57,14 @@ class ProductFactory extends AbstractPurchasableFactory
      * Prices are initialized to "zero amount" Money value objects,
      * using injected CurrencyWrapper default Currency
      *
-     * @return Product New Product entity
+     * @return ProductInterface New Product entity
      */
     public function create()
     {
         $zeroPrice = $this->createZeroAmountMoney();
 
         /**
-         * @var Product $product
+         * @var ProductInterface $product
          */
         $classNamespace = $this->getEntityNamespace();
         $product = new $classNamespace();
@@ -72,24 +73,23 @@ class ProductFactory extends AbstractPurchasableFactory
             ? 0
             : ElcodiProductStock::INFINITE_STOCK;
 
-        $product
-            ->setStock($stock)
-            ->setType(ElcodiProductTypes::TYPE_PRODUCT_PHYSICAL)
-            ->setShowInHome(true)
-            ->setPrice($zeroPrice)
-            ->setReducedPrice($zeroPrice)
-            ->setAttributes(new ArrayCollection())
-            ->setVariants(new ArrayCollection())
-            ->setCategories(new ArrayCollection())
-            ->setImages(new ArrayCollection())
-            ->setWidth(0)
-            ->setHeight(0)
-            ->setDepth(0)
-            ->setWidth(0)
-            ->setWeight(0)
-            ->setImagesSort('')
-            ->setEnabled(true)
-            ->setCreatedAt($this->now());
+        $product->setStock($stock);
+        $product->setType(ElcodiProductTypes::TYPE_PRODUCT_PHYSICAL);
+        $product->setShowInHome(true);
+        $product->setPrice($zeroPrice);
+        $product->setReducedPrice($zeroPrice);
+        $product->setAttributes(new ArrayCollection());
+        $product->setVariants(new ArrayCollection());
+        $product->setCategories(new ArrayCollection());
+        $product->setImages(new ArrayCollection());
+        $product->setWidth(0);
+        $product->setHeight(0);
+        $product->setDepth(0);
+        $product->setWidth(0);
+        $product->setWeight(0);
+        $product->setImagesSort('');
+        $product->enable();
+        $product->setCreatedAt($this->now());
 
         return $product;
     }

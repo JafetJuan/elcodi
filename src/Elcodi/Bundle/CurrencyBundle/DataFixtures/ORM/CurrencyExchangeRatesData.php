@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\CurrencyBundle\DataFixtures\ORM;
 
@@ -52,33 +53,30 @@ class CurrencyExchangeRatesData extends AbstractFixture implements DependentFixt
         /**
          * Dollar to Euro.
          */
-        $dollarToEuroRate = $currencyExchangeRateDirector
-            ->create()
-            ->setSourceCurrency($currencyDollar)
-            ->setTargetCurrency($currencyEuro)
-            ->setExchangeRate(0.736596);
+        $dollarToEuroRate = $currencyExchangeRateDirector->create();
+        $dollarToEuroRate->setSourceCurrency($currencyDollar);
+        $dollarToEuroRate->setTargetCurrency($currencyEuro);
+        $dollarToEuroRate->setExchangeRate(0.736596);
 
         $currencyExchangeRateDirector->save($dollarToEuroRate);
 
         /**
          * Dollar to Pound.
          */
-        $dollarToPoundRate = $currencyExchangeRateDirector
-            ->create()
-            ->setSourceCurrency($currencyDollar)
-            ->setTargetCurrency($currencyPound)
-            ->setExchangeRate(0.588765);
+        $dollarToPoundRate = $currencyExchangeRateDirector->create();
+        $dollarToPoundRate->setSourceCurrency($currencyDollar);
+        $dollarToPoundRate->setTargetCurrency($currencyPound);
+        $dollarToPoundRate->setExchangeRate(0.588765);
 
         $currencyExchangeRateDirector->save($dollarToPoundRate);
 
         /**
          * Dollar to Yen.
          */
-        $dollarToIenRate = $currencyExchangeRateDirector
-            ->create()
-            ->setSourceCurrency($currencyDollar)
-            ->setTargetCurrency($currencyIen)
-            ->setExchangeRate(101.822625);
+        $dollarToIenRate = $currencyExchangeRateDirector->create();
+        $dollarToIenRate->setSourceCurrency($currencyDollar);
+        $dollarToIenRate->setTargetCurrency($currencyIen);
+        $dollarToIenRate->setExchangeRate(101.822625);
 
         $currencyExchangeRateDirector->save($dollarToIenRate);
     }

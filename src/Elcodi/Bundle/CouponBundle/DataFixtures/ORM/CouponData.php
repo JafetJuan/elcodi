@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\CouponBundle\DataFixtures\ORM;
 
@@ -58,15 +59,14 @@ class CouponData extends AbstractFixture implements DependentFixtureInterface
          *
          * @var CouponInterface $couponPercent
          */
-        $couponPercent = $couponDirector
-            ->create()
-            ->setCode('percent')
-            ->setName('10 percent discount')
-            ->setType(PercentCartCouponApplicator::id())
-            ->setDiscount(12)
-            ->setCount(100)
-            ->setValidFrom(new DateTime())
-            ->setValidTo(new DateTime('next month'));
+        $couponPercent = $couponDirector->create();
+        $couponPercent->setCode('percent');
+        $couponPercent->setName('10 percent discount');
+        $couponPercent->setType(PercentCartCouponApplicator::id());
+        $couponPercent->setDiscount(12);
+        $couponPercent->setCount(100);
+        $couponPercent->setValidFrom(new DateTime());
+        $couponPercent->setValidTo(new DateTime('next month'));
 
         $couponDirector->save($couponPercent);
         $this->addReference('coupon-percent', $couponPercent);
@@ -84,14 +84,13 @@ class CouponData extends AbstractFixture implements DependentFixtureInterface
          *
          * @var CouponInterface $couponAmount
          */
-        $couponAmount = $couponDirector
-            ->create()
-            ->setCode('amount')
-            ->setName('5 USD discount')
-            ->setType(AbsoluteCartCouponApplicator::id())
-            ->setPrice(Money::create(500, $currency))
-            ->setCount(20)
-            ->setValidFrom(new DateTime());
+        $couponAmount = $couponDirector->create();
+        $couponAmount->setCode('amount');
+        $couponAmount->setName('5 USD discount');
+        $couponAmount->setType(AbsoluteCartCouponApplicator::id());
+        $couponAmount->setPrice(Money::create(500, $currency));
+        $couponAmount->setCount(20);
+        $couponAmount->setValidFrom(new DateTime());
         $couponDirector->save($couponAmount);
         $this->addReference('coupon-amount', $couponAmount);
 
@@ -106,16 +105,15 @@ class CouponData extends AbstractFixture implements DependentFixtureInterface
          *
          * @var CouponInterface $couponPercent
          */
-        $stackableCouponPercent = $couponDirector
-            ->create()
-            ->setCode('stackable-percent')
-            ->setName('12 percent discount - stackable')
-            ->setType(PercentCartCouponApplicator::id())
-            ->setDiscount(12)
-            ->setCount(100)
-            ->setStackable(true)
-            ->setValidFrom(new DateTime())
-            ->setValidTo(new DateTime('next month'));
+        $stackableCouponPercent = $couponDirector->create();
+        $stackableCouponPercent->setCode('stackable-percent');
+        $stackableCouponPercent->setName('12 percent discount - stackable');
+        $stackableCouponPercent->setType(PercentCartCouponApplicator::id());
+        $stackableCouponPercent->setDiscount(12);
+        $stackableCouponPercent->setCount(100);
+        $stackableCouponPercent->setStackable(true);
+        $stackableCouponPercent->setValidFrom(new DateTime());
+        $stackableCouponPercent->setValidTo(new DateTime('next month'));
         $couponDirector->save($stackableCouponPercent);
         $this->addReference('stackable-coupon-percent', $stackableCouponPercent);
 
@@ -132,15 +130,14 @@ class CouponData extends AbstractFixture implements DependentFixtureInterface
          *
          * @var CouponInterface $couponAmount
          */
-        $stackableCouponAmount = $couponDirector
-            ->create()
-            ->setCode('stackable-amount')
-            ->setName('2 USD discount - stackable')
-            ->setType(AbsoluteCartCouponApplicator::id())
-            ->setPrice(Money::create(200, $currency))
-            ->setCount(20)
-            ->setStackable(true)
-            ->setValidFrom(new DateTime());
+        $stackableCouponAmount = $couponDirector->create();
+        $stackableCouponAmount->setCode('stackable-amount');
+        $stackableCouponAmount->setName('2 USD discount - stackable');
+        $stackableCouponAmount->setType(AbsoluteCartCouponApplicator::id());
+        $stackableCouponAmount->setPrice(Money::create(200, $currency));
+        $stackableCouponAmount->setCount(20);
+        $stackableCouponAmount->setStackable(true);
+        $stackableCouponAmount->setValidFrom(new DateTime());
         $couponDirector->save($stackableCouponAmount);
         $this->addReference('stackable-coupon-amount', $stackableCouponAmount);
 
@@ -157,15 +154,14 @@ class CouponData extends AbstractFixture implements DependentFixtureInterface
          *
          * @var CouponInterface $couponAmount
          */
-        $coupon2x1Category1 = $couponDirector
-            ->create()
-            ->setCode('2x1category1')
-            ->setEnabled(true)
-            ->setName('2x1 in products from category1')
-            ->setType(AbstractMxNCartCouponApplicator::id())
-            ->setValue('2x1:cat(1):P')
-            ->setCount(20)
-            ->setValidFrom(new DateTime());
+        $coupon2x1Category1 = $couponDirector->create();
+        $coupon2x1Category1->setCode('2x1category1');
+        $coupon2x1Category1->setEnabled(true);
+        $coupon2x1Category1->setName('2x1 in products from category1');
+        $coupon2x1Category1->setType(AbstractMxNCartCouponApplicator::id());
+        $coupon2x1Category1->setValue('2x1:cat(1):P');
+        $coupon2x1Category1->setCount(20);
+        $coupon2x1Category1->setValidFrom(new DateTime());
         $couponDirector->save($coupon2x1Category1);
         $this->addReference('coupon-2x1-category1', $coupon2x1Category1);
     }

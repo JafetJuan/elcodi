@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Tax\Tests\UnitTest\Entity;
 
@@ -66,14 +67,14 @@ class TaxTest extends AbstractEntityTest
                 'type' => $this::GETTER_SETTER,
                 'getter' => 'getName',
                 'setter' => 'setName',
-                'value' => sha1(rand()),
+                'value' => sha1((string) rand()),
                 'nullable' => false,
             ]],
             [[
                 'type' => $this::GETTER_SETTER,
                 'getter' => 'getDescription',
                 'setter' => 'setDescription',
-                'value' => sha1(rand()),
+                'value' => sha1((string) rand()),
                 'nullable' => false,
             ]],
             [[
@@ -92,7 +93,7 @@ class TaxTest extends AbstractEntityTest
     public function testToString()
     {
         $object = new Tax();
-        $name = sha1(rand());
+        $name = sha1((string) rand());
 
         $setterOutput = $object->setName($name);
         $this->assertInstanceOf(get_class($object), $setterOutput);

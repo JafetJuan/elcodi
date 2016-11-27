@@ -12,13 +12,14 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Rule\Factory;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
-use Elcodi\Component\Rule\Entity\Rule;
+use Elcodi\Component\Rule\Entity\Interfaces\RuleInterface;
 
 /**
  * Class RuleFactory.
@@ -30,12 +31,12 @@ class RuleFactory extends AbstractFactory
      *
      * This method must return always an empty instance
      *
-     * @return Rule Empty entity
+     * @return RuleInterface Empty entity
      */
     public function create()
     {
         /**
-         * @var Rule $rule
+         * @var RuleInterface $rule
          */
         $classNamespace = $this->getEntityNamespace();
         $rule = new $classNamespace();

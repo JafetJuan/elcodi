@@ -12,12 +12,13 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Cart\Factory;
 
-use Elcodi\Component\Cart\Entity\CartLine;
+use Elcodi\Component\Cart\Entity\Interfaces\CartLineInterface;
 use Elcodi\Component\Currency\Factory\Abstracts\AbstractPurchasableFactory;
 
 /**
@@ -28,18 +29,17 @@ class CartLineFactory extends AbstractPurchasableFactory
     /**
      * Creates an instance of CartLine.
      *
-     * @return CartLine New CartLine entity
+     * @return CartLineInterface New CartLine entity
      */
     public function create()
     {
         /**
-         * @var CartLine $cartLine
+         * @var CartLineInterface $cartLine
          */
         $classNamespace = $this->getEntityNamespace();
         $cartLine = new $classNamespace();
-        $cartLine
-            ->setAmount($this->createZeroAmountMoney())
-            ->setPurchasableAmount($this->createZeroAmountMoney());
+        $cartLine->setAmount($this->createZeroAmountMoney());
+        $cartLine->setPurchasableAmount($this->createZeroAmountMoney());
 
         return $cartLine;
     }

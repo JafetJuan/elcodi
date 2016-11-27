@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\MenuBundle\DataFixtures\ORM;
 
@@ -39,35 +40,32 @@ class NodeData extends AbstractFixture
          */
         $menuNodeDirector = $this->getDirector('menu_node');
 
-        $menuNodeHim = $menuNodeDirector
-            ->create()
-            ->setName('him')
-            ->setCode('him')
-            ->setUrl('elcodi.dev/him')
-            ->setActiveUrls([])
-            ->setEnabled(true);
+        $menuNodeHim = $menuNodeDirector->create();
+        $menuNodeHim->setName('him');
+        $menuNodeHim->setCode('him');
+        $menuNodeHim->setUrl('elcodi.dev/him');
+        $menuNodeHim->setActiveUrls([]);
+        $menuNodeHim->enable(true);
 
-        $menuNodeHer = $menuNodeDirector
-            ->create()
-            ->setName('her')
-            ->setCode('her')
-            ->setUrl('elcodi.dev/her')
-            ->setActiveUrls(
-                [
-                    'her_products_list_route',
-                    'her_offers_list_route',
-                ]
-            )
-            ->setEnabled(true);
+        $menuNodeHer = $menuNodeDirector->create();
+        $menuNodeHer->setName('her');
+        $menuNodeHer->setCode('her');
+        $menuNodeHer->setUrl('elcodi.dev/her');
+        $menuNodeHer->setActiveUrls(
+            [
+                'her_products_list_route',
+                'her_offers_list_route',
+            ]
+        );
+        $menuNodeHer->enable();
 
-        $menuNodeVogue = $menuNodeDirector
-            ->create()
-            ->setName('vogue')
-            ->setCode('vogue')
-            ->setEnabled(true)
-            ->setActiveUrls([])
-            ->addSubnode($menuNodeHim)
-            ->addSubnode($menuNodeHer);
+        $menuNodeVogue = $menuNodeDirector->create();
+        $menuNodeVogue->setName('vogue');
+        $menuNodeVogue->setCode('vogue');
+        $menuNodeVogue->enable(true);
+        $menuNodeVogue->setActiveUrls([]);
+        $menuNodeVogue->addSubnode($menuNodeHim);
+        $menuNodeVogue->addSubnode($menuNodeHer);
 
         $menuNodeDirector->save($menuNodeVogue);
         $this->addReference('menu-node-him', $menuNodeHim);

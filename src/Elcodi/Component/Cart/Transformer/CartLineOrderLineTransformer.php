@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Cart\Transformer;
 
@@ -116,16 +117,15 @@ class CartLineOrderLineTransformer
         /**
          * @var OrderLineInterface $orderLine
          */
-        $orderLine
-            ->setOrder($order)
-            ->setPurchasable($cartLine->getPurchasable())
-            ->setQuantity($cartLine->getQuantity())
-            ->setPurchasableAmount($cartLine->getPurchasableAmount())
-            ->setAmount($cartLine->getAmount())
-            ->setHeight($cartLine->getHeight())
-            ->setWidth($cartLine->getWidth())
-            ->setDepth($cartLine->getDepth())
-            ->setWeight($cartLine->getWeight());
+        $orderLine->setOrder($order);
+        $orderLine->setPurchasable($cartLine->getPurchasable());
+        $orderLine->setQuantity($cartLine->getQuantity());
+        $orderLine->setPurchasableAmount($cartLine->getPurchasableAmount());
+        $orderLine->setAmount($cartLine->getAmount());
+        $orderLine->setHeight($cartLine->getHeight());
+        $orderLine->setWidth($cartLine->getWidth());
+        $orderLine->setDepth($cartLine->getDepth());
+        $orderLine->setWeight($cartLine->getWeight());
 
         $this
             ->orderLineEventDispatcher

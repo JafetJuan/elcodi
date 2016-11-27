@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts;
 
@@ -35,14 +36,10 @@ abstract class AbstractFixture extends DoctrineAbstractFixture implements Contai
      * Set container.
      *
      * @param ContainerInterface $container Container
-     *
-     * @return $this Self object
      */
     public function setContainer(ContainerInterface $container = null)
     {
         self::$container = $container;
-
-        return $this;
     }
 
     /**
@@ -52,7 +49,7 @@ abstract class AbstractFixture extends DoctrineAbstractFixture implements Contai
      *
      * @return mixed Value parsed
      */
-    protected function parseYaml($filePath)
+    protected function parseYaml(string $filePath)
     {
         $yaml = new Parser();
 

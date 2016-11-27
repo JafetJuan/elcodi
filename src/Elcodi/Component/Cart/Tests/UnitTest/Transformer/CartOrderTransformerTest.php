@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Cart\Tests\UnitTest\Transformer;
 
@@ -70,22 +71,16 @@ class CartOrderTransformerTest extends PHPUnit_Framework_TestCase
          * @var OrderFactory                 $orderFactory
          */
         $orderEventDispatcher = $this
-            ->getMock(
-                'Elcodi\Component\Cart\EventDispatcher\OrderEventDispatcher',
-                [], [], '', false
-            );
+            ->createMock('Elcodi\Component\Cart\EventDispatcher\OrderEventDispatcher');
 
-        $orderFactory = $this->getMock('Elcodi\Component\Cart\Factory\OrderFactory', [], [], '', false);
+        $orderFactory = $this->createMock('Elcodi\Component\Cart\Factory\OrderFactory');
         $order = new Order();
         $orderFactory
             ->expects($this->any())
             ->method('create')
             ->will($this->returnValue($order));
 
-        $cartLineOrderLineTransformer = $this->getMock(
-            'Elcodi\Component\Cart\Transformer\CartLineOrderLineTransformer',
-            [], [], '', false
-        );
+        $cartLineOrderLineTransformer = $this->createMock('Elcodi\Component\Cart\Transformer\CartLineOrderLineTransformer');
 
         $cartOrderTransformer = new CartOrderTransformer(
             $orderEventDispatcher,
@@ -109,8 +104,8 @@ class CartOrderTransformerTest extends PHPUnit_Framework_TestCase
          * @var OrderInterface    $order
          * @var CurrencyInterface $currency
          */
-        $order = $this->getMock('Elcodi\Component\Cart\Entity\Order', null);
-        $currency = $this->getMock('Elcodi\Component\Currency\Entity\Currency', null);
+        $order = $this->createPartialMock('Elcodi\Component\Cart\Entity\Order', []);
+        $currency = $this->createPartialMock('Elcodi\Component\Currency\Entity\Currency', []);
         $currency->setIso('EUR');
 
         $this
@@ -127,13 +122,12 @@ class CartOrderTransformerTest extends PHPUnit_Framework_TestCase
 
         $customer = new Customer();
         $cart = new Cart();
-        $cart
-            ->setCustomer($customer)
-            ->setPurchasableAmount(Money::create(20, $currency))
-            ->setCouponAmount(Money::create(0, $currency))
-            ->setAmount(Money::create(20, $currency))
-            ->setShippingAmount($this->getMock('Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface'))
-            ->setCartLines(new ArrayCollection());
+        $cart->setCustomer($customer);
+        $cart->setPurchasableAmount(Money::create(20, $currency));
+        $cart->setCouponAmount(Money::create(0, $currency));
+        $cart->setAmount(Money::create(20, $currency));
+        $cart->setShippingAmount($this->createMock('Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface'));
+        $cart->setCartLines(new ArrayCollection());
 
         $this
             ->cartOrderTransformer
@@ -151,8 +145,8 @@ class CartOrderTransformerTest extends PHPUnit_Framework_TestCase
          * @var OrderInterface    $order
          * @var CurrencyInterface $currency
          */
-        $order = $this->getMock('Elcodi\Component\Cart\Entity\Order', null);
-        $currency = $this->getMock('Elcodi\Component\Currency\Entity\Currency', null);
+        $order = $this->createPartialMock('Elcodi\Component\Cart\Entity\Order', []);
+        $currency = $this->createPartialMock('Elcodi\Component\Currency\Entity\Currency', []);
         $currency->setIso('EUR');
 
         $this
@@ -169,14 +163,13 @@ class CartOrderTransformerTest extends PHPUnit_Framework_TestCase
 
         $customer = new Customer();
         $cart = new Cart();
-        $cart
-            ->setCustomer($customer)
-            ->setPurchasableAmount(Money::create(20, $currency))
-            ->setCouponAmount(Money::create(0, $currency))
-            ->setOrder($order)
-            ->setShippingAmount($this->getMock('Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface'))
-            ->setAmount(Money::create(20, $currency))
-            ->setCartLines(new ArrayCollection());
+        $cart->setCustomer($customer);
+        $cart->setPurchasableAmount(Money::create(20, $currency));
+        $cart->setCouponAmount(Money::create(0, $currency));
+        $cart->setOrder($order);
+        $cart->setShippingAmount($this->createMock('Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface'));
+        $cart->setAmount(Money::create(20, $currency));
+        $cart->setCartLines(new ArrayCollection());
 
         $this
             ->cartOrderTransformer
@@ -194,8 +187,8 @@ class CartOrderTransformerTest extends PHPUnit_Framework_TestCase
          * @var OrderInterface    $order
          * @var CurrencyInterface $currency
          */
-        $order = $this->getMock('Elcodi\Component\Cart\Entity\Order', null);
-        $currency = $this->getMock('Elcodi\Component\Currency\Entity\Currency', null);
+        $order = $this->createPartialMock('Elcodi\Component\Cart\Entity\Order', []);
+        $currency = $this->createPartialMock('Elcodi\Component\Currency\Entity\Currency', []);
         $currency->setIso('EUR');
 
         $this
@@ -210,7 +203,7 @@ class CartOrderTransformerTest extends PHPUnit_Framework_TestCase
             ->method('createOrderLinesByCartLines')
             ->will($this->returnValue(new ArrayCollection()));
 
-        $cart = $this->getMock('Elcodi\Component\Cart\Entity\Cart');
+        $cart = $this->createMock('Elcodi\Component\Cart\Entity\Cart');
 
         $cart
             ->expects($this->any())
@@ -219,7 +212,7 @@ class CartOrderTransformerTest extends PHPUnit_Framework_TestCase
         $cart
             ->expects($this->any())
             ->method('getShippingAmount')
-            ->will($this->returnValue($this->getMock('Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface')));
+            ->will($this->returnValue($this->createMock('Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface')));
 
         $cart
             ->expects($this->any())

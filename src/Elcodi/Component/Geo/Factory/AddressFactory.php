@@ -12,13 +12,14 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Geo\Factory;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
-use Elcodi\Component\Geo\Entity\Address;
+use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 
 /**
  * Class AddressFactory.
@@ -30,19 +31,18 @@ class AddressFactory extends AbstractFactory
      *
      * This method must return always an empty instance
      *
-     * @return Address Empty entity
+     * @return AddressInterface Empty entity
      */
     public function create()
     {
         /**
-         * @var Address $address
+         * @var AddressInterface $address
          */
         $classNamespace = $this->getEntityNamespace();
         $address = new $classNamespace();
-        $address
-            ->setAddressMore('')
-            ->setEnabled(true)
-            ->setCreatedAt($this->now());
+        $address->setAddressMore('');
+        $address->enable();
+        $address->setCreatedAt($this->now());
 
         return $address;
     }

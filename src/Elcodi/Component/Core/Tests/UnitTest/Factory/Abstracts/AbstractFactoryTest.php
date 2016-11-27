@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Tests\UnitTest\Factory\Abstracts;
 
@@ -46,10 +47,10 @@ abstract class AbstractFactoryTest extends PHPUnit_Framework_TestCase
     {
         $factoryNamespace = $this->getFactoryNamespace();
 
-        return $this->getMock($factoryNamespace, [
+        return $this->createPartialMock($factoryNamespace, [
             'now',
             'getEntityNamespace',
-        ], [], '', false);
+        ]);
     }
 
     /**

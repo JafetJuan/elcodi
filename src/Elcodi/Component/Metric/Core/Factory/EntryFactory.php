@@ -12,14 +12,16 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Metric\Core\Factory;
 
 use DateTime;
 
 use Elcodi\Component\Metric\Core\Entity\Entry;
+use Elcodi\Component\Metric\Core\Entity\Interfaces\EntryInterface;
 
 /**
  * Class EntryFactory.
@@ -35,7 +37,7 @@ class EntryFactory
      * @param int      $type      Type
      * @param DateTime $createdAt Created At
      *
-     * @return Entry new entry instance
+     * @return EntryInterface new entry instance
      */
     public function create(
         $token,
@@ -43,7 +45,7 @@ class EntryFactory
         $uniqueId,
         $type,
         DateTime $createdAt
-    ) {
+    ) : EntryInterface {
         return new Entry(
             $token,
             $event,

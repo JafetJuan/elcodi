@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\EntityTranslator\Tests\Services;
 
@@ -32,7 +33,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
      */
     public function testTranslate()
     {
-        $entityTranslationProvider = $this->getMock('Elcodi\Component\EntityTranslator\Services\EntityTranslationProvider', [], [], '', false);
+        $entityTranslationProvider = $this->createMock('Elcodi\Component\EntityTranslator\Services\EntityTranslationProvider');
         $entityTranslationProvider
             ->expects($this->once())
             ->method('getTranslation')
@@ -78,7 +79,7 @@ class TranslatorTest extends PHPUnit_Framework_TestCase
      */
     public function testSave()
     {
-        $entityTranslationProvider = $this->getMock('Elcodi\Component\EntityTranslator\Services\EntityTranslationProvider', [], [], '', false);
+        $entityTranslationProvider = $this->createMock('Elcodi\Component\EntityTranslator\Services\EntityTranslationProvider');
         $entityTranslationProvider
             ->expects($this->exactly(4))
             ->method('setTranslation')

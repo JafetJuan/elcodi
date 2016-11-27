@@ -12,15 +12,16 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Product\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
 use Elcodi\Component\Currency\Factory\Abstracts\AbstractPurchasableFactory;
-use Elcodi\Component\Product\Entity\Variant;
+use Elcodi\Component\Product\Entity\Interfaces\VariantInterface;
 
 /**
  * Factory for Variant entities.
@@ -33,33 +34,32 @@ class VariantFactory extends AbstractPurchasableFactory
      * Prices are initialized to "zero amount" Money value objects,
      * using injected CurrencyWrapper default Currency
      *
-     * @return Variant New Variant entity
+     * @return VariantInterface New Variant entity
      */
     public function create()
     {
         $zeroPrice = $this->createZeroAmountMoney();
 
         /**
-         * @var Variant $variant
+         * @var VariantInterface $variant
          */
         $classNamespace = $this->getEntityNamespace();
         $variant = new $classNamespace();
-        $variant
-            ->setSku('')
-            ->setStock(0)
-            ->setPrice($zeroPrice)
-            ->setReducedPrice($zeroPrice)
-            ->setImages(new ArrayCollection())
-            ->setOptions(new ArrayCollection())
-            ->setWidth(0)
-            ->setHeight(0)
-            ->setWidth(0)
-            ->setDepth(0)
-            ->setWeight(0)
-            ->setShowInHome(false)
-            ->setImagesSort('')
-            ->setEnabled(true)
-            ->setCreatedAt($this->now());
+        $variant->setSku('');
+        $variant->setStock(0);
+        $variant->setPrice($zeroPrice);
+        $variant->setReducedPrice($zeroPrice);
+        $variant->setImages(new ArrayCollection());
+        $variant->setOptions(new ArrayCollection());
+        $variant->setWidth(0);
+        $variant->setHeight(0);
+        $variant->setWidth(0);
+        $variant->setDepth(0);
+        $variant->setWeight(0);
+        $variant->setShowInHome(false);
+        $variant->setImagesSort('');
+        $variant->enable();
+        $variant->setCreatedAt($this->now());
 
         return $variant;
     }

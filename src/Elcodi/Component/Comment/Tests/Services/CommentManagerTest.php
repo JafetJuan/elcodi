@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Comment\Tests\Services;
 
@@ -48,7 +49,7 @@ class CommentManagerTest extends PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->commentObjectDirector = $this->getMock('Elcodi\Component\Core\Services\ObjectDirector', [], [], '', false);
+        $this->commentObjectDirector = $this->createMock('Elcodi\Component\Core\Services\ObjectDirector');
 
         $this
             ->commentObjectDirector
@@ -57,7 +58,7 @@ class CommentManagerTest extends PHPUnit_Framework_TestCase
             ->will($this->returnValue(new Comment()));
 
         $this->commentManager = new CommentManager(
-            $this->getMock('Elcodi\Component\Comment\EventDispatcher\CommentEventDispatcher', [], [], '', false),
+            $this->createMock('Elcodi\Component\Comment\EventDispatcher\CommentEventDispatcher'),
             $this->commentObjectDirector
         );
     }

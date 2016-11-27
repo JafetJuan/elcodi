@@ -12,11 +12,13 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Comment\Factory;
 
+use Elcodi\Component\Comment\Entity\Interfaces\VoteInterface;
 use Elcodi\Component\Comment\Entity\Vote;
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 
@@ -28,12 +30,12 @@ class VoteFactory extends AbstractFactory
     /**
      * Creates an instance of Vote.
      *
-     * @return Vote New Vote entity
+     * @return VoteInterface New Vote entity
      */
     public function create()
     {
         /**
-         * @var Vote $vote
+         * @var VoteInterface $vote
          */
         $classNamespace = $this->getEntityNamespace();
         $vote = new $classNamespace();
@@ -45,24 +47,26 @@ class VoteFactory extends AbstractFactory
     /**
      * Creates an instance of Up Vote.
      *
-     * @return Vote New Up Vote entity
+     * @return VoteInterface New Up Vote entity
      */
     public function createUp()
     {
-        return $this
-            ->create()
-            ->setType(Vote::UP);
+        $voteUp = $this->create();
+        $voteUp->setType(Vote::UP);
+
+        return $voteUp;
     }
 
     /**
      * Creates an instance of Down Vote.
      *
-     * @return Vote New Down Vote entity
+     * @return VoteInterface New Down Vote entity
      */
     public function createDown()
     {
-        return $this
-            ->create()
-            ->setType(Vote::DOWN);
+        $voteUp = $this->create();
+        $voteUp->setType(Vote::DOWN);
+
+        return $voteUp;
     }
 }

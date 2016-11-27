@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\CartCouponBundle\Tests\Functional\EventListener;
 
@@ -34,16 +35,17 @@ class TryAutomaticCouponsApplicationEventListenerTest extends AbstractCartCoupon
     {
         $couponAutomatic = $this
             ->getFactory('coupon')
-            ->create()
-            ->setCode('automatic')
-            ->setName('50 percent discount')
-            ->setType(ElcodiCouponTypes::TYPE_PERCENT)
-            ->setDiscount(50)
-            ->setCount(100)
-            ->setEnabled(true)
-            ->setEnforcement(ElcodiCouponTypes::ENFORCEMENT_AUTOMATIC)
-            ->setValidFrom(new DateTime())
-            ->setValidTo(new DateTime('next month'));
+            ->create();
+
+        $couponAutomatic->setCode('automatic');
+        $couponAutomatic->setName('50 percent discount');
+        $couponAutomatic->setType(ElcodiCouponTypes::TYPE_PERCENT);
+        $couponAutomatic->setDiscount(50);
+        $couponAutomatic->setCount(100);
+        $couponAutomatic->setEnabled(true);
+        $couponAutomatic->setEnforcement(ElcodiCouponTypes::ENFORCEMENT_AUTOMATIC);
+        $couponAutomatic->setValidFrom(new DateTime());
+        $couponAutomatic->setValidTo(new DateTime('next month'));
         $this->flush($couponAutomatic);
 
         $cart = $this->getLoadedCart(2);

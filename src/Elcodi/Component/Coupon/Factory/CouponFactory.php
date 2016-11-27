@@ -12,13 +12,13 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Coupon\Factory;
 
 use Elcodi\Component\Coupon\ElcodiCouponTypes;
-use Elcodi\Component\Coupon\Entity\Coupon;
 use Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface;
 use Elcodi\Component\Currency\Factory\Abstracts\AbstractPurchasableFactory;
 
@@ -32,7 +32,7 @@ class CouponFactory extends AbstractPurchasableFactory
      *
      * This method must return always an empty instance for related entity
      *
-     * @return Coupon Empty entity
+     * @return CouponInterface Empty entity
      */
     public function create()
     {
@@ -44,19 +44,18 @@ class CouponFactory extends AbstractPurchasableFactory
          */
         $classNamespace = $this->getEntityNamespace();
         $coupon = new $classNamespace();
-        $coupon
-            ->setType(ElcodiCouponTypes::TYPE_AMOUNT)
-            ->setPrice($zeroPrice)
-            ->setAbsolutePrice($zeroPrice)
-            ->setMinimumPurchase($zeroPrice)
-            ->setEnforcement(ElcodiCouponTypes::ENFORCEMENT_MANUAL)
-            ->setUsed(0)
-            ->setCount(0)
-            ->setPriority(0)
-            ->setStackable(false)
-            ->setEnabled(false)
-            ->setCreatedAt($now)
-            ->setValidFrom($now);
+        $coupon->setType(ElcodiCouponTypes::TYPE_AMOUNT);
+        $coupon->setPrice($zeroPrice);
+        $coupon->setAbsolutePrice($zeroPrice);
+        $coupon->setMinimumPurchase($zeroPrice);
+        $coupon->setEnforcement(ElcodiCouponTypes::ENFORCEMENT_MANUAL);
+        $coupon->setUsed(0);
+        $coupon->setCount(0);
+        $coupon->setPriority(0);
+        $coupon->setStackable(false);
+        $coupon->disable();
+        $coupon->setCreatedAt($now);
+        $coupon->setValidFrom($now);
 
         return $coupon;
     }

@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Controller;
 
@@ -78,20 +79,20 @@ class ImageResizeController
     /**
      * Construct method.
      *
-     * @param RequestStack                  $requestStack         Request Stack
-     * @param ImageRepository               $imageRepository      Image Repository
-     * @param ImageManager                  $imageManager         Image Manager
-     * @param ImageEtagTransformerInterface $imageEtagTransformer ImageEtagTransformer Image Etag Transformer
-     * @param int                           $maxAge               Max size
-     * @param int                           $sharedMaxAge         Shared max size
+     * @param RequestStack                  $requestStack
+     * @param ImageRepository               $imageRepository
+     * @param ImageManager                  $imageManager
+     * @param ImageEtagTransformerInterface $imageEtagTransformer
+     * @param int                           $maxAge
+     * @param int                           $sharedMaxAge
      */
     public function __construct(
         RequestStack $requestStack,
         ImageRepository $imageRepository,
         ImageManager $imageManager,
         ImageEtagTransformerInterface $imageEtagTransformer,
-        $maxAge,
-        $sharedMaxAge
+        int $maxAge,
+        int $sharedMaxAge
     ) {
         $this->requestStack = $requestStack;
         $this->imageRepository = $imageRepository;
@@ -166,9 +167,9 @@ class ImageResizeController
                 ->imageEtagTransformer
                 ->transform(
                     $image,
-                    $height,
-                    $width,
-                    $type
+                    (string) $height,
+                    (string) $width,
+                    (string) $type
                 )
             )
             ->setLastModified($image->getUpdatedAt())
@@ -187,9 +188,9 @@ class ImageResizeController
             ->imageManager
             ->resize(
                 $image,
-                $height,
-                $width,
-                $type
+                (int) $height,
+                (int) $width,
+                (int) $type
             );
 
         $imageData = $image->getContent();

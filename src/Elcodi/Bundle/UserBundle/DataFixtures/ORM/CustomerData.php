@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\UserBundle\DataFixtures\ORM;
 
@@ -42,10 +43,9 @@ class CustomerData extends AbstractFixture
         /**
          * Customer 1.
          */
-        $customer1 = $customerDirector
-            ->create()
-            ->setPassword('customer')
-            ->setEmail('customer@customer.com');
+        $customer1 = $customerDirector->create();
+        $customer1->setPassword('customer');
+        $customer1->setEmail('customer@customer.com');
 
         $customerDirector->save($customer1);
         $this->addReference('customer-1', $customer1);
@@ -53,10 +53,9 @@ class CustomerData extends AbstractFixture
         /**
          * Customer 2.
          */
-        $customer2 = $customerDirector
-            ->create()
-            ->setPassword('customer2')
-            ->setEmail('customer2@customer.com');
+        $customer2 = $customerDirector->create();
+        $customer2->setPassword('customer2');
+        $customer2->setEmail('customer2@customer.com');
 
         $customerDirector->save($customer2);
         $this->addReference('customer-2', $customer2);

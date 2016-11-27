@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Adapter\Resizer\Model;
 
@@ -25,14 +26,14 @@ use Elcodi\Component\Media\ElcodiMediaImageResizeTypes;
 class Dimensions
 {
     /**
-     * @var float
+     * @var int
      *
      * originalWidth
      */
     private $originalWidth;
 
     /**
-     * @var float
+     * @var int
      *
      * originalHeight
      */
@@ -46,70 +47,70 @@ class Dimensions
     private $originalAspectRatio;
 
     /**
-     * @var float
+     * @var int
      *
      * srcY
      */
     private $srcY;
 
     /**
-     * @var float
+     * @var int
      *
      * srcX
      */
     private $srcX;
 
     /**
-     * @var
+     * @var int
      *
      * srcWidth
      */
     private $srcWidth;
 
     /**
-     * @var float
+     * @var int
      *
      * srcHeight
      */
     private $srcHeight;
 
     /**
-     * @var float
+     * @var int
      *
      * dstY
      */
     private $dstY;
 
     /**
-     * @var float
+     * @var int
      *
      * dstX
      */
     private $dstX;
 
     /**
-     * @var float
+     * @var int
      *
      * dstWidth
      */
     private $dstWidth;
 
     /**
-     * @var float
+     * @var int
      *
      * dstHeight
      */
     private $dstHeight;
 
     /**
-     * @var float
+     * @var int
      *
      * dstFrameX
      */
     private $dstFrameX;
 
     /**
-     * @var float
+     * @var int
      *
      * dstFrameY
      */
@@ -118,18 +119,18 @@ class Dimensions
     /**
      * Construct.
      *
-     * @param float $originalWidth  Original width
-     * @param float $originalHeight Original height
-     * @param float $newWidth       New width
-     * @param float $newHeight      New height
-     * @param int   $type           Resize type
+     * @param int $originalWidth
+     * @param int $originalHeight
+     * @param int $newWidth
+     * @param int $newHeight
+     * @param int $resizeType
      */
     private function __construct(
-        $originalWidth,
-        $originalHeight,
-        $newWidth,
-        $newHeight,
-        $type
+        int $originalWidth,
+        int $originalHeight,
+        int $newWidth,
+        int $newHeight,
+        int $resizeType
     ) {
         $this->originalWidth = $originalWidth;
         $this->originalHeight = $originalHeight;
@@ -138,23 +139,23 @@ class Dimensions
         $this->resolveDimensions(
             $newWidth,
             $newHeight,
-            $type
+            $resizeType
         );
     }
 
     /**
      * Resolve dimensions.
      *
-     * @param float $newWidth  New width
-     * @param float $newHeight New height
-     * @param int   $type      Resize type
+     * @param int $newWidth
+     * @param int $newHeight
+     * @param int $resizeType
      *
      * @return $this Self object
      */
     public function resolveDimensions(
-        $newWidth,
-        $newHeight,
-        $type
+        int $newWidth,
+        int $newHeight,
+        int $resizeType
     ) {
         $this->dstX = 0;
         $this->dstY = 0;
@@ -168,12 +169,12 @@ class Dimensions
         $this->srcWidth = $this->originalWidth;
         $this->srcHeight = $this->originalHeight;
 
-        if ($type == ElcodiMediaImageResizeTypes::NO_RESIZE) {
+        if ($resizeType == ElcodiMediaImageResizeTypes::NO_RESIZE) {
             $this->dstWidth = $this->originalWidth;
             $this->dstHeight = $this->originalHeight;
             $this->dstFrameX = $this->originalWidth;
             $this->dstFrameY = $this->originalHeight;
-        } elseif (in_array($type, [
+        } elseif (in_array($resizeType, [
             ElcodiMediaImageResizeTypes::INSET,
             ElcodiMediaImageResizeTypes::INSET_FILL_WHITE,
             ElcodiMediaImageResizeTypes::OUTBOUNDS_FILL_WHITE,
@@ -185,7 +186,7 @@ class Dimensions
                 $width = $newWidth;
             } elseif (
                 ($newAspectRatio > $this->originalAspectRatio) ^
-                (in_array($type, [
+                (in_array($resizeType, [
                     ElcodiMediaImageResizeTypes::OUTBOUNDS_FILL_WHITE,
                     ElcodiMediaImageResizeTypes::OUTBOUND_CROP,
                 ])
@@ -195,23 +196,23 @@ class Dimensions
                 $width = $newHeight * $this->originalAspectRatio;
             } else {
                 $width = $newWidth;
-                $height = $newWidth / $this->originalAspectRatio;
+                $height = (int) ($newWidth / $this->originalAspectRatio);
             }
             $changeRatio = $height / $this->originalHeight;
 
-            if ($type == ElcodiMediaImageResizeTypes::OUTBOUND_CROP) {
-                $this->srcX = (($width - $newWidth) / 2) / $changeRatio;
-                $this->srcY = (($height - $newHeight) / 2) / $changeRatio;
-                $this->srcWidth = $newWidth / $changeRatio;
-                $this->srcHeight = $newHeight / $changeRatio;
+            if ($resizeType == ElcodiMediaImageResizeTypes::OUTBOUND_CROP) {
+                $this->srcX = (int) ((($width - $newWidth) / 2) / $changeRatio);
+                $this->srcY = (int) ((($height - $newHeight) / 2) / $changeRatio);
+                $this->srcWidth = (int) ($newWidth / $changeRatio);
+                $this->srcHeight = (int) ($newHeight / $changeRatio);
             }
 
-            if ($type == ElcodiMediaImageResizeTypes::INSET_FILL_WHITE) {
-                $this->dstX = ($newWidth - $width) / 2;
-                $this->dstY = ($newHeight - $height) / 2;
+            if ($resizeType == ElcodiMediaImageResizeTypes::INSET_FILL_WHITE) {
+                $this->dstX = (int) (($newWidth - $width) / 2);
+                $this->dstY = (int) (($newHeight - $height) / 2);
             }
 
-            if (in_array($type, [
+            if (in_array($resizeType, [
                 ElcodiMediaImageResizeTypes::INSET,
                 ElcodiMediaImageResizeTypes::INSET_FILL_WHITE,
                 ElcodiMediaImageResizeTypes::OUTBOUNDS_FILL_WHITE,
@@ -220,7 +221,7 @@ class Dimensions
                 $this->dstHeight = $height;
             }
 
-            if (in_array($type, [
+            if (in_array($resizeType, [
                 ElcodiMediaImageResizeTypes::INSET,
                 ElcodiMediaImageResizeTypes::OUTBOUNDS_FILL_WHITE,
             ])) {
@@ -235,9 +236,9 @@ class Dimensions
     /**
      * Get OriginalWidth.
      *
-     * @return float OriginalWidth
+     * @return int
      */
-    public function getOriginalWidth()
+    public function getOriginalWidth() : int
     {
         return $this->originalWidth;
     }
@@ -245,9 +246,9 @@ class Dimensions
     /**
      * Get OriginalHeight.
      *
-     * @return float OriginalHeight
+     * @return int
      */
-    public function getOriginalHeight()
+    public function getOriginalHeight() : int
     {
         return $this->originalHeight;
     }
@@ -255,9 +256,9 @@ class Dimensions
     /**
      * Get OriginalAspectRatio.
      *
-     * @return float OriginalAspectRatio
+     * @return float
      */
-    public function getOriginalAspectRatio()
+    public function getOriginalAspectRatio() : float
     {
         return $this->originalAspectRatio;
     }
@@ -265,9 +266,9 @@ class Dimensions
     /**
      * Get SrcY.
      *
-     * @return float SrcY
+     * @return int
      */
-    public function getSrcY()
+    public function getSrcY() : int
     {
         return $this->srcY;
     }
@@ -275,9 +276,9 @@ class Dimensions
     /**
      * Get SrcX.
      *
-     * @return float SrcX
+     * @return int
      */
-    public function getSrcX()
+    public function getSrcX() : int
     {
         return $this->srcX;
     }
@@ -285,9 +286,9 @@ class Dimensions
     /**
      * Get SrcWidth.
      *
-     * @return float SrcWidth
+     * @return int
      */
-    public function getSrcWidth()
+    public function getSrcWidth() : int
     {
         return $this->srcWidth;
     }
@@ -295,9 +296,9 @@ class Dimensions
     /**
      * Get SrcHeight.
      *
-     * @return float SrcHeight
+     * @return int
      */
-    public function getSrcHeight()
+    public function getSrcHeight() : int
     {
         return $this->srcHeight;
     }
@@ -305,9 +306,9 @@ class Dimensions
     /**
      * Get DstY.
      *
-     * @return float DstY
+     * @return int
      */
-    public function getDstY()
+    public function getDstY() : int
     {
         return $this->dstY;
     }
@@ -315,9 +316,9 @@ class Dimensions
     /**
      * Get DstX.
      *
-     * @return float DstX
+     * @return int
      */
-    public function getDstX()
+    public function getDstX() : int
     {
         return $this->dstX;
     }
@@ -325,9 +326,9 @@ class Dimensions
     /**
      * Get DstWidth.
      *
-     * @return float DstWidth
+     * @return int
      */
-    public function getDstWidth()
+    public function getDstWidth() : int
     {
         return $this->dstWidth;
     }
@@ -335,9 +336,9 @@ class Dimensions
     /**
      * Get DstHeight.
      *
-     * @return float DstHeight
+     * @return int
      */
-    public function getDstHeight()
+    public function getDstHeight() : int
     {
         return $this->dstHeight;
     }
@@ -345,9 +346,9 @@ class Dimensions
     /**
      * Get DstFrameX.
      *
-     * @return float DstFrameX
+     * @return int
      */
-    public function getDstFrameX()
+    public function getDstFrameX() : int
     {
         return $this->dstFrameX;
     }
@@ -355,28 +356,28 @@ class Dimensions
     /**
      * Get DstFrameY.
      *
-     * @return float DstFrameY
+     * @return int
      */
-    public function getDstFrameY()
+    public function getDstFrameY() : int
     {
         return $this->dstFrameY;
     }
 
     /**
-     * @param float $originalWidth  Original width
-     * @param float $originalHeight Original height
-     * @param float $newWidth       New width
-     * @param float $newHeight      New height
-     * @param int   $type           Resize type
+     * @param int $originalWidth  Original width
+     * @param int $originalHeight Original height
+     * @param int $newWidth       New width
+     * @param int $newHeight      New height
+     * @param int $type           Resize type
      *
      * @return self New instance
      */
     public static function create(
-        $originalWidth,
-        $originalHeight,
-        $newWidth,
-        $newHeight,
-        $type
+        int $originalWidth,
+        int $originalHeight,
+        int $newWidth,
+        int $newHeight,
+        int $type
     ) {
         return new self(
             $originalWidth,

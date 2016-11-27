@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\StoreBundle\DataFixtures\ORM;
 
@@ -43,17 +44,16 @@ class StoreData extends AbstractFixture implements DependentFixtureInterface
         $language = $this->getReference('language-es');
         $currency = $this->getReference('currency-euro');
 
-        $store = $storeDirector
-            ->create()
-            ->setName('Store')
-            ->setLeitmotiv('Uh yes, I don\'t know what... this is a store...')
-            ->setEmail('email@email.com')
-            ->setTracker('123456')
-            ->setTemplate('fhsjkhfjklsa')
-            ->setUseStock(true)
-            ->setAddress($address)
-            ->setDefaultLanguage($language)
-            ->setDefaultCurrency($currency);
+        $store = $storeDirector->create();
+        $store->setName('Store');
+        $store->setLeitmotiv('Uh yes, I don\'t know what... this is a store...');
+        $store->setEmail('email@email.com');
+        $store->setTracker('123456');
+        $store->setTemplate('fhsjkhfjklsa');
+        $store->setUseStock(true);
+        $store->setAddress($address);
+        $store->setDefaultLanguage($language);
+        $store->setDefaultCurrency($currency);
 
         $storeDirector->save($store);
         $this->setReference('store', $store);

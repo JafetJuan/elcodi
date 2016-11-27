@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Product\Entity\Interfaces;
 
@@ -89,4 +90,20 @@ interface PackInterface extends PurchasableInterface, CategorizableInterface
      * @return int Stock type
      */
     public function getStockType();
+
+    /**
+     * Sets Type.
+     *
+     * @param int $type Type
+     *
+     * @return $this Self object
+     */
+    public function setType($type);
+
+    /**
+     * Get Type.
+     *
+     * @return int Type
+     */
+    public function getType();
 }

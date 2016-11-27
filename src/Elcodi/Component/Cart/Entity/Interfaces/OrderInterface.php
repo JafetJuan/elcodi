@@ -12,13 +12,15 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Cart\Entity\Interfaces;
 
 use Doctrine\Common\Collections\Collection;
 
+use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
@@ -33,6 +35,7 @@ use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
  */
 interface OrderInterface extends
     PriceInterface,
+    DateTimeInterface,
     DimensionableInterface,
     IdentifiableInterface
 {

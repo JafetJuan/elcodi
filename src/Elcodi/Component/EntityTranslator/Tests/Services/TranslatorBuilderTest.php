@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\EntityTranslator\Tests\Services;
 
@@ -31,9 +32,9 @@ class TranslatorBuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testCompileOk()
     {
-        $entityTranslationProvider = $this->getMock('Elcodi\Component\EntityTranslator\Services\EntityTranslationProvider', [], [], '', false);
-        $translatorFactory = $this->getMock('Elcodi\Component\EntityTranslator\Factory\EntityTranslatorFactory', [], [], '', false);
-        $translator = $this->getMock('Elcodi\Component\EntityTranslator\Services\EntityTranslator', [], [], '', false);
+        $entityTranslationProvider = $this->createMock('Elcodi\Component\EntityTranslator\Services\EntityTranslationProvider');
+        $translatorFactory = $this->createMock('Elcodi\Component\EntityTranslator\Factory\EntityTranslatorFactory');
+        $translator = $this->createMock('Elcodi\Component\EntityTranslator\Services\EntityTranslator');
 
         $translatorFactory
             ->expects($this->once())
@@ -72,8 +73,8 @@ class TranslatorBuilderTest extends PHPUnit_Framework_TestCase
      */
     public function testCompileException($configuration)
     {
-        $entityTranslationProvider = $this->getMock('Elcodi\Component\EntityTranslator\Services\EntityTranslationProvider', [], [], '', false);
-        $translatorFactory = $this->getMock('Elcodi\Component\EntityTranslator\Factory\EntityTranslatorFactory', [], [], '', false);
+        $entityTranslationProvider = $this->createMock('Elcodi\Component\EntityTranslator\Services\EntityTranslationProvider');
+        $translatorFactory = $this->createMock('Elcodi\Component\EntityTranslator\Factory\EntityTranslatorFactory');
 
         $translatorBuilder = new EntityTranslatorBuilder(
             $entityTranslationProvider,

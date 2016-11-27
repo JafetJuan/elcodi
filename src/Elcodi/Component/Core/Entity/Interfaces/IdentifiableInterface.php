@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Entity\Interfaces;
 
@@ -23,18 +24,16 @@ namespace Elcodi\Component\Core\Entity\Interfaces;
 interface IdentifiableInterface
 {
     /**
-     * Get Id.
-     *
-     * @return int Id
-     */
-    public function getId();
-
-    /**
      * Sets Id.
      *
-     * @param int $id Id
-     *
-     * @return $this Self object
+     * @param mixed $id
      */
     public function setId($id);
+
+    /**
+     * Get Id.
+     *
+     * @return mixed Id
+     */
+    public function getId();
 }

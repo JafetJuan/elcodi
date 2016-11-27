@@ -12,13 +12,15 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\EntityTranslator\Factory;
 
 use Elcodi\Component\Core\Factory\Traits\EntityNamespaceTrait;
 use Elcodi\Component\EntityTranslator\Services\Interfaces\EntityTranslationProviderInterface;
+use Elcodi\Component\EntityTranslator\Services\Interfaces\EntityTranslatorInterface;
 
 /**
  * Class EntityTranslatorFactory.
@@ -34,13 +36,13 @@ class EntityTranslatorFactory
      * @param array                              $configuration             Configuration
      * @param bool                               $fallback                  Fallback
      *
-     * @return object Empty entity
+     * @return EntityTranslatorInterface Empty entity
      */
     public function create(
         EntityTranslationProviderInterface $entityTranslationProvider,
         array $configuration,
-        $fallback
-    ) {
+        bool $fallback
+    ) : EntityTranslatorInterface {
         return new $this->entityNamespace(
             $entityTranslationProvider,
             $configuration,

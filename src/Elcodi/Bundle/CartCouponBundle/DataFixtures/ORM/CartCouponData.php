@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\CartCouponBundle\DataFixtures\ORM;
 
@@ -49,10 +50,9 @@ class CartCouponData extends AbstractFixture implements DependentFixtureInterfac
         $cart = $this->getReference('full-cart');
         $coupon = $this->getReference('coupon-percent');
 
-        $cartCoupon = $cartCouponDirectory
-            ->create()
-            ->setCart($cart)
-            ->setCoupon($coupon);
+        $cartCoupon = $cartCouponDirectory->create();
+        $cartCoupon->setCart($cart);
+        $cartCoupon->setCoupon($coupon);
 
         $cartCouponDirectory->save($cartCoupon);
         $this->addReference('cart-coupon', $cartCoupon);

@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Comment\Services;
 
@@ -225,16 +226,18 @@ class CommentCache extends AbstractCacheWrapper
      */
     private function loadCommentTreeFromCache($source, $context)
     {
-        return $this
-            ->encoder
-            ->decode(
-                $this
-                    ->cache
-                    ->fetch($this->getSpecificSourceCacheKey(
-                        $source,
-                        $context
-                    ))
-            );
+        $fetchedData = $this
+            ->cache
+            ->fetch($this->getSpecificSourceCacheKey(
+                $source,
+                $context
+            ));
+
+        return is_string($fetchedData)
+            ? $this
+                ->encoder
+                ->decode($fetchedData)
+            : [];
     }
 
     /**

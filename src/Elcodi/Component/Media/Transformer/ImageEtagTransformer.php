@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Transformer;
 
@@ -37,9 +38,9 @@ class ImageEtagTransformer implements ImageEtagTransformerInterface
      */
     public function transform(
         ImageInterface $image,
-        $height,
-        $width,
-        $type
+        string $height,
+        string $width,
+        string $type
     ) {
         return sha1(
             $image->getId() . '.' .

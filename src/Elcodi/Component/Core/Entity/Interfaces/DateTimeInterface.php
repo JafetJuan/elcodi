@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Entity\Interfaces;
 
@@ -28,8 +29,6 @@ interface DateTimeInterface
      * Set locally created at value.
      *
      * @param DateTime $createdAt Created at value
-     *
-     * @return $this Self object
      */
     public function setCreatedAt(DateTime $createdAt);
 
@@ -38,14 +37,12 @@ interface DateTimeInterface
      *
      * @return DateTime
      */
-    public function getCreatedAt();
+    public function getCreatedAt() : ? DateTime;
 
     /**
      * Set locally updated at value.
      *
      * @param DateTime $updatedAt Updated at value
-     *
-     * @return $this Self object
      */
     public function setUpdatedAt(DateTime $updatedAt);
 
@@ -54,5 +51,5 @@ interface DateTimeInterface
      *
      * @return DateTime
      */
-    public function getUpdatedAt();
+    public function getUpdatedAt() : ? DateTime;
 }

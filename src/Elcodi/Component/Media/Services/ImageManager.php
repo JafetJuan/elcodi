@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Services;
 
@@ -116,13 +117,12 @@ class ImageManager
             $imageSizeData = getimagesize($file->getPathname());
         }
         $name = $file->getFilename();
-        $image
-            ->setWidth($imageSizeData[0])
-            ->setHeight($imageSizeData[1])
-            ->setContentType($fileMime)
-            ->setSize($file->getSize())
-            ->setExtension($extension)
-            ->setName($name);
+        $image->setWidth($imageSizeData[0]);
+        $image->setHeight($imageSizeData[1]);
+        $image->setContentType($fileMime);
+        $image->setSize($file->getSize());
+        $image->setExtension($extension);
+        $image->setName($name);
 
         return $image;
     }
@@ -139,9 +139,9 @@ class ImageManager
      */
     public function resize(
         ImageInterface $image,
-        $height,
-        $width,
-        $type = ElcodiMediaImageResizeTypes::FORCE_MEASURES
+        int $height,
+        int $width,
+        int $type = ElcodiMediaImageResizeTypes::FORCE_MEASURES
     ) {
         $imageData = $this
             ->fileManager
@@ -165,12 +165,13 @@ class ImageManager
          * Ideally, we should be doing this in memory.
          */
         $resizedFile = new File(tempnam(sys_get_temp_dir(), '_generated'));
-        file_put_contents($resizedFile, $resizedImageData);
+        $resizedFileName = $resizedFile->getPathname();
+        file_put_contents($resizedFileName, $resizedImageData);
 
         $image = $this->createImage($resizedFile);
         $image->setContent($resizedImageData);
 
-        unlink($resizedFile);
+        unlink($resizedFileName);
 
         return $image;
     }

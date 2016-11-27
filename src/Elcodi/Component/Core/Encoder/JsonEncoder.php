@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Encoder;
 
@@ -39,11 +40,11 @@ class JsonEncoder implements EncoderInterface
     /**
      * Decode incoming data.
      *
-     * @param string|bool $serializedData Serialized data
+     * @param string $serializedData Serialized data
      *
      * @return mixed Decoded data
      */
-    public function decode($serializedData)
+    public function decode(string $serializedData)
     {
         return json_decode($serializedData, true);
     }

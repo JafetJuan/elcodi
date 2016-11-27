@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\CurrencyBundle\DataFixtures\ORM;
 
@@ -42,22 +43,20 @@ class CurrencyData extends AbstractFixture
         /**
          * Dollar.
          */
-        $currencyDollar = $currencyDirector
-            ->create()
-            ->setName('Dollar')
-            ->setSymbol('$')
-            ->setIso('USD');
+        $currencyDollar = $currencyDirector->create();
+        $currencyDollar->setName('Dollar');
+        $currencyDollar->setSymbol('$');
+        $currencyDollar->setIso('USD');
 
         $currencyDirector->save($currencyDollar);
         $this->setReference('currency-dollar', $currencyDollar);
 
         /**Euro
          */
-        $currencyEuro = $currencyDirector
-            ->create()
-            ->setName('Euro')
-            ->setSymbol('€')
-            ->setIso('EUR');
+        $currencyEuro = $currencyDirector->create();
+        $currencyEuro->setName('Euro');
+        $currencyEuro->setSymbol('€');
+        $currencyEuro->setIso('EUR');
 
         $currencyDirector->save($currencyEuro);
         $this->setReference('currency-euro', $currencyEuro);
@@ -65,11 +64,10 @@ class CurrencyData extends AbstractFixture
         /**
          * Pound.
          */
-        $currencyPound = $currencyDirector
-            ->create()
-            ->setName('Pound')
-            ->setSymbol('£')
-            ->setIso('GBP');
+        $currencyPound = $currencyDirector->create();
+        $currencyPound->setName('Pound');
+        $currencyPound->setSymbol('£');
+        $currencyPound->setIso('GBP');
 
         $currencyDirector->save($currencyPound);
         $this->setReference('currency-pound', $currencyPound);
@@ -77,11 +75,10 @@ class CurrencyData extends AbstractFixture
         /**
          * Ien.
          */
-        $currencyIen = $currencyDirector
-            ->create()
-            ->setName('Yen')
-            ->setSymbol('円')
-            ->setIso('JPY');
+        $currencyIen = $currencyDirector->create();
+        $currencyIen->setName('Yen');
+        $currencyIen->setSymbol('円');
+        $currencyIen->setIso('JPY');
 
         $currencyDirector->save($currencyIen);
         $this->setReference('currency-ien', $currencyIen);

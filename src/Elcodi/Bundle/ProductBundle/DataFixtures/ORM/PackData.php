@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\DataFixtures\ORM;
 
@@ -60,52 +61,50 @@ class PackData extends AbstractFixture implements DependentFixtureInterface
         $packDirector = $this->getDirector('purchasable_pack');
 
         // Id assigned = 9
-        $pack = $packDirector
-            ->create()
-            ->setName('pack')
-            ->setSlug('pack')
-            ->setDescription('my pack description')
-            ->setShortDescription('my pack short description')
-            ->addCategory($category)
-            ->setPrincipalCategory($category)
-            ->setManufacturer($manufacturer)
-            ->addPurchasable($product)
-            ->addPurchasable($productReduced)
-            ->addPurchasable($variant)
-            ->setStockType(ElcodiProductStock::SPECIFIC_STOCK)
-            ->setStock(10)
-            ->setPrice(Money::create(5000, $currency))
-            ->setSku('pack-sku-code-1')
-            ->setHeight(30)
-            ->setWidth(30)
-            ->setDepth(30)
-            ->setWeight(200)
-            ->setEnabled(true);
+        $pack = $packDirector->create();
+        $pack->setName('pack');
+        $pack->setSlug('pack');
+        $pack->setDescription('my pack description');
+        $pack->setShortDescription('my pack short description');
+        $pack->addCategory($category);
+        $pack->setPrincipalCategory($category);
+        $pack->setManufacturer($manufacturer);
+        $pack->addPurchasable($product);
+        $pack->addPurchasable($productReduced);
+        $pack->addPurchasable($variant);
+        $pack->setStockType(ElcodiProductStock::SPECIFIC_STOCK);
+        $pack->setStock(10);
+        $pack->setPrice(Money::create(5000, $currency));
+        $pack->setSku('pack-sku-code-1');
+        $pack->setHeight(30);
+        $pack->setWidth(30);
+        $pack->setDepth(30);
+        $pack->setWeight(200);
+        $pack->setEnabled(true);
 
         $packDirector->save($pack);
         $this->addReference('pack', $pack);
 
         // Id assigned = 10
-        $packInherit = $packDirector
-            ->create()
-            ->setName('pack-inherit')
-            ->setSlug('pack-inherit')
-            ->setDescription('my pack inherit description')
-            ->setShortDescription('my pack inherit short description')
-            ->addCategory($category)
-            ->setPrincipalCategory($category)
-            ->setManufacturer($manufacturer)
-            ->addPurchasable($product)
-            ->addPurchasable($productReduced)
-            ->addPurchasable($variant)
-            ->setStockType(ElcodiProductStock::INHERIT_STOCK)
-            ->setPrice(Money::create(5000, $currency))
-            ->setSku('pack-inherit-sku-code-1')
-            ->setHeight(30)
-            ->setWidth(30)
-            ->setDepth(30)
-            ->setWeight(200)
-            ->setEnabled(true);
+        $packInherit = $packDirector->create();
+        $packInherit->setName('pack-inherit');
+        $packInherit->setSlug('pack-inherit');
+        $packInherit->setDescription('my pack inherit description');
+        $packInherit->setShortDescription('my pack inherit short description');
+        $packInherit->addCategory($category);
+        $packInherit->setPrincipalCategory($category);
+        $packInherit->setManufacturer($manufacturer);
+        $packInherit->addPurchasable($product);
+        $packInherit->addPurchasable($productReduced);
+        $packInherit->addPurchasable($variant);
+        $packInherit->setStockType(ElcodiProductStock::INHERIT_STOCK);
+        $packInherit->setPrice(Money::create(5000, $currency));
+        $packInherit->setSku('pack-inherit-sku-code-1');
+        $packInherit->setHeight(30);
+        $packInherit->setWidth(30);
+        $packInherit->setDepth(30);
+        $packInherit->setWeight(200);
+        $packInherit->setEnabled(true);
 
         $this->storeProductImage(
             $packInherit,

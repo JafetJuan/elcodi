@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Adapter\Resizer;
 
@@ -67,11 +68,11 @@ class ImageMagickResizeAdapter implements ResizeAdapterInterface
      * @throws \RuntimeException
      */
     public function resize(
-        $imageData,
-        $height,
-        $width,
-        $type = ElcodiMediaImageResizeTypes::FORCE_MEASURES
-    ) {
+        string $imageData,
+        int $height,
+        int $width,
+        int $type = ElcodiMediaImageResizeTypes::FORCE_MEASURES
+    ) : string {
         if (ElcodiMediaImageResizeTypes::NO_RESIZE === $type) {
             return $imageData;
         }
@@ -79,7 +80,7 @@ class ImageMagickResizeAdapter implements ResizeAdapterInterface
         $originalFile = new File(tempnam(sys_get_temp_dir(), '_original'));
         $resizedFile = new File(tempnam(sys_get_temp_dir(), '_resize'));
 
-        file_put_contents($originalFile, $imageData);
+        file_put_contents($originalFile->getRealPath(), $imageData);
 
         //ImageMagick params
         $pb = new ProcessBuilder();
@@ -165,8 +166,8 @@ class ImageMagickResizeAdapter implements ResizeAdapterInterface
 
         $imageContent = file_get_contents($resizedFile->getRealPath());
 
-        unlink($originalFile);
-        unlink($resizedFile);
+        unlink($originalFile->getRealPath());
+        unlink($resizedFile->getRealPath());
 
         return $imageContent;
     }

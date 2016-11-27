@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Tests\UnitTest\Transformer;
 
@@ -32,13 +33,13 @@ class ImageEtagTransformerTest extends PHPUnit_Framework_TestCase
     public function testGetEtag()
     {
         $imageEtagGenerator = new ImageEtagTransformer();
-        $dateTime = $this->getMock('DateTime');
+        $dateTime = $this->createMock('DateTime');
         $dateTime
             ->expects($this->any())
             ->method('getTimestamp')
             ->will($this->returnValue('123456'));
 
-        $image = $this->getMock('Elcodi\Component\Media\Entity\Interfaces\ImageInterface');
+        $image = $this->createMock('Elcodi\Component\Media\Entity\Interfaces\ImageInterface');
         $image
             ->expects($this->any())
             ->method('getId')
@@ -50,7 +51,7 @@ class ImageEtagTransformerTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             '5c5253c90e9fc68a8b2be2b78313689e16b1d683',
-            $imageEtagGenerator->transform($image, 50, 60, 2)
+            $imageEtagGenerator->transform($image, '50', '60', '2')
         );
     }
 }

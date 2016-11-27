@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\StateTransitionMachine\Tests\UnitTest\Machine;
 
@@ -30,13 +31,13 @@ class LoggableMachineTest extends AbstractStateTransitionTest
      */
     public function testMakeTransitionLog()
     {
-        $machine = $this->getMock('Elcodi\Component\StateTransitionMachine\Machine\Interfaces\MachineInterface');
+        $machine = $this->createMock('Elcodi\Component\StateTransitionMachine\Machine\Interfaces\MachineInterface');
         $machine
             ->expects($this->any())
             ->method('transition')
             ->will($this->returnValue($this->getTransition()));
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger
             ->expects($this->atLeastOnce())
             ->method('info');
@@ -54,13 +55,13 @@ class LoggableMachineTest extends AbstractStateTransitionTest
      */
     public function testReachStateLog()
     {
-        $machine = $this->getMock('Elcodi\Component\StateTransitionMachine\Machine\Interfaces\MachineInterface');
+        $machine = $this->createMock('Elcodi\Component\StateTransitionMachine\Machine\Interfaces\MachineInterface');
         $machine
             ->expects($this->any())
             ->method('reachState')
             ->will($this->returnValue($this->getTransition()));
 
-        $logger = $this->getMock('Psr\Log\LoggerInterface');
+        $logger = $this->createMock('Psr\Log\LoggerInterface');
         $logger
             ->expects($this->atLeastOnce())
             ->method('info');

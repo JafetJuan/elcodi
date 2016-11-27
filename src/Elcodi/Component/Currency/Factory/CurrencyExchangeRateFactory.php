@@ -12,13 +12,14 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Currency\Factory;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
-use Elcodi\Component\Currency\Entity\CurrencyExchangeRate;
+use Elcodi\Component\Currency\Entity\Interfaces\CurrencyExchangeRateInterface;
 
 /**
  * Class CurrencyExchangeRateFactory.
@@ -28,12 +29,12 @@ class CurrencyExchangeRateFactory extends AbstractFactory
     /**
      * Creates an instance of CurrencyExchangeRate entity.
      *
-     * @return CurrencyExchangeRate Empty entity
+     * @return CurrencyExchangeRateInterface Empty entity
      */
     public function create()
     {
         /**
-         * @var CurrencyExchangeRate $exchangeRate
+         * @var CurrencyExchangeRateInterface $exchangeRate
          */
         $classNamespace = $this->getEntityNamespace();
         $exchangeRate = new $classNamespace();

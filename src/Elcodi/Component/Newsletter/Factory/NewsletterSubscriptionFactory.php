@@ -12,13 +12,14 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Newsletter\Factory;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
-use Elcodi\Component\Newsletter\Entity\NewsletterSubscription;
+use Elcodi\Component\Newsletter\Entity\Interfaces\NewsletterSubscriptionInterface;
 
 /**
  * Class NewsletterSubscriptionFactory.
@@ -30,18 +31,17 @@ class NewsletterSubscriptionFactory extends AbstractFactory
      *
      * This method must return always an empty instance
      *
-     * @return NewsletterSubscription Empty entity
+     * @return NewsletterSubscriptionInterface Empty entity
      */
     public function create()
     {
         /**
-         * @var NewsletterSubscription $newsletterSubscription
+         * @var NewsletterSubscriptionInterface $newsletterSubscription
          */
         $classNamespace = $this->getEntityNamespace();
         $newsletterSubscription = new $classNamespace();
-        $newsletterSubscription
-            ->setEnabled(true)
-            ->setCreatedAt($this->now());
+        $newsletterSubscription->enable();
+        $newsletterSubscription->setCreatedAt($this->now());
 
         return $newsletterSubscription;
     }

@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\EventListener;
 
@@ -39,13 +40,20 @@ class ReferrerSessionEventListener
             ->getRequest()
             ->server;
 
-        $referrer = parse_url($server->get('HTTP_REFERER', false), PHP_URL_HOST);
-        $host = parse_url($server->get('HTTP_HOST'), PHP_URL_HOST);
+        $httpReferrer = $server->get('HTTP_REFERER', false);
+        $httpHost = $server->get('HTTP_HOST', false);
 
         if (
-            ($referrer != $host) &&
-            ($referrer !== false)
+            false === $httpReferrer ||
+            false === $httpHost
         ) {
+            return;
+        }
+
+        $referrer = parse_url($httpReferrer, PHP_URL_HOST);
+        $host = parse_url($httpHost, PHP_URL_HOST);
+
+        if ($referrer != $host) {
             $event
                 ->getRequest()
                 ->getSession()

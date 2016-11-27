@@ -12,15 +12,16 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Menu\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
-use Elcodi\Component\Menu\Entity\Node;
+use Elcodi\Component\Menu\Entity\Interfaces\NodeInterface;
 
 /**
  * Class NodeFactory.
@@ -30,20 +31,19 @@ class NodeFactory extends AbstractFactory
     /**
      * Creates an instance of Node entity.
      *
-     * @return Node Empty entity
+     * @return NodeInterface Empty entity
      */
     public function create()
     {
         /**
-         * @var Node $node
+         * @var NodeInterface $node
          */
         $classNamespace = $this->getEntityNamespace();
         $node = new $classNamespace();
-        $node
-            ->setSubnodes(new ArrayCollection())
-            ->setPriority(0)
-            ->setActiveUrls([])
-            ->setEnabled(true);
+        $node->setSubnodes(new ArrayCollection());
+        $node->setPriority(0);
+        $node->setActiveUrls([]);
+        $node->enable();
 
         return $node;
     }

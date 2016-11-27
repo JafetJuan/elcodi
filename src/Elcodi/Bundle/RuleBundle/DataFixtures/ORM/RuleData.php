@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\RuleBundle\DataFixtures\ORM;
 
@@ -37,24 +38,21 @@ class RuleData extends AbstractFixture
          */
         $ruleDirector = $this->getDirector('rule');
 
-        $cartOver1000Euros = $ruleDirector
-            ->create()
-            ->setName('cart_over_1000euros')
-            ->setExpression('cart.getAmount() > 1000');
+        $cartOver1000Euros = $ruleDirector->create();
+        $cartOver1000Euros->setName('cart_over_1000euros');
+        $cartOver1000Euros->setExpression('cart.getAmount() > 1000');
 
         $ruleDirector->save($cartOver1000Euros);
 
-        $cartUnder10Products = $ruleDirector
-            ->create()
-            ->setName('cart_under_10products')
-            ->setExpression('cart.getTotalItemNumber() < 10');
+        $cartUnder10Products = $ruleDirector->create();
+        $cartUnder10Products->setName('cart_under_10products');
+        $cartUnder10Products->setExpression('cart.getTotalItemNumber() < 10');
 
         $ruleDirector->save($cartUnder10Products);
 
-        $cartValuableItems = $ruleDirector
-            ->create()
-            ->setName('cart_valuable_items')
-            ->setExpression('rule("cart_over_1000euros") and rule("cart_under_10products")');
+        $cartValuableItems = $ruleDirector->create();
+        $cartValuableItems->setName('cart_valuable_items');
+        $cartValuableItems->setExpression('rule("cart_over_1000euros") and rule("cart_under_10products")');
 
         $ruleDirector->save($cartValuableItems);
     }

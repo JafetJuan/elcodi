@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Language\Factory;
 
@@ -40,7 +41,7 @@ class LanguageFactory extends AbstractFactory
         $classNamespace = $this->getEntityNamespace();
         $language = new $classNamespace();
 
-        $language->setEnabled(false);
+        $language->disable();
 
         return $language;
     }

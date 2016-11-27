@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\CartCoupon\Applicator\ExpressionLanguage;
 
@@ -35,7 +36,7 @@ class ManufacturerFunction implements ExpressionLanguageFunctionInterface
     {
         $expressionLanguage->register('m', function ($ids) {
             return sprintf('(purchasable.manufacturer.id in [%1$s])', $ids);
-        }, function ($arguments, $ids) {
+        }, function (array $arguments, string $ids) {
             $ids = explode(',', $ids);
             $purchasable = $arguments['purchasable'];
             $manufacturer = $purchasable->getManufacturer();

@@ -12,14 +12,15 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Cart\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Elcodi\Component\Cart\Entity\Order;
+use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 use Elcodi\Component\Currency\Factory\Abstracts\AbstractPurchasableFactory;
 use Elcodi\Component\StateTransitionMachine\Entity\StateLineStack;
 use Elcodi\Component\StateTransitionMachine\Machine\MachineManager;
@@ -76,26 +77,25 @@ class OrderFactory extends AbstractPurchasableFactory
      *
      * This method must return always an empty instance for related entity
      *
-     * @return Order New Order instance
+     * @return OrderInterface New Order instance
      */
     public function create()
     {
         /**
-         * @var Order $order
+         * @var OrderInterface $order
          */
         $classNamespace = $this->getEntityNamespace();
         $order = new $classNamespace();
-        $order
-            ->setQuantity(0)
-            ->setWidth(0)
-            ->setHeight(0)
-            ->setWidth(0)
-            ->setWeight(0)
-            ->setCreatedAt($this->now())
-            ->setPurchasableAmount($this->createZeroAmountMoney())
-            ->setAmount($this->createZeroAmountMoney())
-            ->setCouponAmount($this->createZeroAmountMoney())
-            ->setShippingAmount($this->createZeroAmountMoney());
+        $order->setQuantity(0);
+        $order->setWidth(0);
+        $order->setHeight(0);
+        $order->setWidth(0);
+        $order->setWeight(0);
+        $order->setCreatedAt($this->now());
+        $order->setPurchasableAmount($this->createZeroAmountMoney());
+        $order->setAmount($this->createZeroAmountMoney());
+        $order->setCouponAmount($this->createZeroAmountMoney());
+        $order->setShippingAmount($this->createZeroAmountMoney());
 
         $paymentStateLineStack = $this
             ->paymentMachineManager

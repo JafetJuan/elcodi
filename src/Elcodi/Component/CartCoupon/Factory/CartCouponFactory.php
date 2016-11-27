@@ -12,12 +12,13 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\CartCoupon\Factory;
 
-use Elcodi\Component\CartCoupon\Entity\CartCoupon;
+use Elcodi\Component\CartCoupon\Entity\Interfaces\CartCouponInterface;
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 
 /**
@@ -30,10 +31,13 @@ class CartCouponFactory extends AbstractFactory
      *
      * This method must return always an empty instance for related entity
      *
-     * @return CartCoupon New CartCoupon instance
+     * @return CartCouponInterface New CartCoupon instance
      */
     public function create()
     {
+        /**
+         * @var CartCouponInterface $cartCoupon
+         */
         $classNamespace = $this->getEntityNamespace();
         $cartCoupon = new $classNamespace();
 

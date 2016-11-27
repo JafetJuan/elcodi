@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Core\Entity\Interfaces;
 
@@ -25,16 +26,24 @@ interface EnabledInterface
     /**
      * Set isEnabled.
      *
-     * @param bool $enabled enabled value
-     *
-     * @return $this Self object
+     * @param bool|null $enabled enabled value
      */
-    public function setEnabled($enabled);
+    public function setEnabled(bool $enabled);
 
     /**
      * Get if entity is enabled.
      *
-     * @return bool Enabled
+     * @return bool|null Enabled
      */
-    public function isEnabled();
+    public function isEnabled() : ? bool;
+
+    /**
+     * Enable.
+     */
+    public function enable();
+
+    /**
+     * Disable.
+     */
+    public function disable();
 }

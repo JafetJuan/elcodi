@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Adapter\Resizer;
 
@@ -39,11 +40,11 @@ class GDResizeAdapter implements ResizeAdapterInterface
      * @return string Resized image data
      */
     public function resize(
-        $imageData,
-        $height,
-        $width,
-        $type = ElcodiMediaImageResizeTypes::FORCE_MEASURES
-    ) {
+        string $imageData,
+        int $height,
+        int $width,
+        int $type = ElcodiMediaImageResizeTypes::FORCE_MEASURES
+    ) : string {
         $originalResource = imagecreatefromstring($imageData);
         $originalWidth = imagesx($originalResource);
         $originalHeight = imagesy($originalResource);
@@ -56,8 +57,8 @@ class GDResizeAdapter implements ResizeAdapterInterface
         );
 
         $newResource = imagecreatetruecolor(
-            $dimensions->getDstFrameX(),
-            $dimensions->getDstFrameY()
+            (int) $dimensions->getDstFrameX(),
+            (int) $dimensions->getDstFrameY()
         );
 
         $backgroundColor = imagecolorallocate($newResource, 255, 255, 255);

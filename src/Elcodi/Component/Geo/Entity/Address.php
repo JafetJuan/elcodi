@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Geo\Entity;
 
@@ -27,7 +28,7 @@ use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
  */
 class Address implements AddressInterface
 {
-    use IdentifiableTrait,DateTimeTrait, EnabledTrait;
+    use IdentifiableTrait, DateTimeTrait, EnabledTrait;
 
     /**
      * @var string

@@ -12,14 +12,15 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Banner\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Elcodi\Component\Banner\Entity\Banner;
+use Elcodi\Component\Banner\Entity\Interfaces\BannerInterface;
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 
 /**
@@ -32,19 +33,18 @@ class BannerFactory extends AbstractFactory
      *
      * This method must return always an empty instance for related entity
      *
-     * @return Banner New Banner instance
+     * @return BannerInterface New Banner instance
      */
     public function create()
     {
         /**
-         * @var Banner $banner
+         * @var BannerInterface $banner
          */
         $classNamespace = $this->getEntityNamespace();
         $banner = new $classNamespace();
-        $banner
-            ->setBannerZones(new ArrayCollection())
-            ->setEnabled(false)
-            ->setCreatedAt($this->now());
+        $banner->setBannerZones(new ArrayCollection());
+        $banner->disable();
+        $banner->setCreatedAt($this->now());
 
         return $banner;
     }

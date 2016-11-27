@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Bundle\ZoneBundle\DataFixtures\ORM;
 
@@ -40,21 +41,19 @@ class ZoneData extends AbstractFixture implements DependentFixtureInterface
          */
         $zoneDirector = $this->getDirector('zone');
 
-        $zone08021 = $zoneDirector
-            ->create()
-            ->setName('Postalcode 08021')
-            ->setCode('zone-08021')
-            ->addLocation($this->getReference('location-sant-celoni'))
-            ->addLocation($this->getReference('location-08021'));
+        $zone08021 = $zoneDirector->create();
+        $zone08021->setName('Postalcode 08021');
+        $zone08021->setCode('zone-08021');
+        $zone08021->addLocation($this->getReference('location-sant-celoni'));
+        $zone08021->addLocation($this->getReference('location-08021'));
 
         $this->setReference('zone-08021', $zone08021);
         $zoneDirector->save($zone08021);
 
-        $zoneViladecavalls = $zoneDirector
-            ->create()
-            ->setName('Viladecavalls i alrededores')
-            ->setCode('zone-viladecavalls')
-            ->addLocation($this->getReference('location-viladecavalls'));
+        $zoneViladecavalls = $zoneDirector->create();
+        $zoneViladecavalls->setName('Viladecavalls y alrededores');
+        $zoneViladecavalls->setCode('zone-viladecavalls');
+        $zoneViladecavalls->addLocation($this->getReference('location-viladecavalls'));
 
         $this->setReference('zone-viladecavalls', $zoneViladecavalls);
         $zoneDirector->save($zoneViladecavalls);

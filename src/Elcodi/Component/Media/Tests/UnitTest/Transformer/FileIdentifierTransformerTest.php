@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Tests\UnitTest\Transformer;
 
@@ -33,7 +34,7 @@ class FileIdentifierTransformerTest extends PHPUnit_Framework_TestCase
     {
         $imageEtagGenerator = new FileIdentifierTransformer();
 
-        $file = $this->getMock('Elcodi\Component\Media\Entity\Interfaces\FileInterface');
+        $file = $this->createMock('Elcodi\Component\Media\Entity\Interfaces\FileInterface');
         $file
             ->expects($this->any())
             ->method('getId')

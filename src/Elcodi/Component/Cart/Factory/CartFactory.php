@@ -12,14 +12,15 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Cart\Factory;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Elcodi\Component\Cart\Entity\Cart;
+use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Currency\Factory\Abstracts\AbstractPurchasableFactory;
 
 /**
@@ -38,23 +39,22 @@ class CartFactory extends AbstractPurchasableFactory
      *
      * @see Elcodi\Component\Cart\EventListener\CartEventListener::loadCartPrices()
      *
-     * @return Cart New Cart entity
+     * @return CartInterface New Cart entity
      */
     public function create()
     {
         /**
-         * @var Cart $cart
+         * @var CartInterface $cart
          */
         $classNamespace = $this->getEntityNamespace();
         $cart = new $classNamespace();
-        $cart
-            ->setOrdered(false)
-            ->setCartLines(new ArrayCollection())
-            ->setPurchasableAmount($this->createZeroAmountMoney())
-            ->setAmount($this->createZeroAmountMoney())
-            ->setCouponAmount($this->createZeroAmountMoney())
-            ->setShippingAmount($this->createZeroAmountMoney())
-            ->setCreatedAt($this->now());
+        $cart->setOrdered(false);
+        $cart->setCartLines(new ArrayCollection());
+        $cart->setPurchasableAmount($this->createZeroAmountMoney());
+        $cart->setAmount($this->createZeroAmountMoney());
+        $cart->setCouponAmount($this->createZeroAmountMoney());
+        $cart->setShippingAmount($this->createZeroAmountMoney());
+        $cart->setCreatedAt($this->now());
 
         return $cart;
     }

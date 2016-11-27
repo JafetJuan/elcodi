@@ -12,8 +12,9 @@
  *
  * @author Marc Morera <yuhu@mmoreram.com>
  * @author Aldo Chiecchia <zimage@tiscali.it>
- * @author Elcodi Team <tech@elcodi.com>
  */
+
+declare(strict_types=1);
 
 namespace Elcodi\Component\Comment\Services;
 
@@ -77,17 +78,21 @@ class CommentManager extends AbstractCacheWrapper
         $authorEmail,
         CommentInterface $parent = null
     ) {
+        /**
+         * @var CommentInterface $comment
+         */
         $comment = $this
             ->commentDirector
-            ->create()
-            ->setId(round(microtime(true) * 1000))
-            ->setParent($parent)
-            ->setSource($source)
-            ->setAuthorToken($authorToken)
-            ->setAuthorName($authorName)
-            ->setAuthorEmail($authorEmail)
-            ->setContent($content)
-            ->setContext($context);
+            ->create();
+
+        $comment->setId(round(microtime(true) * 1000));
+        $comment->setParent($parent);
+        $comment->setSource($source);
+        $comment->setAuthorToken($authorToken);
+        $comment->setAuthorName($authorName);
+        $comment->setAuthorEmail($authorEmail);
+        $comment->setContent($content);
+        $comment->setContext($context);
 
         $this
             ->commentDirector
