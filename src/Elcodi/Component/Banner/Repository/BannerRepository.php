@@ -33,13 +33,15 @@ class BannerRepository extends EntityRepository
      *
      * Return an ArrayCollection object
      *
-     * @param string            $bannerZoneCode BannerZone code
-     * @param LanguageInterface $language       Language
+     * @param string            $bannerZoneCode
+     * @param LanguageInterface $language
      *
      * @return ArrayCollection
      */
-    public function getBannerByZone($bannerZoneCode, LanguageInterface $language = null)
-    {
+    public function getBannerByZone(
+        string $bannerZoneCode,
+        LanguageInterface $language = null
+    ) {
         $parameters = [
             'code' => $bannerZoneCode,
         ];

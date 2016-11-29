@@ -43,34 +43,30 @@ class Attribute implements AttributeInterface
     protected $name;
 
     /**
-     * Values for this Attribute.
-     *
      * @var Collection
+     *
+     * Values for this Attribute
      */
     protected $values;
+
+    /**
+     * Sets attribute name.
+     *
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+    }
 
     /**
      * Return attribute name.
      *
      * @return string
      */
-    public function getName()
+    public function getName() : ? string
     {
         return $this->name;
-    }
-
-    /**
-     * Sets attribute name.
-     *
-     * @param string $name
-     *
-     * @return AttributeInterface
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -78,7 +74,7 @@ class Attribute implements AttributeInterface
      *
      * @return Collection
      */
-    public function getValues()
+    public function getValues() : Collection
     {
         return $this->values;
     }
@@ -87,42 +83,41 @@ class Attribute implements AttributeInterface
      * Sets attribute values.
      *
      * @param Collection $values
-     *
-     * @return AttributeInterface
      */
     public function setValues(Collection $values)
     {
         $this->values = $values;
-
-        return $this;
     }
 
     /**
      * Adds a value to this attribute collection.
      *
      * @param ValueInterface $value
-     *
-     * @return AttributeInterface
      */
     public function addValue(ValueInterface $value)
     {
-        $this->values->add($value);
+        if ($this
+            ->values
+            ->contains($value)
+        ) {
+            return;
+        }
 
-        return $this;
+        $this
+            ->values
+            ->add($value);
     }
 
     /**
      * Removes a value from this attribute collection.
      *
      * @param ValueInterface $value
-     *
-     * @return AttributeInterface
      */
     public function removeValue(ValueInterface $value)
     {
-        $this->values->removeElement($value);
-
-        return $this;
+        $this
+            ->values
+            ->removeElement($value);
     }
 
     /**
@@ -130,7 +125,7 @@ class Attribute implements AttributeInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->name;
     }

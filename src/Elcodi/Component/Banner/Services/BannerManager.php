@@ -49,13 +49,15 @@ class BannerManager
     /**
      * Get banners from a bannerZone code, given a language.
      *
-     * @param string            $bannerZoneCode Banner zone code
-     * @param LanguageInterface $language       Language
+     * @param string                 $bannerZoneCode
+     * @param LanguageInterface|null $language
      *
-     * @return Collection banners
+     * @return Collection
      */
-    public function getBannersFromBannerZoneCode($bannerZoneCode, LanguageInterface $language = null)
-    {
+    public function getBannersFromBannerZoneCode(
+        string $bannerZoneCode,
+        LanguageInterface $language = null
+    ) : Collection {
         return $this
             ->bannerRepository
             ->getBannerByZone($bannerZoneCode, $language);
@@ -64,13 +66,15 @@ class BannerManager
     /**
      * Get banners from a bannerZone, given a language.
      *
-     * @param BannerZoneInterface $bannerZone Banner zone
-     * @param LanguageInterface   $language   Language
+     * @param BannerZoneInterface $bannerZone
+     * @param LanguageInterface   $language
      *
-     * @return Collection banners
+     * @return Collection
      */
-    public function getBannersFromBannerZone(BannerZoneInterface $bannerZone, LanguageInterface $language = null)
-    {
+    public function getBannersFromBannerZone(
+        BannerZoneInterface $bannerZone,
+        LanguageInterface $language = null
+    ) : Collection {
         return $this->getBannersFromBannerZoneCode(
             $bannerZone->getCode(),
             $language

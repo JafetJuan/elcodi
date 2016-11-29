@@ -35,82 +35,70 @@ interface BannerInterface extends
     /**
      * Set banner name.
      *
-     * @param string $name Name of the banner
-     *
-     * @return $this Self object
+     * @param string $name
      */
-    public function setName($name);
+    public function setName(string $name);
 
     /**
      * Get banner name.
      *
-     * @return string
+     * @return string|null
      */
-    public function getName();
+    public function getName() : ? string;
 
     /**
      * Set banner description.
      *
-     * @param string $description Description of the banner
-     *
-     * @return $this Self object
+     * @param string $description
      */
-    public function setDescription($description);
+    public function setDescription(string $description);
 
     /**
      * Get banner description.
      *
-     * @return string
+     * @return string|null
      */
-    public function getDescription();
+    public function getDescription() : ? string;
 
     /**
      * Set banner url.
      *
-     * @param string $url Url of the banner
-     *
-     * @return $this Self object
+     * @param string $url
      */
-    public function setUrl($url);
+    public function setUrl(string $url);
 
     /**
      * Get banner url.
      *
-     * @return string
+     * @return string|null
      */
-    public function getUrl();
+    public function getUrl() : ? string;
 
     /**
      * Set banner zones to banner.
      *
-     * @param Collection $bannerZones Banner zones
-     *
-     * @return $this Self object
+     * @param Collection $bannerZones
      */
     public function setBannerZones(Collection $bannerZones);
 
     /**
      * Get banner zones from banner.
      *
-     * @return Collection banner zones
+     * @return Collection
      */
-    public function getBannerZones();
+    public function getBannerZones() : Collection;
 
     /**
      * Add banner zone to banner.
      *
-     * @param BannerZoneInterface $bannerZone Banner Zone
-     *
-     * @return $this Self object
+     * @param BannerZoneInterface $bannerZone
      */
     public function addBannerZone(BannerZoneInterface $bannerZone);
 
     /**
      * Remove banner zone from banner.
      *
-     * @param BannerZoneInterface $bannerZone Banner Zone
-     *
-     * @return $this Self object
+     * @param BannerZoneInterface $bannerZone
      */
     public function removeBannerZone(BannerZoneInterface $bannerZone);
 }

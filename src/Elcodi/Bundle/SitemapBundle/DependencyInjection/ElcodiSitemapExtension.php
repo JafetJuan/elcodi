@@ -107,8 +107,6 @@ class ElcodiSitemapExtension extends BaseExtension
      *
      * @param array            $blocks    Blocks
      * @param ContainerBuilder $container Container
-     *
-     * @return $this self Object
      */
     protected function loadBlocks(array $blocks, ContainerBuilder $container)
     {
@@ -135,8 +133,6 @@ class ElcodiSitemapExtension extends BaseExtension
                 ->addArgument($block['priority'])
                 ->setPublic(false);
         }
-
-        return $this;
     }
 
     /**
@@ -144,8 +140,6 @@ class ElcodiSitemapExtension extends BaseExtension
      *
      * @param array            $statics   Statics
      * @param ContainerBuilder $container Container
-     *
-     * @return $this self Object
      */
     protected function loadStatics(array $statics, ContainerBuilder $container)
     {
@@ -162,8 +156,6 @@ class ElcodiSitemapExtension extends BaseExtension
                 ->addArgument($static['priority'])
                 ->setPublic(false);
         }
-
-        return $this;
     }
 
     /**
@@ -171,8 +163,6 @@ class ElcodiSitemapExtension extends BaseExtension
      *
      * @param array            $builders  Builders
      * @param ContainerBuilder $container Container
-     *
-     * @return $this self Object
      */
     protected function loadBuilders(array $builders, ContainerBuilder $container)
     {
@@ -198,8 +188,6 @@ class ElcodiSitemapExtension extends BaseExtension
                     'entity'
                 );
         }
-
-        return $this;
     }
 
     /**
@@ -208,8 +196,6 @@ class ElcodiSitemapExtension extends BaseExtension
      * @param Definition $builderDefinition Block definition
      * @param array      $elements          Elements
      * @param string     $elementType       Element type
-     *
-     * @return $this Self object
      */
     protected function addBuilderElements(
         Definition $builderDefinition,
@@ -223,8 +209,6 @@ class ElcodiSitemapExtension extends BaseExtension
                 [new Reference('elcodi.sitemap_element_generator.' . $elementType . '_' . $blockReference)]
             );
         }
-
-        return $this;
     }
 
     /**
@@ -232,8 +216,6 @@ class ElcodiSitemapExtension extends BaseExtension
      *
      * @param array            $builders  Builders
      * @param ContainerBuilder $container Container
-     *
-     * @return $this self Object
      */
     protected function loadDumpers(array $builders, ContainerBuilder $container)
     {
@@ -248,8 +230,6 @@ class ElcodiSitemapExtension extends BaseExtension
                 ->addArgument($builder['path'])
                 ->setPublic(true);
         }
-
-        return $this;
     }
 
     /**
@@ -257,8 +237,6 @@ class ElcodiSitemapExtension extends BaseExtension
      *
      * @param array            $profiles  Profiles
      * @param ContainerBuilder $container Container
-     *
-     * @return $this self Object
      */
     protected function loadProfiles(array $profiles, ContainerBuilder $container)
     {
@@ -278,8 +256,6 @@ class ElcodiSitemapExtension extends BaseExtension
                 );
             }
         }
-
-        return $this;
     }
 
     /**

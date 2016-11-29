@@ -22,7 +22,7 @@ Elcodi\Component\Attribute\Entity\Attribute:
         enabled:
             column: enabled
             type: boolean
-            nullable: true
+            nullable: false
 
     oneToMany:
         values:

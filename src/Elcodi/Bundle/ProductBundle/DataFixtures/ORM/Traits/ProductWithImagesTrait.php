@@ -33,8 +33,6 @@ trait ProductWithImagesTrait
      *
      * @param ImagesContainerWithPrincipalImageInterface $imageContainer Image Container
      * @param string                                     $imageName      Image name
-     *
-     * @return $this Self object
      */
     protected function storeProductImage(
         ImagesContainerWithPrincipalImageInterface $imageContainer,
@@ -45,7 +43,5 @@ trait ProductWithImagesTrait
 
         $imageContainer->addImage($image);
         $imageContainer->setPrincipalImage($image);
-
-        return $this;
     }
 }

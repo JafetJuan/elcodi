@@ -83,23 +83,19 @@ class Banner implements BannerInterface
     /**
      * Set banner name.
      *
-     * @param string $name Name of the banner
-     *
-     * @return $this Self object
+     * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * Get banner name.
      *
-     * @return string Name
+     * @return string|null Name
      */
-    public function getName()
+    public function getName() : ? string
     {
         return $this->name;
     }
@@ -107,23 +103,19 @@ class Banner implements BannerInterface
     /**
      * Set banner description.
      *
-     * @param string $description Description of the banner
-     *
-     * @return $this Self object
+     * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description)
     {
         $this->description = $description;
-
-        return $this;
     }
 
     /**
      * Get banner description.
      *
-     * @return string Description
+     * @return string|null
      */
-    public function getDescription()
+    public function getDescription() : ? string
     {
         return $this->description;
     }
@@ -131,23 +123,19 @@ class Banner implements BannerInterface
     /**
      * Set banner url.
      *
-     * @param string $url Url of the banner
-     *
-     * @return $this Self object
+     * @param string $url
      */
-    public function setUrl($url)
+    public function setUrl(string $url)
     {
         $this->url = $url;
-
-        return $this;
     }
 
     /**
      * Get banner url.
      *
-     * @return string Url
+     * @return string|null
      */
-    public function getUrl()
+    public function getUrl() : ? string
     {
         return $this->url;
     }
@@ -155,23 +143,19 @@ class Banner implements BannerInterface
     /**
      * Set banner zones to banner.
      *
-     * @param Collection $bannerZones Banner zones
-     *
-     * @return $this Self object
+     * @param Collection $bannerZones
      */
     public function setBannerZones(Collection $bannerZones)
     {
         $this->bannerZones = $bannerZones;
-
-        return $this;
     }
 
     /**
      * Get banner zones from banner.
      *
-     * @return Collection banner zones
+     * @return Collection
      */
-    public function getBannerZones()
+    public function getBannerZones() : Collection
     {
         return $this->bannerZones;
     }
@@ -179,29 +163,32 @@ class Banner implements BannerInterface
     /**
      * Add banner zone to banner.
      *
-     * @param BannerZoneInterface $bannerZone Banner Zone
-     *
-     * @return $this Self object
+     * @param BannerZoneInterface $bannerZone
      */
     public function addBannerZone(BannerZoneInterface $bannerZone)
     {
-        $this->bannerZones->add($bannerZone);
+        if ($this
+            ->bannerZones
+            ->contains($bannerZone)
+        ) {
+            return;
+        }
 
-        return $this;
+        $this
+            ->bannerZones
+            ->add($bannerZone);
     }
 
     /**
      * Remove banner zone from banner.
      *
-     * @param BannerZoneInterface $bannerZone Banner Zone
-     *
-     * @return $this Self object
+     * @param BannerZoneInterface $bannerZone
      */
     public function removeBannerZone(BannerZoneInterface $bannerZone)
     {
-        $this->bannerZones->removeElement($bannerZone);
-
-        return $this;
+        $this
+            ->bannerZones
+            ->removeElement($bannerZone);
     }
 
     /**
@@ -209,7 +196,7 @@ class Banner implements BannerInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->getId() . ' - ' . $this->getName();
     }

@@ -143,8 +143,6 @@ trait ContainerAccessorTrait
      * persisted always.
      *
      * @param mixed $entity Entity
-     *
-     * @return $this Self object
      */
     public function flush($entity)
     {
@@ -157,16 +155,12 @@ trait ContainerAccessorTrait
 
         $objectManager->persist($entity);
         $objectManager->flush($entity);
-
-        return $this;
     }
 
     /**
      * Remove an entity from ORM map.
      *
      * @param mixed $entity Entity
-     *
-     * @return $this Self object
      */
     public function clear($entity)
     {
@@ -178,7 +172,5 @@ trait ContainerAccessorTrait
             ->getObjectManagerByEntityNamespace(get_class($entity));
 
         $objectManager->clear($entity);
-
-        return $this;
     }
 }

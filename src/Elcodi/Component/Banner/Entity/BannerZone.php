@@ -61,14 +61,14 @@ class BannerZone implements BannerZoneInterface
     protected $banners;
 
     /**
-     * @var float
+     * @var int
      *
      * Height of item in cm
      */
     protected $height;
 
     /**
-     * @var float
+     * @var int
      *
      * Width of item in cm
      */
@@ -77,23 +77,19 @@ class BannerZone implements BannerZoneInterface
     /**
      * Set banner name.
      *
-     * @param string $name Name of the banner
-     *
-     * @return $this Self object
+     * @param string $name
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * Get banner name.
      *
-     * @return string Name
+     * @return string|null Name
      */
-    public function getName()
+    public function getName() : ? string
     {
         return $this->name;
     }
@@ -102,22 +98,18 @@ class BannerZone implements BannerZoneInterface
      * Set code.
      *
      * @param string $code
-     *
-     * @return $this Self object
      */
-    public function setCode($code)
+    public function setCode(string $code)
     {
         $this->code = $code;
-
-        return $this;
     }
 
     /**
      * Get code.
      *
-     * @return string Code
+     * @return string|null Code
      */
-    public function getCode()
+    public function getCode() : ? string
     {
         return $this->code;
     }
@@ -125,23 +117,19 @@ class BannerZone implements BannerZoneInterface
     /**
      * Set Language.
      *
-     * @param LanguageInterface $language Language to set
-     *
-     * @return $this Self object
+     * @param LanguageInterface $language
      */
-    public function setLanguage(LanguageInterface $language = null)
+    public function setLanguage( ? LanguageInterface $language)
     {
         $this->language = $language;
-
-        return $this;
     }
 
     /**
      * Get Language.
      *
-     * @return LanguageInterface Language
+     * @return LanguageInterface
      */
-    public function getLanguage()
+    public function getLanguage() : ? LanguageInterface
     {
         return $this->language;
     }
@@ -149,51 +137,50 @@ class BannerZone implements BannerZoneInterface
     /**
      * Add banner into banner zone.
      *
-     * @param BannerInterface $banner Banner
-     *
-     * @return $this Self object
+     * @param BannerInterface $banner
      */
     public function addBanner(BannerInterface $banner)
     {
-        $this->banners->add($banner);
+        if ($this
+            ->banners
+            ->contains($banner)
+        ) {
+            return;
+        }
 
-        return $this;
+        $this
+            ->banners
+            ->add($banner);
     }
 
     /**
      * Remove banner from banner zone.
      *
-     * @param BannerInterface $banner Banner
-     *
-     * @return $this Self object
+     * @param BannerInterface $banner
      */
     public function removeBanner(BannerInterface $banner)
     {
-        $this->banners->removeElement($banner);
-
-        return $this;
+        $this
+            ->banners
+            ->removeElement($banner);
     }
 
     /**
      * Set banners into banner zone.
      *
-     * @param Collection $banners Banners
-     *
-     * @return $this Self object
+     * @param Collection $banners
      */
     public function setBanners(Collection $banners)
     {
         $this->banners = $banners;
-
-        return $this;
     }
 
     /**
      * Get banners.
      *
-     * @return Collection Banners
+     * @return Collection
      */
-    public function getBanners()
+    public function getBanners() : Collection
     {
         return $this->banners;
     }
@@ -201,23 +188,19 @@ class BannerZone implements BannerZoneInterface
     /**
      * Set the BannerZoneInterface height in pixels.
      *
-     * @param float $height Height
-     *
-     * @return $this Self object
+     * @param int $height
      */
-    public function setHeight($height)
+    public function setHeight(int $height)
     {
-        $this->height = (float) $height;
-
-        return $this;
+        $this->height = $height;
     }
 
     /**
      * Get the BannerZoneInterface height in pixels.
      *
-     * @return float Height
+     * @return int
      */
-    public function getHeight()
+    public function getHeight() : ? int
     {
         return $this->height;
     }
@@ -225,23 +208,19 @@ class BannerZone implements BannerZoneInterface
     /**
      * Set the BannerZoneInterface width in pixels.
      *
-     * @param float $width Width
-     *
-     * @return $this Self object
+     * @param int $width
      */
-    public function setWidth($width)
+    public function setWidth(int $width)
     {
-        $this->width = (float) $width;
-
-        return $this;
+        $this->width = $width;
     }
 
     /**
      * Get the BannerZoneInterface width in pixels.
      *
-     * @return float Width
+     * @return int
      */
-    public function getWidth()
+    public function getWidth() : ? int
     {
         return $this->width;
     }
@@ -249,9 +228,9 @@ class BannerZone implements BannerZoneInterface
     /**
      * To string method.
      *
-     * @return string BannerZoneInterface to string
+     * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         $isoLang = 'all languages';
 

@@ -46,9 +46,9 @@ class Value implements ValueInterface
     /**
      * Get Value.
      *
-     * @return string Value
+     * @return string|null Value
      */
-    public function getValue()
+    public function getValue() : ? string
     {
         return $this->value;
     }
@@ -56,23 +56,19 @@ class Value implements ValueInterface
     /**
      * Sets Value.
      *
-     * @param string $value Value
-     *
-     * @return $this Self object
+     * @param string $value
      */
-    public function setValue($value)
+    public function setValue(string $value)
     {
         $this->value = $value;
-
-        return $this;
     }
 
     /**
      * Get Attribute.
      *
-     * @return AttributeInterface Attribute
+     * @return AttributeInterface|null
      */
-    public function getAttribute()
+    public function getAttribute() : ? AttributeInterface
     {
         return $this->attribute;
     }
@@ -80,23 +76,19 @@ class Value implements ValueInterface
     /**
      * Sets Attribute.
      *
-     * @param AttributeInterface $attribute Attribute
-     *
-     * @return $this Self object
+     * @param AttributeInterface $attribute
      */
     public function setAttribute(AttributeInterface $attribute)
     {
         $this->attribute = $attribute;
-
-        return $this;
     }
 
     /**
      * String representation of a value.
      *
-     * @return string String representation
+     * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->getValue();
     }

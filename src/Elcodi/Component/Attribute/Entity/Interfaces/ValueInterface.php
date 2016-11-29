@@ -28,32 +28,28 @@ interface ValueInterface extends IdentifiableInterface
     /**
      * Get Value.
      *
-     * @return string Value
+     * @return string|null
      */
-    public function getValue();
+    public function getValue() : ? string;
 
     /**
      * Sets Value.
      *
-     * @param string $value Value
-     *
-     * @return $this Self object
+     * @param string $value
      */
-    public function setValue($value);
+    public function setValue(string $value);
 
     /**
      * Get Attribute.
      *
-     * @return AttributeInterface Attribute
+     * @return AttributeInterface|null
      */
-    public function getAttribute();
+    public function getAttribute() : ? AttributeInterface;
 
     /**
      * Sets Attribute.
      *
-     * @param AttributeInterface $attribute Attribute
-     *
-     * @return $this Self object
+     * @param AttributeInterface $attribute
      */
     public function setAttribute(AttributeInterface $attribute);
 }

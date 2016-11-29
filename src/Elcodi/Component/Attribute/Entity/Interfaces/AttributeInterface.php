@@ -39,24 +39,20 @@ interface AttributeInterface extends
      * Sets attribute name.
      *
      * @param string $name
-     *
-     * @return AttributeInterface
      */
-    public function setName($name);
+    public function setName(string $name);
 
     /**
      * Return attribute name.
      *
      * @return string
      */
-    public function getName();
+    public function getName() : ? string;
 
     /**
      * Sets attribute values.
      *
      * @param Collection $values
-     *
-     * @return AttributeInterface
      */
     public function setValues(Collection $values);
 
@@ -65,14 +61,12 @@ interface AttributeInterface extends
      *
      * @return Collection
      */
-    public function getValues();
+    public function getValues() : Collection;
 
     /**
      * Adds a value to this attribute collection.
      *
      * @param ValueInterface $value
-     *
-     * @return AttributeInterface
      */
     public function addValue(ValueInterface $value);
 
@@ -80,8 +74,6 @@ interface AttributeInterface extends
      * Removes a value from this attribute collection.
      *
      * @param ValueInterface $value
-     *
-     * @return AttributeInterface
      */
     public function removeValue(ValueInterface $value);
 }

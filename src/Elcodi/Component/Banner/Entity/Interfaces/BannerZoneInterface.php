@@ -31,114 +31,98 @@ interface BannerZoneInterface extends IdentifiableInterface
     /**
      * Set banner name.
      *
-     * @param string $name Name of the banner
-     *
-     * @return $this Self object
+     * @param string $name
      */
-    public function setName($name);
+    public function setName(string $name);
 
     /**
      * Get banner name.
      *
-     * @return string Name
+     * @return string|null
      */
-    public function getName();
+    public function getName() : ? string;
 
     /**
      * Set code.
      *
      * @param string $code
-     *
-     * @return $this Self object
      */
-    public function setCode($code);
+    public function setCode(string $code);
 
     /**
      * Get code.
      *
-     * @return string Code
+     * @return string|null
      */
-    public function getCode();
+    public function getCode() : ? string;
 
     /**
      * Set Language.
      *
-     * @param LanguageInterface $language Language to set
-     *
-     * @return $this Self object
+     * @param LanguageInterface|null $language
      */
-    public function setLanguage(LanguageInterface $language = null);
+    public function setLanguage( ? LanguageInterface $language);
 
     /**
      * Get Language.
      *
-     * @return LanguageInterface Language
+     * @return LanguageInterface|null
      */
-    public function getLanguage();
+    public function getLanguage() : ? LanguageInterface;
 
     /**
      * Add banner into banner zone.
      *
-     * @param BannerInterface $banner Banner
-     *
-     * @return $this Self object
+     * @param BannerInterface $banner
      */
     public function addBanner(BannerInterface $banner);
 
     /**
      * Remove banner from banner zone.
      *
-     * @param BannerInterface $banner Banner
-     *
-     * @return $this Self object
+     * @param BannerInterface $banner
      */
     public function removeBanner(BannerInterface $banner);
 
     /**
      * Set banners into banner zone.
      *
-     * @param Collection $banners Banners
-     *
-     * @return $this Self object
+     * @param Collection $banners
      */
     public function setBanners(Collection $banners);
 
     /**
      * Get banners.
      *
-     * @return Collection Banners
+     * @return Collection
      */
-    public function getBanners();
+    public function getBanners() : Collection;
 
     /**
      * Set the BannerZoneInterface height in pixels.
      *
-     * @param float $height Height
-     *
-     * @return $this Self object
+     * @param int $height
      */
-    public function setHeight($height);
+    public function setHeight(int $height);
 
     /**
      * Get the BannerZoneInterface height in pixels.
      *
-     * @return float Height
+     * @return int
      */
-    public function getHeight();
+    public function getHeight() : ? int;
 
     /**
      * Set the BannerZoneInterface width in pixels.
      *
-     * @param float $width Width
-     *
-     * @return $this Self object
+     * @param int $width
      */
-    public function setWidth($width);
+    public function setWidth(int $width);
 
     /**
      * Get the BannerZoneInterface width in pixels.
      *
-     * @return float Width
+     * @return int Width
      */
-    public function getWidth();
+    public function getWidth() : ? int;
 }
