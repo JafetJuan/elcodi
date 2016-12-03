@@ -48,15 +48,11 @@ abstract class AbstractUserManager
      * Creates new token given a user, with related Role set.
      *
      * @param AbstractUserInterface $user User to register
-     *
-     * @return $this Self object
      */
     public function register(AbstractUserInterface $user)
     {
         $this
             ->userEventDispatcher
             ->dispatchOnUserRegisteredEvent($user);
-
-        return $this;
     }
 }

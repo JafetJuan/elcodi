@@ -18,72 +18,39 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\EventListener;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
-use Elcodi\Component\Core\Services\ObjectDirector;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 
 /**
  * Class CategoryRepositoryTest.
  */
-class RootCategoryEventListenerTest extends WebTestCase
+class RootCategoryEventListenerTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * @var ObjectDirector
-     *
-     * The category director
-     */
-    protected $categoryDirector;
-
-    /**
-     * Setup.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->categoryDirector = $this->get('elcodi.director.category');
-    }
-
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
     /**
      * Test that creating a new root category the parent category should be null.
      */
     public function testNewRootCategoryIsSavedWithoutParent()
     {
+        $categoryDirector = $this->get('elcodi.director.category');
+
         /**
          * @var $rootCategory CategoryInterface
+         * @var $category     CategoryInterface
          */
-        $rootCategory = $this
-            ->categoryDirector
-            ->findOneBy(['slug' => 'root-category']);
+        $rootCategory = $categoryDirector->findOneBy(['slug' => 'root-category']);
 
-        $category = $this->categoryDirector->create();
+        $category = $categoryDirector->create();
         $category->setRoot(true);
         $category->setParent($rootCategory);
         $category->setName('New root category');
         $category->setSlug('new-root-category');
 
-        $this
-            ->categoryDirector
-            ->save($category);
+        $this->save($category);
 
         /**
          * @var $category CategoryInterface
          */
-        $category = $this
-            ->categoryDirector
-            ->findOneBy(['slug' => 'new-root-category']);
+        $category = $categoryDirector->findOneBy(['slug' => 'new-root-category']);
 
         $this->assertNull(
             $category->getParent(),
@@ -97,32 +64,23 @@ class RootCategoryEventListenerTest extends WebTestCase
      */
     public function testEditRootCategoryIsSavedWithoutParent()
     {
-        /**
-         * @var $rootCategory CategoryInterface
-         */
-        $rootCategory = $this
-            ->categoryDirector
-            ->findOneBy(['slug' => 'root-category']);
+        $categoryDirector = $this->get('elcodi.director.category');
 
         /**
+         * @var $rootCategory    CategoryInterface
          * @var $anotherCategory CategoryInterface
          */
-        $anotherCategory = $this
-            ->categoryDirector
-            ->findOneBy(['slug' => 'category']);
+        $rootCategory = $categoryDirector->findOneBy(['slug' => 'root-category']);
+        $anotherCategory = $categoryDirector->findOneBy(['slug' => 'category']);
 
         $rootCategory->setParent($anotherCategory);
 
-        $this
-            ->categoryDirector
-            ->save($rootCategory);
+        $this->save($rootCategory);
 
         /**
          * @var $category CategoryInterface
          */
-        $category = $this
-            ->categoryDirector
-            ->findOneBy(['slug' => 'root-category']);
+        $category = $categoryDirector->findOneBy(['slug' => 'root-category']);
 
         $this->assertNull(
             $category->getParent(),

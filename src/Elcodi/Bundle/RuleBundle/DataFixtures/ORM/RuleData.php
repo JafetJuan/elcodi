@@ -20,13 +20,13 @@ namespace Elcodi\Bundle\RuleBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Component\Core\Services\ObjectDirector;
 
 /**
  * Class RuleData.
  */
-class RuleData extends AbstractFixture
+class RuleData extends ElcodiFixture
 {
     /**
      * {@inheritdoc}

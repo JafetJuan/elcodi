@@ -18,31 +18,19 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\NameResolver;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 
 /**
  * Class ProductNameResolverTest.
  */
-class ProductNameResolverTest extends WebTestCase
+class ProductNameResolverTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
     /**
      * Test resolve name.
      */
     public function testResolveName()
     {
-        $product = $this->find('product', 2);
+        $product = $this->find('elcodi:product', 2);
         $this->assertEquals(
             'product-reduced',
             $this

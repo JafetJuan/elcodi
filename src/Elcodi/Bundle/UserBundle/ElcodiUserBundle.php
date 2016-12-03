@@ -66,10 +66,14 @@ class ElcodiUserBundle extends BaseBundle
     public static function getBundleDependencies(KernelInterface $kernel)
     {
         return [
+            'Symfony\Bundle\FrameworkBundle\FrameworkBundle',
+            'Doctrine\Bundle\DoctrineBundle\DoctrineBundle',
+            'Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle',
             'Elcodi\Bundle\GeoBundle\ElcodiGeoBundle',
             'Elcodi\Bundle\LanguageBundle\ElcodiLanguageBundle',
             'Elcodi\Bundle\CartBundle\ElcodiCartBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

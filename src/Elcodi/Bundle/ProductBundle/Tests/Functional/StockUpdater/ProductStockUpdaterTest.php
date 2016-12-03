@@ -18,37 +18,25 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\StockUpdater;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 
 /**
  * Class ProductStockUpdaterTest.
  */
-class ProductStockUpdaterTest extends WebTestCase
+class ProductStockUpdaterTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
     /**
      * Test update stock.
      */
     public function testUpdateStock()
     {
-        $product = $this->find('product', 1);
+        $product = $this->find('elcodi:product', 1);
         $this->get('elcodi.stock_updater.product')->updateStock(
             $product,
             2
         );
-        $this->clear($product);
-        $product = $this->find('product', 1);
+        $this->clear('elcodi:product');
+        $product = $this->find('elcodi:product', 1);
         $this->assertEquals(
             8,
             $product->getStock()

@@ -18,12 +18,12 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\MediaBundle\Tests\Functional\Services;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\MediaBundle\Tests\Functional\ElcodiMediaFunctionalTest;
 
 /**
  * Class FileServiceTest.
  */
-class FileServiceTest extends WebTestCase
+class FileServiceTest extends ElcodiMediaFunctionalTest
 {
     /**
      * Given a file, upload using single local filesystem.

@@ -18,31 +18,19 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\ImageResolver;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 
 /**
  * Class VariantNameResolverTest.
  */
-class VariantNameResolverTest extends WebTestCase
+class VariantNameResolverTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
     /**
      * Test resolve image.
      */
     public function testResolveImage()
     {
-        $variant = $this->find('product_variant', 7);
+        $variant = $this->find('elcodi:product_variant', 7);
         $this->assertEquals(
             'variant.jpg',
             $this
@@ -57,7 +45,7 @@ class VariantNameResolverTest extends WebTestCase
      */
     public function testResolveImageEmpty()
     {
-        $variant = $this->find('product_variant', 6);
+        $variant = $this->find('elcodi:product_variant', 6);
         $this->assertFalse(
             $this
                 ->get('elcodi.image_resolver.purchasable')

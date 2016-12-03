@@ -20,7 +20,7 @@ namespace Elcodi\Bundle\UserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Component\Core\Services\ObjectDirector;
 
 /**
@@ -28,7 +28,7 @@ use Elcodi\Component\Core\Services\ObjectDirector;
  *
  * Load fixtures of admin entities
  */
-class CustomerData extends AbstractFixture
+class CustomerData extends ElcodiFixture
 {
     /**
      * {@inheritdoc}

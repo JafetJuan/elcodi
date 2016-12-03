@@ -28,22 +28,18 @@ interface PasswordEventDispatcherInterface
     /**
      * Dispatch password remember event.
      *
-     * @param AbstractUserInterface $user       User
-     * @param string                $recoverUrl Recover url
-     *
-     * @return $this Self object
+     * @param AbstractUserInterface $user
+     * @param string                $recoverUrl
      */
     public function dispatchOnPasswordRememberEvent(
         AbstractUserInterface $user,
-        $recoverUrl
+        string $recoverUrl
     );
 
     /**
      * Dispatch password recover event.
      *
-     * @param AbstractUserInterface $user User
-     *
-     * @return $this Self object
+     * @param AbstractUserInterface $user
      */
     public function dispatchOnPasswordRecoverEvent(AbstractUserInterface $user);
 }

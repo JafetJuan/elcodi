@@ -170,36 +170,21 @@ abstract class AbstractEntityTest extends PHPUnit_Framework_TestCase
             ? new $bagType()
             : [];
 
-        $this->assertEquals(
-            $class,
-            $class->$setter($bag)
-        );
+        $class->$setter($bag);
         $this->assertEmpty($class->$getter());
 
         $value1 = $this->getFieldValue($field);
-        $this->assertEquals(
-            $class,
-            $class->$adder($value1)
-        );
+        $class->$adder($value1);
         $this->assertCount(1, $class->$getter());
 
         $value2 = $this->getFieldValue($field);
-        $this->assertSame(
-            $class,
-            $class->$adder($value2)
-        );
+        $class->$adder($value2);
         $this->assertCount(2, $class->$getter());
 
-        $this->assertSame(
-            $class,
-            $class->$remover($value1)
-        );
+        $class->$remover($value1);
         $this->assertCount(1, $class->$getter());
 
-        $this->assertSame(
-            $class,
-            $class->$remover($this->getFieldValue($field))
-        );
+        $class->$remover($this->getFieldValue($field));
         $this->assertCount(1, $class->$getter());
     }
 

@@ -52,11 +52,10 @@ class ValidateCouponRulesEventListenerTest extends AbstractCartCouponEventListen
         $rules = [];
         foreach ($expressions as $name => $expression) {
             $rule = $this
-                ->getFactory('rule')
-                ->create()
+                ->create('elcodi:rule')
                 ->setName($name)
                 ->setExpression($expression);
-            $this->flush($rule);
+            $this->save($rule);
             $rules[] = $rule;
         }
 
@@ -80,7 +79,7 @@ class ValidateCouponRulesEventListenerTest extends AbstractCartCouponEventListen
          * Clean operations to avoid restart scenario.
          */
         $coupon->setRule(null);
-        $this->getDirector('rule')->remove($rules);
+        $this->getDirector('elcodi:rule')->remove($rules);
         $this
             ->get('elcodi.manager.cart_coupon')
             ->removeCoupon(

@@ -18,25 +18,26 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\CartCouponBundle\Tests\Functional\Applicator;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartCouponBundle\Tests\Functional\ElcodiCartCouponFunctionalTest;
 
 /**
  * Class MxNCartCouponApplicatorTest.
  */
-class MxNCartCouponApplicatorTest extends WebTestCase
+class MxNCartCouponApplicatorTest extends ElcodiCartCouponFunctionalTest
 {
     /**
      * Load fixtures of these bundles.
      *
-     * @return array Bundles name where fixtures should be found
+     * @return array
      */
-    protected static function loadFixturesBundles()
+    protected static function loadFixturePaths() : array
     {
         return [
-            'ElcodiCartBundle',
-            'ElcodiCouponBundle',
-            'ElcodiProductBundle',
-            'ElcodiCurrencyBundle',
+            '@ElcodiCartBundle/DataFixtures/ORM',
+            '@ElcodiCouponBundle/DataFixtures/ORM',
+            '@ElcodiCartCouponBundle/DataFixtures/ORM',
+            '@ElcodiProductBundle/DataFixtures/ORM',
+            '@ElcodiCurrencyBundle/DataFixtures/ORM',
         ];
     }
 
@@ -51,7 +52,7 @@ class MxNCartCouponApplicatorTest extends WebTestCase
     ) {
         $cartManager = $this->get('elcodi.manager.cart');
         $cartCouponManager = $this->get('elcodi.manager.cart_coupon');
-        $cart = $this->find('cart', 1);
+        $cart = $this->find('elcodi:cart', 1);
 
         $this
             ->get('elcodi.event_dispatcher.cart')
@@ -59,27 +60,25 @@ class MxNCartCouponApplicatorTest extends WebTestCase
 
         $cartManager->addPurchasable(
             $cart,
-            $this->find('purchasable', 3),
+            $this->find('elcodi:purchasable', 3),
             4
         );
 
         $cartManager->addPurchasable(
             $cart,
-            $this->find('purchasable', 7),
+            $this->find('elcodi:purchasable', 7),
             2
         );
 
         $cartManager->addPurchasable(
             $cart,
-            $this->find('purchasable', 9),
+            $this->find('elcodi:purchasable', 9),
             3
         );
 
-        $coupon = $this
-            ->getRepository('coupon')
-            ->findOneBy(
-                ['code' => '2x1category1']
-            );
+        $coupon = $this->findOneBy('elcodi:coupon', [
+            'code' => '2x1category1',
+        ]);
 
         $coupon->setValue($value);
         $cartCouponManager->addCoupon(

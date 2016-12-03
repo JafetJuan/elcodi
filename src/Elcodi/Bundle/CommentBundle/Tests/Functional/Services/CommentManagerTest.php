@@ -18,23 +18,13 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\CommentBundle\Tests\Functional\Services;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartCouponBundle\Tests\Functional\ElcodiCommentFunctionalTest;
 
 /**
  * Class CommentManagerTest.
  */
-class CommentManagerTest extends WebTestCase
+class CommentManagerTest extends ElcodiCommentFunctionalTest
 {
-    /**
-     * Schema must be loaded in all test cases.
-     *
-     * @return bool Load schema
-     */
-    protected static function loadSchema()
-    {
-        return true;
-    }
-
     /**
      * Test add comment.
      */
@@ -52,7 +42,7 @@ class CommentManagerTest extends WebTestCase
             null
         );
 
-        $storedComment = $this->find('comment', 1);
+        $storedComment = $this->find('elcodi:comment', 1);
         $this->assertEquals('http://page.com/product1', $storedComment->getSource());
         $this->assertEquals('This is my comment #1', $storedComment->getContent());
         $this->assertSame('Efervescencio', $storedComment->getAuthorName());

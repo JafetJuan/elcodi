@@ -18,14 +18,14 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\GeoBundle\Tests\Functional\Adapter\LocationProviderAdapter;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\GeoBundle\Tests\Functional\ElcodiGeoFunctionalTest;
 use Elcodi\Component\Geo\Adapter\LocationProvider\Interfaces\LocationProviderAdapterInterface;
 use Elcodi\Component\Geo\ValueObject\LocationData;
 
 /**
  * Class LocationServiceProviderAdapterTest.
  */
-class LocationServiceProviderAdapterTest extends WebTestCase
+class LocationServiceProviderAdapterTest extends ElcodiGeoFunctionalTest
 {
     /**
      * @var LocationProviderAdapterInterface
@@ -33,18 +33,6 @@ class LocationServiceProviderAdapterTest extends WebTestCase
      * LocationProviderAdapter class
      */
     protected $locationProviderAdapter;
-
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiGeoBundle',
-        ];
-    }
 
     /**
      * Setup.
@@ -129,7 +117,7 @@ class LocationServiceProviderAdapterTest extends WebTestCase
      */
     public function testGetChildrenLocationNotFound()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'Doctrine\ORM\EntityNotFoundException'
         );
 
@@ -192,7 +180,7 @@ class LocationServiceProviderAdapterTest extends WebTestCase
      */
     public function testGetParentsLocationNotFound()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'Doctrine\ORM\EntityNotFoundException'
         );
 
@@ -262,7 +250,7 @@ class LocationServiceProviderAdapterTest extends WebTestCase
      */
     public function testGetLocationNotFound()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'Doctrine\ORM\EntityNotFoundException'
         );
 
@@ -355,7 +343,7 @@ class LocationServiceProviderAdapterTest extends WebTestCase
      */
     public function testGetHierarchyNotFound()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'Doctrine\ORM\EntityNotFoundException'
         );
 
@@ -439,7 +427,7 @@ class LocationServiceProviderAdapterTest extends WebTestCase
      */
     public function testInLocationNotFound()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'Doctrine\ORM\EntityNotFoundException'
         );
 

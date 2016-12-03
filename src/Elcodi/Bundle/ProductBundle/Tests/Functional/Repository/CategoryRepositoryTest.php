@@ -18,44 +18,14 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\Repository;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
-use Elcodi\Component\Product\Repository\CategoryRepository;
 
 /**
  * Class CategoryRepositoryTest.
  */
-class CategoryRepositoryTest extends WebTestCase
+class CategoryRepositoryTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * @var CategoryRepository
-     *
-     * LocationProvider class
-     */
-    protected $categoryRepository;
-
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
-    /**
-     * Setup.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->categoryRepository = $this->get('elcodi.repository.category');
-    }
-
     /**
      * Test category repository provider.
      */
@@ -77,12 +47,14 @@ class CategoryRepositoryTest extends WebTestCase
          * @var $rootCategory CategoryInterface
          */
         $rootCategory = $this
-            ->categoryRepository
+            ->get('elcodi.repository.category')
             ->findOneBy(['slug' => 'root-category']);
 
-        $childrenCategories = $this->categoryRepository->getChildrenCategories(
-            $rootCategory
-        );
+        $childrenCategories = $this
+            ->get('elcodi.repository.category')
+            ->getChildrenCategories(
+                $rootCategory
+            );
 
         $this->assertCount(
             1,
@@ -101,13 +73,15 @@ class CategoryRepositoryTest extends WebTestCase
          * @var $rootCategory CategoryInterface
          */
         $rootCategory = $this
-            ->categoryRepository
+            ->get('elcodi.repository.category')
             ->findOneBy(['slug' => 'root-category']);
 
-        $childrenCategories = $this->categoryRepository->getChildrenCategories(
-            $rootCategory,
-            true
-        );
+        $childrenCategories = $this
+            ->get('elcodi.repository.category')
+            ->getChildrenCategories(
+                $rootCategory,
+                true
+            );
 
         $this->assertCount(
             2,

@@ -18,13 +18,15 @@ declare(strict_types=1);
 
 namespace Elcodi\Component\User\Entity\Traits;
 
+use DateTime;
+
 /**
  * Trait LastLoginTrait.
  */
 trait LastLoginTrait
 {
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * Last login date
      */
@@ -33,9 +35,9 @@ trait LastLoginTrait
     /**
      * Get LastLoginAt.
      *
-     * @return \DateTime LastLoginAt
+     * @return DateTime|null LastLoginAt
      */
-    public function getLastLoginAt()
+    public function getLastLoginAt() : ? DateTime
     {
         return $this->lastLoginAt;
     }
@@ -43,14 +45,10 @@ trait LastLoginTrait
     /**
      * Sets LastLoginAt.
      *
-     * @param \DateTime $lastLoginAt LastLoginAt
-     *
-     * @return $this Self object
+     * @param DateTime $lastLoginAt
      */
-    public function setLastLoginAt(\DateTime $lastLoginAt)
+    public function setLastLoginAt(DateTime $lastLoginAt)
     {
         $this->lastLoginAt = $lastLoginAt;
-
-        return $this;
     }
 }

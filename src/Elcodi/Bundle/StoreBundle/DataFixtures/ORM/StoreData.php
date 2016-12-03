@@ -21,13 +21,13 @@ namespace Elcodi\Bundle\StoreBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Component\Core\Services\ObjectDirector;
 
 /**
  * Class StoreData.
  */
-class StoreData extends AbstractFixture implements DependentFixtureInterface
+class StoreData extends ElcodiFixture implements DependentFixtureInterface
 {
     /**
      * Load data fixtures with the passed EntityManager.

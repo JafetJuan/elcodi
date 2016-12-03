@@ -18,53 +18,14 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\EventListener;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
-use Elcodi\Component\Core\Services\ObjectDirector;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 use Elcodi\Component\Product\Entity\Interfaces\ProductInterface;
-use Elcodi\Component\Product\Repository\CategoryRepository;
 
 /**
  * Class ProductCategoryIntegrityEventListenerTest.
  */
-class ProductCategoryIntegrityEventListenerTest extends WebTestCase
+class ProductCategoryIntegrityEventListenerTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * @var CategoryRepository
-     *
-     * Category repository class
-     */
-    protected $categoryRepository;
-
-    /**
-     * @var ObjectDirector
-     *
-     * The product director
-     */
-    protected $productDirector;
-
-    /**
-     * Setup.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->categoryRepository = $this->get('elcodi.repository.category');
-        $this->productDirector = $this->get('elcodi.director.product');
-    }
-
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
     /**
      * Test that the principal category is assigned when a product is saved
      * with categories but not principal category.
@@ -72,7 +33,7 @@ class ProductCategoryIntegrityEventListenerTest extends WebTestCase
     public function testProductIsSavedWithoutPrincipalCategoryButCategories()
     {
         $category = $this
-            ->categoryRepository
+            ->get('elcodi.repository.category')
             ->findOneBy(['slug' => 'category']);
 
         /**
@@ -83,10 +44,10 @@ class ProductCategoryIntegrityEventListenerTest extends WebTestCase
         $product->setSlug('new-product-1');
         $product->setName('New product 1');
 
-        $this->productDirector->save($product);
+        $this->save($product);
 
         $product = $this
-            ->productDirector
+            ->get('elcodi.repository.product')
             ->findOneBy(['slug' => 'new-product-1']);
 
         $this->assertEquals(
@@ -103,7 +64,7 @@ class ProductCategoryIntegrityEventListenerTest extends WebTestCase
     public function testProductIsSavedOnlyWithPrincipalCategory()
     {
         $category = $this
-            ->categoryRepository
+            ->get('elcodi.repository.category')
             ->findOneBy(['slug' => 'category']);
 
         /**
@@ -114,10 +75,10 @@ class ProductCategoryIntegrityEventListenerTest extends WebTestCase
         $product->setSlug('new-product-2');
         $product->setName('New product 2');
 
-        $this->productDirector->save($product);
+        $this->save($product);
 
         $product = $this
-            ->productDirector
+            ->get('elcodi.repository.product')
             ->findOneBy(['slug' => 'new-product-2']);
 
         $this->assertEquals(
@@ -141,7 +102,7 @@ class ProductCategoryIntegrityEventListenerTest extends WebTestCase
     public function getNewProduct()
     {
         return $this
-            ->productDirector
+            ->get('elcodi.factory.product')
             ->create();
     }
 }

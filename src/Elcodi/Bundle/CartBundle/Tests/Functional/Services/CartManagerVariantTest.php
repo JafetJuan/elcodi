@@ -33,12 +33,12 @@ class CartManagerVariantTest extends AbstractCartManagerTest
     /**
      * Load fixtures of these bundles.
      *
-     * @return array Bundles name where fixtures should be found
+     * @return array
      */
-    protected static function loadFixturesBundles()
+    protected static function loadFixturePaths() : array
     {
         return [
-            'ElcodiProductBundle',
+            '@ElcodiProductBundle',
         ];
     }
 
@@ -49,7 +49,7 @@ class CartManagerVariantTest extends AbstractCartManagerTest
      */
     protected function createPurchasable()
     {
-        return $this->find('purchasable', 6);
+        return $this->find('elcodi:purchasable', 6);
     }
 
     /**
@@ -161,13 +161,12 @@ class CartManagerVariantTest extends AbstractCartManagerTest
         /**
          * @var ValueInterface $variantOption
          */
-        $variantOption = $this->find('attribute_value', 1);
+        $variantOption = $this->find('elcodi:attribute_value', 1);
         /**
          * @var VariantInterface $variant
          */
         $this
-            ->getFactory('product_variant')
-            ->create()
+            ->create('elcodi:product_variant')
             ->addOption($variantOption);
     }
 }

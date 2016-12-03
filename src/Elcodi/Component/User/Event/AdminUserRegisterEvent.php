@@ -45,9 +45,11 @@ final class AdminUserRegisterEvent extends Event
     }
 
     /**
-     * @return AdminUserInterface Admin User
+     * Get admin user.
+     *
+     * @return AdminUserInterface
      */
-    public function getAdminUser()
+    public function getAdminUser() : AdminUserInterface
     {
         return $this->adminUser;
     }

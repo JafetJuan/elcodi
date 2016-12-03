@@ -97,14 +97,14 @@ class BannerZoneTest extends AbstractEntityTest
                 'type' => $this::GETTER_SETTER,
                 'getter' => 'getHeight',
                 'setter' => 'setHeight',
-                'value' => microtime(true),
+                'value' => rand(),
                 'nullable' => false,
             ]],
             [[
                 'type' => $this::GETTER_SETTER,
                 'getter' => 'getWidth',
                 'setter' => 'setWidth',
-                'value' => microtime(true),
+                'value' => rand(),
                 'nullable' => false,
             ]],
         ];

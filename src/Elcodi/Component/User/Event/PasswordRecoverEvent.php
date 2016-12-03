@@ -49,9 +49,9 @@ final class PasswordRecoverEvent extends Event
     /**
      * Get user.
      *
-     * @return AbstractUserInterface User
+     * @return AbstractUserInterface
      */
-    public function getUser()
+    public function getUser() : AbstractUserInterface
     {
         return $this->user;
     }

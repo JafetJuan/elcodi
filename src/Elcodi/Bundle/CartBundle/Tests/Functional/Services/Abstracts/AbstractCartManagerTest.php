@@ -20,7 +20,7 @@ namespace Elcodi\Bundle\CartBundle\Tests\Functional\Services\Abstracts;
 
 use Doctrine\ORM\UnitOfWork;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartBundle\Tests\Functional\ElcodiCartFunctionalTest;
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\CartLineInterface;
 use Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface;
@@ -28,7 +28,7 @@ use Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface;
 /**
  * Class AbstractCartManagerTest.
  */
-abstract class AbstractCartManagerTest extends WebTestCase
+abstract class AbstractCartManagerTest extends ElcodiCartFunctionalTest
 {
     /**
      * @var CartInterface
@@ -58,15 +58,12 @@ abstract class AbstractCartManagerTest extends WebTestCase
     {
         parent::setUp();
 
-        $this->cart = $this
-            ->get('elcodi.factory.cart')
-            ->create();
+        $this->cart = $this->create('elcodi:cart');
 
         $this->purchasable = $this->createPurchasable();
 
         $this->cartLine = $this
-            ->get('elcodi.factory.cart_line')
-            ->create()
+            ->create('elcodi:cart_line')
             ->setPurchasable($this->purchasable)
             ->setPurchasableAmount($this->purchasable->getPrice())
             ->setAmount($this->purchasable->getPrice())
@@ -106,7 +103,7 @@ abstract class AbstractCartManagerTest extends WebTestCase
         $this->assertEquals(
             UnitOfWork::STATE_MANAGED,
             $this
-                ->getObjectManager('cart')
+                ->getObjectManager('elcodi:cart')
                 ->getUnitOfWork()
                 ->getEntityState($this->cart)
         );
@@ -114,7 +111,7 @@ abstract class AbstractCartManagerTest extends WebTestCase
         $this->assertEquals(
             UnitOfWork::STATE_MANAGED,
             $this
-                ->getObjectManager('cart_line')
+                ->getObjectManager('elcodi:cart_line')
                 ->getUnitOfWork()
                 ->getEntityState($this->cart->getCartLines()->last())
         );
@@ -258,8 +255,7 @@ abstract class AbstractCartManagerTest extends WebTestCase
          * @var CartLineInterface $cartLine
          */
         $cartLine = $this
-            ->get('elcodi.factory.cart_line')
-            ->create()
+            ->create('elcodi:cart_line')
             ->setPurchasable($this->purchasable)
             ->setQuantity($quantityStart);
 
@@ -363,7 +359,7 @@ abstract class AbstractCartManagerTest extends WebTestCase
             $this->assertEquals(
                 UnitOfWork::STATE_MANAGED,
                 $this
-                    ->getObjectManager('cart')
+                    ->getObjectManager('elcodi:cart')
                     ->getUnitOfWork()
                     ->getEntityState($this->cart)
             );
@@ -374,7 +370,7 @@ abstract class AbstractCartManagerTest extends WebTestCase
             $this->assertEquals(
                 UnitOfWork::STATE_NEW,
                 $this
-                    ->getObjectManager('cart_line')
+                    ->getObjectManager('elcodi:cart_line')
                     ->getUnitOfWork()
                     ->getEntityState($this->cartLine)
             );
@@ -401,7 +397,7 @@ abstract class AbstractCartManagerTest extends WebTestCase
         $this->assertEquals(
             UnitOfWork::STATE_NEW,
             $this
-                ->get('elcodi.object_manager.cart_line')
+                ->getObjectManager('elcodi:cart_line')
                 ->getUnitOfWork()
                 ->getEntityState($line)
         );

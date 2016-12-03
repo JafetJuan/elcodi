@@ -18,25 +18,25 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\CartBundle\Tests\Functional\Transformer;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartBundle\Tests\Functional\ElcodiCartFunctionalTest;
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\OrderInterface;
 
 /**
  * Class CartOrderTransformerTest.
  */
-class CartOrderTransformerTest extends WebTestCase
+class CartOrderTransformerTest extends ElcodiCartFunctionalTest
 {
     /**
      * Load fixtures of these bundles.
      *
-     * @return array Bundles name where fixtures should be found
+     * @return array
      */
-    protected static function loadFixturesBundles()
+    protected static function loadFixturePaths() : array
     {
         return [
-            'ElcodiCartBundle',
-            'ElcodiProductBundle',
+            '@ElcodiCartBundle',
+            '@ElcodiProductBundle',
         ];
     }
 
@@ -48,7 +48,7 @@ class CartOrderTransformerTest extends WebTestCase
         /**
          * @var CartInterface $cart
          */
-        $cart = $this->find('cart', 2);
+        $cart = $this->find('elcodi:cart', 2);
 
         $this
             ->get('elcodi.event_dispatcher.cart')
@@ -72,7 +72,7 @@ class CartOrderTransformerTest extends WebTestCase
      */
     public function testCreateOrderFromCartComplex()
     {
-        $cart = $this->find('cart', 1);
+        $cart = $this->find('elcodi:cart', 1);
 
         $this
             ->get('elcodi.event_dispatcher.cart')
@@ -81,19 +81,19 @@ class CartOrderTransformerTest extends WebTestCase
         $cartManager = $this->get('elcodi.manager.cart');
         $cartManager->addPurchasable(
             $cart,
-            $this->find('product', 1),
+            $this->find('elcodi:product', 1),
             1
         );
 
         $cartManager->addPurchasable(
             $cart,
-            $this->find('product_variant', 7),
+            $this->find('elcodi:product_variant', 7),
             1
         );
 
         $cartManager->addPurchasable(
             $cart,
-            $this->find('purchasable_pack', 9),
+            $this->find('elcodi:purchasable_pack', 9),
             1
         );
 

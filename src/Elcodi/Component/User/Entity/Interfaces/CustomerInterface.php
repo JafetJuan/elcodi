@@ -36,73 +36,63 @@ interface CustomerInterface extends AbstractUserInterface
     /**
      * Set phone.
      *
-     * @param string $phone Phone
-     *
-     * @return $this
+     * @param string|null $phone
      */
-    public function setPhone($phone);
+    public function setPhone( ? string $phone);
 
     /**
      * Get phone.
      *
-     * @return string
+     * @return string|null
      */
-    public function getPhone();
+    public function getPhone() : ? string;
 
     /**
      * Set identity document.
      *
-     * @param string $identityDocument
-     *
-     * @return $this
+     * @param string|null $identityDocument
      */
-    public function setIdentityDocument($identityDocument);
+    public function setIdentityDocument( ? string $identityDocument);
 
     /**
      * Get identity document.
      *
-     * @return string Identity document
+     * @return string|null
      */
-    public function getIdentityDocument();
+    public function getIdentityDocument() : ? string;
 
     /**
      * Sets Guest.
      *
-     * @param bool $guest Guest
-     *
-     * @return $this Self object
+     * @param bool $guest
      */
-    public function setGuest($guest);
+    public function setGuest(bool $guest);
 
     /**
      * Get Guest.
      *
-     * @return bool Guest
+     * @return bool
      */
-    public function isGuest();
+    public function isGuest() : bool;
 
     /**
      * Sets Newsletter.
      *
-     * @param bool $newsletter Newsletter
-     *
-     * @return $this Self object
+     * @param bool $newsletter
      */
-    public function setNewsletter($newsletter);
+    public function setNewsletter(bool $newsletter);
 
     /**
      * Get Newsletter.
      *
-     * @return bool Newsletter
+     * @return bool
      */
-    public function getNewsletter();
+    public function getNewsletter() : bool;
 
     /**
      * Add Order.
      *
-     * @param OrderInterface $order Order
-     *
-     * @return $this Self object
+     * @param OrderInterface $order
      */
     public function addOrder(OrderInterface $order);
 
@@ -110,33 +100,27 @@ interface CustomerInterface extends AbstractUserInterface
      * Remove Order.
      *
      * @param OrderInterface $order
-     *
-     * @return $this Self object
      */
     public function removeOrder(OrderInterface $order);
 
     /**
      * Set orders.
      *
-     * @param Collection $orders Orders
-     *
-     * @return $this Self object
+     * @param Collection $orders
      */
     public function setOrders(Collection $orders);
 
     /**
      * Get user orders.
      *
-     * @return Collection Customerinterface orders
+     * @return Collection
      */
-    public function getOrders();
+    public function getOrders() : Collection;
 
     /**
      * Add Cart.
      *
      * @param CartInterface $cart
-     *
-     * @return $this Self object
      */
     public function addCart(CartInterface $cart);
 
@@ -144,15 +128,11 @@ interface CustomerInterface extends AbstractUserInterface
      * Remove Cart.
      *
      * @param CartInterface $cart
-     *
-     * @return $this Self object
      */
     public function removeCart(CartInterface $cart);
 
     /**
      * @param Collection $carts
-     *
-     * @return $this Self object
      */
     public function setCarts(Collection $carts);
 
@@ -161,14 +141,12 @@ interface CustomerInterface extends AbstractUserInterface
      *
      * @return Collection
      */
-    public function getCarts();
+    public function getCarts() : Collection;
 
     /**
      * Add address.
      *
      * @param AddressInterface $address
-     *
-     * @return $this Self object
      */
     public function addAddress(AddressInterface $address);
 
@@ -176,72 +154,62 @@ interface CustomerInterface extends AbstractUserInterface
      * Remove address.
      *
      * @param AddressInterface $address
-     *
-     * @return $this Self object
      */
     public function removeAddress(AddressInterface $address);
 
     /**
      * Set addresses.
      *
-     * @param Collection $addresses Addresses
-     *
-     * @return $this Self object
+     * @param Collection $addresses
      */
     public function setAddresses(Collection $addresses);
 
     /**
      * Get addresses.
      *
-     * @return Collection Addresses
+     * @return Collection
      */
-    public function getAddresses();
+    public function getAddresses() : Collection;
 
     /**
      * Set Delivery Address.
      *
-     * @param AddressInterface $deliveryAddress
-     *
-     * @return $this Self object
+     * @param AddressInterface|null $deliveryAddress
      */
-    public function setDeliveryAddress(AddressInterface $deliveryAddress = null);
+    public function setDeliveryAddress( ? AddressInterface $deliveryAddress);
 
     /**
      * Get Delivery address.
      *
-     * @return AddressInterface
+     * @return AddressInterface|null
      */
-    public function getDeliveryAddress();
+    public function getDeliveryAddress() : ? AddressInterface;
 
     /**
      * Set Invoice Address.
      *
-     * @param AddressInterface $invoiceAddress
-     *
-     * @return $this Self object
+     * @param AddressInterface|null $invoiceAddress
      */
-    public function setInvoiceAddress(AddressInterface $invoiceAddress = null);
+    public function setInvoiceAddress( ? AddressInterface $invoiceAddress);
 
     /**
      * Get Invoice address.
      *
-     * @return AddressInterface
+     * @return AddressInterface|null
      */
-    public function getInvoiceAddress();
+    public function getInvoiceAddress() : ? AddressInterface;
 
     /**
      * Set language.
      *
-     * @param LanguageInterface $language The language
-     *
-     * @return $this Self object
+     * @param LanguageInterface|null $language
      */
-    public function setLanguage(LanguageInterface $language);
+    public function setLanguage( ? LanguageInterface $language);
 
     /**
      * Get language.
      *
-     * @return LanguageInterface
+     * @return LanguageInterface|null
      */
-    public function getLanguage();
+    public function getLanguage() : ? LanguageInterface;
 }

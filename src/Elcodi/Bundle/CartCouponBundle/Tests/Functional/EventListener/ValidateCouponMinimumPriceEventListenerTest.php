@@ -30,14 +30,15 @@ class ValidateCouponMinimumPriceEventListenerTest extends AbstractCartCouponEven
     /**
      * Load fixtures of these bundles.
      *
-     * @return array Bundles name where fixtures should be found
+     * @return array
      */
-    protected static function loadFixturesBundles()
+    protected static function loadFixturePaths() : array
     {
         return [
-            'ElcodiCartBundle',
-            'ElcodiCouponBundle',
-            'ElcodiCurrencyBundle',
+            '@ElcodiCartBundle/DataFixtures/ORM',
+            '@ElcodiCouponBundle/DataFixtures/ORM',
+            '@ElcodiCartCouponBundle/DataFixtures/ORM',
+            '@ElcodiCurrencyBundle/DataFixtures/ORM',
         ];
     }
 
@@ -55,7 +56,7 @@ class ValidateCouponMinimumPriceEventListenerTest extends AbstractCartCouponEven
         $coupon = $this->getEnabledCoupon(3);
         $coupon->setMinimumPurchase(Money::create(
             $price,
-            $this->find('currency', $currency)
+            $this->find('elcodi:currency', $currency)
         ));
 
         try {

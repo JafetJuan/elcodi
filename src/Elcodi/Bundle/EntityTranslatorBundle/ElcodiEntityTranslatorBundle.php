@@ -66,9 +66,12 @@ class ElcodiEntityTranslatorBundle extends BaseBundle
     public static function getBundleDependencies(KernelInterface $kernel)
     {
         return [
+            'Symfony\Bundle\FrameworkBundle\FrameworkBundle',
+            'Doctrine\Bundle\DoctrineBundle\DoctrineBundle',
             'Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle',
             'Elcodi\Bundle\LanguageBundle\ElcodiLanguageBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

@@ -18,26 +18,14 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\Adapter\SimilarPurchasablesProvider;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 use Elcodi\Component\Product\Adapter\SimilarPurchasablesProvider\SameCategoryRelatedPurchasableProvider;
 
 /**
  * Class SameCategoryRelatedPurchasablesProviderTest.
  */
-class SameCategoryRelatedPurchasablesProviderTest extends WebTestCase
+class SameCategoryRelatedPurchasablesProviderTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
     /**
      * Test method getRelatedProducts.
      */
@@ -47,7 +35,7 @@ class SameCategoryRelatedPurchasablesProviderTest extends WebTestCase
          * @var SameCategoryRelatedPurchasableProvider $relatedPurchasablesProvider
          */
         $relatedPurchasablesProvider = $this->get('elcodi.related_purchasables_provider.same_category');
-        $purchasable = $this->find('purchasable', 1);
+        $purchasable = $this->find('elcodi:purchasable', 1);
 
         /**
          * Testing when limit 0 is requested.
@@ -57,7 +45,6 @@ class SameCategoryRelatedPurchasablesProviderTest extends WebTestCase
         );
 
         $purchasables = $relatedPurchasablesProvider->getRelatedPurchasables($purchasable, 1);
-
         /**
          * Testing when limit 1 is requested with 1 possible elements. We check
          * as well that is not the same product.
@@ -89,7 +76,7 @@ class SameCategoryRelatedPurchasablesProviderTest extends WebTestCase
          */
         $this->assertCount(0, $relatedPurchasablesProvider
             ->getRelatedPurchasables(
-                $this->find('purchasable', 2),
+                $this->find('elcodi:purchasable', 2),
                 1
             )
         );
@@ -97,10 +84,10 @@ class SameCategoryRelatedPurchasablesProviderTest extends WebTestCase
         /**
          * For this test, we emulate that product 2 has category 1.
          */
-        $category2 = $this->find('category', 2);
-        $purchasable2 = $this->find('purchasable', 2);
+        $category2 = $this->find('elcodi:category', 2);
+        $purchasable2 = $this->find('elcodi:purchasable', 2);
         $purchasable2->setPrincipalCategory($category2);
-        $this->flush($purchasable2);
+        $this->save($purchasable2);
 
         /**
          * Testing when limit 1 is requested with 2 possible elements.
@@ -115,21 +102,23 @@ class SameCategoryRelatedPurchasablesProviderTest extends WebTestCase
      */
     public function testGetRelatedPurchasablesFromArray()
     {
+        $this->reloadFixtures();
+
         /**
          * For this test, we emulate that product 2 has category 1.
          */
-        $category1 = $this->find('category', 1);
-        $purchasable2 = $this->find('purchasable', 2);
+        $category1 = $this->find('elcodi:category', 1);
+        $purchasable2 = $this->find('elcodi:purchasable', 2);
         $purchasable2->setPrincipalCategory($category1);
-        $this->flush($purchasable2);
+        $this->save($purchasable2);
 
         /**
          * @var SameCategoryRelatedPurchasableProvider $relatedPurchasablesProvider
          */
         $relatedPurchasablesProvider = $this->get('elcodi.related_purchasables_provider.same_category');
         $purchasables = [
-            $this->find('purchasable', 1),
-            $this->find('purchasable', 2),
+            $this->find('elcodi:purchasable', 1),
+            $this->find('elcodi:purchasable', 2),
         ];
 
         /**

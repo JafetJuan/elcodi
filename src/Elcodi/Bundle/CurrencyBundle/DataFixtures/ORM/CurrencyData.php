@@ -20,13 +20,13 @@ namespace Elcodi\Bundle\CurrencyBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Component\Core\Services\ObjectDirector;
 
 /**
  * Class CurrencyData.
  */
-class CurrencyData extends AbstractFixture
+class CurrencyData extends ElcodiFixture
 {
     /**
      * Load data fixtures with the passed EntityManager.

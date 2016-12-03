@@ -18,37 +18,25 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\StockUpdater;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 
 /**
  * Class PackStockUpdaterTest.
  */
-class PackStockUpdaterTest extends WebTestCase
+class PackStockUpdaterTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
     /**
      * Test update stock.
      */
     public function atestUpdateStockNonInherit()
     {
-        $pack = $this->find('purchasable_pack', 9);
+        $pack = $this->find('elcodi:purchasable_pack', 9);
         $this->get('elcodi.stock_updater.purchasable_pack')->updateStock(
             $pack,
             4
         );
-        $this->getObjectManager('purchasable_pack')->clear();
-        $pack = $this->find('purchasable_pack', 9);
+        $this->getObjectManager('elcodi:purchasable_pack')->clear();
+        $pack = $this->find('elcodi:purchasable_pack', 9);
         $this->assertEquals(
             6,
             $pack->getStock()
@@ -60,15 +48,15 @@ class PackStockUpdaterTest extends WebTestCase
      */
     public function testUpdateStockInherit()
     {
-        $this->reloadScenario();
+        $this->reloadFixtures();
 
-        $pack = $this->find('purchasable_pack', 10);
+        $pack = $this->find('elcodi:purchasable_pack', 10);
         $this->get('elcodi.stock_updater.purchasable_pack')->updateStock(
             $pack,
             3
         );
-        $this->clear($pack);
-        $pack = $this->find('purchasable_pack', 10);
+        $this->clear('elcodi:purchasable_pack');
+        $pack = $this->find('elcodi:purchasable_pack', 10);
         $this->assertEquals(
             2,
             $pack->getStock()
@@ -96,15 +84,15 @@ class PackStockUpdaterTest extends WebTestCase
      */
     public function testUpdateStockInheritWithStockFinish()
     {
-        $this->reloadScenario();
+        $this->reloadFixtures();
 
-        $pack = $this->find('purchasable_pack', 10);
+        $pack = $this->find('elcodi:purchasable_pack', 10);
         $this->get('elcodi.stock_updater.purchasable_pack')->updateStock(
             $pack,
             9
         );
-        $this->clear($pack);
-        $pack = $this->find('purchasable_pack', 10);
+        $this->clear('elcodi:purchasable_pack');
+        $pack = $this->find('elcodi:purchasable_pack', 10);
         $this->assertEquals(
             0,
             $pack->getStock()

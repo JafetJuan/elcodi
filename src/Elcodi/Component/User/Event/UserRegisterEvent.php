@@ -45,9 +45,11 @@ final class UserRegisterEvent extends Event
     }
 
     /**
-     * @return AbstractUserInterface User
+     * Get user.
+     *
+     * @return AbstractUserInterface
      */
-    public function getUser()
+    public function getUser() : AbstractUserInterface
     {
         return $this->user;
     }

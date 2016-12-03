@@ -20,7 +20,7 @@ namespace Elcodi\Bundle\TaxBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Component\Core\Services\ObjectDirector;
 
 /**
@@ -28,7 +28,7 @@ use Elcodi\Component\Core\Services\ObjectDirector;
  *
  * Load fixtures of tax entities
  */
-class TaxData extends AbstractFixture
+class TaxData extends ElcodiFixture
 {
     /**
      * {@inheritdoc}

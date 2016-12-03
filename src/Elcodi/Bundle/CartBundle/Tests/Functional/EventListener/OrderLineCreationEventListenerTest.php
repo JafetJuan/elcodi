@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\CartBundle\Tests\Functional\EventListener;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartBundle\Tests\Functional\ElcodiCartFunctionalTest;
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\CartLineInterface;
 use Elcodi\Component\Cart\Transformer\CartOrderTransformer;
@@ -26,20 +26,8 @@ use Elcodi\Component\Cart\Transformer\CartOrderTransformer;
 /**
  * Class OrderLineCreationEventListenerTest.
  */
-class OrderLineCreationEventListenerTest extends WebTestCase
+class OrderLineCreationEventListenerTest extends ElcodiCartFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiCartBundle',
-        ];
-    }
-
     /**
      * Test update stock positive.
      *
@@ -50,31 +38,28 @@ class OrderLineCreationEventListenerTest extends WebTestCase
         $quantity,
         $finalStock
     ) {
-        $this->reloadScenario();
+        $this->reloadFixtures();
 
         /**
          * @var CartOrderTransformer $cartOrderTransformer
          */
-        $cartOrderTransformer = $this
-            ->get('elcodi.transformer.cart_order');
+        $cartOrderTransformer = $this->get('elcodi.transformer.cart_order');
 
         /**
          * @var CartInterface     $cart
          * @var CartLineInterface $cartLine
          */
-        $cart = $this->find('cart', 2);
+        $cart = $this->find('elcodi:cart', 2);
         $cartLine = $cart
             ->getCartLines()
-            ->first()
-            ->setQuantity($quantity);
+            ->first();
+        $cartLine->setQuantity($quantity);
+        $this->save($cartLine);
 
-        $this->flush($cartLine);
+        $purchasable = $cartLine->getPurchasable();
+        $purchasable->setStock($stock);
 
-        $purchasable = $cartLine
-            ->getPurchasable()
-            ->setStock($stock);
-
-        $this->flush($purchasable);
+        $this->save($purchasable);
 
         $this
             ->get('elcodi.event_dispatcher.cart')
@@ -93,9 +78,9 @@ class OrderLineCreationEventListenerTest extends WebTestCase
             [5, 2, 3],
             [5, 5, 0],
             [5, 6, 0],
-            [null, 1, null],
             [null, 10, null],
             [null, 100, null],
+            [null, 1, null],
         ];
     }
 }

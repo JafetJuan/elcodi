@@ -20,14 +20,14 @@ namespace Elcodi\Bundle\AttributeBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Component\Attribute\Entity\Interfaces\AttributeInterface;
 use Elcodi\Component\Core\Services\ObjectDirector;
 
 /**
  * Class AttributeData.
  */
-class AttributeData extends AbstractFixture
+class AttributeData extends ElcodiFixture
 {
     /**
      * Loads sample fixtures for Attribute entities.

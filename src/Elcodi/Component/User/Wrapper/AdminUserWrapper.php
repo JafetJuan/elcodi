@@ -21,14 +21,13 @@ namespace Elcodi\Component\User\Wrapper;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
-use Elcodi\Component\Core\Wrapper\Interfaces\WrapperInterface;
 use Elcodi\Component\User\Entity\Interfaces\AdminUserInterface;
 use Elcodi\Component\User\Factory\AdminUserFactory;
 
 /**
  * Cart to order service.
  */
-class AdminUserWrapper implements WrapperInterface
+class AdminUserWrapper
 {
     /**
      * @var AdminUserInterface|object|string
@@ -79,9 +78,9 @@ class AdminUserWrapper implements WrapperInterface
      * Get loaded object. If object is not loaded yet, then load it and save it
      * locally. Otherwise, just return the pre-loaded object.
      *
-     * @return mixed Loaded object
+     * @return AdminUserInterface|null
      */
-    public function get()
+    public function get() : ? AdminUserInterface
     {
         if ($this->adminUser instanceof AdminUserInterface) {
             return $this->adminUser;
@@ -102,13 +101,9 @@ class AdminUserWrapper implements WrapperInterface
 
     /**
      * Clean loaded object in order to reload it again.
-     *
-     * @return $this Self object
      */
     public function clean()
     {
         $this->adminUser = null;
-
-        return $this;
     }
 }

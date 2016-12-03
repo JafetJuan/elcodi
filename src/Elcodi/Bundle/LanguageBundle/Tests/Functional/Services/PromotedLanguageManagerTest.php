@@ -18,25 +18,13 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\LanguageBundle\Tests\Functional\Services;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\GeoBundle\Tests\Functional\ElcodiLanguageFunctionalTest;
 
 /**
  * Tests PromotedLanguageManagerTest class.
  */
-class PromotedLanguageManagerTest extends WebTestCase
+class PromotedLanguageManagerTest extends ElcodiLanguageFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiLanguageBundle',
-        ];
-    }
-
     /**
      * Test getLanguagesWithMasterLanguagePromoted.
      */

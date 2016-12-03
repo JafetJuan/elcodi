@@ -21,20 +21,20 @@ namespace Elcodi\Bundle\MediaBundle\Tests\Functional\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\RouteCollection;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\MediaBundle\Tests\Functional\ElcodiMediaFunctionalTest;
 use Elcodi\Component\Media\Entity\Interfaces\FileInterface;
 
 /**
  * Class ImageUploadControllerTest.
  */
-class ImageUploadControllerTest extends WebTestCase
+class ImageUploadControllerTest extends ElcodiMediaFunctionalTest
 {
     /**
      * Schema must be loaded in all test cases.
      *
-     * @return bool Load schema
+     * @return bool
      */
-    protected static function loadSchema()
+    protected static function loadSchema() : bool
     {
         return true;
     }
@@ -78,7 +78,7 @@ class ImageUploadControllerTest extends WebTestCase
         /**
          * @var FileInterface $image
          */
-        $image = $this->find('image', 1);
+        $image = $this->find('elcodi:image', 1);
         $this->assertInstanceOf('Elcodi\Component\Media\Entity\Interfaces\ImageInterface', $image);
         $this->assertEmpty($image->getContent());
         $this

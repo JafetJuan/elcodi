@@ -20,3 +20,7 @@ services:
         class: Elcodi\Component\User\Services\AdminUserManager
         arguments:
             - '@elcodi.event_dispatcher.user'
+
+    elcodi.user_login:
+        class: Elcodi\Component\User\Services\UserLogin
+        arguments:

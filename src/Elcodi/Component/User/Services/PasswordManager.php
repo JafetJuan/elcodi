@@ -80,26 +80,31 @@ class PasswordManager
     /**
      * Remember a password from a user, given its email.
      *
-     * @param UserEmaileableInterface $userRepository         User repository
-     * @param string                  $email                  User email
-     * @param string                  $recoverPasswordUrlName Recover password name
-     * @param string                  $hashField              Hash
+     * @param UserEmaileableInterface $userRepository
+     * @param string                  $email
+     * @param string                  $recoverPasswordUrlName
+     * @param string                  $hashField
      *
      * @return bool its been found and processed
      */
     public function rememberPasswordByEmail(
         UserEmaileableInterface $userRepository,
-        $email,
-        $recoverPasswordUrlName,
-        $hashField = 'hash'
-    ) {
+        string $email,
+        string $recoverPasswordUrlName,
+        string $hashField = 'hash'
+    ) : bool {
         $user = $userRepository->findOneByEmail($email);
 
         if (!($user instanceof AbstractUser)) {
             return false;
         }
 
-        $this->rememberPassword($user, $recoverPasswordUrlName, $hashField);
+        $this
+            ->rememberPassword(
+                $user,
+                $recoverPasswordUrlName,
+                $hashField
+            );
 
         return true;
     }
@@ -110,20 +115,20 @@ class PasswordManager
      *
      * Recover url must contain these fields with these names
      *
-     * @param AbstractUser $user                   User
-     * @param string       $recoverPasswordUrlName Recover password name
-     * @param string       $hashField              Hash
-     *
-     * @return $this Self object
+     * @param AbstractUser $user
+     * @param string       $recoverPasswordUrlName
+     * @param string       $hashField
      */
     public function rememberPassword(
         AbstractUser $user,
-        $recoverPasswordUrlName,
-        $hashField = 'hash'
+        string $recoverPasswordUrlName,
+        string $hashField = 'hash'
     ) {
         $recoveryHash = $this->recoveryHashGenerator->generate();
         $user->setRecoveryHash($recoveryHash);
-        $this->manager->flush($user);
+        $this
+            ->manager
+            ->flush($user);
 
         $recoverUrl = $this
             ->router
@@ -137,8 +142,6 @@ class PasswordManager
                 $user,
                 $recoverUrl
             );
-
-        return $this;
     }
 
     /**
@@ -147,22 +150,22 @@ class PasswordManager
      * @param AbstractUser $user        User
      * @param string       $hash        Hash given by provider
      * @param string       $newPassword New password
-     *
-     * @return $this Self object
      */
-    public function recoverPassword(AbstractUser $user, $hash, $newPassword)
-    {
+    public function recoverPassword(
+        AbstractUser $user,
+        string $hash,
+        string $newPassword
+    ) {
         if ($hash == $user->getRecoveryHash()) {
-            $user
-                ->setPassword($newPassword)
-                ->setRecoveryHash(null);
-            $this->manager->flush($user);
+            $user->setPassword($newPassword);
+            $user->setRecoveryHash(null);
+            $this
+                ->manager
+                ->flush($user);
 
             $this
-            ->passwordEventDispatcher
-            ->dispatchOnPasswordRecoverEvent($user);
+                ->passwordEventDispatcher
+                ->dispatchOnPasswordRecoverEvent($user);
         }
-
-        return $this;
     }
 }

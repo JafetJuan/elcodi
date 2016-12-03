@@ -18,16 +18,8 @@ declare(strict_types=1);
 
 namespace Elcodi\Component\User\EventListener;
 
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Security\Http\SecurityEvents;
-
-use Elcodi\Component\User\Entity\Interfaces\AbstractUserInterface;
 use Elcodi\Component\User\Event\UserRegisterEvent;
+use Elcodi\Component\User\Services\UserLogin;
 
 /**
  * Class AutologinOnRegisterEventListener.
@@ -35,114 +27,33 @@ use Elcodi\Component\User\Event\UserRegisterEvent;
 class AutologinOnRegisterEventListener
 {
     /**
-     * @var RequestStack
+     * @var UserLogin
      *
-     * Request stack
+     * User login
      */
-    private $requestStack;
+    private $userLogin;
 
     /**
-     * @var TokenStorageInterface
+     * AutologinOnRegisterEventListener constructor.
      *
-     * Token storage
+     * @param UserLogin $userLogin
      */
-    private $tokenStorage;
-
-    /**
-     * @var EventDispatcherInterface
-     *
-     * Event dispatcher
-     */
-    private $dispatcher;
-
-    /**
-     * @var string
-     *
-     * Provider key
-     */
-    private $providerKey;
-
-    /**
-     * Constructor.
-     *
-     * @param RequestStack             $requestStack Request stack
-     * @param TokenStorageInterface    $tokenStorage Token storage
-     * @param EventDispatcherInterface $dispatcher   Event dispatcher
-     * @param string                   $providerKey  Provider key
-     */
-    public function __construct(
-        RequestStack $requestStack,
-        TokenStorageInterface $tokenStorage,
-        EventDispatcherInterface $dispatcher,
-        $providerKey
-    ) {
-        $this->requestStack = $requestStack;
-        $this->tokenStorage = $tokenStorage;
-        $this->providerKey = $providerKey;
-        $this->dispatcher = $dispatcher;
+    public function __construct(UserLogin $userLogin)
+    {
+        $this->userLogin = $userLogin;
     }
 
     /**
-     * Autologin users after registration.
+     * Auto-login users after registration.
      *
-     * @param UserRegisterEvent $event User registered event
-     *
-     * @return $this Self object
+     * @param UserRegisterEvent $event
      */
     public function onUserRegister(UserRegisterEvent $event)
     {
-        $masterRequest = $this
-            ->requestStack
-            ->getMasterRequest();
-
-        if (!($masterRequest instanceof Request)) {
-            return $this;
-        }
-
-        if (null === $this
-                ->tokenStorage
-                ->getToken()
-        ) {
-            return $this;
-        }
-
-        $token = $this->createNewToken(
-            $event->getUser()
-        );
-
         $this
-            ->tokenStorage
-            ->setToken($token);
-
-        $event = new InteractiveLoginEvent(
-            $masterRequest,
-            $token
-        );
-
-        $this
-            ->dispatcher
-            ->dispatch(
-                SecurityEvents::INTERACTIVE_LOGIN,
-                $event
+            ->userLogin
+            ->loginUser(
+                $event->getUser()
             );
-
-        return $this;
-    }
-
-    /**
-     * Generate new token given a user.
-     *
-     * @param AbstractUserInterface $user User
-     *
-     * @return UsernamePasswordToken New token
-     */
-    private function createNewToken(AbstractUserInterface $user)
-    {
-        return new UsernamePasswordToken(
-            $user,
-            null,
-            $this->providerKey,
-            $user->getRoles()
-        );
     }
 }

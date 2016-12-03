@@ -22,7 +22,7 @@ use DateTime;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Component\CartCoupon\Applicator\AbsoluteCartCouponApplicator;
 use Elcodi\Component\CartCoupon\Applicator\Abstracts\AbstractMxNCartCouponApplicator;
 use Elcodi\Component\CartCoupon\Applicator\PercentCartCouponApplicator;
@@ -34,7 +34,7 @@ use Elcodi\Component\Currency\Entity\Money;
 /**
  * Class CouponData.
  */
-class CouponData extends AbstractFixture implements DependentFixtureInterface
+class CouponData extends ElcodiFixture implements DependentFixtureInterface
 {
     /**
      * {@inheritdoc}

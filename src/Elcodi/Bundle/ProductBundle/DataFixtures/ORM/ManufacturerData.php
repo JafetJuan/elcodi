@@ -20,13 +20,13 @@ namespace Elcodi\Bundle\ProductBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Component\Core\Services\ObjectDirector;
 
 /**
  * Class ManufacturerData.
  */
-class ManufacturerData extends AbstractFixture
+class ManufacturerData extends ElcodiFixture
 {
     /**
      * Load data fixtures with the passed EntityManager.

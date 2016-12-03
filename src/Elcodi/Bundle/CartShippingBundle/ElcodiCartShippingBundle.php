@@ -47,9 +47,11 @@ class ElcodiCartShippingBundle extends BaseBundle
     public static function getBundleDependencies(KernelInterface $kernel)
     {
         return [
+            'Symfony\Bundle\FrameworkBundle\FrameworkBundle',
             'Elcodi\Bundle\CartBundle\ElcodiCartBundle',
             'Elcodi\Bundle\ShippingBundle\ElcodiShippingBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

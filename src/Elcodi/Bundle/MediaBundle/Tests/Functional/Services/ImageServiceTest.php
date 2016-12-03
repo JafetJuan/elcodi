@@ -20,13 +20,13 @@ namespace Elcodi\Bundle\MediaBundle\Tests\Functional\Services;
 
 use Symfony\Component\HttpFoundation\File\File;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\MediaBundle\Tests\Functional\ElcodiMediaFunctionalTest;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 
 /**
  * Class ImageServiceTest.
  */
-class ImageServiceTest extends WebTestCase
+class ImageServiceTest extends ElcodiMediaFunctionalTest
 {
     /**
      * Test image object creation.

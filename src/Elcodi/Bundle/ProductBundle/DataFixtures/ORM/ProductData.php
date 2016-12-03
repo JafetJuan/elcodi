@@ -21,7 +21,7 @@ namespace Elcodi\Bundle\ProductBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Bundle\ProductBundle\DataFixtures\ORM\Traits\ProductWithImagesTrait;
 use Elcodi\Component\Core\Services\ObjectDirector;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
@@ -33,7 +33,7 @@ use Elcodi\Component\Product\Entity\Interfaces\ProductInterface;
 /**
  * Class ProductData.
  */
-class ProductData extends AbstractFixture implements DependentFixtureInterface
+class ProductData extends ElcodiFixture implements DependentFixtureInterface
 {
     use ProductWithImagesTrait;
 
@@ -78,7 +78,7 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
         $product->setWidth(15);
         $product->setDepth(20);
         $product->setWeight(100);
-        $product->setEnabled(true);
+        $product->enable();
 
         $productDirector->save($product);
         $this->addReference('product', $product);
@@ -101,7 +101,7 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
         $productReduced->setWidth(30);
         $productReduced->setDepth(35);
         $productReduced->setWeight(200);
-        $productReduced->setEnabled(true);
+        $productReduced->enable();
 
         $this->storeProductImage(
             $productReduced,
@@ -131,7 +131,7 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
         $productWithVariants->setWidth(45);
         $productWithVariants->setDepth(50);
         $productWithVariants->setWeight(500);
-        $productWithVariants->setEnabled(true);
+        $productWithVariants->enable();
 
         $productDirector->save($productWithVariants);
         $this->addReference('product-with-variants', $productWithVariants);
@@ -142,21 +142,21 @@ class ProductData extends AbstractFixture implements DependentFixtureInterface
          * @var ProductInterface $rootCategoryProduct
          */
         $rootCategoryProduct = $productDirector->create();
-        $productWithVariants->setName('Root category product');
-        $productWithVariants->setSlug('root-category-product');
-        $productWithVariants->setDescription('my product description');
-        $productWithVariants->setShortDescription('my product short description');
-        $productWithVariants->addCategory($rootCategory);
-        $productWithVariants->setPrincipalCategory($rootCategory);
-        $productWithVariants->setManufacturer($manufacturer);
-        $productWithVariants->setStock(10);
-        $productWithVariants->setPrice(Money::create(500, $currency));
-        $productWithVariants->setSku('product-sku-code-3');
-        $productWithVariants->setHeight(10);
-        $productWithVariants->setWidth(15);
-        $productWithVariants->setDepth(20);
-        $productWithVariants->setWeight(100);
-        $productWithVariants->setEnabled(true);
+        $rootCategoryProduct->setName('Root category product');
+        $rootCategoryProduct->setSlug('root-category-product');
+        $rootCategoryProduct->setDescription('my product description');
+        $rootCategoryProduct->setShortDescription('my product short description');
+        $rootCategoryProduct->addCategory($rootCategory);
+        $rootCategoryProduct->setPrincipalCategory($rootCategory);
+        $rootCategoryProduct->setManufacturer($manufacturer);
+        $rootCategoryProduct->setStock(10);
+        $rootCategoryProduct->setPrice(Money::create(500, $currency));
+        $rootCategoryProduct->setSku('product-sku-code-3');
+        $rootCategoryProduct->setHeight(10);
+        $rootCategoryProduct->setWidth(15);
+        $rootCategoryProduct->setDepth(20);
+        $rootCategoryProduct->setWeight(100);
+        $rootCategoryProduct->enable();
 
         $productDirector->save($rootCategoryProduct);
         $this->addReference('rootCategoryProduct', $rootCategoryProduct);

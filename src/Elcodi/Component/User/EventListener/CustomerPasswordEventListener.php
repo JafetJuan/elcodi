@@ -27,13 +27,13 @@ use Elcodi\Component\User\EventListener\Abstracts\AbstractPasswordEventListener;
 class CustomerPasswordEventListener extends AbstractPasswordEventListener
 {
     /**
-     * Check entity type.
+     * Check entity type and return if the entity is ready for being encoded.
      *
-     * @param $entity Object Entity to check
+     * @param object $entity
      *
-     * @return bool Entity is ready for being encoded
+     * @return bool
      */
-    public function checkEntityType($entity)
+    public function checkEntityType($entity) : bool
     {
         return $entity instanceof CustomerInterface;
     }

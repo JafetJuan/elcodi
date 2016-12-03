@@ -60,9 +60,7 @@ class UpdateLastLoginEventListener
     /**
      * Update last login date.
      *
-     * @param InteractiveLoginEvent $event Interactive login event
-     *
-     * @return $this Self object
+     * @param InteractiveLoginEvent $event
      */
     public function updateLastLogin(InteractiveLoginEvent $event)
     {
@@ -82,7 +80,5 @@ class UpdateLastLoginEventListener
                 ->getObjectManagerByEntityNamespace(get_class($user))
                 ->flush($user);
         }
-
-        return $this;
     }
 }

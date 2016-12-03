@@ -18,16 +18,15 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\NewsletterBundle\Tests\Functional\Service;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\NewsletterBundle\Tests\Functional\ElcodiNewsletterFunctionalTest;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\Newsletter\Entity\Interfaces\NewsletterSubscriptionInterface;
-use Elcodi\Component\Newsletter\Repository\NewsletterSubscriptionRepository;
 use Elcodi\Component\Newsletter\Services\NewsletterManager;
 
 /**
  * Class NewsletterManagerTest.
  */
-class NewsletterManagerTest extends WebTestCase
+class NewsletterManagerTest extends ElcodiNewsletterFunctionalTest
 {
     /**
      * @var NewsletterManager
@@ -37,39 +36,15 @@ class NewsletterManagerTest extends WebTestCase
     private $newsletterManager;
 
     /**
-     * @var NewsletterSubscriptionRepository
-     *
-     * NewsletterSubscription Repository
-     */
-    private $newsletterSubscriptionRepository;
-
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiLanguageBundle',
-            'ElcodiNewsletterBundle',
-        ];
-    }
-
-    /**
      * Set up.
      */
     public function setUp()
     {
-        $this->reloadScenario();
+        $this->reloadFixtures();
 
         parent::setUp();
 
-        $this->newsletterManager = $this
-            ->get('elcodi.manager.newsletter');
-
-        $this->newsletterSubscriptionRepository = $this
-            ->getRepository('newsletter_subscription');
+        $this->newsletterManager = $this->get('elcodi.manager.newsletter');
     }
 
     /**
@@ -77,41 +52,37 @@ class NewsletterManagerTest extends WebTestCase
      */
     public function testSubscribe()
     {
-        $this->assertCount(2, $this
-                ->newsletterSubscriptionRepository
-                ->findBy([
-                    'enabled' => true,
-                ])
+        $this->assertCount(
+            2,
+            $this->findBy('elcodi:newsletter_subscription', [
+                'enabled' => true,
+            ])
         );
 
         /**
          * @var LanguageInterface $language
          */
-        $language = $this
-            ->getRepository('language')
-            ->findOneBy([
-                'iso' => 'es',
-            ]);
+        $language = $this->findOneBy('elcodi:language', [
+            'iso' => 'es',
+        ]);
 
         $this
             ->newsletterManager
             ->subscribe('hi@hi.org', $language);
 
-        $this->assertCount(3, $this
-                ->newsletterSubscriptionRepository
-                ->findBy([
-                    'enabled' => true,
-                ])
+        $this->assertCount(
+            3,
+            $this->findBy('elcodi:newsletter_subscription', [
+                'enabled' => true,
+            ])
         );
 
         /**
          * @var NewsletterSubscriptionInterface $newsletterSubscription
          */
-        $newsletterSubscription = $this
-            ->newsletterSubscriptionRepository
-            ->findOneBy([
-                'email' => 'hi@hi.org',
-            ]);
+        $newsletterSubscription = $this->findOneBy('elcodi:newsletter_subscription', [
+            'email' => 'hi@hi.org',
+        ]);
 
         $this->assertNotEmpty($newsletterSubscription->getHash());
     }
@@ -121,22 +92,22 @@ class NewsletterManagerTest extends WebTestCase
      */
     public function testSubscribeNoLanguage()
     {
-        $this->assertCount(2, $this
-                ->newsletterSubscriptionRepository
-                ->findBy([
-                    'enabled' => true,
-                ])
+        $this->assertCount(
+            2,
+            $this->findBy('elcodi:newsletter_subscription', [
+                'enabled' => true,
+            ])
         );
 
         $this
             ->newsletterManager
             ->subscribe('hi@hi.org');
 
-        $this->assertCount(3, $this
-                ->newsletterSubscriptionRepository
-                ->findBy([
-                    'enabled' => true,
-                ])
+        $this->assertCount(
+            3,
+            $this->findBy('elcodi:newsletter_subscription', [
+                'enabled' => true,
+            ])
         );
     }
 
@@ -145,50 +116,49 @@ class NewsletterManagerTest extends WebTestCase
      */
     public function testUnsubscribeExisting()
     {
-        $this->assertCount(2, $this
-                ->newsletterSubscriptionRepository
-                ->findBy([
-                    'enabled' => true,
-                ])
+        $this->assertCount(
+            2,
+            $this->findBy('elcodi:newsletter_subscription', [
+                'enabled' => true,
+            ])
         );
 
         $this
             ->newsletterManager
             ->unSubscribe('someemail@something.org', '123456789');
 
-        $this->assertCount(2, $this
-                ->newsletterSubscriptionRepository
-                ->findAll()
+        $this->assertCount(
+            2,
+            $this->findAll('elcodi:newsletter_subscription')
         );
 
         /**
          * @var LanguageInterface $language
          */
-        $language = $this
-            ->getRepository('language')
-            ->findOneBy([
-                'iso' => 'es',
-            ]);
+        $language = $this->findOneBy('elcodi:language', [
+            'iso' => 'es',
+        ]);
 
         $reason = 'my reason';
         $this
             ->newsletterManager
             ->unSubscribe('someemail@something.org', '123456789', $language, $reason);
 
-        $this->assertCount(1, $this
-                ->newsletterSubscriptionRepository
-                ->findBy([
-                    'enabled' => true,
-                ])
+        $this->assertCount(
+            1,
+            $this->findBy('elcodi:newsletter_subscription', [
+                'enabled' => true,
+            ])
         );
 
-        $disabledNewsletterSubscription = $this
-            ->newsletterSubscriptionRepository
-            ->findOneBy([
-                'enabled' => false,
-            ]);
+        $disabledNewsletterSubscription = $this->findOneBy('elcodi:newsletter_subscription', [
+            'enabled' => false,
+        ]);
 
-        $this->assertEquals($disabledNewsletterSubscription->getReason(), $reason);
+        $this->assertEquals(
+            $disabledNewsletterSubscription->getReason(),
+            $reason
+        );
     }
 
     /**

@@ -92,7 +92,7 @@ class ValidateStackableCouponsEventListenerTest extends AbstractCartCouponEventL
     ) {
         $cartCouponManager = $this->get('elcodi.manager.cart_coupon');
         foreach ($couponIds as $couponId) {
-            $coupon = $this->find('coupon', $couponId);
+            $coupon = $this->find('elcodi:coupon', $couponId);
             $coupon->setEnabled(true);
             $cartCouponManager
                 ->addCoupon(
@@ -111,7 +111,7 @@ class ValidateStackableCouponsEventListenerTest extends AbstractCartCouponEventL
     ) {
         $cartCouponManager = $this->get('elcodi.manager.cart_coupon');
         foreach ($couponIds as $couponId) {
-            $coupon = $this->find('coupon', $couponId);
+            $coupon = $this->find('elcodi:coupon', $couponId);
             $cartCouponManager
                 ->removeCoupon(
                     $cart,

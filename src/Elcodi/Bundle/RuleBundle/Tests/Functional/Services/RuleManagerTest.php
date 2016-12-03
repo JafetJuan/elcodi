@@ -18,44 +18,14 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\RuleBundle\Tests\Functional\Services;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\RuleBundle\Tests\Functional\ElcodiRuleFunctionalTest;
 use Elcodi\Component\Rule\Entity\Rule;
-use Elcodi\Component\Rule\Services\RuleManager;
 
 /**
  * Class RuleManagerTest.
  */
-class RuleManagerTest extends WebTestCase
+class RuleManagerTest extends ElcodiRuleFunctionalTest
 {
-    /**
-     * @var RuleManager
-     *
-     * Rule manager
-     */
-    protected $ruleManager;
-
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiRuleBundle',
-        ];
-    }
-
-    /**
-     * Set up.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->ruleManager = $this->get('elcodi.manager.rule');
-    }
-
     /**
      * Test if it can evaluate simple rules.
      */
@@ -71,7 +41,10 @@ class RuleManagerTest extends WebTestCase
             'cart' => $cart,
         ];
 
-        $this->assertTrue($this->ruleManager->evaluate($rule, $context));
+        $this->assertTrue($this
+            ->get('elcodi.manager.rule')
+            ->evaluate($rule, $context)
+        );
     }
 
     /**
@@ -96,7 +69,12 @@ class RuleManagerTest extends WebTestCase
             'cart' => $cart,
         ];
 
-        $this->assertEquals($expected, $this->ruleManager->evaluate($rule, $context));
+        $this->assertEquals(
+            $expected,
+            $this
+                ->get('elcodi.manager.rule')
+                ->evaluate($rule, $context)
+        );
     }
 
     /**

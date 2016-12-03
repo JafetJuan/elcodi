@@ -20,7 +20,7 @@ namespace Elcodi\Component\User\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-use Elcodi\Component\User\Entity\Interfaces\AbstractUserInterface;
+use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
 use Elcodi\Component\User\Repository\Interfaces\UserEmaileableInterface;
 
@@ -34,30 +34,28 @@ class CustomerRepository extends EntityRepository implements UserEmaileableInter
      *
      * @param string $email Email
      *
-     * @return AbstractUserInterface|null User found
+     * @return CustomerInterface|null
      */
     public function findOneByEmail($email)
     {
-        $user = $this
+        return $this
             ->findOneBy([
                 'email' => $email,
             ]);
-
-        return ($user instanceof AbstractUserInterface)
-            ? $user
-            : null;
     }
 
     /**
      * Find a user address by it's id.
      *
-     * @param int $customerId The customer Id
-     * @param int $addressId  The address Id
+     * @param int $customerId
+     * @param int $addressId
      *
-     * @return bool
+     * @return AddressInterface|null
      */
-    public function findAddress($customerId, $addressId)
-    {
+    public function findAddress(
+        int $customerId,
+        int $addressId
+    ) : ? AddressInterface {
         $response = $this
             ->createQueryBuilder('c')
             ->select(
@@ -82,7 +80,5 @@ class CustomerRepository extends EntityRepository implements UserEmaileableInter
                 return $addresses->first();
             }
         }
-
-        return false;
     }
 }

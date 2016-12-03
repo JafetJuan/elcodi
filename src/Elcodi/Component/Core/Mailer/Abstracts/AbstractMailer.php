@@ -16,7 +16,7 @@
 
 declare(strict_types=1);
 
-namespace Elcodi\Component\Core\Mailer\Abstracts;
+namespace Elcodi\Component\Core\Mailer;
 
 use Swift_Mailer;
 use Swift_Message;

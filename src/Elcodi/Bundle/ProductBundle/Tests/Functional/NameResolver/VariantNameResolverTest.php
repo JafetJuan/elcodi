@@ -18,39 +18,27 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\NameResolver;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 
 /**
  * Class VariantNameResolverTest.
  */
-class VariantNameResolverTest extends WebTestCase
+class VariantNameResolverTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
     /**
      * Test resolve name.
      */
     public function testResolveName()
     {
-        $variant = $this->find('product_variant', 6);
+        $variant = $this->find('elcodi:product_variant', 6);
         $this->assertEquals(
-            'Product with variants - Size Large - Color White',
+            'Product with variants - size large - color white',
             $this
                 ->get('elcodi.name_resolver.product_variant')
                 ->resolveName($variant)
         );
         $this->assertEquals(
-            'Product with variants - Size Large - Color White',
+            'Product with variants - size large - color white',
             $this
                 ->get('elcodi.name_resolver.purchasable')
                 ->resolveName($variant)

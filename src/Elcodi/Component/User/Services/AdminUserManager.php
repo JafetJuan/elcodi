@@ -33,8 +33,6 @@ class AdminUserManager extends AbstractUserManager
      *
      * @param AbstractUserInterface $user User to register
      *
-     * @return $this Self object
-     *
      * @internal param string $providerKey Provider key
      */
     public function register(AbstractUserInterface $user)
@@ -47,7 +45,5 @@ class AdminUserManager extends AbstractUserManager
         $this
             ->userEventDispatcher
             ->dispatchOnAdminUserRegisteredEvent($user);
-
-        return $this;
     }
 }

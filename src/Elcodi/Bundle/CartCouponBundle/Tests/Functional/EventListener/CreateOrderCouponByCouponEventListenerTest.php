@@ -44,8 +44,9 @@ class CreateOrderCouponByCouponEventListenerTest extends AbstractCartCouponEvent
             ->createOrderFromCart($cart);
 
         $orderCoupons = $this
-            ->getRepository('order_coupon')
+            ->getObjectRepository('elcodi:order_coupon')
             ->findOrderCouponsByOrder($order);
+
         $orderCoupon = reset($orderCoupons);
 
         $this->assertSame(

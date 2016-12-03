@@ -47,7 +47,7 @@ class RemoveCartCouponEventListenerTest extends AbstractCartCouponEventListenerT
             );
 
         $this->assertEmpty($this
-            ->getRepository('cart_coupon')
+            ->getObjectRepository('elcodi:cart_coupon')
             ->findCouponsByCart($cart)
         );
 

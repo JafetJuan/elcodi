@@ -63,7 +63,10 @@ class ElcodiTaxBundle extends BaseBundle
     public static function getBundleDependencies(KernelInterface $kernel)
     {
         return [
+            'Symfony\Bundle\FrameworkBundle\FrameworkBundle',
+            'Doctrine\Bundle\DoctrineBundle\DoctrineBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

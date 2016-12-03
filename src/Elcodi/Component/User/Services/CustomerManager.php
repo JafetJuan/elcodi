@@ -32,8 +32,6 @@ class CustomerManager extends AbstractUserManager
      * Creates new token given a user, with related Role set.
      *
      * @param AbstractUserInterface $user User to register
-     *
-     * @return $this Self object
      */
     public function register(AbstractUserInterface $user)
     {
@@ -45,7 +43,5 @@ class CustomerManager extends AbstractUserManager
         $this
             ->userEventDispatcher
             ->dispatchOnCustomerRegisteredEvent($user);
-
-        return $this;
     }
 }

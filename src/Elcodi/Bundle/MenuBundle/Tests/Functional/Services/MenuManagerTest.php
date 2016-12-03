@@ -18,43 +18,13 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\MenuBundle\Tests\Functional\Services;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
-use Elcodi\Component\Menu\Services\MenuManager;
+use Elcodi\Bundle\MediaBundle\Tests\Functional\ElcodiMenuFunctionalTest;
 
 /**
  * Class MenuManagerTest.
  */
-class MenuManagerTest extends WebTestCase
+class MenuManagerTest extends ElcodiMenuFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiMenuBundle',
-        ];
-    }
-
-    /**
-     * @var MenuManager
-     *
-     * Menu manager
-     */
-    protected $menuManager;
-
-    /**
-     * Setup.
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        $this->menuManager = $this->get('elcodi.manager.menu');
-    }
-
     /**
      * Test load structure.
      */
@@ -63,7 +33,7 @@ class MenuManagerTest extends WebTestCase
         $this->assertInstanceOf(
             'Elcodi\Component\Menu\Entity\Interfaces\MenuInterface',
             $this
-                ->menuManager
+                ->get('elcodi.manager.menu')
                 ->loadMenuByCode('menu-admin')
         );
     }
@@ -76,7 +46,7 @@ class MenuManagerTest extends WebTestCase
         $this->assertInstanceOf(
             'Elcodi\Component\Menu\Entity\Interfaces\MenuInterface',
             $this
-                ->menuManager
+                ->get('elcodi.manager.menu')
                 ->loadMenuByCode('menu-front')
         );
     }

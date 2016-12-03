@@ -18,31 +18,19 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\StockValidator;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 
 /**
  * Class ProductStockValidatorTest.
  */
-class ProductStockValidatorTest extends WebTestCase
+class ProductStockValidatorTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
     /**
      * Test product validator.
      */
     public function testIsStockAvailable()
     {
-        $product = $this->find('product', 1);
+        $product = $this->find('elcodi:product', 1);
         $productStockValidator = $this->get('elcodi.stock_validator.product');
         $this->assertTrue(
             $productStockValidator->isStockAvailable(

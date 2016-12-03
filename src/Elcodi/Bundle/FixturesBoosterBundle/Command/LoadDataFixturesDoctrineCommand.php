@@ -19,6 +19,8 @@ declare(strict_types=1);
 namespace Elcodi\Bundle\FixturesBoosterBundle\Command;
 
 use Doctrine\Bundle\FixturesBundle\Command\LoadDataFixturesDoctrineCommand as OriginalCommand;
+use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -43,6 +45,13 @@ class LoadDataFixturesDoctrineCommand extends OriginalCommand
     protected $kernel;
 
     /**
+     * @var ManagerRegistry
+     *
+     * Manager
+     */
+    protected $doctrine;
+
+    /**
      * @var string
      *
      * Database file path
@@ -52,16 +61,19 @@ class LoadDataFixturesDoctrineCommand extends OriginalCommand
     /**
      * Construct.
      *
-     * @param KernelInterface $kernel           Kernel
-     * @param string          $databaseFilePath Database file path
+     * @param KernelInterface $kernel
+     * @param ManagerRegistry $doctrine
+     * @param string          $databaseFilePath
      */
     public function __construct(
         KernelInterface $kernel,
+        ManagerRegistry $doctrine,
         $databaseFilePath
     ) {
         parent::__construct();
 
         $this->kernel = $kernel;
+        $this->doctrine = $doctrine;
         $this->databaseFilePath = $databaseFilePath;
     }
 
@@ -125,16 +137,21 @@ class LoadDataFixturesDoctrineCommand extends OriginalCommand
             }
         }
 
+        $kernel = $this->kernel;
+
         /**
-         * In order to take in account the kernel as well (same fixtures,
-         * different kernel/different schema, make the tests crash.
+         * In order to take in account the kernel as well we add as part of the
+         * signature the root dir of the kernel.
          */
-        $paths[] = get_class($this->kernel);
+        $paths[] = $kernel->getRootDir();
+        $boosterPath = $kernel->getCacheDir() . '/booster/';
+        @mkdir($boosterPath);
 
         sort($paths, SORT_STRING);
-        $backupFileName = sys_get_temp_dir() . '/' . sha1(serialize($paths)) . '.backup.database';
+        $backupFileName = $boosterPath . md5(json_encode($paths)) . '.backup.database';
         if (file_exists($backupFileName)) {
             copy($backupFileName, $this->databaseFilePath);
+            $this->clearAllManagers();
 
             return 0;
         }
@@ -150,5 +167,15 @@ class LoadDataFixturesDoctrineCommand extends OriginalCommand
         }
 
         return 0;
+    }
+
+    /**
+     * Clear all managers.
+     */
+    private function clearAllManagers()
+    {
+        array_map(function (ObjectManager $manager) {
+            $manager->clear();
+        }, $this->doctrine->getManagers());
     }
 }

@@ -18,23 +18,13 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\CommentBundle\Tests\Functional\Services;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartCouponBundle\Tests\Functional\ElcodiCommentFunctionalTest;
 
 /**
  * Class CommentCacheTest.
  */
-class CommentCacheTest extends WebTestCase
+class CommentCacheTest extends ElcodiCommentFunctionalTest
 {
-    /**
-     * Schema must be loaded in all test cases.
-     *
-     * @return bool Load schema
-     */
-    protected static function loadSchema()
-    {
-        return true;
-    }
-
     /**
      * Test load.
      */

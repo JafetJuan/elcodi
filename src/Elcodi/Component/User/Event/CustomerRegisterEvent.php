@@ -45,9 +45,11 @@ final class CustomerRegisterEvent extends Event
     }
 
     /**
-     * @return CustomerInterface User
+     * Get customer.
+     *
+     * @return CustomerInterface
      */
-    public function getCustomer()
+    public function getCustomer() : CustomerInterface
     {
         return $this->customer;
     }

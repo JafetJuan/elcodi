@@ -71,8 +71,8 @@ class ValueTest extends AbstractEntityTest
             ]],
             [[
                 'type' => $this::GETTER_SETTER,
-                'getter' => 'getValue',
-                'setter' => 'setValue',
+                'getter' => 'getAttribute',
+                'setter' => 'setAttribute',
                 'value' => '\Elcodi\Component\Attribute\Entity\Interfaces\AttributeInterface',
                 'nullable' => false,
             ]],

@@ -30,27 +30,21 @@ interface UserEventDispatcherInterface
     /**
      * Dispatch user created event.
      *
-     * @param AbstractUserInterface $user User registered
-     *
-     * @return $this Self object
+     * @param AbstractUserInterface $user
      */
     public function dispatchOnUserRegisteredEvent(AbstractUserInterface $user);
 
     /**
      * Dispatch customer created event.
      *
-     * @param CustomerInterface $customer Customer registered
-     *
-     * @return $this Self object
+     * @param CustomerInterface $customer
      */
     public function dispatchOnCustomerRegisteredEvent(CustomerInterface $customer);
 
     /**
      * Dispatch admin user created event.
      *
-     * @param AdminUserInterface $adminUser AdminUser registered
-     *
-     * @return $this Self object
+     * @param AdminUserInterface $adminUser
      */
     public function dispatchOnAdminUserRegisteredEvent(AdminUserInterface $adminUser);
 }

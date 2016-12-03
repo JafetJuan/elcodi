@@ -28,16 +28,14 @@ interface LastLoginInterface
     /**
      * Get LastLoginAt.
      *
-     * @return \DateTime LastLoginAt
+     * @return DateTime|null LastLoginAt
      */
-    public function getLastLoginAt();
+    public function getLastLoginAt() : ? DateTime;
 
     /**
      * Sets LastLoginAt.
      *
-     * @param DateTime $lastLoginAt LastLoginAt
-     *
-     * @return $this Self object
+     * @param DateTime $lastLoginAt
      */
     public function setLastLoginAt(DateTime $lastLoginAt);
 }

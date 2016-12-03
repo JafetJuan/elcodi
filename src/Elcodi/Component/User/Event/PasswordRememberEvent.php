@@ -46,11 +46,13 @@ final class PasswordRememberEvent extends Event
     /**
      * Construct method.
      *
-     * @param AbstractUserInterface $user        User
-     * @param string                $rememberUrl Remember url
+     * @param AbstractUserInterface $user
+     * @param string                $rememberUrl
      */
-    public function __construct(AbstractUserInterface $user, $rememberUrl)
-    {
+    public function __construct(
+        AbstractUserInterface $user,
+        string $rememberUrl
+    ) {
         $this->user = $user;
         $this->rememberUrl = $rememberUrl;
     }
@@ -58,9 +60,9 @@ final class PasswordRememberEvent extends Event
     /**
      * Get user.
      *
-     * @return AbstractUserInterface User
+     * @return AbstractUserInterface
      */
-    public function getUser()
+    public function getUser() : AbstractUserInterface
     {
         return $this->user;
     }
@@ -68,9 +70,9 @@ final class PasswordRememberEvent extends Event
     /**
      * Get remember url.
      *
-     * @return string Remember url
+     * @return string
      */
-    public function getRememberUrl()
+    public function getRememberUrl() : string
     {
         return $this->rememberUrl;
     }

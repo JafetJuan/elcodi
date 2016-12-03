@@ -21,19 +21,19 @@ namespace Elcodi\Bundle\MediaBundle\Tests\Functional\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Routing\RouterInterface;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\MediaBundle\Tests\Functional\ElcodiMediaFunctionalTest;
 
 /**
  * Class ImageResizeControllerTest.
  */
-class ImageResizeControllerTest extends WebTestCase
+class ImageResizeControllerTest extends ElcodiMediaFunctionalTest
 {
     /**
      * Schema must be loaded in all test cases.
      *
-     * @return bool Load schema
+     * @return bool
      */
-    protected static function loadSchema()
+    protected static function loadSchema() : bool
     {
         return true;
     }

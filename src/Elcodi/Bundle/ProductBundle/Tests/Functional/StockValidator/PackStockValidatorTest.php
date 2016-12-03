@@ -18,31 +18,19 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\StockValidator;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 
 /**
  * Class PackStockValidatorTest.
  */
-class PackStockValidatorTest extends WebTestCase
+class PackStockValidatorTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
     /**
      * Test product validator without stock inheritance.
      */
     public function testIsStockAvailableNonInheritance()
     {
-        $pack = $this->find('purchasable_pack', 9);
+        $pack = $this->find('elcodi:purchasable_pack', 9);
         $packStockValidator = $this->get('elcodi.stock_validator.purchasable_pack');
         $this->assertTrue(
             $packStockValidator->isStockAvailable(
@@ -86,7 +74,7 @@ class PackStockValidatorTest extends WebTestCase
      */
     public function testIsStockAvailableInheritance()
     {
-        $pack = $this->find('purchasable_pack', 10);
+        $pack = $this->find('elcodi:purchasable_pack', 10);
         $packStockValidator = $this->get('elcodi.stock_validator.purchasable_pack');
         $this->assertTrue(
             $packStockValidator->isStockAvailable(

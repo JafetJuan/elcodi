@@ -18,32 +18,20 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\Entity;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 
 /**
  * Class PackTest.
  */
-class PackTest extends WebTestCase
+class PackTest extends ElcodiProductFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
-
     /**
      * Test get stock with specific stock.
      */
     public function testGetStockSpecificStock()
     {
         $this->assertEquals(10, $this
-            ->find('purchasable_pack', 9)
+            ->find('elcodi:purchasable_pack', 9)
             ->getStock()
         );
     }
@@ -54,7 +42,7 @@ class PackTest extends WebTestCase
     public function testGetStockInheritStock()
     {
         $this->assertEquals(5, $this
-            ->find('purchasable_pack', 10)
+            ->find('elcodi:purchasable_pack', 10)
             ->getStock()
         );
     }

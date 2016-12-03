@@ -18,26 +18,14 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\CouponBundle\Tests\Functional\Factory;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartCouponBundle\Tests\Functional\ElcodiCouponFunctionalTest;
 use Elcodi\Component\Coupon\Entity\Coupon;
 
 /**
  * Class CouponFactoryTest.
  */
-class CouponFactoryTest extends WebTestCase
+class CouponFactoryTest extends ElcodiCouponFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiCurrencyBundle',
-        ];
-    }
-
     /**
      * Tests that the Coupon object is factored correctly.
      */
@@ -45,7 +33,7 @@ class CouponFactoryTest extends WebTestCase
     {
         $this->assertInstanceOf(
             $this->getParameter('elcodi.entity.coupon.class'),
-            $this->get('elcodi.factory.coupon')->create()
+            $this->create('elcodi:coupon')
         );
     }
 
@@ -57,7 +45,7 @@ class CouponFactoryTest extends WebTestCase
         /**
          * @var $coupon Coupon
          */
-        $coupon = $this->get('elcodi.factory.coupon')->create();
+        $coupon = $this->create('elcodi:coupon');
 
         $this->assertInstanceOf(
             'Elcodi\Component\Currency\Entity\Money',

@@ -31,15 +31,14 @@ class SaveCartEventListenerTest extends AbstractCartEventListenerTest
     public function testSaveCart()
     {
         $cart = $this
-            ->getFactory('cart')
-            ->create()
-            ->setCustomer($this->find('customer', 1));
+            ->create('elcodi:cart')
+            ->setCustomer($this->find('elcodi:customer', 1));
 
         $this
             ->get('elcodi.manager.cart')
             ->addPurchasable(
                 $cart,
-                $this->find('product', 1),
+                $this->find('elcodi:product', 1),
                 1
             );
 

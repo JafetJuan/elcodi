@@ -69,44 +69,25 @@ class ElcodiSitemapExtension extends BaseExtension
     }
 
     /**
-     * Load Parametrization definition.
-     *
-     * return array(
-     *      'parameter1' => $config['parameter1'],
-     *      'parameter2' => $config['parameter2'],
-     *      ...
-     * );
-     *
-     * @param array $config Bundles config values
-     *
-     * @return array Parametrization values
-     */
-    protected function getParametrizationValues(array $config) : array
-    {
-        return [];
-    }
-
-    /**
      * Hook after load the full container.
      *
-     * @param array            $config    Configuration
-     * @param ContainerBuilder $container Container
+     * @param array            $config
+     * @param ContainerBuilder $container
      */
     protected function postLoad(array $config, ContainerBuilder $container)
     {
-        $this
-            ->loadBlocks($config['blocks'], $container)
-            ->loadStatics($config['statics'], $container)
-            ->loadBuilders($config['builders'], $container)
-            ->loadDumpers($config['builders'], $container)
-            ->loadProfiles($config['profiles'], $container);
+        $this->loadBlocks($config['blocks'], $container);
+        $this->loadStatics($config['statics'], $container);
+        $this->loadBuilders($config['builders'], $container);
+        $this->loadDumpers($config['builders'], $container);
+        $this->loadProfiles($config['profiles'], $container);
     }
 
     /**
      * Load blocks.
      *
-     * @param array            $blocks    Blocks
-     * @param ContainerBuilder $container Container
+     * @param array            $blocks
+     * @param ContainerBuilder $container
      */
     protected function loadBlocks(array $blocks, ContainerBuilder $container)
     {
@@ -138,8 +119,8 @@ class ElcodiSitemapExtension extends BaseExtension
     /**
      * Load statics.
      *
-     * @param array            $statics   Statics
-     * @param ContainerBuilder $container Container
+     * @param array            $statics
+     * @param ContainerBuilder $container
      */
     protected function loadStatics(array $statics, ContainerBuilder $container)
     {
@@ -161,8 +142,8 @@ class ElcodiSitemapExtension extends BaseExtension
     /**
      * Load builders.
      *
-     * @param array            $builders  Builders
-     * @param ContainerBuilder $container Container
+     * @param array            $builders
+     * @param ContainerBuilder $container
      */
     protected function loadBuilders(array $builders, ContainerBuilder $container)
     {
@@ -193,9 +174,9 @@ class ElcodiSitemapExtension extends BaseExtension
     /**
      * Load builder blocks.
      *
-     * @param Definition $builderDefinition Block definition
-     * @param array      $elements          Elements
-     * @param string     $elementType       Element type
+     * @param Definition $builderDefinition
+     * @param array      $elements
+     * @param string     $elementType
      */
     protected function addBuilderElements(
         Definition $builderDefinition,
@@ -214,8 +195,8 @@ class ElcodiSitemapExtension extends BaseExtension
     /**
      * Load dumpers.
      *
-     * @param array            $builders  Builders
-     * @param ContainerBuilder $container Container
+     * @param array            $builders
+     * @param ContainerBuilder $container
      */
     protected function loadDumpers(array $builders, ContainerBuilder $container)
     {
@@ -235,8 +216,8 @@ class ElcodiSitemapExtension extends BaseExtension
     /**
      * Load profiles.
      *
-     * @param array            $profiles  Profiles
-     * @param ContainerBuilder $container Container
+     * @param array            $profiles
+     * @param ContainerBuilder $container
      */
     protected function loadProfiles(array $profiles, ContainerBuilder $container)
     {
@@ -261,9 +242,9 @@ class ElcodiSitemapExtension extends BaseExtension
     /**
      * Config files to load.
      *
-     * @param array $config Configuration
+     * @param array $config
      *
-     * @return array Config files
+     * @return array
      */
     public function getConfigFiles(array $config) : array
     {

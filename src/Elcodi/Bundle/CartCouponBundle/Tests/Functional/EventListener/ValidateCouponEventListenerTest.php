@@ -50,9 +50,9 @@ class ValidateCouponEventListenerTest extends AbstractCartCouponEventListenerTes
      */
     public function testDuplicatedCouponNotActive()
     {
-        $this->reloadScenario();
+        $this->reloadFixtures();
         $cart = $this->getLoadedCart(2);
-        $coupon = $this->find('coupon', 3);
+        $coupon = $this->find('elcodi:coupon', 3);
 
         $this
             ->get('elcodi.manager.cart_coupon')
@@ -69,7 +69,7 @@ class ValidateCouponEventListenerTest extends AbstractCartCouponEventListenerTes
      */
     public function testDuplicatedCouponNotUsable()
     {
-        $this->reloadScenario();
+        $this->reloadFixtures();
         $cart = $this->getLoadedCart(2);
         $coupon = $this
             ->getEnabledCoupon(3)

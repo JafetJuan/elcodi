@@ -57,7 +57,6 @@ class CategoryIntegrityFixer
              */
             $categorizable->addCategory($principalCategory);
         } elseif (!$categories->isEmpty()) {
-
             /**
              * The product does not have principal category but has categories
              * assigned so the first category is assigned as principal category.

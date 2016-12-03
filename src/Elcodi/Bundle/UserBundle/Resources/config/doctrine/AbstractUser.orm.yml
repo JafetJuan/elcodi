@@ -4,7 +4,7 @@ Elcodi\Component\User\Entity\AbstractUser:
         gender:
             column: gender
             type: integer
-            nullable: true
+            nullable: false
         password:
             column: password
             type: string

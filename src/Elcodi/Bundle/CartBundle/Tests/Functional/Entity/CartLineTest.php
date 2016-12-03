@@ -18,31 +18,19 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\CartBundle\Tests\Functional\Entity;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartBundle\Tests\Functional\ElcodiCartFunctionalTest;
 
 /**
  * Class CartTest.
  */
-class CartLineTest extends WebTestCase
+class CartLineTest extends ElcodiCartFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiCartBundle',
-        ];
-    }
-
     /**
      * Test cart dimensions.
      */
     public function testDimensions()
     {
-        $cart = $this->find('cart_line', 1);
+        $cart = $this->find('elcodi:cart_line', 1);
 
         $this->assertEquals(10, $cart->getHeight());
         $this->assertEquals(15, $cart->getWidth());

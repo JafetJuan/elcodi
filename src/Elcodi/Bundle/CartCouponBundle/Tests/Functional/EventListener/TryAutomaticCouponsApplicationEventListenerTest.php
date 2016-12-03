@@ -33,9 +33,7 @@ class TryAutomaticCouponsApplicationEventListenerTest extends AbstractCartCoupon
      */
     public function testTryAutomaticCoupons()
     {
-        $couponAutomatic = $this
-            ->getFactory('coupon')
-            ->create();
+        $couponAutomatic = $this->create('elcodi:coupon');
 
         $couponAutomatic->setCode('automatic');
         $couponAutomatic->setName('50 percent discount');
@@ -46,7 +44,7 @@ class TryAutomaticCouponsApplicationEventListenerTest extends AbstractCartCoupon
         $couponAutomatic->setEnforcement(ElcodiCouponTypes::ENFORCEMENT_AUTOMATIC);
         $couponAutomatic->setValidFrom(new DateTime());
         $couponAutomatic->setValidTo(new DateTime('next month'));
-        $this->flush($couponAutomatic);
+        $this->save($couponAutomatic);
 
         $cart = $this->getLoadedCart(2);
 

@@ -21,13 +21,13 @@ namespace Elcodi\Bundle\ZoneBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Component\Core\Services\ObjectDirector;
 
 /**
  * Class ZoneData.
  */
-class ZoneData extends AbstractFixture implements DependentFixtureInterface
+class ZoneData extends ElcodiFixture implements DependentFixtureInterface
 {
     /**
      * Loads sample fixtures for Zone entities.

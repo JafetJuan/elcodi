@@ -32,7 +32,7 @@ abstract class AbstractPasswordEventListener
      *
      * Password encoder
      */
-    protected $passwordEncoder;
+    private $passwordEncoder;
 
     /**
      * Construct method.
@@ -86,24 +86,31 @@ abstract class AbstractPasswordEventListener
     }
 
     /**
-     * Encode a password.
+     * Encode a password and return it.
      *
      * @param string      $password Password
      * @param string|null $salt     salt
      *
-     * @return string password encrypted
+     * @return string
      */
-    public function encryptPassword($password, $salt = null)
-    {
-        return $this->passwordEncoder->encodePassword($password, $salt);
+    public function encryptPassword(
+        string $password,
+        ? string $salt = null
+    ) {
+        return $this
+            ->passwordEncoder
+            ->encodePassword(
+                $password,
+                $salt
+            );
     }
 
     /**
-     * Check entity type.
+     * Check entity type and return if the entity is ready for being encoded.
      *
-     * @param $entity Object Entity to check
+     * @param object $entity
      *
-     * @return bool Entity is ready for being encoded
+     * @return bool
      */
-    abstract public function checkEntityType($entity);
+    abstract public function checkEntityType($entity) : bool;
 }

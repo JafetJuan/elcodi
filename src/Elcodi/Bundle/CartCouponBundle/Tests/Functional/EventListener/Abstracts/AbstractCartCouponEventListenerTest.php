@@ -18,28 +18,15 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\CartCouponBundle\Tests\Functional\EventListener\Abstracts;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartCouponBundle\Tests\Functional\ElcodiCartCouponFunctionalTest;
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Coupon\Entity\Interfaces\CouponInterface;
 
 /**
  * Class AbstractCartCouponEventListenerTest.
  */
-abstract class AbstractCartCouponEventListenerTest extends WebTestCase
+abstract class AbstractCartCouponEventListenerTest extends ElcodiCartCouponFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiCartBundle',
-            'ElcodiCouponBundle',
-        ];
-    }
-
     /**
      * Get loaded cart.
      *
@@ -49,7 +36,7 @@ abstract class AbstractCartCouponEventListenerTest extends WebTestCase
      */
     public function getLoadedCart($cartId)
     {
-        $cart = $this->find('cart', $cartId);
+        $cart = $this->find('elcodi:cart', $cartId);
         $this
             ->get('elcodi.event_dispatcher.cart')
             ->dispatchCartLoadEvents($cart);
@@ -66,8 +53,8 @@ abstract class AbstractCartCouponEventListenerTest extends WebTestCase
      */
     public function getEnabledCoupon($couponId)
     {
-        $coupon = $this->find('coupon', $couponId);
-        $coupon->setEnabled(true);
+        $coupon = $this->find('elcodi:coupon', $couponId);
+        $coupon->enable();
 
         return $coupon;
     }

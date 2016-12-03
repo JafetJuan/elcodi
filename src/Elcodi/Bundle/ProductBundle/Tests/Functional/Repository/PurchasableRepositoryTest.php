@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\ProductBundle\Tests\Functional\Repository;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\ProductBundle\Tests\Functional\ElcodiProductFunctionalTest;
 use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 use Elcodi\Component\Product\Repository\CategoryRepository;
 use Elcodi\Component\Product\Repository\PurchasableRepository;
@@ -26,7 +26,7 @@ use Elcodi\Component\Product\Repository\PurchasableRepository;
 /**
  * Class PurchasableRepositoryTest.
  */
-class PurchasableRepositoryTest extends WebTestCase
+class PurchasableRepositoryTest extends ElcodiProductFunctionalTest
 {
     /**
      * @var CategoryRepository
@@ -41,18 +41,6 @@ class PurchasableRepositoryTest extends WebTestCase
      * LocationProvider class
      */
     protected $purchasableRepository;
-
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiProductBundle',
-        ];
-    }
 
     /**
      * Setup.
@@ -145,10 +133,10 @@ class PurchasableRepositoryTest extends WebTestCase
      */
     public function testGetHomePurchasables($count, $numberExpected, $useStock)
     {
-        $purchasable = $this->find('purchasable', 2);
+        $purchasable = $this->find('elcodi:purchasable', 2);
         $oldStock = $purchasable->getStock();
         $purchasable->setStock(0);
-        $this->flush($purchasable);
+        $this->save($purchasable);
 
         $purchasables = $this
             ->purchasableRepository
@@ -158,7 +146,7 @@ class PurchasableRepositoryTest extends WebTestCase
         $this->assertCount($numberExpected, $purchasables);
 
         $purchasable->setStock($oldStock);
-        $this->flush($purchasable);
+        $this->save($purchasable);
     }
 
     /**
@@ -186,10 +174,10 @@ class PurchasableRepositoryTest extends WebTestCase
      */
     public function testGetOfferPurchasables($count, $numberExpected, $useStock)
     {
-        $purchasable = $this->find('purchasable', 2);
+        $purchasable = $this->find('elcodi:purchasable', 2);
         $oldStock = $purchasable->getStock();
         $purchasable->setStock(0);
-        $this->flush($purchasable);
+        $this->save($purchasable);
 
         $purchasables = $this
             ->purchasableRepository
@@ -199,7 +187,7 @@ class PurchasableRepositoryTest extends WebTestCase
         $this->assertCount($numberExpected, $purchasables);
 
         $purchasable->setStock($oldStock);
-        $this->flush($purchasable);
+        $this->save($purchasable);
     }
 
     /**

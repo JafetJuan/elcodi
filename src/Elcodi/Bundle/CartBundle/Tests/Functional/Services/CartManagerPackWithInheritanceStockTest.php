@@ -31,13 +31,13 @@ class CartManagerPackWithInheritanceStockTest extends AbstractCartManagerTest
     /**
      * Load fixtures of these bundles.
      *
-     * @return array Bundles name where fixtures should be found
+     * @return array
      */
-    protected static function loadFixturesBundles()
+    protected static function loadFixturePaths() : array
     {
         return [
-            'ElcodiCartBundle',
-            'ElcodiProductBundle',
+            '@ElcodiCartBundle',
+            '@ElcodiProductBundle',
         ];
     }
 
@@ -48,7 +48,7 @@ class CartManagerPackWithInheritanceStockTest extends AbstractCartManagerTest
      */
     protected function createPurchasable()
     {
-        return $this->find('purchasable_pack', 10);
+        return $this->find('elcodi:purchasable_pack', 10);
     }
 
     /**

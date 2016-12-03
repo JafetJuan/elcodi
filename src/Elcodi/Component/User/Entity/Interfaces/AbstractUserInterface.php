@@ -24,6 +24,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
+use Elcodi\Component\User\Exception\InvalidPasswordException;
 
 /**
  * Interface AbstractUserInterface.
@@ -38,144 +39,128 @@ interface AbstractUserInterface extends
     /**
      * Sets a hash so it can be used to login once without the need to use the password.
      *
-     * @param string $oneTimeLoginHash The hash you want to set for the one time login
-     *
-     * @return $this Self object
+     * @param string|null $oneTimeLoginHash
      */
-    public function setOneTimeLoginHash($oneTimeLoginHash);
+    public function setOneTimeLoginHash( ? string $oneTimeLoginHash);
 
     /**
      * Gets the one time login hash.
      *
-     * @return string Login hash
+     * @return string|null
      */
-    public function getOneTimeLoginHash();
+    public function getOneTimeLoginHash() : ? string;
 
     /**
      * Set recovery hash.
      *
-     * @param string $recoveryHash
-     *
-     * @return $this Self object
+     * @param string|null $recoveryHash
      */
-    public function setRecoveryHash($recoveryHash);
+    public function setRecoveryHash( ? string $recoveryHash);
 
     /**
      * Get recovery hash.
      *
-     * @return string Recovery Hash
+     * @return string|null
      */
-    public function getRecoveryHash();
+    public function getRecoveryHash() : ? string;
 
     /**
      * Sets Firstname.
      *
-     * @param string $firstname Firstname
-     *
-     * @return $this Self object
+     * @param string|null $firstname
      */
-    public function setFirstname($firstname);
+    public function setFirstname( ? string $firstname);
 
     /**
      * Get Firstname.
      *
-     * @return string Firstname
+     * @return string|null
      */
-    public function getFirstname();
+    public function getFirstname() : ? string;
 
     /**
      * Sets Lastname.
      *
-     * @param string $lastname Lastname
-     *
-     * @return $this Self object
+     * @param string|null $lastname
      */
-    public function setLastname($lastname);
+    public function setLastname( ? string $lastname);
 
     /**
      * Get Lastname.
      *
-     * @return string Lastname
+     * @return string|null
      */
-    public function getLastname();
+    public function getLastname() : ? string;
 
     /**
      * Set gender.
      *
-     * @param int $gender Gender
-     *
-     * @return $this Self object
+     * @param int $gender
      */
-    public function setGender($gender);
+    public function setGender(int $gender);
 
     /**
      * Get gender.
      *
-     * @return int Gender
+     * @return int
      */
-    public function getGender();
+    public function getGender() : int;
 
     /**
      * Set email.
      *
-     * @param string $email
-     *
-     * @return $this Self object
+     * @param string|null $email
      */
-    public function setEmail($email);
+    public function setEmail( ? string $email);
 
     /**
      * Return email.
      *
-     * @return string Email
+     * @return string|null
      */
-    public function getEmail();
-
-    /**
-     * Get birthday.
-     *
-     * @return DateTime
-     */
-    public function getBirthday();
+    public function getEmail() : ? string;
 
     /**
      * Set birthday.
      *
-     * @param DateTime $birthday
-     *
-     * @return $this Self object
+     * @param DateTime|null $birthday
      */
-    public function setBirthday(DateTime $birthday = null);
+    public function setBirthday( ? DateTime $birthday);
+
+    /**
+     * Get birthday.
+     *
+     * @return DateTime|null
+     */
+    public function getBirthday() : ? DateTime;
 
     /**
      * Get user full name.
      *
-     * @return string Full name
+     * @return string
      */
-    public function getFullName();
+    public function getFullName() : string;
 
     /**
      * Set password.
      *
-     * @param string $password
+     * @param string|null $password
      *
-     * @return $this Self object
+     * @throws InvalidPasswordException
      */
-    public function setPassword($password);
+    public function setPassword( ? string $password);
+
+    /**
+     * Sets Token.
+     *
+     * @param string $token
+     */
+    public function setToken(string $token);
 
     /**
      * Get Token.
      *
      * @return string Token
      */
-    public function getToken();
-
-    /**
-     * Sets Token.
-     *
-     * @param string $token Token
-     *
-     * @return $this Self object
-     */
-    public function setToken($token);
+    public function getToken() : string;
 }

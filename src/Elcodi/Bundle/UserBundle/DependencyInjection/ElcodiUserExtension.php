@@ -18,7 +18,6 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\UserBundle\DependencyInjection;
 
-use Mmoreram\BaseBundle\DependencyInjection\BaseConfiguration;
 use Mmoreram\BaseBundle\DependencyInjection\BaseExtension;
 use Mmoreram\BaseBundle\DependencyInjection\EntitiesOverridableExtension;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -62,7 +61,7 @@ class ElcodiUserExtension extends BaseExtension implements EntitiesOverridableEx
      */
     protected function getConfigurationInstance() : ? ConfigurationInterface
     {
-        return new BaseConfiguration(
+        return new ElcodiUserConfiguration(
             $this->getAlias(),
             $this->mappingBagProvider
         );
@@ -85,6 +84,32 @@ class ElcodiUserExtension extends BaseExtension implements EntitiesOverridableEx
             'providers',
             'directors',
             'eventDispatchers',
+        ];
+    }
+
+    /**
+     * Load Parametrization definition.
+     *
+     * return array(
+     *      'parameter1' => $config['parameter1'],
+     *      'parameter2' => $config['parameter2'],
+     *      ...
+     * );
+     *
+     * @param array $config Bundles config values
+     *
+     * @return array
+     */
+    protected function getParametrizationValues(array $config) : array
+    {
+        return [
+            'elcodi.user_auto_login_firewalls' => array_filter(
+                array_map(function (array $configuration) {
+                    return $configuration['enabled']
+                        ? $configuration['firewall']
+                        : false;
+                }, $config['auto_login'])
+            ),
         ];
     }
 

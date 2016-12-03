@@ -21,14 +21,13 @@ namespace Elcodi\Component\User\Wrapper;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
-use Elcodi\Component\Core\Wrapper\Interfaces\WrapperInterface;
 use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
 use Elcodi\Component\User\Factory\CustomerFactory;
 
 /**
  * Cart to order service.
  */
-class CustomerWrapper implements WrapperInterface
+class CustomerWrapper
 {
     /**
      * @var CustomerInterface
@@ -72,9 +71,9 @@ class CustomerWrapper implements WrapperInterface
      * Get loaded object. If object is not loaded yet, then load it and save it
      * locally. Otherwise, just return the pre-loaded object.
      *
-     * @return mixed Loaded object
+     * @return CustomerInterface|null
      */
-    public function get()
+    public function get() : ? CustomerInterface
     {
         if ($this->customer instanceof CustomerInterface) {
             return $this->customer;
@@ -93,36 +92,28 @@ class CustomerWrapper implements WrapperInterface
 
     /**
      * Clean loaded object in order to reload it again.
-     *
-     * @return $this Self object
      */
     public function clean()
     {
         $this->customer = null;
-
-        return $this;
     }
 
     /**
      * Set customer.
      *
-     * @param CustomerInterface $customer Customer
-     *
-     * @return $this Self object
+     * @param CustomerInterface|null $customer
      */
-    public function setCustomer(CustomerInterface $customer = null)
+    public function setCustomer( ? CustomerInterface $customer)
     {
         $this->customer = $customer;
-
-        return $this;
     }
 
     /**
      * Return the current user from security context.
      *
-     * @return CustomerInterface Current customer in token
+     * @return CustomerInterface|null
      */
-    private function getCustomerFromToken()
+    private function getCustomerFromToken() : ? CustomerInterface
     {
         if (!($this->tokenStorage instanceof TokenStorageInterface)) {
             return null;

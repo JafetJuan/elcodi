@@ -18,25 +18,15 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\CommentBundle\Tests\Functional\Services;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartCouponBundle\Tests\Functional\ElcodiCommentFunctionalTest;
 use Elcodi\Component\Comment\Entity\Vote;
 use Elcodi\Component\Comment\Services\VoteManager;
 
 /**
  * Class VoteManagerTest.
  */
-class VoteManagerTest extends WebTestCase
+class VoteManagerTest extends ElcodiCommentFunctionalTest
 {
-    /**
-     * Schema must be loaded in all test cases.
-     *
-     * @return bool Load schema
-     */
-    protected static function loadSchema()
-    {
-        return true;
-    }
-
     /**
      * Test add vote.
      */
@@ -48,8 +38,7 @@ class VoteManagerTest extends WebTestCase
         $voteManager = $this->get('elcodi.manager.comment_vote');
 
         $comment = $this
-            ->getFactory('comment')
-            ->create()
+            ->create('elcodi:comment')
             ->setSource('source')
             ->setAuthorToken(1234)
             ->setAuthorName('percebe')
@@ -57,7 +46,7 @@ class VoteManagerTest extends WebTestCase
             ->setContent('content')
             ->setContext('admin');
 
-        $this->flush($comment);
+        $this->save($comment);
 
         /**
          * Customer votes UP.

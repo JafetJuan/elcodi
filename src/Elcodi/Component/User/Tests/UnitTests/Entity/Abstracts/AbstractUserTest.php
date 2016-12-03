@@ -39,14 +39,11 @@ class AbstractUserTest extends PHPUnit_Framework_TestCase
     public function testGender($gender, $expected)
     {
         $user = $this->getMockForAbstractClass('Elcodi\Component\User\Entity\AbstractUser');
-        $setterOutput = $user->setGender($gender);
-
-        $this->assertInstanceOf(
-            'Elcodi\Component\User\Entity\AbstractUser',
-            $setterOutput
+        $user->setGender($gender);
+        $this->assertEquals(
+            $expected,
+            $user->getGender()
         );
-
-        $this->assertEquals($expected, $user->getGender());
     }
 
     /**
@@ -104,7 +101,6 @@ class AbstractUserTest extends PHPUnit_Framework_TestCase
     public function testSetPasswordWithException($value)
     {
         $user = $this->getMockForAbstractClass('Elcodi\Component\User\Entity\AbstractUser');
-        $user->setPassword('00000');
         try {
             $user->setPassword($value);
             $this->fail('AbstractUser::setPassword($password) should contain a null value or a string');
@@ -116,14 +112,11 @@ class AbstractUserTest extends PHPUnit_Framework_TestCase
     /**
      * Data for testSetPasswordWithException.
      */
-    public function dataSetPasswordWithException($value)
+    public function dataSetPasswordWithException()
     {
         return [
-            [true],
-            [false],
             [''],
             ['   '],
-            [0],
         ];
     }
 }

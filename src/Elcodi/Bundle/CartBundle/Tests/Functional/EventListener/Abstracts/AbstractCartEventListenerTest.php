@@ -18,26 +18,14 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\CartBundle\Tests\Functional\EventListener\Abstracts;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartBundle\Tests\Functional\ElcodiCartFunctionalTest;
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 
 /**
  * Class AbstractCartEventListenerTest.
  */
-abstract class AbstractCartEventListenerTest extends WebTestCase
+abstract class AbstractCartEventListenerTest extends ElcodiCartFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiCartBundle',
-        ];
-    }
-
     /**
      * Get loaded cart.
      *
@@ -47,7 +35,7 @@ abstract class AbstractCartEventListenerTest extends WebTestCase
      */
     public function getLoadedCart($cartId)
     {
-        $cart = $this->find('cart', $cartId);
+        $cart = $this->find('elcodi:cart', $cartId);
         $this
             ->get('elcodi.event_dispatcher.cart')
             ->dispatchCartLoadEvents($cart);

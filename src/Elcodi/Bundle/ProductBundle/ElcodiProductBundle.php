@@ -74,6 +74,8 @@ class ElcodiProductBundle extends BaseBundle
     public static function getBundleDependencies(KernelInterface $kernel)
     {
         return [
+            'Symfony\Bundle\FrameworkBundle\FrameworkBundle',
+            'Doctrine\Bundle\DoctrineBundle\DoctrineBundle',
             'Doctrine\Bundle\DoctrineCacheBundle\DoctrineCacheBundle',
             'Elcodi\Bundle\LanguageBundle\ElcodiLanguageBundle',
             'Elcodi\Bundle\MediaBundle\ElcodiMediaBundle',
@@ -81,6 +83,7 @@ class ElcodiProductBundle extends BaseBundle
             'Elcodi\Bundle\AttributeBundle\ElcodiAttributeBundle',
             'Elcodi\Bundle\StoreBundle\ElcodiStoreBundle',
             'Elcodi\Bundle\CoreBundle\ElcodiCoreBundle',
+            'Mmoreram\BaseBundle\BaseBundle',
         ];
     }
 }

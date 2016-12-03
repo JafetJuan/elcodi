@@ -118,23 +118,19 @@ class Customer extends AbstractUser implements CustomerInterface
     /**
      * Set phone.
      *
-     * @param string $phone Phone
-     *
-     * @return $this
+     * @param string|null $phone
      */
-    public function setPhone($phone)
+    public function setPhone( ? string $phone)
     {
         $this->phone = $phone;
-
-        return $this;
     }
 
     /**
      * Get phone.
      *
-     * @return string
+     * @return string|null
      */
-    public function getPhone()
+    public function getPhone() : ? string
     {
         return $this->phone;
     }
@@ -142,23 +138,19 @@ class Customer extends AbstractUser implements CustomerInterface
     /**
      * Set identity document.
      *
-     * @param string $identityDocument
-     *
-     * @return $this
+     * @param string|null $identityDocument
      */
-    public function setIdentityDocument($identityDocument)
+    public function setIdentityDocument( ? string $identityDocument)
     {
         $this->identityDocument = $identityDocument;
-
-        return $this;
     }
 
     /**
      * Get identity document.
      *
-     * @return string Identity document
+     * @return string
      */
-    public function getIdentityDocument()
+    public function getIdentityDocument() : ? string
     {
         return $this->identityDocument;
     }
@@ -166,23 +158,19 @@ class Customer extends AbstractUser implements CustomerInterface
     /**
      * Sets Guest.
      *
-     * @param bool $guest Guest
-     *
-     * @return $this Self object
+     * @param bool $guest
      */
-    public function setGuest($guest)
+    public function setGuest(bool $guest)
     {
         $this->guest = $guest;
-
-        return $this;
     }
 
     /**
      * Get Guest.
      *
-     * @return bool Guest
+     * @return bool
      */
-    public function isGuest()
+    public function isGuest() : bool
     {
         return $this->guest;
     }
@@ -190,23 +178,19 @@ class Customer extends AbstractUser implements CustomerInterface
     /**
      * Sets Newsletter.
      *
-     * @param bool $newsletter Newsletter
-     *
-     * @return $this Self object
+     * @param bool $newsletter
      */
-    public function setNewsletter($newsletter)
+    public function setNewsletter(bool $newsletter)
     {
         $this->newsletter = $newsletter;
-
-        return $this;
     }
 
     /**
      * Get Newsletter.
      *
-     * @return bool Newsletter
+     * @return bool
      */
-    public function getNewsletter()
+    public function getNewsletter() : bool
     {
         return $this->newsletter;
     }
@@ -215,50 +199,49 @@ class Customer extends AbstractUser implements CustomerInterface
      * Add Order.
      *
      * @param OrderInterface $order Order
-     *
-     * @return $this Self object
      */
     public function addOrder(OrderInterface $order)
     {
-        $this->orders->add($order);
+        if ($this
+            ->orders
+            ->contains($order)
+        ) {
+            return;
+        }
 
-        return $this;
+        $this
+            ->orders
+            ->add($order);
     }
 
     /**
      * Remove Order.
      *
      * @param OrderInterface $order
-     *
-     * @return $this Self object
      */
     public function removeOrder(OrderInterface $order)
     {
-        $this->orders->removeElement($order);
-
-        return $this;
+        $this
+            ->orders
+            ->removeElement($order);
     }
 
     /**
      * Set orders.
      *
-     * @param Collection $orders Orders
-     *
-     * @return $this Self object
+     * @param Collection $orders
      */
     public function setOrders(Collection $orders)
     {
         $this->orders = $orders;
-
-        return $this;
     }
 
     /**
      * Get user orders.
      *
-     * @return Collection Customer orders
+     * @return Collection
      */
-    public function getOrders()
+    public function getOrders() : Collection
     {
         return $this->orders;
     }
@@ -267,40 +250,39 @@ class Customer extends AbstractUser implements CustomerInterface
      * Add Cart.
      *
      * @param CartInterface $cart
-     *
-     * @return $this Self object
      */
     public function addCart(CartInterface $cart)
     {
-        $this->carts->add($cart);
+        if ($this
+            ->carts
+            ->contains($cart)
+        ) {
+            return;
+        }
 
-        return $this;
+        $this
+            ->carts
+            ->add($cart);
     }
 
     /**
      * Remove Cart.
      *
      * @param CartInterface $cart
-     *
-     * @return $this Self object
      */
     public function removeCart(CartInterface $cart)
     {
         $this->carts->removeElement($cart);
-
-        return $this;
     }
 
     /**
-     * @param Collection $carts
+     * Set carts.
      *
-     * @return $this Self object
+     * @param Collection $carts
      */
     public function setCarts(Collection $carts)
     {
         $this->carts = $carts;
-
-        return $this;
     }
 
     /**
@@ -308,7 +290,7 @@ class Customer extends AbstractUser implements CustomerInterface
      *
      * @return Collection
      */
-    public function getCarts()
+    public function getCarts() : Collection
     {
         return $this->carts;
     }
@@ -317,42 +299,41 @@ class Customer extends AbstractUser implements CustomerInterface
      * Add address.
      *
      * @param AddressInterface $address
-     *
-     * @return $this Self object
      */
     public function addAddress(AddressInterface $address)
     {
-        $this->addresses->add($address);
+        if ($this
+            ->addresses
+            ->contains($address)
+        ) {
+            return;
+        }
 
-        return $this;
+        $this
+            ->addresses
+            ->add($address);
     }
 
     /**
      * Remove address.
      *
      * @param AddressInterface $address
-     *
-     * @return $this Self object
      */
     public function removeAddress(AddressInterface $address)
     {
-        $this->addresses->removeElement($address);
-
-        return $this;
+        $this
+            ->addresses
+            ->removeElement($address);
     }
 
     /**
      * Set addresses.
      *
-     * @param Collection $addresses Addresses
-     *
-     * @return $this Self object
+     * @param Collection $addresses
      */
     public function setAddresses(Collection $addresses)
     {
         $this->addresses = $addresses;
-
-        return $this;
     }
 
     /**
@@ -360,7 +341,7 @@ class Customer extends AbstractUser implements CustomerInterface
      *
      * @return Collection Addresses
      */
-    public function getAddresses()
+    public function getAddresses() : Collection
     {
         return $this->addresses;
     }
@@ -368,23 +349,19 @@ class Customer extends AbstractUser implements CustomerInterface
     /**
      * Set Delivery Address.
      *
-     * @param AddressInterface $deliveryAddress
-     *
-     * @return $this Self object
+     * @param AddressInterface|null $deliveryAddress
      */
-    public function setDeliveryAddress(AddressInterface $deliveryAddress = null)
+    public function setDeliveryAddress( ? AddressInterface $deliveryAddress)
     {
         $this->deliveryAddress = $deliveryAddress;
-
-        return $this;
     }
 
     /**
      * Get Delivery address.
      *
-     * @return AddressInterface
+     * @return AddressInterface|null
      */
-    public function getDeliveryAddress()
+    public function getDeliveryAddress() : ? AddressInterface
     {
         return $this->deliveryAddress;
     }
@@ -392,23 +369,19 @@ class Customer extends AbstractUser implements CustomerInterface
     /**
      * Set Invoice Address.
      *
-     * @param AddressInterface $invoiceAddress
-     *
-     * @return $this Self object
+     * @param AddressInterface|null $invoiceAddress
      */
-    public function setInvoiceAddress(AddressInterface $invoiceAddress = null)
+    public function setInvoiceAddress( ? AddressInterface $invoiceAddress)
     {
         $this->invoiceAddress = $invoiceAddress;
-
-        return $this;
     }
 
     /**
      * Get Invoice address.
      *
-     * @return AddressInterface
+     * @return AddressInterface|null
      */
-    public function getInvoiceAddress()
+    public function getInvoiceAddress() : ? AddressInterface
     {
         return $this->invoiceAddress;
     }
@@ -416,23 +389,19 @@ class Customer extends AbstractUser implements CustomerInterface
     /**
      * Set language.
      *
-     * @param LanguageInterface $language The language
-     *
-     * @return $this Self object
+     * @param LanguageInterface|null $language
      */
-    public function setLanguage(LanguageInterface $language = null)
+    public function setLanguage( ? LanguageInterface $language)
     {
         $this->language = $language;
-
-        return $this;
     }
 
     /**
      * Get language.
      *
-     * @return LanguageInterface
+     * @return LanguageInterface|null
      */
-    public function getLanguage()
+    public function getLanguage() : ? LanguageInterface
     {
         return $this->language;
     }

@@ -149,23 +149,19 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Sets Firstname.
      *
-     * @param string $firstname Firstname
-     *
-     * @return $this Self object
+     * @param string|null $firstname
      */
-    public function setFirstname($firstname)
+    public function setFirstname( ? string $firstname)
     {
         $this->firstname = $firstname;
-
-        return $this;
     }
 
     /**
      * Get Firstname.
      *
-     * @return string Firstname
+     * @return string|null Firstname
      */
-    public function getFirstname()
+    public function getFirstname() : ? string
     {
         return $this->firstname;
     }
@@ -173,23 +169,19 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Sets Lastname.
      *
-     * @param string $lastname Lastname
-     *
-     * @return $this Self object
+     * @param string|null $lastname
      */
-    public function setLastname($lastname)
+    public function setLastname( ? string $lastname)
     {
         $this->lastname = $lastname;
-
-        return $this;
     }
 
     /**
      * Get Lastname.
      *
-     * @return string Lastname
+     * @return string|null Lastname
      */
-    public function getLastname()
+    public function getLastname() : ? string
     {
         return $this->lastname;
     }
@@ -197,51 +189,43 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Set gender, if the gender is allowed.
      *
-     * @param int $gender Gender
-     *
-     * @return $this Self object
+     * @param int $gender
      */
-    public function setGender($gender)
+    public function setGender(int $gender)
     {
         if (!in_array($gender, self::$genders, true)) {
-            return $this;
+            return;
         }
 
         $this->gender = $gender;
-
-        return $this;
     }
 
     /**
      * Get gender.
      *
-     * @return int Gender
+     * @return int
      */
-    public function getGender()
+    public function getGender() : int
     {
-        return (int) $this->gender;
+        return $this->gender;
     }
 
     /**
      * Set email.
      *
-     * @param string $email
-     *
-     * @return $this Self object
+     * @param string|null $email
      */
-    public function setEmail($email)
+    public function setEmail( ? string $email)
     {
         $this->email = $email;
-
-        return $this;
     }
 
     /**
      * Return email.
      *
-     * @return string Email
+     * @return string|null
      */
-    public function getEmail()
+    public function getEmail() : ? string
     {
         return $this->email;
     }
@@ -249,9 +233,9 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Get Token.
      *
-     * @return string Token
+     * @return string
      */
-    public function getToken()
+    public function getToken() : string
     {
         return $this->token;
     }
@@ -259,15 +243,11 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Sets Token.
      *
-     * @param string $token Token
-     *
-     * @return $this Self object
+     * @param string $token
      */
-    public function setToken($token)
+    public function setToken(string $token)
     {
         $this->token = $token;
-
-        return $this;
     }
 
     /**
@@ -275,7 +255,7 @@ abstract class AbstractUser implements AbstractUserInterface
      *
      * Just for symfony security purposes
      *
-     * @return string Username
+     * @return string
      */
     public function getUsername()
     {
@@ -283,49 +263,41 @@ abstract class AbstractUser implements AbstractUserInterface
     }
 
     /**
+     * Set birthday.
+     *
+     * @param DateTime|null $birthday
+     */
+    public function setBirthday( ? DateTime $birthday)
+    {
+        $this->birthday = $birthday;
+    }
+
+    /**
      * Get birthday.
      *
-     * @return DateTime
+     * @return DateTime|null
      */
-    public function getBirthday()
+    public function getBirthday() : ? DateTime
     {
         return $this->birthday;
     }
 
     /**
-     * Set birthday.
-     *
-     * @param DateTime $birthday
-     *
-     * @return $this Self object
-     */
-    public function setBirthday(DateTime $birthday = null)
-    {
-        $this->birthday = $birthday;
-
-        return $this;
-    }
-
-    /**
      * Set recovery hash.
      *
-     * @param string $recoveryHash
-     *
-     * @return $this Self object
+     * @param string|null $recoveryHash
      */
-    public function setRecoveryHash($recoveryHash)
+    public function setRecoveryHash( ? string $recoveryHash)
     {
         $this->recoveryHash = $recoveryHash;
-
-        return $this;
     }
 
     /**
      * Get recovery hash.
      *
-     * @return string Recovery Hash
+     * @return string|null
      */
-    public function getRecoveryHash()
+    public function getRecoveryHash() : ? string
     {
         return $this->recoveryHash;
     }
@@ -333,9 +305,9 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Get user full name.
      *
-     * @return string Full name
+     * @return string
      */
-    public function getFullName()
+    public function getFullName() : string
     {
         return trim($this->firstname . ' ' . $this->lastname);
     }
@@ -343,14 +315,14 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Set password.
      *
-     * @param string $password Password
+     * @param string|null $password
      *
-     * @return $this Self object
+     * @throws InvalidPasswordException
      */
-    public function setPassword($password)
+    public function setPassword( ? string $password)
     {
         if (null === $password) {
-            return $this;
+            return;
         }
 
         if (!is_string($password) || trim($password) == '') {
@@ -358,8 +330,6 @@ abstract class AbstractUser implements AbstractUserInterface
         }
 
         $this->password = $password;
-
-        return $this;
     }
 
     /**
@@ -375,25 +345,22 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Gets the one time login hash.
      *
-     * @return string Login hash
+     * @return string|null
      */
-    public function getOneTimeLoginHash()
+    public function getOneTimeLoginHash() : ? string
     {
         return $this->oneTimeLoginHash;
     }
 
     /**
-     * Sets a hash so it can be used to login once without the need to use the password.
+     * Sets a hash so it can be used to login once without the need to use the
+     * password.
      *
-     * @param string $oneTimeLoginHash The hash you want to set for the one time login
-     *
-     * @return $this Self object
+     * @param string|null $oneTimeLoginHash
      */
-    public function setOneTimeLoginHash($oneTimeLoginHash)
+    public function setOneTimeLoginHash( ? string $oneTimeLoginHash)
     {
         $this->oneTimeLoginHash = $oneTimeLoginHash;
-
-        return $this;
     }
 
     /**
@@ -421,7 +388,7 @@ abstract class AbstractUser implements AbstractUserInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString() : string
     {
         return $this->getFullName();
     }
@@ -430,6 +397,8 @@ abstract class AbstractUser implements AbstractUserInterface
      * Sleep implementation for some reason.
      *
      * @link http://asiermarques.com/2013/symfony2-security-usernamepasswordtokenserialize-must-return-a-string-or-null/
+     *
+     * @return array
      */
     public function __sleep()
     {

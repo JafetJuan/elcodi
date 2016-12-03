@@ -36,9 +36,7 @@ class UserEventDispatcher extends AbstractEventDispatcher implements UserEventDi
     /**
      * Dispatch user created event.
      *
-     * @param AbstractUserInterface $user User registered
-     *
-     * @return $this Self object
+     * @param AbstractUserInterface $user
      */
     public function dispatchOnUserRegisteredEvent(AbstractUserInterface $user)
     {
@@ -49,16 +47,12 @@ class UserEventDispatcher extends AbstractEventDispatcher implements UserEventDi
                 ElcodiUserEvents::ABSTRACTUSER_REGISTER,
                 $event
             );
-
-        return $this;
     }
 
     /**
      * Dispatch customer created event.
      *
-     * @param CustomerInterface $customer Customer registered
-     *
-     * @return $this Self object
+     * @param CustomerInterface $customer
      */
     public function dispatchOnCustomerRegisteredEvent(CustomerInterface $customer)
     {
@@ -69,16 +63,12 @@ class UserEventDispatcher extends AbstractEventDispatcher implements UserEventDi
                 ElcodiUserEvents::CUSTOMER_REGISTER,
                 $event
             );
-
-        return $this;
     }
 
     /**
      * Dispatch admin user created event.
      *
-     * @param AdminUserInterface $adminUser AdminUser registered
-     *
-     * @return $this Self object
+     * @param AdminUserInterface $adminUser
      */
     public function dispatchOnAdminUserRegisteredEvent(AdminUserInterface $adminUser)
     {
@@ -89,7 +79,5 @@ class UserEventDispatcher extends AbstractEventDispatcher implements UserEventDi
                 ElcodiUserEvents::ADMINUSER_REGISTER,
                 $event
             );
-
-        return $this;
     }
 }

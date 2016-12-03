@@ -21,14 +21,14 @@ namespace Elcodi\Bundle\CurrencyBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Component\Core\Services\ObjectDirector;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 
 /**
  * Class CurrencyExchangeRatesData.
  */
-class CurrencyExchangeRatesData extends AbstractFixture implements DependentFixtureInterface
+class CurrencyExchangeRatesData extends ElcodiFixture implements DependentFixtureInterface
 {
     /**
      * Load data fixtures with the passed EntityManager.

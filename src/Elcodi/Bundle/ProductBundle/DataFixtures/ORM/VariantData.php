@@ -21,7 +21,7 @@ namespace Elcodi\Bundle\ProductBundle\DataFixtures\ORM;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\Abstracts\AbstractFixture;
+use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
 use Elcodi\Bundle\ProductBundle\DataFixtures\ORM\Traits\ProductWithImagesTrait;
 use Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface;
 use Elcodi\Component\Core\Services\ObjectDirector;
@@ -30,7 +30,7 @@ use Elcodi\Component\Currency\Entity\Money;
 use Elcodi\Component\Product\Entity\Interfaces\ProductInterface;
 use Elcodi\Component\Product\Entity\Interfaces\VariantInterface;
 
-class VariantData extends AbstractFixture implements DependentFixtureInterface
+class VariantData extends ElcodiFixture implements DependentFixtureInterface
 {
     use ProductWithImagesTrait;
 

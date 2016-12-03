@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\CartBundle\Tests\Functional\Transformer;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartBundle\Tests\Functional\ElcodiCartFunctionalTest;
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Cart\Entity\Interfaces\CartLineInterface;
 use Elcodi\Component\Cart\Entity\OrderLine;
@@ -28,20 +28,8 @@ use Elcodi\Component\Cart\Transformer\CartOrderTransformer;
 /**
  * Class CartLineOrderLineTransformer.
  */
-class CartLineOrderLineTransformerTest extends WebTestCase
+class CartLineOrderLineTransformerTest extends ElcodiCartFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiCartBundle',
-        ];
-    }
-
     /**
      * test create orderLine by CartLine.
      */
@@ -51,18 +39,15 @@ class CartLineOrderLineTransformerTest extends WebTestCase
          * @var CartLineOrderLineTransformer $cartLineOrderLineTransformer
          * @var CartOrderTransformer         $cartOrderTransformer
          */
-        $cartLineOrderLineTransformer = $this
-            ->get('elcodi.transformer.cart_line_order_line');
-
-        $cartOrderTransformer = $this
-            ->get('elcodi.transformer.cart_order');
+        $cartLineOrderLineTransformer = $this->get('elcodi.transformer.cart_line_order_line');
+        $cartOrderTransformer = $this->get('elcodi.transformer.cart_order');
 
         /**
          * @var CartInterface     $cart
          * @var CartLineInterface $cartLine
          * @var OrderLine         $orderLine
          */
-        $cart = $this->find('cart', 2);
+        $cart = $this->find('elcodi:cart', 2);
 
         $this
             ->get('elcodi.event_dispatcher.cart')

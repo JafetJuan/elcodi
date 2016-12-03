@@ -65,7 +65,7 @@ class UpdateCartWithUserListener
      * to see if a Cart was created in session when she was not
      * logged.
      *
-     * @param AuthenticationEvent $event Event
+     * @param AuthenticationEvent $event
      */
     public function onAuthenticationSuccess(AuthenticationEvent $event)
     {
@@ -89,7 +89,9 @@ class UpdateCartWithUserListener
              */
             $cart->setCustomer($loggedUser);
 
-            $this->cartManager->flush($cart);
+            $this
+                ->cartManager
+                ->flush($cart);
         }
     }
 }

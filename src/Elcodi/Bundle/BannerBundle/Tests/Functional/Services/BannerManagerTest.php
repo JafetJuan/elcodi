@@ -18,33 +18,20 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\BannerBundle\Tests\Functional\Services;
 
-use Elcodi\Bundle\TestCommonBundle\Functional\WebTestCase;
+use Elcodi\Bundle\CartBundle\Tests\Functional\ElcodiBannerFunctionalTest;
 
 /**
  * Tests BannerManager class.
  */
-class BannerManagerTest extends WebTestCase
+class BannerManagerTest extends ElcodiBannerFunctionalTest
 {
-    /**
-     * Load fixtures of these bundles.
-     *
-     * @return array Bundles name where fixtures should be found
-     */
-    protected static function loadFixturesBundles()
-    {
-        return [
-            'ElcodiLanguageBundle',
-            'ElcodiBannerBundle',
-        ];
-    }
-
     /**
      * Load banners given a banner_zone with language.
      */
     public function testGetBannersFromBannerZoneCode()
     {
         $language = $this
-            ->getRepository('language')
+            ->getObjectRepository('elcodi:language')
             ->findOneBy([
                 'iso' => 'es',
             ]);

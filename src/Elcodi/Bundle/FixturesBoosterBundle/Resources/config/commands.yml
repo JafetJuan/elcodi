@@ -7,6 +7,7 @@ services:
         class: Elcodi\Bundle\FixturesBoosterBundle\Command\LoadDataFixturesDoctrineCommand
         arguments:
             - '@kernel'
+            - '@doctrine'
             - %database_path%
         tags:
             -  { name: console.command }
