@@ -1,0 +1,24 @@
+Elcodi\Component\User\Entity\PermissionGroup:
+    type: entity
+    table: permission_group
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            column: name
+            type: string
+            required: true
+            unique: true
+        description:
+            column: description
+            type: text
+            required: false
+        permissions:
+            column: permissions
+            type: array
+        enabled:
+            column: enabled
+            type: boolean

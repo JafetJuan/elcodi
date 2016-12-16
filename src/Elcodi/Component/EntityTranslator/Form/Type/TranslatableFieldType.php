@@ -17,11 +17,13 @@
 
 namespace Elcodi\Component\EntityTranslator\Form\Type;
 
+use Elcodi\Component\EntityTranslator\Services\Interfaces\EntityTranslationProviderInterface;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormConfigInterface;
-
-use Elcodi\Component\EntityTranslator\Services\Interfaces\EntityTranslationProviderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Class TranslatableFieldType.
@@ -29,147 +31,42 @@ use Elcodi\Component\EntityTranslator\Services\Interfaces\EntityTranslationProvi
 class TranslatableFieldType extends AbstractType
 {
     /**
-     * @var EntityTranslationProviderInterface
-     *
-     * Entity Translation provider
-     */
-    protected $entityTranslationProvider;
-
-    /**
-     * @var FormConfigInterface
-     *
-     * Form Config
-     */
-    protected $formConfig;
-
-    /**
-     * @var object
-     *
-     * Entity
-     */
-    protected $entity;
-
-    /**
-     * @var string
-     *
-     * Field name
-     */
-    protected $fieldName;
-
-    /**
-     * @var array
-     *
-     * Entity configuration
-     */
-    protected $entityConfiguration;
-
-    /**
-     * @var array
-     *
-     * Field configuration
-     */
-    protected $fieldConfiguration;
-
-    /**
-     * @var array
-     *
-     * Locales
-     */
-    protected $locales;
-
-    /**
-     * @var string
-     *
-     * Master locale
-     */
-    protected $masterLocale;
-
-    /**
-     * @var bool
-     *
-     * Fallback is enabled.
-     *
-     * If a field is required and the fallback flag is enabled, all translations
-     * will not be required anymore, but just the translation with same language
-     * than master
-     */
-    protected $fallback;
-
-    /**
-     * Construct.
-     *
-     * @param EntityTranslationProviderInterface $entityTranslationProvider Entity Translation provider
-     * @param FormConfigInterface                $formConfig                Form config
-     * @param object                             $entity                    Entity
-     * @param string                             $fieldName                 Field name
-     * @param array                              $entityConfiguration       Entity configuration
-     * @param array                              $fieldConfiguration        Field configuration
-     * @param array                              $locales                   Locales
-     * @param string                             $masterLocale              Master locale
-     * @param bool                               $fallback                  Fallback
-     */
-    public function __construct(
-        EntityTranslationProviderInterface $entityTranslationProvider,
-        FormConfigInterface $formConfig,
-        $entity,
-        $fieldName,
-        array $entityConfiguration,
-        array $fieldConfiguration,
-        array $locales,
-        $masterLocale,
-        $fallback
-    ) {
-        $this->entityTranslationProvider = $entityTranslationProvider;
-        $this->formConfig = $formConfig;
-        $this->entity = $entity;
-        $this->fieldName = $fieldName;
-        $this->entityConfiguration = $entityConfiguration;
-        $this->fieldConfiguration = $fieldConfiguration;
-        $this->locales = $locales;
-        $this->masterLocale = $masterLocale;
-        $this->fallback = $fallback;
-    }
-
-    /**
      * Buildform function.
      *
-     * @param FormBuilderInterface $builder the formBuilder
-     * @param array                $options the options for this form
+     * @param FormBuilderInterface $builder
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $entityAlias = $this->entityConfiguration['alias'];
-        $entityIdGetter = $this->entityConfiguration['idGetter'];
+        $entityAlias = $options['entityConfiguration']['alias'];
+        $entityIdGetter = $options['entityConfiguration']['idGetter'];
+        $fieldOptions = $options['formConfig']->getOptions();
+        $fieldBlockPrefix = $options['formConfig']
+                ->getType()
+                ->getBlockPrefix();
 
-        $fieldOptions = $this
-            ->formConfig
-            ->getOptions();
+        $fieldType = $this->resolveFieldType($fieldBlockPrefix);
 
-        $fieldType = $this
-            ->formConfig
-            ->getType()
-            ->getName();
+        foreach ($options['locales'] as $locale) {
+            $translatedFieldName = $locale . '_' . $options['fieldName'];
 
-        foreach ($this->locales as $locale) {
-            $translatedFieldName = $locale . '_' . $this->fieldName;
-
-            $entityId = $this->entity->$entityIdGetter();
+            $entityId = $options['entity']->$entityIdGetter();
             $translationData = $entityId
-                ? $this
-                    ->entityTranslationProvider
-                    ->getTranslation(
+                ? $options['entityTranslationProvider']->getTranslation(
                         $entityAlias,
                         $entityId,
-                        $this->fieldName,
+                        $options['fieldName'],
                         $locale
-                    )
+                )
                 : '';
 
             $builder->add($translatedFieldName, $fieldType, [
                 'required' => isset($fieldOptions['required'])
                     ? $this->evaluateRequired(
                         $fieldOptions['required'],
-                        $locale
+                        $locale,
+                        $options['masterLocale'],
+                        $options['fallback']
                     )
                     : false,
                 'mapped' => false,
@@ -181,27 +78,63 @@ class TranslatableFieldType extends AbstractType
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'entityTranslationProvider' => null,
+            'formConfig' => null,
+            'entity' => null,
+            'fieldName' => '',
+            'entityConfiguration' => [],
+            'fieldConfiguration' => [],
+            'locales' => [],
+            'masterLocale' => '',
+            'fallback' => false,
+            'mapped' => false,
+        ));
+    }
+
+    /**
      * Check the require value.
      *
-     * @param bool   $required Form field is required
-     * @param string $locale   Locale
+     * @param bool   $required
+     * @param string $locale
+     * @param string $masterLocale
+     * @param bool   $fallback
      *
-     * @return bool translatable field is required
+     * @return bool
      */
-    public function evaluateRequired($required, $locale)
+    private function evaluateRequired(
+        bool $required,
+        string $locale,
+        string $masterLocale,
+        bool $fallback
+
+    ) : bool
     {
         return (boolean) $required
-            ? !$this->fallback || ($this->masterLocale === $locale)
+            ? !$fallback || ($masterLocale === $locale)
             : false;
     }
 
     /**
-     * Returns the name of this type.
+     * Resolve field type
      *
-     * @return string The name of this type
+     * @param string $fieldType
+     *
+     * @return string
      */
-    public function getName()
+    private function resolveFieldType(string $fieldType) : string
     {
-        return 'translatable_field';
+        if ('text' === $fieldType) {
+            return TextType::class;
+        }
+        if ('textarea' === $fieldType) {
+            return TextareaType::class;
+        }
+
+        return $fieldType;
     }
 }

@@ -57,6 +57,13 @@ class Configuration extends AbstractConfiguration
                             'default',
                             true
                         ))
+                        ->append($this->addMappingNode(
+                            'permission_group',
+                            'Elcodi\Component\User\Entity\PermissionGroup',
+                            '@ElcodiUserBundle/Resources/config/doctrine/PermissionGroup.orm.yml',
+                            'default',
+                            true
+                        ))
                     ->end()
                 ->end()
             ->end();

@@ -17,13 +17,15 @@
 
 namespace Elcodi\Component\Core\Factory\Traits;
 
+use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
+
 /**
  * Trait FactoryTrait.
  */
 trait FactoryTrait
 {
     /**
-     * @var \Elcodi\Component\Core\Factory\Abstracts\AbstractFactory
+     * @var AbstractFactory
      *
      * Factory
      */
@@ -32,24 +34,44 @@ trait FactoryTrait
     /**
      * Get Factory.
      *
-     * @return \Elcodi\Component\Core\Factory\Abstracts\AbstractFactory Factory
+     * @return AbstractFactory
      */
-    public function getFactory()
+    protected function getFactory()
     {
         return $this->factory;
     }
 
     /**
+     * Get entity namespace
+     *
+     * @return string
+     */
+    protected function getEntityNamespace()
+    {
+        return $this
+            ->factory
+            ->getEntityNamespace();
+    }
+
+    /**
+     * Create from factory
+     *
+     * @return Object
+     */
+    protected function createFromFactory()
+    {
+        return $this
+            ->factory
+            ->create();
+    }
+
+    /**
      * Sets Factory.
      *
-     * @param \Elcodi\Component\Core\Factory\Abstracts\AbstractFactory $factory Factory
-     *
-     * @return $this Self object
+     * @param AbstractFactory $factory
      */
-    public function setFactory(\Elcodi\Component\Core\Factory\Abstracts\AbstractFactory $factory)
+    public function setFactory(AbstractFactory $factory)
     {
         $this->factory = $factory;
-
-        return $this;
     }
 }

@@ -42,6 +42,7 @@ class MappingCompilerPass extends AbstractElcodiMappingCompilerPass
                     'abstract_user',
                     'admin_user',
                     'customer',
+                    'permission_group'
                 ]
             );
     }

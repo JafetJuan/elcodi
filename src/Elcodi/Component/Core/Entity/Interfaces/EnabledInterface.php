@@ -37,4 +37,18 @@ interface EnabledInterface
      * @return bool Enabled
      */
     public function isEnabled();
+
+    /**
+     * Enable.
+     *
+     * @return $this Self object
+     */
+    public function enable();
+
+    /**
+     * Disable.
+     *
+     * @return $this Self object
+     */
+    public function disable();
 }

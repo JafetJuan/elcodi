@@ -91,6 +91,11 @@ class ElcodiUserExtension extends AbstractExtension implements EntitiesOverridab
             'elcodi.entity.customer.mapping_file' => $config['mapping']['customer']['mapping_file'],
             'elcodi.entity.customer.manager' => $config['mapping']['customer']['manager'],
             'elcodi.entity.customer.enabled' => $config['mapping']['customer']['enabled'],
+
+            'elcodi.entity.permission_group.class' => $config['mapping']['permission_group']['class'],
+            'elcodi.entity.permission_group.mapping_file' => $config['mapping']['permission_group']['mapping_file'],
+            'elcodi.entity.permission_group.manager' => $config['mapping']['permission_group']['manager'],
+            'elcodi.entity.permission_group.enabled' => $config['mapping']['permission_group']['enabled'],
         ];
     }
 
@@ -124,6 +129,7 @@ class ElcodiUserExtension extends AbstractExtension implements EntitiesOverridab
         return [
             'Elcodi\Component\User\Entity\Interfaces\CustomerInterface' => 'elcodi.entity.customer.class',
             'Elcodi\Component\User\Entity\Interfaces\AdminUserInterface' => 'elcodi.entity.admin_user.class',
+            'Elcodi\Component\User\Entity\Interfaces\PermissionGroupInterface' => 'elcodi.entity.permission_group.class',
         ];
     }
 
