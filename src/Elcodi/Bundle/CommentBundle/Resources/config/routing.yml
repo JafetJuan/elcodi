@@ -26,7 +26,7 @@ elcodi_comments_edit:
     requirements:
         source: ".+"
         authorToken: ".+"
-        commentId: "\d+"
+        commentId: "\\d+"
 
 elcodi_comments_delete:
     path: /comments/{authorToken}/{commentId}/delete
@@ -35,4 +35,4 @@ elcodi_comments_delete:
         _controller: elcodi.controller.comment:deleteCommentAction
     requirements:
         authorToken: ".+"
-        commentId: "\d+"
+        commentId: "\\d+"

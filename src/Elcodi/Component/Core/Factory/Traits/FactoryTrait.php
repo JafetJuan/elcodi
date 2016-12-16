@@ -35,7 +35,7 @@ trait FactoryTrait
     /**
      * Sets Factory.
      *
-     * @param AbstractFactory $factory Factory
+     * @param AbstractFactory $factory
      */
     public function setFactory(AbstractFactory $factory)
     {
@@ -43,12 +43,26 @@ trait FactoryTrait
     }
 
     /**
-     * Get Factory.
+     * Get entity namespace
      *
-     * @return AbstractFactory Factory
+     * @return string
      */
-    public function getFactory() : AbstractFactory
+    protected function getEntityNamespace()
     {
-        return $this->factory;
+        return $this
+            ->factory
+            ->getEntityNamespace();
+    }
+
+    /**
+     * Create from factory
+     *
+     * @return Object
+     */
+    protected function createFromFactory()
+    {
+        return $this
+            ->factory
+            ->create();
     }
 }

@@ -8,6 +8,18 @@ Elcodi\Component\User\Entity\AdminUser:
             generator:
                 strategy: AUTO
 
+    manyToMany:
+        permissionGroups:
+            targetEntity: Elcodi\Component\User\Entity\Interfaces\PermissionGroupInterface
+            joinTable:
+                name: admin_permission_group
+                joinColumns:
+                    admin_user_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    permission_group_id:
+                        referencedColumnName: id
+
     lifecycleCallbacks:
             preUpdate: [loadUpdateAt]
             prePersist: [loadUpdateAt]

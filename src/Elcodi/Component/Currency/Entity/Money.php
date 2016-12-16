@@ -59,10 +59,13 @@ class Money implements MoneyInterface
     /**
      * Simple Money Value Object constructor.
      *
-     * @param int               $amount   Amount
-     * @param CurrencyInterface $currency Currency
+     * @param int               $amount
+     * @param CurrencyInterface $currency
      */
-    protected function __construct($amount, CurrencyInterface $currency)
+    protected function __construct(
+        int $amount,
+        CurrencyInterface $currency
+    )
     {
         $this->amount = intval($amount);
         $this->currency = $currency;
@@ -76,9 +79,9 @@ class Money implements MoneyInterface
     /**
      * Gets the Money Currency.
      *
-     * @return CurrencyInterface Currency
+     * @return CurrencyInterface
      */
-    public function getCurrency()
+    public function getCurrency() : CurrencyInterface
     {
         return $this->currency;
     }
@@ -86,9 +89,9 @@ class Money implements MoneyInterface
     /**
      * Gets the Money amount.
      *
-     * @return int Amount
+     * @return int
      */
-    public function getAmount()
+    public function getAmount() : int
     {
         return $this->amount;
     }
@@ -99,7 +102,7 @@ class Money implements MoneyInterface
      *
      * @return float
      */
-    public function getConvertedAmount()
+    public function getConvertedAmount() : float
     {
         return $this
             ->wrappedMoney
@@ -117,9 +120,9 @@ class Money implements MoneyInterface
      *
      * @param MoneyInterface $other
      *
-     * @return int Comparison value
+     * @return int
      */
-    public function compareTo(MoneyInterface $other)
+    public function compareTo(MoneyInterface $other) : int
     {
         return $this
             ->wrappedMoney
@@ -129,12 +132,11 @@ class Money implements MoneyInterface
     /**
      * Adds a Money and returns the result as a new Money.
      *
-     * @param MoneyInterface $other Other money
+     * @param MoneyInterface $other
      *
-     * @return MoneyInterface New money instance as a result of addition
-     *                        between current object and given as a parameter
+     * @return MoneyInterface
      */
-    public function add(MoneyInterface $other)
+    public function add(MoneyInterface $other) : MoneyInterface
     {
         $wrappedMoney = $this
             ->wrappedMoney
@@ -149,12 +151,11 @@ class Money implements MoneyInterface
     /**
      * Subtracts a Money and returns the result as a new Money.
      *
-     * @param MoneyInterface $other Other money
+     * @param MoneyInterface $other
      *
-     * @return MoneyInterface New money instance as a result of subtraction
-     *                        between current object and given as a parameter
+     * @return MoneyInterface
      */
-    public function subtract(MoneyInterface $other)
+    public function subtract(MoneyInterface $other) : MoneyInterface
     {
         $wrappedMoney = $this
             ->wrappedMoney
@@ -170,11 +171,11 @@ class Money implements MoneyInterface
      * Multiplies current Money amount by a factor returns the result as a new
      * Money.
      *
-     * @param float $factor Factor
+     * @param float $factor
      *
-     * @return MoneyInterface New money instance with amount multiplied by factor
+     * @return MoneyInterface
      */
-    public function multiply($factor)
+    public function multiply($factor) : MoneyInterface
     {
         $wrappedMoney = $this
             ->wrappedMoney
@@ -191,9 +192,9 @@ class Money implements MoneyInterface
      *
      * @param MoneyInterface $other
      *
-     * @return bool Current money equals given as parameter
+     * @return bool
      */
-    public function equals(MoneyInterface $other)
+    public function equals(MoneyInterface $other) : bool
     {
         return $this->compareTo($other) == 0;
     }
@@ -203,9 +204,9 @@ class Money implements MoneyInterface
      *
      * @param MoneyInterface $other
      *
-     * @return bool Current money is greater than given as parameter
+     * @return bool
      */
-    public function isGreaterThan(MoneyInterface $other)
+    public function isGreaterThan(MoneyInterface $other) : bool
     {
         return $this
             ->wrappedMoney
@@ -217,9 +218,9 @@ class Money implements MoneyInterface
      *
      * @param MoneyInterface $other
      *
-     * @return bool Current money is less than given as parameter
+     * @return bool
      */
-    public function isLessThan(MoneyInterface $other)
+    public function isLessThan(MoneyInterface $other) : bool
     {
         return $this
             ->wrappedMoney
@@ -231,9 +232,9 @@ class Money implements MoneyInterface
      *
      * @param MoneyInterface $money Money
      *
-     * @return WrappedMoney WrappedMoney new instance
+     * @return WrappedMoney
      */
-    private function newWrappedMoneyFromMoney(MoneyInterface $money)
+    private function newWrappedMoneyFromMoney(MoneyInterface $money) : WrappedMoney
     {
         return new WrappedMoney(
             $money->getAmount(),
@@ -255,10 +256,10 @@ class Money implements MoneyInterface
      * amount and a Currency object implementing CurrencyInterface
      * are needed.
      *
-     * @param int               $amount   Amount
-     * @param CurrencyInterface $currency Currency
+     * @param int               $amount
+     * @param CurrencyInterface $currency
      *
-     * @return MoneyInterface new Money instance
+     * @return MoneyInterface
      */
     public static function create(
         $amount,

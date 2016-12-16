@@ -23,6 +23,7 @@ services:
 
     elcodi.money_printer:
         class: Elcodi\Component\Currency\Services\MoneyPrinter
+        lazy: true
         arguments:
             - '@elcodi.converter.currency'
             - '@elcodi.wrapper.currency'

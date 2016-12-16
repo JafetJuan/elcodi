@@ -121,6 +121,7 @@ class ElcodiUserExtension extends BaseExtension implements EntitiesOverridableEx
         return [
             'Elcodi\Component\User\Entity\Interfaces\CustomerInterface' => 'elcodi.entity.customer.class',
             'Elcodi\Component\User\Entity\Interfaces\AdminUserInterface' => 'elcodi.entity.admin_user.class',
+            'Elcodi\Component\User\Entity\Interfaces\PermissionGroupInterface' => 'elcodi.entity.permission_group.class',
         ];
     }
 }

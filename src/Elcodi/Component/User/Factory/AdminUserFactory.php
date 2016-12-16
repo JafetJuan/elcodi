@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace Elcodi\Component\User\Factory;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 use Elcodi\Component\Core\Generator\Interfaces\GeneratorInterface;
 use Elcodi\Component\User\ElcodiUserProperties;
@@ -63,6 +64,7 @@ class AdminUserFactory extends AbstractFactory
         $adminUser->setToken($this->generator->generate(2));
         $adminUser->enable();
         $adminUser->setCreatedAt($this->now());
+        $adminUser->setPermissionGroups(new ArrayCollection());
 
         return $adminUser;
     }

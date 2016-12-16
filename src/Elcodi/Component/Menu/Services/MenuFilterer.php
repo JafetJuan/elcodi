@@ -95,24 +95,20 @@ class MenuFilterer extends AbstractMenuModifier implements MenuChangerInterface
         $stage
     ) {
         return $menuNodes->filter(function (NodeInterface $menuNode) use ($menuCode, $stage) {
-            if ($this->applyFiltersToMenuNode(
+
+            $menuNode->setSubnodes(
+                $this->applyFiltersToMenuNodes(
+                    $menuNode->getSubnodes(),
+                    $menuCode,
+                    $stage
+                )
+            );
+
+            return $this->applyFiltersToMenuNode(
                 $menuNode,
                 $menuCode,
                 $stage
-            )
-            ) {
-                $menuNode->setSubnodes(
-                    $this->applyFiltersToMenuNodes(
-                        $menuNode->getSubnodes(),
-                        $menuCode,
-                        $stage
-                    )
-                );
-
-                return true;
-            }
-
-            return false;
+            );
         });
     }
 
