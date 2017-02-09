@@ -97,19 +97,6 @@ class Money implements MoneyInterface
     }
 
     /**
-     * Gets the monetary value represented by this object converted to its base
-     * units.
-     *
-     * @return float
-     */
-    public function getConvertedAmount() : float
-    {
-        return $this
-            ->wrappedMoney
-            ->getConvertedAmount();
-    }
-
-    /**
      * Compares current Money object to another.
      *
      * Will return -1, 0, 1 if the amount of this Money object
@@ -256,7 +243,7 @@ class Money implements MoneyInterface
      * amount and a Currency object implementing CurrencyInterface
      * are needed.
      *
-     * @param int               $amount
+     * @param mixed             $amount
      * @param CurrencyInterface $currency
      *
      * @return MoneyInterface
@@ -265,6 +252,9 @@ class Money implements MoneyInterface
         $amount,
         CurrencyInterface $currency
     ) {
-        return new self($amount, $currency);
+        return new Money(
+            intval($amount),
+            $currency
+        );
     }
 }

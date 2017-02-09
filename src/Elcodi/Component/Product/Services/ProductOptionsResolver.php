@@ -20,8 +20,8 @@ namespace Elcodi\Component\Product\Services;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
-use Elcodi\Component\Attribute\Entity\Interfaces\AttributeInterface;
-use Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface;
+use Elcodi\Component\Product\Entity\Interfaces\AttributeInterface;
+use Elcodi\Component\Product\Entity\Interfaces\ValueInterface;
 use Elcodi\Component\Product\Entity\Interfaces\ProductInterface;
 use Elcodi\Component\Product\Entity\Interfaces\VariantInterface;
 

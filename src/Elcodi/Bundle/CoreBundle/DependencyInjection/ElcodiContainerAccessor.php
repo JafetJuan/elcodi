@@ -29,54 +29,70 @@ trait ElcodiContainerAccessor
     /**
      * Create new entity.
      *
-     * @param string $entityName
+     * @param string $entityAlias
      *
      * @return object
      */
-    protected function create(string $entityName)
+    protected function create(string $entityAlias)
     {
         return $this
-            ->getFactory($entityName)
+            ->getFactory($entityAlias)
             ->create();
     }
 
     /**
      * Get factory given its its entity name.
      *
-     * @param string $entityName
+     * @param string $entityAlias
      *
      * @return AbstractFactory
      */
-    protected function getFactory(string $entityName) : AbstractFactory
+    protected function getFactory(string $entityAlias) : AbstractFactory
     {
-        return $this->get('elcodi.factory.' . $this->fromMappingFormatToElcodiFormat($entityName));
+        list($domain, $entityName) = $this->fromMappingFormatToElcodiFormat($entityAlias);
+
+        return $this->get("$domain.factory.$entityName");
     }
 
     /**
      * Get director given its its entity name.
      *
-     * @param string $entityName
+     * @param string $entityAlias
      *
      * @return ObjectDirector
      */
-    protected function getDirector(string $entityName) : ObjectDirector
+    protected function getDirector(string $entityAlias) : ObjectDirector
     {
-        return $this->get('elcodi.director.' . $this->fromMappingFormatToElcodiFormat($entityName));
+        list($domain, $entityName) = $this->fromMappingFormatToElcodiFormat($entityAlias);
+
+        return $this->get("$domain.director.$entityName");
     }
 
     /**
      * Transform common mapping format to elcodi format.
      *
+     * Possible formats:
+     *
+     * "elcodi:cart"
+     * "elcodi_whatever.more_things:shipping_range"
+     * "cart" - Treated as "elcodi:cart"
+     *
+     * Return an array with the first part and the second part
+     *
      * @param string $entityAlias
      *
-     * @return string
+     * @return array
      */
-    private function fromMappingFormatToElcodiFormat(string $entityAlias) : string
+    private function fromMappingFormatToElcodiFormat(string $entityAlias) : array
     {
-        if (preg_match('~^elcodi\:.*+$~', $entityAlias)) {
-            return str_replace('elcodi:', '', $entityAlias);
+        $parts = explode(':', $entityAlias, 2);
+        if (count($parts) === 2) {
+            return $parts;
         }
 
-        return $entityAlias;
+        return [
+            'elcodi',
+            $parts[0]
+        ];
     }
 }

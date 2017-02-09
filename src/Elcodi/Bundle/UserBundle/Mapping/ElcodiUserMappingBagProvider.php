@@ -38,6 +38,7 @@ class ElcodiUserMappingBagProvider implements MappingBagProvider
                 'abstract_user' => 'AbstractUser',
                 'admin_user' => 'AdminUser',
                 'customer' => 'Customer',
+                'permission_group' => 'PermissionGroup',
             ],
             '@ElcodiUserBundle',
             'Elcodi\Component\User\Entity',

@@ -19,7 +19,7 @@ declare(strict_types=1);
 namespace Elcodi\Bundle\CartBundle\Tests\Functional\Services;
 
 use Elcodi\Bundle\CartBundle\Tests\Functional\Services\Abstracts\AbstractCartManagerTest;
-use Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface;
+use Elcodi\Component\Product\Entity\Interfaces\ValueInterface;
 use Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface;
 use Elcodi\Component\Product\Entity\Interfaces\VariantInterface;
 

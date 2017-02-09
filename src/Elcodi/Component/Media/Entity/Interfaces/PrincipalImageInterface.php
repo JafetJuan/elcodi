@@ -26,16 +26,14 @@ interface PrincipalImageInterface
     /**
      * Set the principalImage.
      *
-     * @param ImageInterface $principalImage Principal image
-     *
-     * @return $this Self object
+     * @param ImageInterface|null $principalImage
      */
-    public function setPrincipalImage(ImageInterface $principalImage = null);
+    public function setPrincipalImage(?ImageInterface $principalImage = null);
 
     /**
      * Get the principalImage.
      *
-     * @return ImageInterface Principal image
+     * @return ImageInterface|null
      */
-    public function getPrincipalImage();
+    public function getPrincipalImage() : ? ImageInterface;
 }

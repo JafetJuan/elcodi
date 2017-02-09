@@ -36,3 +36,14 @@ services:
             - elcodi.route.location_api_location
             - elcodi.route.location_api_hierarchy
             - elcodi.route.location_api_in
+
+    elcodi.matcher.zone:
+        class: Elcodi\Component\Geo\Services\ZoneMatcher
+        arguments:
+            - '@elcodi.location_provider'
+
+    elcodi.finder.zone:
+        class: Elcodi\Component\Geo\Services\ZoneFinder
+        arguments:
+            - '@elcodi.repository.zone'
+            - '@elcodi.matcher.zone'

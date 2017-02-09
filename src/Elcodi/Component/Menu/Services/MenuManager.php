@@ -105,13 +105,13 @@ class MenuManager extends AbstractCacheWrapper
      * Otherwise, if is saved into cache, load it and save it locally
      * Otherwise, generate the data, save it into cache and save it locally
      *
-     * @param string $menuCode Menu code
+     * @param string $menuCode
      *
-     * @return array Menu configuration
+     * @return MenuInterface
      *
      * @throws Exception
      */
-    public function loadMenuByCode($menuCode)
+    public function loadMenuByCode(string $menuCode) : MenuInterface
     {
         $menu = $this->loadFromMemory($menuCode);
         if (!($menu instanceof MenuInterface)) {
@@ -149,28 +149,24 @@ class MenuManager extends AbstractCacheWrapper
     /**
      * Save menu configuration to memory.
      *
-     * @param string $menuCode Code of the menu
-     *
-     * @return $this Self object
+     * @param string $menuCode
      */
-    public function removeFromCache($menuCode)
+    public function removeFromCache(string $menuCode)
     {
         $key = $this->getCacheKey($menuCode);
         $this
             ->cache
             ->delete($key);
-
-        return $this;
     }
 
     /**
      * Try to get menu configuration from memory.
      *
-     * @param string $menuCode Code of the menu
+     * @param string $menuCode
      *
-     * @return MenuInterface|null Menu configuration
+     * @return MenuInterface|null
      */
-    private function loadFromMemory($menuCode)
+    private function loadFromMemory(string $menuCode)
     {
         return isset($this->menus[$menuCode])
             ? $this->menus[$menuCode]
@@ -180,25 +176,21 @@ class MenuManager extends AbstractCacheWrapper
     /**
      * Save menu configuration to memory.
      *
-     * @param MenuInterface $menu Menu loaded and processed
-     *
-     * @return $this Self object
+     * @param MenuInterface $menu
      */
     private function saveToMemory(MenuInterface $menu)
     {
         $this->menus[$menu->getCode()] = $menu;
-
-        return $this;
     }
 
     /**
      * Try to get menu configuration from cache.
      *
-     * @param string $key Identifier of the menu
+     * @param string $key
      *
-     * @return MenuInterface|null Menu
+     * @return MenuInterface|null
      */
-    private function loadFromCache($key)
+    private function loadFromCache(string $key)
     {
         $encoded = (string) $this
             ->cache
@@ -220,12 +212,13 @@ class MenuManager extends AbstractCacheWrapper
     /**
      * Save menu configuration to memory.
      *
-     * @param string        $key  Cache key
-     * @param MenuInterface $menu Menu to cache
-     *
-     * @return $this Self object
+     * @param string        $key
+     * @param MenuInterface $menu
      */
-    private function saveToCache($key, MenuInterface $menu)
+    private function saveToCache(
+        string $key,
+        MenuInterface $menu
+    )
     {
         $encodedMenu = $this
             ->encoder
@@ -234,20 +227,18 @@ class MenuManager extends AbstractCacheWrapper
         $this
             ->cache
             ->save($key, $encodedMenu);
-
-        return $this;
     }
 
     /**
      * Build menu.
      *
-     * @param string $menuCode Menu code
+     * @param string $menuCode
      *
      * @return MenuInterface Menu
      *
-     * @throws Exception
+     * @throws Exception Menu not found
      */
-    private function buildMenuFromRepository($menuCode)
+    private function buildMenuFromRepository(string $menuCode) : MenuInterface
     {
         $menu = $this
             ->menuRepository
@@ -273,14 +264,12 @@ class MenuManager extends AbstractCacheWrapper
     /**
      * Apply menu changers to Menu.
      *
-     * @param MenuInterface $menu  Menu
-     * @param string        $stage Stage
-     *
-     * @return $this Self object
+     * @param MenuInterface $menu
+     * @param string        $stage
      */
     private function applyMenuChangers(
         MenuInterface $menu,
-        $stage
+        string $stage
     ) {
         foreach ($this->menuChangers as $menuChanger) {
             $menuChanger
@@ -289,18 +278,16 @@ class MenuManager extends AbstractCacheWrapper
                     $stage
                 );
         }
-
-        return $this;
     }
 
     /**
      * Build menu key for cache.
      *
-     * @param string $menuCode Menu code
+     * @param string $menuCode
      *
-     * @return string Cache key
+     * @return string
      */
-    private function getCacheKey($menuCode)
+    private function getCacheKey(string $menuCode) : string
     {
         return "{$this->key}-{$menuCode}";
     }

@@ -37,6 +37,7 @@ class ElcodiGeoMappingBagProvider implements MappingBagProvider
             [
                 'address' => 'Address',
                 'location' => 'Location',
+                'zone' => 'Zone',
             ],
             '@ElcodiGeoBundle',
             'Elcodi\Component\Geo\Entity',

@@ -18,6 +18,12 @@ services:
         calls:
             - [setEntityNamespace, ["%elcodi.entity.location.class%"]]
 
+    elcodi.factory.zone:
+        class: Elcodi\Component\Geo\Factory\ZoneFactory
+        calls:
+            - [setEntityNamespace, ["%elcodi.entity.zone.class%"]]
+            - [setDateTimeFactory, ["@elcodi.factory.datetime"]]
+
     elcodi.factory.location_data:
         class: Elcodi\Component\Geo\Factory\LocationDataFactory
 

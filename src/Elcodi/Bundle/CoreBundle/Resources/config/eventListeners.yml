@@ -6,4 +6,4 @@ services:
     elcodi.event_listener.referrer_session:
         class: Elcodi\Component\Core\EventListener\ReferrerSessionEventListener
         tags:
-            - { name: kernel.event_listener, event: kernel.request, method: updateSessionReferrer }
+            - { name: kernel.event_listener, event: kernel.request, method: updateSessionReferrer, firewall: store }

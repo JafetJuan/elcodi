@@ -28,9 +28,9 @@ interface UserEmaileableInterface
     /**
      * Find one Entity given an email.
      *
-     * @param string $email Email
+     * @param string $email
      *
-     * @return AbstractUserInterface|null User found
+     * @return AbstractUserInterface|null
      */
-    public function findOneByEmail($email);
+    public function findOneByEmail(string $email) : ? AbstractUserInterface;
 }

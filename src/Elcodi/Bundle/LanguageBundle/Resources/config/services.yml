@@ -7,7 +7,7 @@ services:
         class: Elcodi\Component\Language\Services\LocaleProvider
         arguments:
             - '@request_stack'
-            - %locale%
+            - '%locale%'
 
     elcodi.provider.locale.locale:
         class: Elcodi\Component\Language\Entity\Locale

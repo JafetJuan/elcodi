@@ -69,6 +69,10 @@ class CurrencySessionManager
                 $currency->getIso()
             );
 
+        $this
+            ->session
+            ->save();
+
         return $this;
     }
 

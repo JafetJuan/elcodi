@@ -47,28 +47,20 @@ abstract class AbstractCacheWrapper
     /**
      * Set Cache.
      *
-     * @param CacheProvider $cache Cache
-     *
-     * @return $this Self object
+     * @param CacheProvider $cache
      */
     public function setCache(CacheProvider $cache)
     {
         $this->cache = $cache;
-
-        return $this;
     }
 
     /**
      * Set encoder.
      *
-     * @param EncoderInterface $encoder Encoder
-     *
-     * @return $this Self object
+     * @param EncoderInterface $encoder
      */
     public function setEncoder(EncoderInterface $encoder)
     {
         $this->encoder = $encoder;
-
-        return $this;
     }
 }

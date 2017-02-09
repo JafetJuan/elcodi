@@ -52,15 +52,15 @@ class VariantNameResolverTest extends PHPUnit_Framework_TestCase
             ->getName()
             ->willReturn(null);
 
-        $attribute1 = $this->prophesize('Elcodi\Component\Attribute\Entity\Interfaces\AttributeInterface');
+        $attribute1 = $this->prophesize('Elcodi\Component\Product\Entity\Interfaces\AttributeInterface');
         $attribute1->getName()->willReturn('attribute1');
-        $value1 = $this->prophesize('Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface');
+        $value1 = $this->prophesize('Elcodi\Component\Product\Entity\Interfaces\ValueInterface');
         $value1->getAttribute()->willReturn($attribute1->reveal());
         $value1->getValue()->willReturn('value1');
 
-        $attribute2 = $this->prophesize('Elcodi\Component\Attribute\Entity\Interfaces\AttributeInterface');
+        $attribute2 = $this->prophesize('Elcodi\Component\Product\Entity\Interfaces\AttributeInterface');
         $attribute2->getName()->willReturn('attribute2');
-        $value2 = $this->prophesize('Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface');
+        $value2 = $this->prophesize('Elcodi\Component\Product\Entity\Interfaces\ValueInterface');
         $value2->getAttribute()->willReturn($attribute2->reveal());
         $value2->getValue()->willReturn('value2');
 

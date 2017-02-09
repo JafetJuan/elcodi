@@ -131,6 +131,8 @@ class ElcodiProductExtension extends BaseExtension implements EntitiesOverridabl
             'Elcodi\Component\Product\Entity\Interfaces\PackInterface' => 'elcodi.entity.purchasable_pack.class',
             'Elcodi\Component\Product\Entity\Interfaces\ManufacturerInterface' => 'elcodi.entity.manufacturer.class',
             'Elcodi\Component\Product\Entity\Interfaces\CategoryInterface' => 'elcodi.entity.category.class',
+            'Elcodi\Component\Product\Entity\Interfaces\AttributeInterface' => 'elcodi.entity.attribute.class',
+            'Elcodi\Component\Product\Entity\Interfaces\ValueInterface' => 'elcodi.entity.attribute_value.class',
         ];
     }
 

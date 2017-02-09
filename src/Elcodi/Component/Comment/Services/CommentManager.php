@@ -45,8 +45,8 @@ class CommentManager extends AbstractCacheWrapper
     /**
      * Construct method.
      *
-     * @param CommentEventDispatcher $commentEventDispatcher Comment event dispatcher
-     * @param ObjectDirector         $commentDirector        Comment Director
+     * @param CommentEventDispatcher $commentEventDispatcher
+     * @param ObjectDirector         $commentDirector
      */
     public function __construct(
         CommentEventDispatcher $commentEventDispatcher,
@@ -59,23 +59,23 @@ class CommentManager extends AbstractCacheWrapper
     /**
      * Add comment into source.
      *
-     * @param string                $source      Source
-     * @param string                $context     Context
-     * @param string                $content     Content
-     * @param string                $authorToken Author token
-     * @param string                $authorName  Author name
-     * @param string                $authorEmail Author email
-     * @param CommentInterface|null $parent      Parent
+     * @param string                $source
+     * @param string                $context
+     * @param string                $content
+     * @param string                $authorToken
+     * @param string                $authorName
+     * @param string                $authorEmail
+     * @param CommentInterface|null $parent
      *
      * @return CommentInterface Commend added
      */
     public function addComment(
-        $source,
-        $context,
-        $content,
-        $authorToken,
-        $authorName,
-        $authorEmail,
+        string $source,
+        string $context,
+        string $content,
+        string $authorToken,
+        string $authorName,
+        string $authorEmail,
         CommentInterface $parent = null
     ) {
         /**
@@ -108,14 +108,12 @@ class CommentManager extends AbstractCacheWrapper
     /**
      * Edit a comment.
      *
-     * @param CommentInterface $comment Comment
-     * @param string           $content Content
-     *
-     * @return CommentInterface Edited comment
+     * @param CommentInterface $comment
+     * @param string           $content
      */
     public function editComment(
         CommentInterface $comment,
-        $content
+        string $content
     ) {
         $comment->setContent($content);
 
@@ -126,16 +124,12 @@ class CommentManager extends AbstractCacheWrapper
         $this
             ->commentEventDispatcher
             ->dispatchCommentOnEditEvent($comment);
-
-        return $this;
     }
 
     /**
      * Remove a comment.
      *
-     * @param CommentInterface $comment Comment
-     *
-     * @return $this Self object
+     * @param CommentInterface $comment
      */
     public function removeComment(CommentInterface $comment)
     {
@@ -150,7 +144,5 @@ class CommentManager extends AbstractCacheWrapper
         $this
             ->commentEventDispatcher
             ->dispatchCommentOnRemoveEvent($comment);
-
-        return $this;
     }
 }

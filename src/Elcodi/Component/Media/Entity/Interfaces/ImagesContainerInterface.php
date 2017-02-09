@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace Elcodi\Component\Media\Entity\Interfaces;
 
-use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * Interface ImagesContainerInterface.
@@ -28,57 +28,49 @@ interface ImagesContainerInterface
     /**
      * Set add image.
      *
-     * @param ImageInterface $image Image object to be added
-     *
-     * @return $this Self object
+     * @param ImageInterface $image
      */
     public function addImage(ImageInterface $image);
 
     /**
      * Get if entity is enabled.
      *
-     * @param ImageInterface $image Image object to be removed
-     *
-     * @return $this Self object
+     * @param ImageInterface $image
      */
     public function removeImage(ImageInterface $image);
 
     /**
      * Get all images.
      *
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getImages();
+    public function getImages() : Collection;
 
     /**
      * Set images.
      *
-     * @param ArrayCollection $images Images
-     *
-     * @return $this Self object
+     * @param Collection $images
      */
-    public function setImages(ArrayCollection $images);
+    public function setImages(Collection $images);
 
     /**
      * Get sorted images.
      *
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @return Collection
      */
-    public function getSortedImages();
+    public function getSortedImages() : Collection;
 
     /**
      * Get ImagesSort.
      *
-     * @return string ImagesSort
+     * @return string|null
      */
-    public function getImagesSort();
+    public function getImagesSort() : ? string;
 
     /**
      * Sets ImagesSort.
      *
-     * @param string $imagesSort ImagesSort
-     *
-     * @return $this Self object
+     * @param string|null $imagesSort
      */
-    public function setImagesSort($imagesSort);
+    public function setImagesSort(?string $imagesSort);
 }

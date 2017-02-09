@@ -25,6 +25,7 @@ use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
 use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
+use Elcodi\Component\Store\Entity\Traits\WithStoresTrait;
 
 /**
  * Class Category.
@@ -34,6 +35,7 @@ class Category implements CategoryInterface
     use IdentifiableTrait,
         DateTimeTrait,
         EnabledTrait,
+        WithStoresTrait,
         MetaDataTrait;
 
     /**

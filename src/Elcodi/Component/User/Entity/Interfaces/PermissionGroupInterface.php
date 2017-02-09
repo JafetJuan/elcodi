@@ -54,4 +54,13 @@ interface PermissionGroupInterface extends IdentifiableInterface, EnabledInterfa
      * @param array $permissions
      */
     public function setPermissions(array $permissions);
+
+    /**
+     * Has permission
+     *
+     * @param string $route
+     *
+     * @return bool
+     */
+    public function hasPermission(string $route) : bool;
 }

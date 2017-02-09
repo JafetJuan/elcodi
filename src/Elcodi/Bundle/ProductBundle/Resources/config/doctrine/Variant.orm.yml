@@ -15,7 +15,7 @@ Elcodi\Component\Product\Entity\Variant:
 
     manyToMany:
         options:
-            targetEntity: Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface
+            targetEntity: Elcodi\Component\Product\Entity\Interfaces\ValueInterface
             joinTable:
                 name: variant_options
                 joinColumns:

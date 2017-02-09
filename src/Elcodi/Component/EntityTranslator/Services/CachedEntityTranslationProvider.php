@@ -33,40 +33,33 @@ class CachedEntityTranslationProvider extends AbstractCacheWrapper implements En
      *
      * Entity Translation Provider
      */
-    protected $entityTranslatorProvider;
+    private $entityTranslatorProvider;
 
     /**
      * @var EntityTranslationRepository
      *
      * Entity Translation repository
      */
-    protected $entityTranslationRepository;
+    private $entityTranslationRepository;
 
     /**
      * @var string
      *
      * Cache key
      */
-    protected $cachePrefix;
-
-    /**
-     * @var array
-     *
-     * Translations to be flushed
-     */
-    protected $translationsToBeFlushed = [];
+    private $cachePrefix;
 
     /**
      * Construct method.
      *
-     * @param EntityTranslationProviderInterface $entityTranslationProvider   Translation Provider
-     * @param EntityTranslationRepository        $entityTranslationRepository Entity Translation Repository
-     * @param string                             $cachePrefix                 Cache prefix
+     * @param EntityTranslationProviderInterface $entityTranslationProvider
+     * @param EntityTranslationRepository        $entityTranslationRepository
+     * @param string                             $cachePrefix
      */
     public function __construct(
         EntityTranslationProviderInterface $entityTranslationProvider,
         EntityTranslationRepository $entityTranslationRepository,
-        $cachePrefix
+        string $cachePrefix
     ) {
         $this->entityTranslatorProvider = $entityTranslationProvider;
         $this->entityTranslationRepository = $entityTranslationRepository;
@@ -76,19 +69,19 @@ class CachedEntityTranslationProvider extends AbstractCacheWrapper implements En
     /**
      * Get translation.
      *
-     * @param string $entityType  Type of entity
-     * @param string $entityId    Id of entity
-     * @param string $entityField Field of entity
-     * @param string $locale      Locale
+     * @param string $entityType
+     * @param string $entityId
+     * @param string $entityField
+     * @param string $locale
      *
-     * @return string|bool Value fetched
+     * @return string
      */
     public function getTranslation(
-        $entityType,
-        $entityId,
-        $entityField,
-        $locale
-    ) {
+        string $entityType,
+        string $entityId,
+        string $entityField,
+        string $locale
+    ) : string {
         $cacheKey = $this->buildKey(
             $entityType,
             $entityId,
@@ -105,7 +98,7 @@ class CachedEntityTranslationProvider extends AbstractCacheWrapper implements En
                 ->entityTranslatorProvider
                 ->getTranslation(
                     $entityType,
-                    $entityId,
+                    (string) $entityId,
                     $entityField,
                     $locale
                 );
@@ -124,20 +117,18 @@ class CachedEntityTranslationProvider extends AbstractCacheWrapper implements En
     /**
      * Set translation.
      *
-     * @param string      $entityType       Type of entity
-     * @param string      $entityId         Id of entity
-     * @param string      $entityField      Field of entity
-     * @param string|bool $translationValue Translated value
-     * @param string      $locale           Locale
-     *
-     * @return $this Self object
+     * @param string      $entityType
+     * @param string      $entityId
+     * @param string      $entityField
+     * @param string $translationValue
+     * @param string      $locale
      */
     public function setTranslation(
-        $entityType,
-        $entityId,
-        $entityField,
-        $translationValue,
-        $locale
+        string $entityType,
+        string $entityId,
+        string $entityField,
+        string $translationValue,
+        string $locale
     ) {
         $cacheKey = $this->buildKey(
             $entityType,
@@ -153,11 +144,11 @@ class CachedEntityTranslationProvider extends AbstractCacheWrapper implements En
                 $translationValue
             );
 
-        return $this
+        $this
             ->entityTranslatorProvider
             ->setTranslation(
                 $entityType,
-                $entityId,
+                (string) $entityId,
                 $entityField,
                 $translationValue,
                 $locale
@@ -166,20 +157,16 @@ class CachedEntityTranslationProvider extends AbstractCacheWrapper implements En
 
     /**
      * Flush all previously set translations.
-     *
-     * @return $this Self object
      */
     public function flushTranslations()
     {
-        return $this
+        $this
             ->entityTranslatorProvider
             ->flushTranslations();
     }
 
     /**
      * Warm-up translations.
-     *
-     * @return $this Self object
      */
     public function warmUp()
     {
@@ -205,8 +192,6 @@ class CachedEntityTranslationProvider extends AbstractCacheWrapper implements En
                     $translation->getTranslation()
                 );
         }
-
-        return $this;
     }
 
     /**
@@ -219,7 +204,7 @@ class CachedEntityTranslationProvider extends AbstractCacheWrapper implements En
      *
      * @return string Key
      */
-    protected function buildKey(
+    private function buildKey(
         $entityType,
         $entityId,
         $entityField,

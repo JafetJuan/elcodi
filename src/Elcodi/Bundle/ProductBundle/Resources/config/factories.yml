@@ -52,3 +52,20 @@ services:
         calls:
             - [setEntityNamespace, ["%elcodi.entity.category.class%"]]
             - [setDateTimeFactory, ["@elcodi.factory.datetime"]]
+
+    #
+    # Factory for Attribute entities
+    #
+    elcodi.factory.attribute:
+        class: Elcodi\Component\Product\Factory\AttributeFactory
+        calls:
+            - [setEntityNamespace, ["%elcodi.entity.attribute.class%"]]
+            - [setDateTimeFactory, ["@elcodi.factory.datetime"]]
+
+    #
+    # Factory for Value entities
+    #
+    elcodi.factory.attribute_value:
+        class: Elcodi\Component\Product\Factory\ValueFactory
+        calls:
+            - [setEntityNamespace, ["%elcodi.entity.attribute_value.class%"]]

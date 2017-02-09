@@ -31,32 +31,30 @@ interface EntityTranslationProviderInterface
      * @param string $entityField Field of entity
      * @param string $locale      Locale
      *
-     * @return string|bool Value fetched
+     * @return string
      */
     public function getTranslation(
-        $entityType,
-        $entityId,
-        $entityField,
-        $locale
-    );
+        string $entityType,
+        string $entityId,
+        string $entityField,
+        string $locale
+    ) : string;
 
     /**
      * Set translation.
      *
-     * @param string      $entityType       Type of entity
-     * @param string      $entityId         Id of entity
-     * @param string      $entityField      Field of entity
-     * @param string|bool $translationValue Translated value
-     * @param string      $locale           Locale
-     *
-     * @return $this Self object
+     * @param string      $entityType
+     * @param string      $entityId
+     * @param string      $entityField
+     * @param string $translationValue
+     * @param string      $locale
      */
     public function setTranslation(
-        $entityType,
-        $entityId,
-        $entityField,
-        $translationValue,
-        $locale
+        string $entityType,
+        string $entityId,
+        string $entityField,
+        string $translationValue,
+        string $locale
     );
 
     /**

@@ -35,16 +35,17 @@ class TranslatableFieldType extends AbstractType
      * @param FormBuilderInterface $builder
      * @param array                $options
      */
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(
+        FormBuilderInterface $builder,
+        array $options
+    )
     {
         $entityAlias = $options['entityConfiguration']['alias'];
         $entityIdGetter = $options['entityConfiguration']['idGetter'];
         $fieldOptions = $options['formConfig']->getOptions();
-        $fieldBlockPrefix = $options['formConfig']
+        $fieldType = get_class($options['formConfig']
                 ->getType()
-                ->getBlockPrefix();
-
-        $fieldType = $this->resolveFieldType($fieldBlockPrefix);
+                ->getInnerType());
 
         foreach ($options['locales'] as $locale) {
             $translatedFieldName = $locale . '_' . $options['fieldName'];
@@ -53,7 +54,7 @@ class TranslatableFieldType extends AbstractType
             $translationData = $entityId
                 ? $options['entityTranslationProvider']->getTranslation(
                         $entityAlias,
-                        $entityId,
+                        (string) $entityId,
                         $options['fieldName'],
                         $locale
                 )
@@ -116,24 +117,5 @@ class TranslatableFieldType extends AbstractType
         return (boolean) $required
             ? !$fallback || ($masterLocale === $locale)
             : false;
-    }
-
-    /**
-     * Resolve field type
-     *
-     * @param string $fieldType
-     *
-     * @return string
-     */
-    private function resolveFieldType(string $fieldType) : string
-    {
-        if ('text' === $fieldType) {
-            return TextType::class;
-        }
-        if ('textarea' === $fieldType) {
-            return TextareaType::class;
-        }
-
-        return $fieldType;
     }
 }

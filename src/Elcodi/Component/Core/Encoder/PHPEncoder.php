@@ -23,14 +23,14 @@ use Elcodi\Component\Core\Encoder\Interfaces\EncoderInterface;
 /**
  * Class PHPEncoder.
  */
-class PHPEncoder implements EncoderInterface
+final class PHPEncoder implements EncoderInterface
 {
     /**
      * Encode incoming data.
      *
-     * @param mixed $data Data
+     * @param mixed $data
      *
-     * @return string|bool encoded data
+     * @return string|bool
      */
     public function encode($data)
     {
@@ -40,9 +40,9 @@ class PHPEncoder implements EncoderInterface
     /**
      * Decode incoming data.
      *
-     * @param string $serializedData Serialized data
+     * @param string $serializedData
      *
-     * @return mixed Decoded data
+     * @return mixed
      */
     public function decode(string $serializedData)
     {

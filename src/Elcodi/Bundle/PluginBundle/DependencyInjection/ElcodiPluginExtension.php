@@ -40,12 +40,12 @@ class ElcodiPluginExtension extends BaseExtension
      *
      * Kernel
      */
-    protected $kernel;
+    private $kernel;
 
     /**
      * BaseExtension constructor.
      *
-     * @param KernelInterface    $kernel             Kernel
+     * @param KernelInterface    $kernel
      * @param MappingBagProvider $mappingBagProvider
      */
     public function __construct(
@@ -54,7 +54,7 @@ class ElcodiPluginExtension extends BaseExtension
     ) {
         parent::__construct($mappingBagProvider);
 
-        $this->mappingBagProvider = $mappingBagProvider;
+        $this->kernel = $kernel;
     }
 
     /**

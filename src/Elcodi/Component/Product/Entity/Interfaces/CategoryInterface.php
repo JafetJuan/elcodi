@@ -24,6 +24,7 @@ use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
+use Elcodi\Component\Store\Entity\Interfaces\WithStoresInterface;
 
 /**
  * Interface CategoryInterface.
@@ -32,6 +33,7 @@ interface CategoryInterface extends
     IdentifiableInterface,
     DateTimeInterface,
     MetaDataInterface,
+    WithStoresInterface,
     EnabledInterface
 {
     /**

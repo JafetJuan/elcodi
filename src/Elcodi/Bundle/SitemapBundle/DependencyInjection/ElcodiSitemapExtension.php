@@ -157,17 +157,16 @@ class ElcodiSitemapExtension extends BaseExtension
                 ->addArgument($builder['path'])
                 ->setPublic(true);
 
-            $this
-                ->addBuilderElements(
-                    $definition,
-                    $builder['statics'],
-                    'static'
-                )
-                ->addBuilderElements(
-                    $definition,
-                    $builder['blocks'],
-                    'entity'
-                );
+            $this->addBuilderElements(
+                $definition,
+                $builder['statics'],
+                'static'
+            );
+            $this->addBuilderElements(
+                $definition,
+                $builder['blocks'],
+                'entity'
+            );
         }
     }
 

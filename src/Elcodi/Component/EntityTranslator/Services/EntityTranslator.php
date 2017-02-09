@@ -31,14 +31,14 @@ class EntityTranslator implements EntityTranslatorInterface
      *
      * Translation Provider
      */
-    protected $entityTranslationProvider;
+    private $entityTranslationProvider;
 
     /**
      * @var array
      *
      * Configuration
      */
-    protected $configuration;
+    private $configuration;
 
     /**
      * @var bool
@@ -49,19 +49,19 @@ class EntityTranslator implements EntityTranslatorInterface
      * will not be required anymore, but just the translation with same language
      * than master
      */
-    protected $fallback;
+    private $fallback;
 
     /**
      * Construct method.
      *
-     * @param EntityTranslationProviderInterface $entityTranslationProvider Translation Provider
-     * @param array                              $configuration             Configuration
-     * @param bool                               $fallback                  Use fallback
+     * @param EntityTranslationProviderInterface $entityTranslationProvider
+     * @param array                              $configuration
+     * @param bool                               $fallback
      */
     public function __construct(
         EntityTranslationProviderInterface $entityTranslationProvider,
         array $configuration,
-        $fallback
+        bool $fallback
     ) {
         $this->entityTranslationProvider = $entityTranslationProvider;
         $this->configuration = $configuration;
@@ -71,12 +71,13 @@ class EntityTranslator implements EntityTranslatorInterface
     /**
      * Translate object.
      *
-     * @param object $object Object
-     * @param string $locale Locale to be translated
-     *
-     * @return object Translated Object
+     * @param object $object
+     * @param string $locale
      */
-    public function translate($object, $locale)
+    public function translate(
+        $object,
+        string $locale
+    )
     {
         $classStack = $this->getNamespacesFromClass(get_class($object));
 
@@ -95,7 +96,7 @@ class EntityTranslator implements EntityTranslatorInterface
                     ->entityTranslationProvider
                     ->getTranslation(
                         $configuration['alias'],
-                        $entityId,
+                        (string) $entityId,
                         $fieldName,
                         $locale
                     );
@@ -105,8 +106,6 @@ class EntityTranslator implements EntityTranslatorInterface
                 }
             }
         }
-
-        return $object;
     }
 
     /**
@@ -123,12 +122,13 @@ class EntityTranslator implements EntityTranslatorInterface
      *      ),
      * );
      *
-     * @param object $object       Object
-     * @param array  $translations Translations
-     *
-     * @return $this Self object
+     * @param object $object
+     * @param array  $translations
      */
-    public function save($object, array $translations)
+    public function save(
+        $object,
+        array $translations
+    )
     {
         $classStack = $this->getNamespacesFromClass(get_class($object));
 
@@ -148,7 +148,7 @@ class EntityTranslator implements EntityTranslatorInterface
                             ->entityTranslationProvider
                             ->setTranslation(
                                 $configuration['alias'],
-                                $entityId,
+                                (string) $entityId,
                                 $fieldName,
                                 $translation[$fieldName],
                                 $locale
@@ -161,18 +161,16 @@ class EntityTranslator implements EntityTranslatorInterface
         $this
             ->entityTranslationProvider
             ->flushTranslations();
-
-        return $this;
     }
 
     /**
      * Get all possible classes given an object.
      *
-     * @param string $namespace Namespace
+     * @param string $namespace
      *
-     * @return string[] Set of classes and interfaces
+     * @return string[]
      */
-    protected function getNamespacesFromClass($namespace)
+    private function getNamespacesFromClass($namespace) : array
     {
         $classStack = [$namespace];
         $classStack = array_merge($classStack, class_parents($namespace));

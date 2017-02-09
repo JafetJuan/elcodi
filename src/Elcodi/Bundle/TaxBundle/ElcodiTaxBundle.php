@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace Elcodi\Bundle\TaxBundle;
 
 use Mmoreram\BaseBundle\BaseBundle;
+use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\Extension\ExtensionInterface;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -48,19 +49,25 @@ class ElcodiTaxBundle extends BaseBundle
      *
      * @return CompilerPassInterface[]
      */
-    public function getCompilerPasses()
+    public function getCompilerPasses() : array
     {
         return [
-            new ElcodiTaxMappingBagProvider(),
+            new MappingCompilerPass(
+                new ElcodiTaxMappingBagProvider()
+            ),
         ];
     }
 
     /**
-     * Create instance of current bundle, and return dependent bundle namespaces.
+     * Return all bundle dependencies.
      *
-     * @return array Bundle instances
+     * Values can be a simple bundle namespace or its instance
+     * 
+     * @param KernelInterface $kernel
+     *
+     * @return array
      */
-    public static function getBundleDependencies(KernelInterface $kernel)
+    public static function getBundleDependencies(KernelInterface $kernel) : array
     {
         return [
             'Symfony\Bundle\FrameworkBundle\FrameworkBundle',

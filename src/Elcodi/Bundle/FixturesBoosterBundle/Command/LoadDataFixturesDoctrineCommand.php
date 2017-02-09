@@ -152,11 +152,13 @@ class LoadDataFixturesDoctrineCommand extends OriginalCommand
         if (file_exists($backupFileName)) {
             copy($backupFileName, $this->databaseFilePath);
             $this->clearAllManagers();
+            chmod($this->databaseFilePath, 0755);
 
             return 0;
         }
 
         parent::execute($input, $output);
+        chmod($this->databaseFilePath, 0755);
 
         /**
          * If new file has been created, copy it with generated hash value. Now

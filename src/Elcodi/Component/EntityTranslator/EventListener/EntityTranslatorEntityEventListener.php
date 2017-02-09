@@ -19,6 +19,8 @@ declare(strict_types=1);
 namespace Elcodi\Component\EntityTranslator\EventListener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
+use Elcodi\Component\EntityTranslator\Entity\EntityTranslation;
+use Elcodi\Component\EntityTranslator\Entity\Interfaces\EntityTranslationInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 use Elcodi\Component\Language\Entity\Interfaces\LocaleInterface;
@@ -33,20 +35,20 @@ class EntityTranslatorEntityEventListener
      *
      * Container
      */
-    protected $container;
+    private $container;
 
     /**
      * @var LocaleInterface
      *
-     * Locale
+     * private
      */
-    protected $locale;
+    private $locale;
 
     /**
      * Construct method.
      *
-     * @param ContainerInterface $container Container
-     * @param LocaleInterface    $locale    Locale
+     * @param ContainerInterface $container
+     * @param LocaleInterface    $locale
      */
     public function __construct(
         ContainerInterface $container,
@@ -63,6 +65,15 @@ class EntityTranslatorEntityEventListener
      */
     public function postLoad(LifecycleEventArgs $args)
     {
+        $entity = $args->getEntity();
+
+        /**
+         * Blacklisting translations
+         */
+        if ($entity instanceof EntityTranslationInterface) {
+            return;
+        }
+
         $this
             ->container
             ->get('elcodi.entity_translator')

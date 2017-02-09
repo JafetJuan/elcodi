@@ -18,7 +18,7 @@ declare(strict_types=1);
 
 namespace Elcodi\Component\Product\NameResolver;
 
-use Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface;
+use Elcodi\Component\Product\Entity\Interfaces\ValueInterface;
 use Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface;
 use Elcodi\Component\Product\Entity\Interfaces\VariantInterface;
 use Elcodi\Component\Product\NameResolver\Interfaces\PurchasableNameResolverInterface;

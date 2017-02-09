@@ -49,8 +49,8 @@ class PageController
     /**
      * Constructor.
      *
-     * @param PageRepository          $pageRepository          Page repository
-     * @param PageResponseTransformer $pageResponseTransformer PageResponse Transformer
+     * @param PageRepository          $pageRepository
+     * @param PageResponseTransformer $pageResponseTransformer
      */
     public function __construct(
         PageRepository $pageRepository,
@@ -63,10 +63,10 @@ class PageController
     /**
      * Renders a page given its id and path.
      *
-     * @param string $id   Page id
-     * @param string $path Page path
+     * @param string $id
+     * @param string $path
      *
-     * @return Response Generated response
+     * @return Response
      *
      * @throws NotFoundHttpException Page not found
      */
@@ -90,9 +90,9 @@ class PageController
     /**
      * Renders a page given its path.
      *
-     * @param string $path Page path
+     * @param string $path
      *
-     * @return Response Generated response
+     * @return Response
      *
      * @throws NotFoundHttpException Page not found
      */

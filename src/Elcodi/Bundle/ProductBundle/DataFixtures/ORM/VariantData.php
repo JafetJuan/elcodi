@@ -22,14 +22,18 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 use Elcodi\Bundle\CoreBundle\DataFixtures\ORM\ElcodiFixture;
+use Elcodi\Bundle\CurrencyBundle\DataFixtures\ORM\CurrencyData;
 use Elcodi\Bundle\ProductBundle\DataFixtures\ORM\Traits\ProductWithImagesTrait;
-use Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface;
+use Elcodi\Component\Product\Entity\Interfaces\ValueInterface;
 use Elcodi\Component\Core\Services\ObjectDirector;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Currency\Entity\Money;
 use Elcodi\Component\Product\Entity\Interfaces\ProductInterface;
 use Elcodi\Component\Product\Entity\Interfaces\VariantInterface;
 
+/**
+ * Class VariantData
+ */
 class VariantData extends ElcodiFixture implements DependentFixtureInterface
 {
     use ProductWithImagesTrait;
@@ -162,9 +166,9 @@ class VariantData extends ElcodiFixture implements DependentFixtureInterface
     public function getDependencies()
     {
         return [
-            'Elcodi\Bundle\AttributeBundle\DataFixtures\ORM\AttributeData',
-            'Elcodi\Bundle\CurrencyBundle\DataFixtures\ORM\CurrencyData',
-            'Elcodi\Bundle\ProductBundle\DataFixtures\ORM\ProductData',
+            CurrencyData::class,
+            ProductData::class,
+            VariantData::class
         ];
     }
 }

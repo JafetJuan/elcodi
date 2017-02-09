@@ -28,32 +28,28 @@ interface PriceInterface
     /**
      * Gets the purchasable or purchasables amount with tax.
      *
-     * @return MoneyInterface Purchasable amount with tax
+     * @return MoneyInterface
      */
-    public function getPurchasableAmount();
+    public function getPurchasableAmount() : MoneyInterface;
 
     /**
      * Sets the purchasable or purchasables amount with tax.
      *
-     * @param MoneyInterface $purchasableAmount purchasable amount with tax
-     *
-     * @return $this Self object
+     * @param MoneyInterface $purchasableAmount
      */
     public function setPurchasableAmount(MoneyInterface $purchasableAmount);
 
     /**
      * Gets the total amount with tax.
      *
-     * @return MoneyInterface price with tax
+     * @return MoneyInterface
      */
-    public function getAmount();
+    public function getAmount() : MoneyInterface;
 
     /**
      * Sets the total amount with tax.
      *
-     * @param MoneyInterface $amount amount without tax
-     *
-     * @return $this Self object
+     * @param MoneyInterface $amount
      */
     public function setAmount(MoneyInterface $amount);
 }

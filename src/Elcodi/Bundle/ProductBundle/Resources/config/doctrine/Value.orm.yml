@@ -1,0 +1,24 @@
+Elcodi\Component\Product\Entity\Value:
+    type: entity
+    repositoryClass: Elcodi\Component\Product\Repository\ValueRepository
+    table: value
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        value:
+            column: value
+            type: string
+            length: 255
+            nullable: false
+
+    manyToOne:
+        attribute:
+            targetEntity: Elcodi\Component\Product\Entity\Interfaces\AttributeInterface
+            inversedBy: values
+            joinColumn:
+                name: attribute_id
+                referencedColumnName: id
+                nullable: false

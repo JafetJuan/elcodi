@@ -45,12 +45,12 @@ class LocaleProvider
     /**
      * Construct method.
      *
-     * @param RequestStack $requestStack  Request Stack
-     * @param string       $defaultLocale Default Locale
+     * @param RequestStack $requestStack
+     * @param string       $defaultLocale
      */
     public function __construct(
         RequestStack $requestStack,
-        $defaultLocale
+        string $defaultLocale
     ) {
         $this->requestStack = $requestStack;
         $this->defaultLocale = $defaultLocale;

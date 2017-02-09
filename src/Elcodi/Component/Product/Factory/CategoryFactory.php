@@ -45,6 +45,7 @@ class CategoryFactory extends AbstractFactory
         $category->setPosition(0);
         $category->enable();
         $category->setCreatedAt($this->now());
+        $category->setStores(new ArrayCollection());
 
         return $category;
     }

@@ -21,7 +21,7 @@ Elcodi\Component\Product\Entity\Product:
 
     manyToMany:
         attributes:
-            targetEntity: Elcodi\Component\Attribute\Entity\Interfaces\AttributeInterface
+            targetEntity: Elcodi\Component\Product\Entity\Interfaces\AttributeInterface
             joinTable:
                 name: product_attribute
                 joinColumns:

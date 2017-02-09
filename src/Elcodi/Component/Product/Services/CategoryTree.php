@@ -50,7 +50,7 @@ class CategoryTree
      *
      * @return array
      */
-    public function buildCategoryTree()
+    public function buildCategoryTree() : array
     {
         $categories = $this
             ->categoryRepository

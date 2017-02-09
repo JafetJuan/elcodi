@@ -30,15 +30,30 @@ class LocationRepository extends EntityRepository
      *
      * @return array
      */
-    public function findAllRoots()
+    public function findAllRoots() : array
     {
-        $roots = $this
+        return $this
             ->createQueryBuilder('l')
             ->leftJoin('l.parents', 'p')
             ->andWhere('p.id is NULL')
             ->getQuery()
             ->getResult();
+    }
 
-        return $roots;
+    /**
+     * Return locations by their ids
+     *
+     * @param array $ids
+     *
+     * @return array
+     */
+    public function findLocationsByIds(array $ids) : array
+    {
+        return $this
+            ->createQueryBuilder('l')
+            ->where('l.id in (:ids)')
+            ->setParameter('ids', $ids)
+            ->getQuery()
+            ->getResult();
     }
 }

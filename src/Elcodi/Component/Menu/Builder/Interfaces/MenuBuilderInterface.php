@@ -28,7 +28,7 @@ interface MenuBuilderInterface
     /**
      * Build the menu.
      *
-     * @param MenuInterface $menu Menu
+     * @param MenuInterface $menu
      */
     public function build(MenuInterface $menu);
 }

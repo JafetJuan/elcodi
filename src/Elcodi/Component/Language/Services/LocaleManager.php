@@ -66,14 +66,14 @@ class LocaleManager
     /**
      * Construct method.
      *
-     * @param LocaleInterface $locale                        Locale
-     * @param string          $encoding                      Encoding
-     * @param array           $localeCountryAssociations     Locale to country associations
-     * @param array           $localeTranslationAssociations Locale to translation assocs
+     * @param LocaleInterface $locale
+     * @param string          $encoding
+     * @param array           $localeCountryAssociations
+     * @param array           $localeTranslationAssociations
      */
     public function __construct(
         LocaleInterface $locale,
-        $encoding = '',
+        string $encoding = '',
         array $localeCountryAssociations = [],
         array $localeTranslationAssociations = []
     ) {
@@ -81,27 +81,25 @@ class LocaleManager
         $this->encoding = $encoding;
         $this->localeCountryAssociations = $localeCountryAssociations;
         $this->localeTranslationAssociations = $localeTranslationAssociations;
+
+        $this->initialize();
     }
 
     /**
      * Initialize locale.
-     *
-     * @return $this Self object
      */
     public function initialize()
     {
         setlocale(LC_ALL, $this->locale->getIso() . '.' . $this->encoding);
         $this->localeInfo = localeconv();
-
-        return $this;
     }
 
     /**
      * Returns current locale.
      *
-     * @return Locale locale
+     * @return LocaleInterface
      */
-    public function getLocale()
+    public function getLocale() : LocaleInterface
     {
         return $this->locale;
     }
@@ -109,9 +107,9 @@ class LocaleManager
     /**
      * Returns current locale.
      *
-     * @return Locale locale
+     * @return string
      */
-    public function getLocaleIso()
+    public function getLocaleIso() : string
     {
         return $this
             ->getLocale()
@@ -121,24 +119,20 @@ class LocaleManager
     /**
      * Sets locale.
      *
-     * @param LocaleInterface $locale locale
-     *
-     * @return $this Self object
+     * @param LocaleInterface $locale
      */
     public function setLocale(LocaleInterface $locale)
     {
         $this->locale = $locale;
         $this->initialize();
-
-        return $this;
     }
 
     /**
      * Returns current encoding.
      *
-     * @return string encoding
+     * @return string
      */
-    public function getEncoding()
+    public function getEncoding() : string
     {
         return $this->encoding;
     }
@@ -146,36 +140,34 @@ class LocaleManager
     /**
      * Sets encoding.
      *
-     * @param string $encoding encoding
-     *
-     * @return $this Self object
+     * @param string $encoding
      */
-    public function setEncoding($encoding)
+    public function setEncoding(string $encoding)
     {
         $this->encoding = $encoding;
         $this->initialize();
-
-        return $this;
     }
 
     /**
      * Returns current locale info.
      *
-     * @return array localeInfo
+     * @return array
      */
-    public function getIsoInfo()
+    public function getIsoInfo() : array
     {
         return $this->localeInfo;
     }
 
     /**
-     * Returns the ISO code of the country according to locale.
+     * Returns the 2-letter ISO code of the country according to locale.
      *
-     * @return Locale 2-letter ISO code
+     * @return LocaleInterface
      */
-    public function getCountryCode()
+    public function getCountryCode() : LocaleInterface
     {
-        $localeIso = $this->locale->getIso();
+        $localeIso = $this
+            ->locale
+            ->getIso();
 
         if (isset($this->localeCountryAssociations[$localeIso])) {
             return Locale::create($this->localeCountryAssociations[$localeIso]);
@@ -192,7 +184,7 @@ class LocaleManager
      * Returns the locale used to look for translations, which may not be the
      * same as $this->locale.
      *
-     * @return Locale Locale
+     * @return LocaleInterface
      */
     public function getTranslationsLocale()
     {

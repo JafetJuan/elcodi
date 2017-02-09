@@ -1,0 +1,4 @@
+services:
+
+    elcodi.slugger:
+        class: Elcodi\Component\Core\Services\Slugger

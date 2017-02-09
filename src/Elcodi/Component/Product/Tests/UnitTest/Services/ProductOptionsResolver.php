@@ -21,7 +21,7 @@ namespace Elcodi\Component\Product\Tests\UnitTest\Services;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit_Framework_TestCase;
 
-use Elcodi\Component\Attribute\Entity\Value;
+use Elcodi\Component\Product\Entity\Value;
 use Elcodi\Component\Product\Services\ProductOptionsResolver;
 
 /**
@@ -36,7 +36,7 @@ class ProductOptionsResolverTest extends PHPUnit_Framework_TestCase
     {
         $product = $this->createMock('Elcodi\Component\Product\Entity\Product');
         $variant = $this->createMock('Elcodi\Component\Product\Entity\Variant');
-        $attribute = $this->createMock('Elcodi\Component\Attribute\Entity\Attribute');
+        $attribute = $this->createMock('Elcodi\Component\Product\Entity\Attribute');
 
         $option = new Value();
         $option->setId(111);

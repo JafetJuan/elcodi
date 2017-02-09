@@ -49,7 +49,7 @@ class ElcodiStateTransitionMachineBundle extends BaseBundle
      *
      * @return CompilerPassInterface[]
      */
-    public function getCompilerPasses()
+    public function getCompilerPasses() : array
     {
         return [
             new MappingCompilerPass(
@@ -59,11 +59,15 @@ class ElcodiStateTransitionMachineBundle extends BaseBundle
     }
 
     /**
-     * Create instance of current bundle, and return dependent bundle namespaces.
+     * Return all bundle dependencies.
      *
-     * @return array Bundle instances
+     * Values can be a simple bundle namespace or its instance
+     * 
+     * @param KernelInterface $kernel
+     *
+     * @return array
      */
-    public static function getBundleDependencies(KernelInterface $kernel)
+    public static function getBundleDependencies(KernelInterface $kernel) : array
     {
         return [
             'Symfony\Bundle\FrameworkBundle\FrameworkBundle',

@@ -20,7 +20,7 @@ namespace Elcodi\Component\Product\Entity;
 
 use Doctrine\Common\Collections\Collection;
 
-use Elcodi\Component\Attribute\Entity\Interfaces\ValueInterface;
+use Elcodi\Component\Product\Entity\Interfaces\ValueInterface;
 use Elcodi\Component\Product\Entity\Interfaces\CategoryInterface;
 use Elcodi\Component\Product\Entity\Interfaces\ManufacturerInterface;
 use Elcodi\Component\Product\Entity\Interfaces\ProductInterface;

@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace Elcodi\Bundle\MenuBundle;
 
+use Elcodi\Bundle\MenuBundle\CompilerPass\MenuBuilderCompilerPass;
 use Mmoreram\BaseBundle\BaseBundle;
 use Mmoreram\BaseBundle\CompilerPass\MappingCompilerPass;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -52,25 +53,29 @@ class ElcodiMenuBundle extends BaseBundle
      *
      * @return CompilerPassInterface[]
      */
-    public function getCompilerPasses()
+    public function getCompilerPasses() : array
     {
         return [
             new MappingCompilerPass(
                 new ElcodiMenuMappingBagProvider()
             ),
             new MenuFilterCompilerPass(),
-            new MenuFilterCompilerPass(),
+            new MenuBuilderCompilerPass(),
             new MenuModifierCompilerPass(),
             new MenuChangerCompilerPass(),
         ];
     }
 
     /**
-     * Create instance of current bundle, and return dependent bundle namespaces.
+     * Return all bundle dependencies.
      *
-     * @return array Bundle instances
+     * Values can be a simple bundle namespace or its instance
+     * 
+     * @param KernelInterface $kernel
+     *
+     * @return array
      */
-    public static function getBundleDependencies(KernelInterface $kernel)
+    public static function getBundleDependencies(KernelInterface $kernel) : array
     {
         return [
             'Symfony\Bundle\FrameworkBundle\FrameworkBundle',

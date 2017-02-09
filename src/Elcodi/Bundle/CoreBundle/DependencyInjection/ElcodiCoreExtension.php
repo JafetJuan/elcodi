@@ -103,6 +103,7 @@ class ElcodiCoreExtension extends BaseExtension
             'extractor',
             'factories',
             'guzzle',
+            'services',
         ];
     }
 }

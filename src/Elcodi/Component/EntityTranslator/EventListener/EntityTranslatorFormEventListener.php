@@ -145,7 +145,6 @@ class EntityTranslatorFormEventListener implements EventSubscriberInterface
     {
         $entity = $event->getData();
         $form = $event->getForm();
-
         $entityConfiguration = $this->getTranslatableEntityConfiguration($entity);
 
         if (is_null($entityConfiguration)) {
@@ -169,7 +168,7 @@ class EntityTranslatorFormEventListener implements EventSubscriberInterface
                     'entityTranslationProvider' => $this->entityTranslationProvider,
                     'formConfig' => $formConfig,
                     'entity' => $entity,
-                    'fieldName' =>$fieldName,
+                    'fieldName' => $fieldName,
                     'entityConfiguration' => $entityConfiguration,
                     'fieldConfiguration' => $fieldConfiguration,
                     'locales' => $this->locales,
@@ -268,7 +267,7 @@ class EntityTranslatorFormEventListener implements EventSubscriberInterface
                             ->entityTranslationProvider
                             ->setTranslation(
                                 $entityAlias,
-                                $entity->$entityIdGetter(),
+                                (string) $entity->$entityIdGetter(),
                                 $fieldName,
                                 $translation,
                                 $locale

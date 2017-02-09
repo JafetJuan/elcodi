@@ -24,3 +24,7 @@ services:
     elcodi.user_login:
         class: Elcodi\Component\User\Services\UserLogin
         arguments:
+            - "@request_stack"
+            - "@security.token_storage"
+            - "@event_dispatcher"
+            - "%elcodi.user_auto_login_firewalls%"

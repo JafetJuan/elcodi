@@ -91,8 +91,8 @@ class UserLogin
         /**
          * Given type of user is not enabled for autologin.
          */
-        $userClass = get_class($user);
-        if (!isset($this->firewalls[$userClass])) {
+        $firewall = $this->getUserFirewall($user);
+        if (is_null($firewall)) {
             return;
         }
 
@@ -120,7 +120,7 @@ class UserLogin
         $token = $this
             ->createNewToken(
                 $user,
-                $this->firewalls[$userClass]
+                $firewall
             );
 
         $this
@@ -158,5 +158,30 @@ class UserLogin
             $firewallName,
             $user->getRoles()
         );
+    }
+
+    /**
+     * Get firewall given a user instance. If none firewall defined for this
+     * user, return null
+     *
+     * @param AbstractUserInterface $user
+     *
+     * @return string|null
+     */
+    private function getUserFirewall(AbstractUserInterface $user) : ? string
+    {
+        $possibleClasses = array_merge(
+            [get_class($user)],
+            class_implements($user),
+            class_parents($user)
+        );
+
+        foreach ($possibleClasses as $class) {
+            if (isset($this->firewalls[$class])) {
+                return $this->firewalls[$class];
+            }
+        }
+
+        return null;
     }
 }

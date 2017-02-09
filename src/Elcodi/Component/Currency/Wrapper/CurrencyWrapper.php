@@ -60,9 +60,9 @@ class CurrencyWrapper implements WrapperInterface
     /**
      * Currency wrapper constructor.
      *
-     * @param CurrencySessionManager $currencySessionManager Currency Session Manager
-     * @param CurrencyRepository     $currencyRepository     Currency repository
-     * @param DefaultCurrencyWrapper $defaultCurrencyWrapper Default currency wrapper
+     * @param CurrencySessionManager $currencySessionManager
+     * @param CurrencyRepository     $currencyRepository
+     * @param DefaultCurrencyWrapper $defaultCurrencyWrapper
      */
     public function __construct(
         CurrencySessionManager $currencySessionManager,

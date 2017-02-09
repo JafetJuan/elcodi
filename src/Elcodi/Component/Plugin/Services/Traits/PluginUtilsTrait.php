@@ -17,6 +17,9 @@
 declare(strict_types=1);
 
 namespace Elcodi\Component\Plugin\Services\Traits;
+use Elcodi\Component\Plugin\Interfaces\PluginInterface;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Trait PluginUtilsTrait.
@@ -27,17 +30,17 @@ trait PluginUtilsTrait
      * Load installed plugin bundles and return an array with them, indexed by
      * their namespaces.
      *
-     * @return \Symfony\Component\HttpKernel\Bundle\Bundle[] Plugins installed
+     * @return Bundle[]
      */
-    protected function getInstalledPluginBundles(\Symfony\Component\HttpKernel\KernelInterface $kernel)
+    protected function getInstalledPluginBundles(KernelInterface $kernel)
     {
         $plugins = [];
         $bundles = $kernel->getBundles();
 
         foreach ($bundles as $bundle) {
             if (
-                $bundle instanceof \Symfony\Component\HttpKernel\Bundle\Bundle &&
-                $bundle instanceof \Elcodi\Component\Plugin\Interfaces\PluginInterface
+                $bundle instanceof Bundle &&
+                $bundle instanceof PluginInterface
             ) {
                 $pluginNamespace = $bundle->getNamespace();
                 $plugins[$pluginNamespace] = $bundle;

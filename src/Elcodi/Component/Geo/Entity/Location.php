@@ -274,4 +274,27 @@ class Location implements LocationInterface
     {
         return (string) $this->id;
     }
+
+    /**
+     * Get complete description
+     */
+    public function getCompleteName()
+    {
+        return $this->name . ' - ' . $this->getCompleteParentsName();
+    }
+
+    /**
+     * Get complete description
+     */
+    public function getCompleteParentsName()
+    {
+        $parts = [];
+        $parents = $this->getAllParents();
+        $parents = array_reverse($parents);
+        foreach ($parents as $parent) {
+            $parts[] = $parent->getName();
+        }
+
+        return implode(' - ', $parts);
+    }
 }

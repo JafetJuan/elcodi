@@ -26,16 +26,33 @@ interface EntityTranslatorInterface
     /**
      * Translate object.
      *
-     * @param object $object Object
-     * @param string $locale Locale to be translated
+     * @param object $object
+     * @param string $locale
      */
-    public function translate($object, $locale);
+    public function translate(
+        $object,
+        string $locale
+    );
 
     /**
      * Saves object translations.
      *
-     * @param object $object       Object
-     * @param array  $translations Translations
+     * $translations = array(
+     *      'es' => array(
+     *          'name' => 'Nombre del producto',
+     *          'description' => 'Descripción del producto',
+     *      ),
+     *      'fr' => array(
+     *          'name' => 'Nom du produit',
+     *          'description' => 'Description du produit',
+     *      ),
+     * );
+     *
+     * @param object $object
+     * @param array  $translations
      */
-    public function save($object, array $translations);
+    public function save(
+        $object,
+        array $translations
+    );
 }

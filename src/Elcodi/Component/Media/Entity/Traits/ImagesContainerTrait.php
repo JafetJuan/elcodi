@@ -19,6 +19,8 @@ declare(strict_types=1);
 namespace Elcodi\Component\Media\Entity\Traits;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 
 /**
  * Trait ImagesContainerTrait.
@@ -26,14 +28,14 @@ use Doctrine\Common\Collections\ArrayCollection;
 trait ImagesContainerTrait
 {
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @var Collection
      *
      * Images
      */
     protected $images;
 
     /**
-     * @var string
+     * @var string|null
      *
      * Images sort
      */
@@ -42,37 +44,29 @@ trait ImagesContainerTrait
     /**
      * Set add image.
      *
-     * @param \Elcodi\Component\Media\Entity\Interfaces\ImageInterface $image Image object to be added
-     *
-     * @return $this Self object
+     * @param ImageInterface $image
      */
-    public function addImage(\Elcodi\Component\Media\Entity\Interfaces\ImageInterface $image)
+    public function addImage(ImageInterface $image)
     {
         $this->images->add($image);
-
-        return $this;
     }
 
     /**
      * Get if entity is enabled.
      *
-     * @param \Elcodi\Component\Media\Entity\Interfaces\ImageInterface $image Image object to be removed
-     *
-     * @return $this Self object
+     * @param ImageInterface $image
      */
-    public function removeImage(\Elcodi\Component\Media\Entity\Interfaces\ImageInterface $image)
+    public function removeImage(ImageInterface $image)
     {
         $this->images->removeElement($image);
-
-        return $this;
     }
 
     /**
      * Get all images.
      *
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @return Collection
      */
-    public function getImages()
+    public function getImages() : Collection
     {
         return $this->images;
     }
@@ -80,11 +74,12 @@ trait ImagesContainerTrait
     /**
      * Get sorted images.
      *
-     * @return \Doctrine\Common\Collections\ArrayCollection
+     * @return Collection
      */
-    public function getSortedImages()
+    public function getSortedImages() : Collection
     {
-        $imagesSort = explode(',', $this->getImagesSort());
+        $imagesSort = $this->getImagesSort() ?? '';
+        $imagesSort = explode(',', $imagesSort);
         $orderCollection = array_reverse($imagesSort);
         $imagesCollection = $this
             ->getImages()
@@ -93,8 +88,8 @@ trait ImagesContainerTrait
         usort(
             $imagesCollection,
             function (
-                \Elcodi\Component\Media\Entity\Interfaces\ImageInterface $a,
-                \Elcodi\Component\Media\Entity\Interfaces\ImageInterface $b
+                ImageInterface $a,
+                ImageInterface $b
             ) use ($orderCollection) {
                 $aPos = array_search($a->getId(), $orderCollection);
                 $bPos = array_search($b->getId(), $orderCollection);
@@ -111,23 +106,19 @@ trait ImagesContainerTrait
     /**
      * Set images.
      *
-     * @param \Doctrine\Common\Collections\ArrayCollection $images Images
-     *
-     * @return $this Self object
+     * @param Collection $images
      */
-    public function setImages(\Doctrine\Common\Collections\ArrayCollection $images)
+    public function setImages(Collection $images)
     {
         $this->images = $images;
-
-        return $this;
     }
 
     /**
      * Get ImagesSort.
      *
-     * @return string ImagesSort
+     * @return string|null
      */
-    public function getImagesSort()
+    public function getImagesSort() : ? string
     {
         return $this->imagesSort;
     }
@@ -135,14 +126,10 @@ trait ImagesContainerTrait
     /**
      * Sets ImagesSort.
      *
-     * @param string $imagesSort ImagesSort
-     *
-     * @return $this Self object
+     * @param string|null $imagesSort
      */
-    public function setImagesSort($imagesSort)
+    public function setImagesSort(?string $imagesSort)
     {
         $this->imagesSort = $imagesSort;
-
-        return $this;
     }
 }

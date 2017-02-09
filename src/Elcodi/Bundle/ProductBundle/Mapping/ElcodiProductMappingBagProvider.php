@@ -41,6 +41,8 @@ class ElcodiProductMappingBagProvider implements MappingBagProvider
                 'purchasable_pack' => 'Pack',
                 'category' => 'Category',
                 'manufacturer' => 'Manufacturer',
+                'attribute' => 'Attribute',
+                'attribute_value' => 'Value',
             ],
             '@ElcodiProductBundle',
             'Elcodi\Component\Product\Entity',

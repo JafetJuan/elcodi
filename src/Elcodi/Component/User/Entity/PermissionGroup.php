@@ -96,4 +96,16 @@ class PermissionGroup implements PermissionGroupInterface
     {
         $this->permissions = $permissions;
     }
+
+    /**
+     * Has permission
+     *
+     * @param string $route
+     *
+     * @return bool
+     */
+    public function hasPermission(string $route) : bool
+    {
+        return in_array($route, $this->permissions);
+    }
 }

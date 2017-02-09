@@ -35,35 +35,35 @@ class EntityTranslationProvider implements EntityTranslationProviderInterface
      *
      * Entity Translation repository
      */
-    protected $entityTranslationRepository;
+    private $entityTranslationRepository;
 
     /**
      * @var ObjectManager
      *
      * Entity Translation entity manager
      */
-    protected $entityTranslationObjectManager;
+    private $entityTranslationObjectManager;
 
     /**
      * @var EntityTranslationFactory
      *
      * Entity Translation factory
      */
-    protected $entityTranslationFactory;
+    private $entityTranslationFactory;
 
     /**
      * @var array
      *
      * Translations to be flushed
      */
-    protected $translationsToBeFlushed;
+    private $translationsToBeFlushed = [];
 
     /**
      * Construct method.
      *
-     * @param EntityTranslationRepository $entityTranslationRepository    Entity Translation Repository
-     * @param EntityTranslationFactory    $entityTranslationFactory       Entity Translation Factory
-     * @param ObjectManager               $entityTranslationObjectManager Entity Translation Object Manager
+     * @param EntityTranslationRepository $entityTranslationRepository
+     * @param EntityTranslationFactory    $entityTranslationFactory
+     * @param ObjectManager               $entityTranslationObjectManager
      */
     public function __construct(
         EntityTranslationRepository $entityTranslationRepository,
@@ -73,25 +73,24 @@ class EntityTranslationProvider implements EntityTranslationProviderInterface
         $this->entityTranslationRepository = $entityTranslationRepository;
         $this->entityTranslationFactory = $entityTranslationFactory;
         $this->entityTranslationObjectManager = $entityTranslationObjectManager;
-        $this->translationsToBeFlushed = [];
     }
 
     /**
      * Get translation.
      *
-     * @param string $entityType  Type of entity
-     * @param string $entityId    Id of entity
-     * @param string $entityField Field of entity
-     * @param string $locale      Locale
+     * @param string $entityType
+     * @param string $entityId
+     * @param string $entityField
+     * @param string $locale
      *
-     * @return string|bool Value fetched
+     * @return string
      */
     public function getTranslation(
-        $entityType,
-        $entityId,
-        $entityField,
-        $locale
-    ) {
+        string $entityType,
+        string $entityId,
+        string $entityField,
+        string $locale
+    ) : string {
         $translation = $this
             ->entityTranslationRepository
             ->findOneBy([
@@ -109,20 +108,20 @@ class EntityTranslationProvider implements EntityTranslationProviderInterface
     /**
      * Set translation.
      *
-     * @param string $entityType       Type of entity
-     * @param string $entityId         Id of entity
-     * @param string $entityField      Field of entity
-     * @param string $translationValue Translated value
-     * @param string $locale           Locale
+     * @param string $entityType
+     * @param string $entityId
+     * @param string $entityField
+     * @param string $translationValue
+     * @param string $locale
      *
      * @return $this Self object
      */
     public function setTranslation(
-        $entityType,
-        $entityId,
-        $entityField,
-        $translationValue,
-        $locale
+        string $entityType,
+        string $entityId,
+        string $entityField,
+        string $translationValue,
+        string $locale
     ) {
         $translation = $this
             ->entityTranslationRepository
@@ -150,8 +149,6 @@ class EntityTranslationProvider implements EntityTranslationProviderInterface
         $translation->setTranslation($translationValue);
 
         $this->translationsToBeFlushed[] = $translation;
-
-        return $this;
     }
 
     /**

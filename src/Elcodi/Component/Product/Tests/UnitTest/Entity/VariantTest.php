@@ -21,8 +21,8 @@ namespace Elcodi\Component\Product\Tests\UnitTest\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit_Framework_TestCase;
 
-use Elcodi\Component\Attribute\Entity\Attribute;
-use Elcodi\Component\Attribute\Entity\Value;
+use Elcodi\Component\Product\Entity\Attribute;
+use Elcodi\Component\Product\Entity\Value;
 use Elcodi\Component\Product\Entity\Product;
 use Elcodi\Component\Product\Entity\Variant;
 
