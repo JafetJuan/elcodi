@@ -108,6 +108,7 @@ class ElcodiGeoExtension extends BaseExtension implements EntitiesOverridableExt
             'formatters',
             'adapters',
             'validator',
+            'twig',
         ];
     }
 
@@ -125,6 +126,7 @@ class ElcodiGeoExtension extends BaseExtension implements EntitiesOverridableExt
         return [
             'Elcodi\Component\Geo\Entity\Interfaces\AddressInterface' => 'elcodi.entity.address.class',
             'Elcodi\Component\Geo\Entity\Interfaces\LocationInterface' => 'elcodi.entity.location.class',
+            'Elcodi\Component\Geo\Entity\Interfaces\ZoneInterface' => 'elcodi.entity.zone.class',
         ];
     }
 

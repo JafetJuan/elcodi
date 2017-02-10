@@ -22,6 +22,8 @@ use Elcodi\Component\Core\Wrapper\Interfaces\WrapperInterface;
 use Elcodi\Component\Store\Entity\Interfaces\StoreInterface;
 use Elcodi\Component\Store\Exception\StoreNotFoundException;
 use Elcodi\Component\Store\Repository\StoreRepository;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Class StoreWrapper.
@@ -43,12 +45,23 @@ class StoreWrapper implements WrapperInterface
     private $storeRepository;
 
     /**
+     * @var RequestStack
+     *
+     * Request stack
+     */
+    private $requestStack;
+
+    /**
      * Construct.
      *
-     * @param StoreRepository $storeRepository Store Repository
+     * @param RequestStack $requestStack
+     * @param StoreRepository $storeRepository
      */
-    public function __construct(StoreRepository $storeRepository)
+    public function __construct(
+        RequestStack $requestStack,
+        StoreRepository $storeRepository)
     {
+        $this->requestStack = $requestStack;
         $this->storeRepository = $storeRepository;
     }
 
@@ -65,6 +78,15 @@ class StoreWrapper implements WrapperInterface
             return $this->store;
         }
 
+        $currentRequest = $this
+            ->requestStack
+            ->getMasterRequest();
+
+        if (!$currentRequest instanceof Request) {
+            return null;
+        }
+
+        $currentDomain = $currentRequest->getHost();
         $stores = $this
             ->storeRepository
             ->findAll();
@@ -73,9 +95,23 @@ class StoreWrapper implements WrapperInterface
             throw new StoreNotFoundException();
         }
 
-        $this->store = reset($stores);
+        foreach ($stores as $store) {
+            $domains = $store->getDomains();
+            if(is_null($domains)) {
+                continue;
+            }
+            $domains = explode(',', $domains);
+            foreach ($domains as $domain) {
+                if (trim($domain) == $currentDomain) {
+                    $this->store = $store;
+                    return $store;
+                }
+            }
+        }
 
-        return $this->store;
+        if (empty($stores)) {
+            throw new StoreNotFoundException();
+        }
     }
 
     /**

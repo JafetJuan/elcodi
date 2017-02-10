@@ -1,0 +1,8 @@
+services:
+
+    elcodi.twig_extension.location:
+        class: Elcodi\Component\Geo\Twig\LocationExtension
+        arguments:
+            - "@elcodi.transformer.locations_to_string"
+        tags:
+            - { name: twig.extension }

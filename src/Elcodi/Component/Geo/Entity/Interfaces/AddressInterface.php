@@ -189,4 +189,11 @@ interface AddressInterface extends
      * @return string Postalcode
      */
     public function getPostalcode();
+
+    /**
+     * Get full address name
+     *
+     * @return string
+     */
+    public function fullAddress() : string;
 }

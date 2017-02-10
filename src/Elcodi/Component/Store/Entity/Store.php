@@ -22,8 +22,10 @@ use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
+use Elcodi\Component\Currency\Entity\Traits\WithCurrenciesTrait;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
+use Elcodi\Component\Language\Entity\Traits\WithLanguagesTrait;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 use Elcodi\Component\Store\Entity\Interfaces\StoreInterface;
 
@@ -34,6 +36,8 @@ class Store implements StoreInterface
 {
     use IdentifiableTrait,
         DateTimeTrait,
+        WithLanguagesTrait,
+        WithCurrenciesTrait,
         EnabledTrait;
 
     /**
@@ -91,6 +95,13 @@ class Store implements StoreInterface
      * Use stock
      */
     protected $useStock;
+
+    /**
+     * @var string
+     *
+     * Domains
+     */
+    protected $domains;
 
     /**
      * @var AddressInterface
@@ -345,6 +356,26 @@ class Store implements StoreInterface
         $this->useStock = $useStock;
 
         return $this;
+    }
+
+    /**
+     * Get the domains
+     *
+     * @return null|string
+     */
+    public function getDomains() : ? string
+    {
+        return $this->domains;
+    }
+
+    /**
+     * Set domains
+     *
+     * @param string $domains
+     */
+    public function setDomains(?string $domains)
+    {
+        $this->domains = $domains;
     }
 
     /**

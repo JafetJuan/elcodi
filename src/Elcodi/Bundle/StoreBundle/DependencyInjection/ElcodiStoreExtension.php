@@ -82,6 +82,7 @@ class ElcodiStoreExtension extends BaseExtension implements EntitiesOverridableE
             'factories',
             'wrappers',
             'services',
+            'twig',
         ];
     }
 

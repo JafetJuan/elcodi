@@ -51,7 +51,10 @@ Elcodi\Component\Store\Entity\Store:
         useStock:
             column: use_stock
             type: boolean
-
+        domains:
+            column: domains
+            type: string
+            nullable: true
         createdAt:
             column: created_at
             type: datetime
@@ -114,6 +117,32 @@ Elcodi\Component\Store\Entity\Store:
                 name: background_image_id
                 referencedColumnName: id
                 nullable: true
+
+    manyToMany:
+        languages:
+            targetEntity: Elcodi\Component\Language\Entity\Interfaces\LanguageInterface
+            joinTable:
+                name: store_language
+                joinColumns:
+                    store_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    language_iso:
+                        referencedColumnName: iso
+                        onDelete: "CASCADE"
+        currencies:
+            targetEntity: Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface
+            joinTable:
+                name: store_currency
+                joinColumns:
+                    store_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    currency_iso:
+                        referencedColumnName: iso
+                        onDelete: "CASCADE"
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]

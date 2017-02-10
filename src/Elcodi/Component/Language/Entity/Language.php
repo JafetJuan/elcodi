@@ -27,8 +27,7 @@ use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
  */
 class Language implements LanguageInterface
 {
-    use IdentifiableTrait,
-        EnabledTrait;
+    use EnabledTrait;
 
     /**
      * @var string

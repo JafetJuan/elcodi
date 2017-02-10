@@ -1,0 +1,8 @@
+services:
+
+    elcodi.twig_extension.store:
+        class: Elcodi\Component\Store\Twig\StoreExtension
+        arguments:
+            - "@elcodi.wrapper.store"
+        tags:
+            - { name: twig.extension }

@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace Elcodi\Component\Store\Factory;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 use Elcodi\Component\Store\Entity\Interfaces\StoreInterface;
 use Elcodi\Component\Store\StoreRoutingStrategy;
@@ -45,6 +46,8 @@ class StoreFactory extends AbstractFactory
         $store->setRoutingStrategy(StoreRoutingStrategy::STRATEGY_PREFIX_EXCEPT_DEFAULT);
         $store->enable();
         $store->setCreatedAt($this->now());
+        $store->setLanguages(new ArrayCollection());
+        $store->setCurrencies(new ArrayCollection());
 
         return $store;
     }

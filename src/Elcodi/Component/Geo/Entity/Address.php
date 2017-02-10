@@ -339,4 +339,17 @@ class Address implements AddressInterface
     {
         return $this->postalCode;
     }
+
+    /**
+     * Get full address name
+     *
+     * @return string
+     */
+    public function fullAddress() : string
+    {
+        return
+            $this->address . ' ' .
+            $this->addressMore . ', ' .
+            $this->postalCode;
+    }
 }

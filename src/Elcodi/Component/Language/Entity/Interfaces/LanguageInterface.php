@@ -24,9 +24,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 /**
  * Interface LanguageInterface.
  */
-interface LanguageInterface extends
-    IdentifiableInterface,
-    EnabledInterface
+interface LanguageInterface extends EnabledInterface
 {
     /**
      * Set language name.

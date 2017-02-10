@@ -22,8 +22,10 @@ use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
+use Elcodi\Component\Currency\Entity\Interfaces\WithCurrenciesInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
+use Elcodi\Component\Language\Entity\Interfaces\WithLanguagesInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 
 /**
@@ -32,6 +34,8 @@ use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 interface StoreInterface extends
     IdentifiableInterface,
     DateTimeInterface,
+    WithLanguagesInterface,
+    WithCurrenciesInterface,
     EnabledInterface
 {
     /**
@@ -163,6 +167,20 @@ interface StoreInterface extends
     public function setUseStock($useStock);
 
     /**
+     * Get the domains
+     *
+     * @return null|string
+     */
+    public function getDomains() : ? string;
+
+    /**
+     * Set domains
+     *
+     * @param string $domains
+     */
+    public function setDomains(?string $domains);
+
+    /**
      * Get Address.
      *
      * @return AddressInterface Address
@@ -177,38 +195,6 @@ interface StoreInterface extends
      * @return $this Self object
      */
     public function setAddress(AddressInterface $address);
-
-    /**
-     * Get DefaultLanguage.
-     *
-     * @return LanguageInterface DefaultLanguage
-     */
-    public function getDefaultLanguage();
-
-    /**
-     * Sets DefaultLanguage.
-     *
-     * @param LanguageInterface $defaultLanguage DefaultLanguage
-     *
-     * @return $this Self object
-     */
-    public function setDefaultLanguage(LanguageInterface $defaultLanguage);
-
-    /**
-     * Get DefaultCurrency.
-     *
-     * @return CurrencyInterface DefaultCurrency
-     */
-    public function getDefaultCurrency();
-
-    /**
-     * Sets DefaultCurrency.
-     *
-     * @param CurrencyInterface $defaultCurrency DefaultCurrency
-     *
-     * @return $this Self object
-     */
-    public function setDefaultCurrency(CurrencyInterface $defaultCurrency);
 
     /**
      * Get RoutingStrategy.
