@@ -40,22 +40,24 @@ class PackStockValidator implements PurchasableStockValidatorInterface
      */
     public function getPurchasableNamespace()
     {
-        return 'Elcodi\Component\Product\Entity\Interfaces\PackInterface';
+        return PackInterface::class;
     }
 
     /**
-     * Gets purchasable validation.
+     * Make a simple validation of a Purchasable instance. Return if the stock
+     * is valid by returning a true or false if the entire stock is available.
+     * Return the available stock otherwise.
      *
-     * @param PurchasableInterface $purchasable   Purchasable
-     * @param int                  $stockRequired Stock required
-     * @param bool                 $useStock      Use stock
+     * @param PurchasableInterface $purchasable
+     * @param int                  $stockRequired
+     * @param bool                 $useStock
      *
-     * @return bool|int Is valid or the number of elements that can be used
+     * @return bool|int
      */
     public function isStockAvailable(
         PurchasableInterface $purchasable,
-        $stockRequired,
-        $useStock
+        int $stockRequired,
+        bool $useStock
     ) {
         $namespace = $this->getPurchasableNamespace();
         if (!$purchasable instanceof $namespace) {

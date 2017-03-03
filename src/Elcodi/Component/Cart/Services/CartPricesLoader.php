@@ -54,8 +54,8 @@ class CartPricesLoader
     /**
      * Built method.
      *
-     * @param WrapperInterface  $currencyWrapper   Currency Wrapper
-     * @param CurrencyConverter $currencyConverter Currency Converter
+     * @param WrapperInterface  $currencyWrapper
+     * @param CurrencyConverter $currencyConverter
      */
     public function __construct(
         WrapperInterface $currencyWrapper,
@@ -68,7 +68,7 @@ class CartPricesLoader
     /**
      * Load cart purchasables prices.
      *
-     * @param CartInterface $cart Cart
+     * @param CartInterface $cart
      */
     public function loadCartPurchasablesAmount(CartInterface $cart)
     {
@@ -80,18 +80,13 @@ class CartPricesLoader
 
         /**
          * Calculate Amount and PurchasableAmount.
+         *
+         * @var CartLineInterface $cartLine
          */
         foreach ($cart->getCartLines() as $cartLine) {
 
-            /**
-             * @var CartLineInterface $cartLine
-             */
-            $cartLine = $this->loadCartLinePrices($cartLine);
+            $this->loadCartLinePrices($cartLine);
 
-            /**
-             * @var MoneyInterface $purchasableAmount
-             * @var MoneyInterface $totalAmount
-             */
             $convertedPurchasableAmount = $this
                 ->currencyConverter
                 ->convertMoney(
@@ -111,7 +106,7 @@ class CartPricesLoader
     /**
      * Load cart total price.
      *
-     * @param CartInterface $cart Cart
+     * @param CartInterface $cart
      */
     public function loadCartTotalAmount(CartInterface $cart)
     {
@@ -156,9 +151,7 @@ class CartPricesLoader
      * Loads CartLine prices.
      * This method does not consider Coupon.
      *
-     * @param CartLineInterface $cartLine Cart line
-     *
-     * @return CartLineInterface Line with prices loaded
+     * @param CartLineInterface $cartLine
      */
     private function loadCartLinePrices(CartLineInterface $cartLine)
     {
@@ -179,7 +172,5 @@ class CartPricesLoader
          */
         $cartLine->setPurchasableAmount($purchasablePrice);
         $cartLine->setAmount($purchasablePrice->multiply($cartLine->getQuantity()));
-
-        return $cartLine;
     }
 }

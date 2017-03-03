@@ -33,8 +33,6 @@ interface WrapperInterface
 
     /**
      * Clean loaded object in order to reload it again.
-     *
-     * @return $this Self object
      */
     public function clean();
 }

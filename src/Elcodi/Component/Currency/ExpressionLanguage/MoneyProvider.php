@@ -22,7 +22,6 @@ use RuntimeException;
 use Symfony\Component\ExpressionLanguage\ExpressionFunction;
 use Symfony\Component\ExpressionLanguage\ExpressionFunctionProviderInterface;
 
-use Elcodi\Component\Core\Wrapper\Interfaces\WrapperInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Currency\Entity\Money;
 use Elcodi\Component\Currency\Repository\CurrencyRepository;
@@ -35,11 +34,11 @@ use Elcodi\Component\Currency\Repository\CurrencyRepository;
 class MoneyProvider implements ExpressionFunctionProviderInterface
 {
     /**
-     * @var WrapperInterface
+     * @var CurrencyInterface
      *
      * Currency wrapper to get the default currency
      */
-    private $defaultCurrencyWrapper;
+    private $defaultCurrency;
 
     /**
      * @var CurrencyRepository
@@ -51,14 +50,14 @@ class MoneyProvider implements ExpressionFunctionProviderInterface
     /**
      * Construct.
      *
-     * @param WrapperInterface   $defaultCurrencyWrapper Default Currency wrapper
-     * @param CurrencyRepository $currencyRepository     Currency Repository
+     * @param CurrencyInterface   $defaultCurrency
+     * @param CurrencyRepository $currencyRepository
      */
     public function __construct(
-        WrapperInterface $defaultCurrencyWrapper,
+        CurrencyInterface $defaultCurrency,
         CurrencyRepository $currencyRepository
     ) {
-        $this->defaultCurrencyWrapper = $defaultCurrencyWrapper;
+        $this->defaultCurrency = $defaultCurrency;
         $this->currencyRepository = $currencyRepository;
     }
 
@@ -82,9 +81,7 @@ class MoneyProvider implements ExpressionFunctionProviderInterface
                 },
                 function (array $context, $amount, $currencyIso = null) {
                     if ($currencyIso === null) {
-                        $currency = $this
-                            ->defaultCurrencyWrapper
-                            ->get();
+                        $currency = $this->defaultCurrency;
                     } else {
                         /**
                          * @var CurrencyInterface $currency

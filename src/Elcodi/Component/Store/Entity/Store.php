@@ -36,8 +36,6 @@ class Store implements StoreInterface
 {
     use IdentifiableTrait,
         DateTimeTrait,
-        WithLanguagesTrait,
-        WithCurrenciesTrait,
         EnabledTrait;
 
     /**
@@ -123,13 +121,6 @@ class Store implements StoreInterface
      * Default currency
      */
     protected $defaultCurrency;
-
-    /**
-     * @var string
-     *
-     * Rouring strategy
-     */
-    protected $routingStrategy;
 
     /**
      * @var ImageInterface
@@ -446,30 +437,6 @@ class Store implements StoreInterface
     public function setDefaultCurrency(CurrencyInterface $defaultCurrency)
     {
         $this->defaultCurrency = $defaultCurrency;
-
-        return $this;
-    }
-
-    /**
-     * Get RoutingStrategy.
-     *
-     * @return string RoutingStrategy
-     */
-    public function getRoutingStrategy()
-    {
-        return $this->routingStrategy;
-    }
-
-    /**
-     * Sets RoutingStrategy.
-     *
-     * @param string $routingStrategy RoutingStrategy
-     *
-     * @return $this Self object
-     */
-    public function setRoutingStrategy($routingStrategy)
-    {
-        $this->routingStrategy = $routingStrategy;
 
         return $this;
     }

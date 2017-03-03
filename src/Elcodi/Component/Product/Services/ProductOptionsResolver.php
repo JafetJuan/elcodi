@@ -20,6 +20,7 @@ namespace Elcodi\Component\Product\Services;
 
 use Doctrine\Common\Collections\ArrayCollection;
 
+use Doctrine\Common\Collections\Collection;
 use Elcodi\Component\Product\Entity\Interfaces\AttributeInterface;
 use Elcodi\Component\Product\Entity\Interfaces\ValueInterface;
 use Elcodi\Component\Product\Entity\Interfaces\ProductInterface;
@@ -35,15 +36,15 @@ class ProductOptionsResolver
      *
      * Returned Options belong to Variants available for purchase
      *
-     * @param ProductInterface   $product   Product
-     * @param AttributeInterface $attribute Attribute
+     * @param ProductInterface   $product
+     * @param AttributeInterface $attribute
      *
-     * @return ArrayCollection
+     * @return Collection
      */
     public function getAvailableOptions(
         ProductInterface $product,
         AttributeInterface $attribute
-    ) {
+    ) : Collection {
         $availableOptions = new ArrayCollection();
 
         foreach ($product->getVariants() as $variant) {

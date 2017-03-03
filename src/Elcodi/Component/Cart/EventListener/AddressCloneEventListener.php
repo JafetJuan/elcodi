@@ -67,7 +67,7 @@ final class AddressCloneEventListener
     /**
      * Updates all the carts with the cloned address.
      *
-     * @param AddressOnCloneEvent $event Event
+     * @param AddressOnCloneEvent $event
      */
     public function updateCarts(AddressOnCloneEvent $event)
     {

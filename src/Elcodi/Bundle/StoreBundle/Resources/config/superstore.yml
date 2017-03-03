@@ -1,0 +1,60 @@
+services:
+
+    #
+    # Services
+    #
+    elcodi.superstore:
+        class: Elcodi\Component\Store\Entity\Interfaces\SuperstoreInterface
+        factory:
+            - "@elcodi.repository.superstore"
+            - "find"
+        arguments:
+            - 1
+
+    elcodi.superstore_routing_strategy:
+        class: stdClass
+        factory:
+            - "@elcodi.superstore"
+            - "getRoutingStrategy"
+
+    elcodi.superstore_languages:
+        class: Doctrine\Common\Collection\Collection
+        factory:
+            - "@elcodi.superstore"
+            - "getLanguages"
+
+    elcodi.superstore_languages_iso:
+        class: Doctrine\Common\Collection\Collection
+        factory:
+            - "@elcodi.superstore"
+            - "getLanguageIsos"
+
+    elcodi.superstore_main_language:
+        class: Elcodi\Component\Language\Entity\Interfaces\LanguageInterface
+        factory:
+            - "@elcodi.superstore"
+            - "getMainLanguage"
+
+    elcodi.superstore_main_language_iso:
+        class: stdClass
+        factory:
+            - "@elcodi.superstore_main_language"
+            - "getIso"
+
+    elcodi.superstore_currencies:
+        class: Doctrine\Common\Collection\Collection
+        factory:
+            - "@elcodi.superstore"
+            - "getCurrencies"
+
+    elcodi.superstore_main_currency:
+        class: Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface
+        factory:
+            - "@elcodi.superstore"
+            - "getMainCurrency"
+
+    elcodi.superstore_main_currency_iso:
+        class: stdClass
+        factory:
+            - "@elcodi.superstore_main_currency"
+            - "getIso"

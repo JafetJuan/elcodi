@@ -62,9 +62,9 @@ class CartOrderTransformer
     /**
      * Construct method.
      *
-     * @param OrderEventDispatcher         $orderEventDispatcher         Order EventDispatcher
-     * @param CartLineOrderLineTransformer $cartLineOrderLineTransformer CartLine to OrderLine transformer
-     * @param OrderFactory                 $orderFactory                 OrderFactory
+     * @param OrderEventDispatcher         $orderEventDispatcher
+     * @param CartLineOrderLineTransformer $cartLineOrderLineTransformer
+     * @param OrderFactory                 $orderFactory
      */
     public function __construct(
         OrderEventDispatcher $orderEventDispatcher,
@@ -90,9 +90,9 @@ class CartOrderTransformer
      *
      * @param CartInterface $cart Cart to create order from
      *
-     * @return OrderInterface the created order
+     * @return OrderInterface
      */
-    public function createOrderFromCart(CartInterface $cart)
+    public function createOrderFromCart(CartInterface $cart) : OrderInterface
     {
         $this
             ->orderEventDispatcher

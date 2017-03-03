@@ -1,6 +1,8 @@
 <?php
 
 namespace Elcodi\Component\Language\Entity\Traits;
+
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 
@@ -30,7 +32,24 @@ trait WithLanguagesTrait
      */
     public function getLanguages() : Collection
     {
+        $this->promoteMainLanguage();
+
         return $this->languages;
+    }
+
+    /**
+     * Get language isos
+     *
+     * @return string[]
+     */
+    public function getLanguageIsos() : array
+    {
+        return array_map(function(LanguageInterface $language) {
+            return $language->getIso();
+        }, $this
+            ->languages
+            ->toArray()
+        );
     }
 
     /**
@@ -57,7 +76,7 @@ trait WithLanguagesTrait
             return;
         }
 
-        if ($this->mainLanguage instanceof LanguageInterface) {
+        if (!$this->mainLanguage instanceof LanguageInterface) {
             $this->setMainLanguage($language);
         }
 
@@ -113,5 +132,17 @@ trait WithLanguagesTrait
         }
 
         $this->mainLanguage = $mainLanguage;
+    }
+
+    /**
+     * Promote main language
+     */
+    private function promoteMainLanguage()
+    {
+        $this->removeLanguage($this->mainLanguage);
+        $this->setLanguages(new ArrayCollection(array_merge(
+            [$this->mainLanguage],
+            $this->languages
+        )));
     }
 }

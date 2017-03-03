@@ -21,7 +21,6 @@ namespace Elcodi\Component\Cart\Wrapper;
 use Elcodi\Component\Cart\Entity\Interfaces\CartInterface;
 use Elcodi\Component\Cart\Repository\CartRepository;
 use Elcodi\Component\Cart\Services\CartSessionManager;
-use Elcodi\Component\Core\Wrapper\Interfaces\WrapperInterface;
 
 /**
  * Class CartSessionWrapper.
@@ -34,7 +33,7 @@ use Elcodi\Component\Core\Wrapper\Interfaces\WrapperInterface;
  *
  * @api
  */
-class CartSessionWrapper implements WrapperInterface
+class CartSessionWrapper
 {
     /**
      * @var CartSessionManager
@@ -60,8 +59,8 @@ class CartSessionWrapper implements WrapperInterface
     /**
      * Construct method.
      *
-     * @param CartSessionManager $cartSessionManager CartSessionManager
-     * @param CartRepository     $cartRepository     Cart Repository
+     * @param CartSessionManager $cartSessionManager
+     * @param CartRepository     $cartRepository
      */
     public function __construct(
         CartSessionManager $cartSessionManager,
@@ -75,9 +74,9 @@ class CartSessionWrapper implements WrapperInterface
      * Get loaded object. If object is not loaded yet, then load it and save it
      * locally. Otherwise, just return the pre-loaded object.
      *
-     * @return CartInterface|null Loaded object
+     * @return CartInterface|null
      */
-    public function get()
+    public function get() : ? CartInterface
     {
         if ($this->cart instanceof CartInterface) {
             return $this->cart;
@@ -90,22 +89,18 @@ class CartSessionWrapper implements WrapperInterface
 
     /**
      * Clean loaded object in order to reload it again.
-     *
-     * @return $this Self object
      */
     public function clean()
     {
         $this->cart = null;
-
-        return $this;
     }
 
     /**
      * Get cart from session.
      *
-     * @return CartInterface|null Cart loaded from session
+     * @return null|CartInterface
      */
-    protected function loadCartFromSession()
+    protected function loadCartFromSession() : ? CartInterface
     {
         $cartIdInSession = $this
             ->cartSessionManager

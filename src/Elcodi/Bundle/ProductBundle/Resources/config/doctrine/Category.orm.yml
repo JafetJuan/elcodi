@@ -74,9 +74,9 @@ Elcodi\Component\Product\Entity\Category:
         stores:
             targetEntity: Elcodi\Component\Store\Entity\Interfaces\StoreInterface
             joinTable:
-                name: activity_store
+                name: category_store
                 joinColumns:
-                    activity_id:
+                    category_id:
                         referencedColumnName: id
                         onDelete: "CASCADE"
                 inverseJoinColumns:

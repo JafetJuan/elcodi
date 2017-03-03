@@ -65,16 +65,16 @@ class CartIntegrityValidator
     /**
      * Built method.
      *
-     * @param CartEventDispatcher                $cartEventDispatcher       Cart event dispatcher
-     * @param PurchasableStockValidatorInterface $purchasableStockValidator Purchasable stock validator
-     * @param CartManager                        $cartManager               Cart Manager
-     * @param bool                               $useStock                  Use stock
+     * @param CartEventDispatcher                $cartEventDispatcher
+     * @param PurchasableStockValidatorInterface $purchasableStockValidator
+     * @param CartManager                        $cartManager
+     * @param bool                               $useStock
      */
     public function __construct(
         CartEventDispatcher $cartEventDispatcher,
         PurchasableStockValidatorInterface $purchasableStockValidator,
         CartManager $cartManager,
-        $useStock = false
+        bool $useStock = false
     ) {
         $this->cartEventDispatcher = $cartEventDispatcher;
         $this->purchasableStockValidator = $purchasableStockValidator;
@@ -85,7 +85,7 @@ class CartIntegrityValidator
     /**
      * Validate cart integrity.
      *
-     * @param CartInterface $cart Cart
+     * @param CartInterface $cart
      */
     public function validateCartIntegrity(CartInterface $cart)
     {
@@ -110,9 +110,7 @@ class CartIntegrityValidator
      * $quantity is greater that the available units, $quantity for this
      * CartLine is set to Purchasable::$stock number
      *
-     * @param CartLineInterface $cartLine Cart line
-     *
-     * @return CartLineInterface CartLine
+     * @param CartLineInterface $cartLine
      */
     private function validateCartLine(CartLineInterface $cartLine)
     {
@@ -145,13 +143,11 @@ class CartIntegrityValidator
                     $cartLine
                 );
 
-            return $cartLine;
+            return;
         }
 
         if (is_int($realStockAvailable)) {
             $cartLine->setQuantity($realStockAvailable);
         }
-
-        return $cartLine;
     }
 }

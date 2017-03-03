@@ -35,7 +35,8 @@ class ElcodiStoreMappingBagProvider implements MappingBagProvider
     {
         return MappingBagCollection::create(
             [
-                'store' => 'Store'
+                'store' => 'Store',
+                'superstore' => 'Superstore',
             ],
             '@ElcodiStoreBundle',
             'Elcodi\Component\Store\Entity',

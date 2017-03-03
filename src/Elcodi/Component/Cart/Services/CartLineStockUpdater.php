@@ -42,7 +42,7 @@ class CartLineStockUpdater
     /**
      * Built method.
      *
-     * @param PurchasableStockUpdaterInterface $purchasableStockUpdater Purchasable stock updater
+     * @param PurchasableStockUpdaterInterface $purchasableStockUpdater
      */
     public function __construct(PurchasableStockUpdaterInterface $purchasableStockUpdater)
     {
@@ -54,7 +54,7 @@ class CartLineStockUpdater
      *
      * Flushes all loaded order and related entities.
      *
-     * @param CartLineInterface $cartLine Cart line
+     * @param CartLineInterface $cartLine
      */
     public function updatePurchasableStockByCartLine(CartLineInterface $cartLine)
     {

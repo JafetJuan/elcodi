@@ -36,7 +36,7 @@ class CartAmountValidator
     /**
      * When a cart goes below 0 (due to discounts), set the amount to 0.
      *
-     * @param CartInterface $cart Cart
+     * @param CartInterface $cart
      */
     public function validateAmount(CartInterface $cart)
     {
@@ -46,7 +46,7 @@ class CartAmountValidator
     /**
      * When a cart goes below 0 (due to discounts), set the amount to 0.
      *
-     * @param CartInterface $cart Cart
+     * @param CartInterface $cart
      */
     public function validateNegativeAmount(CartInterface $cart)
     {

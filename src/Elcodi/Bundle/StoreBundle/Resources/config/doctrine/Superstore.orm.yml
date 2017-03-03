@@ -1,0 +1,54 @@
+Elcodi\Component\Store\Entity\Superstore:
+    type: entity
+    table: superstore
+
+    id:
+        id:
+            type: integer
+
+    fields:
+        routingStrategy:
+            column: routing_strategy
+            type: string
+            length: 255
+            nullable: false
+
+    manyToOne:
+        mainLanguage:
+            targetEntity: Elcodi\Component\Language\Entity\Interfaces\LanguageInterface
+            joinColumn:
+                name: main_language_iso
+                referencedColumnName: iso
+                nullable: true
+        mainCurrency:
+            targetEntity: Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface
+            joinColumn:
+                name: main_currency_iso
+                referencedColumnName: iso
+                nullable: true
+
+    manyToMany:
+        languages:
+            targetEntity: Elcodi\Component\Language\Entity\Interfaces\LanguageInterface
+            joinTable:
+                name: superstore_language
+                joinColumns:
+                    store_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    language_iso:
+                        referencedColumnName: iso
+                        onDelete: "CASCADE"
+        currencies:
+            targetEntity: Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface
+            joinTable:
+                name: superstore_currency
+                joinColumns:
+                    store_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    currency_iso:
+                        referencedColumnName: iso
+                        onDelete: "CASCADE"

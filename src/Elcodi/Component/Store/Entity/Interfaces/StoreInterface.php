@@ -34,8 +34,6 @@ use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 interface StoreInterface extends
     IdentifiableInterface,
     DateTimeInterface,
-    WithLanguagesInterface,
-    WithCurrenciesInterface,
     EnabledInterface
 {
     /**
@@ -195,22 +193,6 @@ interface StoreInterface extends
      * @return $this Self object
      */
     public function setAddress(AddressInterface $address);
-
-    /**
-     * Get RoutingStrategy.
-     *
-     * @return string RoutingStrategy
-     */
-    public function getRoutingStrategy();
-
-    /**
-     * Sets RoutingStrategy.
-     *
-     * @param string $routingStrategy RoutingStrategy
-     *
-     * @return $this Self object
-     */
-    public function setRoutingStrategy($routingStrategy);
 
     /**
      * Get Logo.

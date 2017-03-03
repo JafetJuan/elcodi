@@ -40,22 +40,24 @@ class PurchasableStockValidator implements PurchasableStockValidatorInterface
     }
 
     /**
-     * Update stock.
+     * Make a simple validation of a Purchasable instance. Return if the stock
+     * is valid by returning a true or false if the entire stock is available.
+     * Return the available stock otherwise.
      *
-     * @param PurchasableInterface $purchasable     Purchasable
-     * @param int                  $stockToDecrease Stock to decrease
-     * @param bool                 $useStock        Use stock
+     * @param PurchasableInterface $purchasable
+     * @param int                  $stockRequired
+     * @param bool                 $useStock
      *
-     * @return bool|int Is valid or the number of elements that can be used
+     * @return bool|int
      */
     public function isStockAvailable(
         PurchasableInterface $purchasable,
-        $stockToDecrease,
-        $useStock
+        int $stockRequired,
+        bool $useStock
     ) {
         return $this->isValidByLoadedValidators(
             $purchasable,
-            $stockToDecrease,
+            $stockRequired,
             $useStock
         );
     }

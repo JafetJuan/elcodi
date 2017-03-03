@@ -40,30 +40,6 @@ services:
     #
     # Environment values
     #
-    elcodi.languages:
-        class: Doctrine\Common\Collections\Collection
-        factory:
-            - '@elcodi.manager.language'
-            - getLanguages
-
-    elcodi.languages_with_master_promoted:
-        class: Doctrine\Common\Collections\Collection
-        factory:
-            - '@elcodi.manager.promoted_language'
-            - getLanguagesWithMasterLanguagePromoted
-
-    elcodi.languages_iso:
-        class: Doctrine\Common\Collections\Collection
-        factory:
-            - '@elcodi.manager.language'
-            - getLanguagesIso
-
-    elcodi.languages_iso_array:
-        class: stdClass
-        factory:
-            - '@elcodi.languages_iso'
-            - toArray
-
     elcodi.locale:
         class: Elcodi\Component\Language\Entity\Locale
         factory:

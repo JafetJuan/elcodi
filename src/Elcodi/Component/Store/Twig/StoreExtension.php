@@ -29,11 +29,11 @@ class StoreExtension extends Twig_Extension
     }
 
     /**
-     * Return all filters.
+     * Return all functions.
      *
      * @return Twig_SimpleFunction[] Filters
      */
-    public function getFilters()
+    public function getFunctions()
     {
         return [
             new Twig_SimpleFunction('store', [

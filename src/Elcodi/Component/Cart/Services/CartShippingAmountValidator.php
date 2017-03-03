@@ -43,7 +43,7 @@ class CartShippingAmountValidator
     /**
      * Construct.
      *
-     * @param EmptyMoneyWrapper $emptyMoneyWrapper Empty money wrapper
+     * @param EmptyMoneyWrapper $emptyMoneyWrapper
      */
     public function __construct(EmptyMoneyWrapper $emptyMoneyWrapper)
     {
@@ -54,7 +54,7 @@ class CartShippingAmountValidator
      * If the cart's shipping amount is not defined, then put an empty Money
      * value.
      *
-     * @param CartInterface $cart Cart
+     * @param CartInterface $cart
      */
     public function validateEmptyShippingAmount(CartInterface $cart)
     {

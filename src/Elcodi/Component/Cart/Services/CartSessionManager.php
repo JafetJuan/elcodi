@@ -77,14 +77,12 @@ class CartSessionManager
     /**
      * Set Cart in session.
      *
-     * @param CartInterface $cart Cart
-     *
-     * @return $this Self object
+     * @param CartInterface $cart
      */
     public function set(CartInterface $cart)
     {
         if (!$this->saveInSession) {
-            return $this;
+            return;
         }
 
         $this
@@ -93,16 +91,14 @@ class CartSessionManager
                 $this->sessionFieldName,
                 $cart->getId()
             );
-
-        return $this;
     }
 
     /**
      * Get current cart id loaded in session.
      *
-     * @return int Cart id
+     * @return null|int
      */
-    public function get()
+    public function get() : ? int
     {
         return $this
             ->session

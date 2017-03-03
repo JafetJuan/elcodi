@@ -8,7 +8,7 @@ services:
         arguments:
             - '@elcodi.entity_translation_provider'
             - '%elcodi.entity_translator_configuration%'
-            - '@elcodi.languages_iso_array'
+            - '@elcodi.languages_iso'
             - '%elcodi.entity_translator_language_master_locale%'
             - '%elcodi.entity_translator_language_fallback%'
             - '@elcodi.entity_translator_changes'

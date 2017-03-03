@@ -38,7 +38,7 @@ trait PurchasableStockValidatorCollectorTrait
     /**
      * Add stock validator.
      *
-     * @param PurchasableStockValidatorInterface $validator Stock updater
+     * @param PurchasableStockValidatorInterface $validator
      */
     public function addPurchasableStockValidator(PurchasableStockValidatorInterface $validator)
     {
@@ -53,17 +53,17 @@ trait PurchasableStockValidatorCollectorTrait
      * * If one of them is invalid, then the whole collection is invalid
      * * Otherwise, will return the minimum of available stocks
      *
-     * @param Traversable $purchasables    Purchasable
-     * @param int         $stockToDecrease Stock to decrease
-     * @param bool        $useStock        Use stock
+     * @param Traversable $purchasables
+     * @param int         $stockToDecrease
+     * @param bool        $useStock
      *
-     * @return bool Are valid
+     * @return bool
      */
     protected function areValidByLoadedValidators(
         Traversable $purchasables,
-        $stockToDecrease,
-        $useStock
-    ) {
+        int $stockToDecrease,
+        bool $useStock
+    ) : bool {
         $maximumStockAvailable = null;
 
         foreach ($purchasables as $purchasable) {
@@ -100,13 +100,13 @@ trait PurchasableStockValidatorCollectorTrait
      * @param int                  $stockRequired Stock required
      * @param bool                 $useStock      Use stock
      *
-     * @return bool Is valid
+     * @return bool
      */
     protected function isValidByLoadedValidators(
         PurchasableInterface $purchasable,
-        $stockRequired,
-        $useStock
-    ) {
+        int $stockRequired,
+        bool $useStock
+    ) : bool {
         foreach ($this->validators as $validator) {
             $stockUpdateNamespace = $validator->getPurchasableNamespace();
             if ($purchasable instanceof $stockUpdateNamespace) {

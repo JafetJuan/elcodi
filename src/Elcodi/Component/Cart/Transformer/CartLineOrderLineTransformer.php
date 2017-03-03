@@ -56,8 +56,8 @@ class CartLineOrderLineTransformer
     /**
      * Construct method.
      *
-     * @param OrderLineEventDispatcher $orderLineEventDispatcher Event dispatcher
-     * @param OrderLineFactory         $orderLineFactory         OrderLineFactory
+     * @param OrderLineEventDispatcher $orderLineEventDispatcher
+     * @param OrderLineFactory         $orderLineFactory
      */
     public function __construct(
         OrderLineEventDispatcher $orderLineEventDispatcher,
@@ -70,15 +70,15 @@ class CartLineOrderLineTransformer
     /**
      * Given a set of CartLines, return a set of OrderLines.
      *
-     * @param OrderInterface $order     Order
-     * @param Collection     $cartLines Set of CartLines
+     * @param OrderInterface $order
+     * @param Collection     $cartLines
      *
-     * @return Collection Set of OrderLines
+     * @return Collection
      */
     public function createOrderLinesByCartLines(
         OrderInterface $order,
         Collection $cartLines
-    ) {
+    ) : Collection {
         $orderLines = new ArrayCollection();
 
         /**
@@ -101,15 +101,15 @@ class CartLineOrderLineTransformer
     /**
      * Given a cart line, creates a new order line.
      *
-     * @param OrderInterface    $order    Order
-     * @param CartLineInterface $cartLine Cart Line
+     * @param OrderInterface    $order
+     * @param CartLineInterface $cartLine
      *
-     * @return OrderLineInterface OrderLine created
+     * @return OrderLineInterface
      */
     public function createOrderLineByCartLine(
         OrderInterface $order,
         CartLineInterface $cartLine
-    ) {
+    ) : OrderLineInterface {
         $orderLine = ($cartLine->getOrderLine() instanceof OrderLineInterface)
             ? $cartLine->getOrderLine()
             : $this->orderLineFactory->create();

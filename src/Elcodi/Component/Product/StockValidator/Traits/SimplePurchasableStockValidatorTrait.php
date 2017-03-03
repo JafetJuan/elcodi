@@ -26,18 +26,20 @@ use Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface;
 trait SimplePurchasableStockValidatorTrait
 {
     /**
-     * Make a simple validation of a Purchasable instance.
+     * Make a simple validation of a Purchasable instance. Return if the stock
+     * is valid by returning a true or false if the entire stock is available.
+     * Return the available stock otherwise.
      *
-     * @param PurchasableInterface $purchasable   Purchasable
-     * @param int                  $stockRequired Stock required
-     * @param bool                 $useStock      Use stock
+     * @param PurchasableInterface $purchasable
+     * @param int                  $stockRequired
+     * @param bool                 $useStock
      *
-     * @return bool|int Is valid or the number of elements that can be used
+     * @return bool|int
      */
     public function isValidUsingSimplePurchasableValidation(
         PurchasableInterface $purchasable,
-        $stockRequired,
-        $useStock
+        int $stockRequired,
+        bool $useStock
     ) {
         if (
             !$purchasable->isEnabled() ||

@@ -95,6 +95,9 @@ class StoreWrapper implements WrapperInterface
             throw new StoreNotFoundException();
         }
 
+        /**
+         * @var StoreInterface $store
+         */
         foreach ($stores as $store) {
             $domains = $store->getDomains();
             if(is_null($domains)) {
@@ -116,13 +119,9 @@ class StoreWrapper implements WrapperInterface
 
     /**
      * Clean loaded object in order to reload it again.
-     *
-     * @return $this Self object
      */
     public function clean()
     {
         $this->store = null;
-
-        return $this;
     }
 }

@@ -44,11 +44,11 @@ class CurrencyWrapper implements WrapperInterface
     private $currencyRepository;
 
     /**
-     * @var DefaultCurrencyWrapper
+     * @var CurrencyInterface
      *
-     * Default currency wrapper
+     * Default currency
      */
-    private $defaultCurrencyWrapper;
+    private $defaultCurrency;
 
     /**
      * @var CurrencyInterface
@@ -62,16 +62,16 @@ class CurrencyWrapper implements WrapperInterface
      *
      * @param CurrencySessionManager $currencySessionManager
      * @param CurrencyRepository     $currencyRepository
-     * @param DefaultCurrencyWrapper $defaultCurrencyWrapper
+     * @param CurrencyInterface $defaultCurrency
      */
     public function __construct(
         CurrencySessionManager $currencySessionManager,
         CurrencyRepository $currencyRepository,
-        DefaultCurrencyWrapper $defaultCurrencyWrapper
+        CurrencyInterface $defaultCurrency
     ) {
         $this->currencySessionManager = $currencySessionManager;
         $this->currencyRepository = $currencyRepository;
-        $this->defaultCurrencyWrapper = $defaultCurrencyWrapper;
+        $this->defaultCurrency = $defaultCurrency;
     }
 
     /**
@@ -97,7 +97,7 @@ class CurrencyWrapper implements WrapperInterface
             return $this->currency;
         }
 
-        $this->currency = $this->loadDefaultCurrency();
+        $this->currency = $this->defaultCurrency;
         $this->saveCurrencyToSession($this->currency);
 
         return $this->currency;
@@ -105,14 +105,10 @@ class CurrencyWrapper implements WrapperInterface
 
     /**
      * Clean loaded object in order to reload it again.
-     *
-     * @return $this Self object
      */
     public function clean()
     {
         $this->currency = null;
-
-        return $this;
     }
 
     /**
@@ -138,28 +134,12 @@ class CurrencyWrapper implements WrapperInterface
     /**
      * Save currency to session.
      *
-     * @param CurrencyInterface $currency Currency
-     *
-     * @return $this Self object
+     * @param CurrencyInterface $currency
      */
     private function saveCurrencyToSession(CurrencyInterface $currency)
     {
         $this
             ->currencySessionManager
             ->set($currency);
-
-        return $this;
-    }
-
-    /**
-     * Load default currency.
-     *
-     * @return CurrencyInterface Currency
-     */
-    private function loadDefaultCurrency()
-    {
-        return $this
-            ->defaultCurrencyWrapper
-            ->get();
     }
 }

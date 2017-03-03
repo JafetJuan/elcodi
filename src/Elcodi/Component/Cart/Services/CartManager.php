@@ -30,24 +30,22 @@ use Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface;
  * Cart manager service.
  *
  * This service hosts all cart and cartLine related actions.
- * This class has not states, so every method just has input parameters and
- * return some output values.
  *
  * Some of these methods also can dispatch some Cart events
  *
  * Api Methods:
  *
- * * addLine(AbstractCart, CartLine) : self
- * * removeLine(AbstractCart, CartLine) : self
- * * silentRemoveLine(AbstractCart, CartLine) : self
- * * emptyLines() : self
+ * * addLine(AbstractCart, CartLine)
+ * * removeLine(AbstractCart, CartLine)
+ * * silentRemoveLine(AbstractCart, CartLine)
+ * * emptyLines()
  *
- * * increaseCartLineQuantity(CartLine, $quantity) : self
- * * decreaseCartLineQuantity(CartLine, $quantity) : self
- * * setCartLineQuantity(CartLine, $quantity) : self
+ * * increaseCartLineQuantity(CartLine, int $quantity)
+ * * decreaseCartLineQuantity(CartLine, int $quantity)
+ * * setCartLineQuantity(CartLine, int $quantity)
  *
- * * addPurchasable(AbstractCart, PurchasableInterface, $quantity) : self
- * * removePurchasable(AbstractCart, PurchasableInterface, $quantity) : self
+ * * addPurchasable(AbstractCart, PurchasableInterface, int $quantity)
+ * * removePurchasable(AbstractCart, PurchasableInterface, int $quantity)
  *
  * @api
  */
@@ -84,10 +82,10 @@ class CartManager
     /**
      * Construct method.
      *
-     * @param CartEventDispatcher     $cartEventDispatcher     Cart Event Dispatcher
-     * @param CartLineEventDispatcher $cartLineEventDispatcher CartLine Event dispatcher
-     * @param CartFactory             $cartFactory             Cart factory
-     * @param CartLineFactory         $cartLineFactory         CartLine factory
+     * @param CartEventDispatcher     $cartEventDispatcher
+     * @param CartLineEventDispatcher $cartLineEventDispatcher
+     * @param CartFactory             $cartFactory
+     * @param CartLineFactory         $cartLineFactory
      */
     public function __construct(
         CartEventDispatcher $cartEventDispatcher,
@@ -110,10 +108,8 @@ class CartManager
      * no product duplication check is performed: in that
      * case CartManager::addProduct should be used
      *
-     * @param CartInterface     $cart     Cart
-     * @param CartLineInterface $cartLine Cart line
-     *
-     * @return $this Self object
+     * @param CartInterface     $cart
+     * @param CartLineInterface $cartLine
      */
     private function addLine(
         CartInterface $cart,
@@ -132,8 +128,6 @@ class CartManager
         $this
             ->cartEventDispatcher
             ->dispatchCartLoadEvents($cart);
-
-        return $this;
     }
 
     /**
@@ -143,10 +137,8 @@ class CartManager
      * If this method is called in CartCheckEvents, $dispatchEvents should be
      * set to false
      *
-     * @param CartInterface     $cart     Cart
-     * @param CartLineInterface $cartLine Cart line
-     *
-     * @return $this Self object
+     * @param CartInterface     $cart
+     * @param CartLineInterface $cartLine
      */
     public function removeLine(
         CartInterface $cart,
@@ -157,17 +149,13 @@ class CartManager
         $this
             ->cartEventDispatcher
             ->dispatchCartLoadEvents($cart);
-
-        return $this;
     }
 
     /**
      * Removes CartLine from Cart.
      *
-     * @param CartInterface     $cart     Cart
-     * @param CartLineInterface $cartLine Cart line
-     *
-     * @return $this Self object
+     * @param CartInterface     $cart
+     * @param CartLineInterface $cartLine
      */
     public function silentRemoveLine(
         CartInterface $cart,
@@ -181,8 +169,6 @@ class CartManager
                 $cart,
                 $cartLine
             );
-
-        return $this;
     }
 
     /**
@@ -190,9 +176,7 @@ class CartManager
      *
      * This method dispatches all Cart Load events
      *
-     * @param CartInterface $cart Cart
-     *
-     * @return $this Self object
+     * @param CartInterface $cart
      */
     public function emptyLines(CartInterface $cart)
     {
@@ -209,8 +193,6 @@ class CartManager
         $this
             ->cartEventDispatcher
             ->dispatchCartLoadEvents($cart);
-
-        return $this;
     }
 
     /**
@@ -220,27 +202,23 @@ class CartManager
      *
      * This method dispatches all Cart Check and Load events
      *
-     * @param CartLineInterface    $cartLine    Cart line
-     * @param PurchasableInterface $purchasable purchasable to be edited
-     * @param int                  $quantity    item quantity
-     *
-     * @return $this Self object
+     * @param CartLineInterface    $cartLine
+     * @param PurchasableInterface $purchasable
+     * @param int                  $quantity
      */
     public function editCartLine(
         CartLineInterface $cartLine,
         PurchasableInterface $purchasable,
-        $quantity
+        int $quantity
     ) {
         $cart = $cartLine->getCart();
 
         if (!($cart instanceof CartInterface)) {
-            return $this;
+            return;
         }
 
         $cartLine->setPurchasable($purchasable);
         $this->setCartLineQuantity($cartLine, $quantity);
-
-        return $this;
     }
 
     /**
@@ -250,22 +228,20 @@ class CartManager
      *
      * This method dispatches all Cart Check and Load events
      *
-     * @param CartLineInterface $cartLine Cart line
-     * @param int               $quantity Number of units to decrease CartLine quantity
-     *
-     * @return $this Self object
+     * @param CartLineInterface $cartLine
+     * @param int               $quantity
      */
     public function increaseCartLineQuantity(
         CartLineInterface $cartLine,
         $quantity
     ) {
         if (!is_int($quantity) || empty($quantity)) {
-            return $this;
+            return;
         }
 
         $newQuantity = $cartLine->getQuantity() + $quantity;
 
-        return $this->setCartLineQuantity(
+        $this->setCartLineQuantity(
             $cartLine,
             $newQuantity
         );
@@ -278,20 +254,18 @@ class CartManager
      *
      * This method dispatches all Cart Check and Load events
      *
-     * @param CartLineInterface $cartLine Cart line
-     * @param int               $quantity Number of units to decrease CartLine quantity
-     *
-     * @return $this Self object
+     * @param CartLineInterface $cartLine
+     * @param int               $quantity
      */
     public function decreaseCartLineQuantity(
         CartLineInterface $cartLine,
-        $quantity
+        int $quantity
     ) {
         if (!is_int($quantity) || empty($quantity)) {
-            return $this;
+            return;
         }
 
-        return $this->increaseCartLineQuantity(
+        $this->increaseCartLineQuantity(
             $cartLine,
             ($quantity * -1)
         );
@@ -304,19 +278,17 @@ class CartManager
      *
      * This method dispatches all Cart Check and Load events
      *
-     * @param CartLineInterface $cartLine Cart line
-     * @param int               $quantity CartLine quantity to set
-     *
-     * @return $this Self object
+     * @param CartLineInterface $cartLine
+     * @param int               $quantity
      */
     public function setCartLineQuantity(
         CartLineInterface $cartLine,
-        $quantity
+        int $quantity
     ) {
         $cart = $cartLine->getCart();
 
         if (!($cart instanceof CartInterface)) {
-            return $this;
+            return;
         }
 
         /**
@@ -346,14 +318,12 @@ class CartManager
              * be treated as such.
              */
 
-            return $this;
+            return;
         }
 
         $this
             ->cartEventDispatcher
             ->dispatchCartLoadEvents($cart);
-
-        return $this;
     }
 
     /**
@@ -365,23 +335,21 @@ class CartManager
      * If the Purchasable is already in the Cart, it just increments
      * item quantity by $quantity
      *
-     * @param CartInterface        $cart        Cart
-     * @param PurchasableInterface $purchasable Product or Variant to add
-     * @param int                  $quantity    Number of units to set or increase
-     *
-     * @return $this Self object
+     * @param CartInterface        $cart
+     * @param PurchasableInterface $purchasable
+     * @param int                  $quantity
      */
     public function addPurchasable(
         CartInterface $cart,
         PurchasableInterface $purchasable,
-        $quantity
+        int $quantity
     ) {
         /**
          * If quantity is not a number or is 0 or less, product is not added
          * into cart.
          */
         if (!is_int($quantity) || $quantity <= 0) {
-            return $this;
+            return;
         }
 
         foreach ($cart->getCartLines() as $cartLine) {
@@ -398,18 +366,15 @@ class CartManager
                  * Product already in the Cart, increase quantity.
                  */
 
-                return $this->increaseCartLineQuantity($cartLine, $quantity);
+                $this->increaseCartLineQuantity($cartLine, $quantity);
             }
         }
 
         $cartLine = $this->cartLineFactory->create();
-        $cartLine
-            ->setPurchasable($purchasable)
-            ->setQuantity($quantity);
+        $cartLine->setPurchasable($purchasable);
+        $cartLine->setQuantity($quantity);
 
         $this->addLine($cart, $cartLine);
-
-        return $this;
     }
 
     /**
@@ -420,23 +385,21 @@ class CartManager
      * If the Purchasable is already in the Cart, it just decreases
      * item quantity by $quantity
      *
-     * @param CartInterface        $cart        Cart
-     * @param PurchasableInterface $purchasable Product or Variant to add
-     * @param int                  $quantity    Number of units to set or increase
-     *
-     * @return $this Self object
+     * @param CartInterface        $cart
+     * @param PurchasableInterface $purchasable
+     * @param int                  $quantity
      */
     public function removePurchasable(
         CartInterface $cart,
         PurchasableInterface $purchasable,
-        $quantity
+        int $quantity
     ) {
         /**
          * If quantity is not a number or is 0 or less, product is not removed
          * from cart.
          */
         if (!is_int($quantity) || $quantity <= 0) {
-            return $this;
+            return;
         }
 
         foreach ($cart->getCartLines() as $cartLine) {
@@ -451,10 +414,10 @@ class CartManager
                  * Product already in the Cart, decrease quantity.
                  */
 
-                return $this->decreaseCartLineQuantity($cartLine, $quantity);
+                $this->decreaseCartLineQuantity($cartLine, $quantity);
             }
         }
 
-        return $this;
+        return;
     }
 }

@@ -80,8 +80,8 @@ class ElcodiStoreExtension extends BaseExtension implements EntitiesOverridableE
         return [
             'directors',
             'factories',
-            'wrappers',
-            'services',
+            'store',
+            'superstore',
             'twig',
         ];
     }
@@ -93,6 +93,7 @@ class ElcodiStoreExtension extends BaseExtension implements EntitiesOverridableE
     {
         return [
             'Elcodi\Component\Store\Entity\Interfaces\StoreInterface' => 'elcodi.entity.store.class',
+            'Elcodi\Component\Store\Entity\Interfaces\SuperstoreInterface' => 'elcodi.entity.superstore.class',
         ];
     }
 }

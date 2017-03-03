@@ -19,6 +19,7 @@ declare(strict_types=1);
 namespace Elcodi\Component\Currency\Wrapper;
 
 use Elcodi\Component\Core\Wrapper\Interfaces\WrapperInterface;
+use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Currency\Entity\Money;
 
 /**
@@ -27,20 +28,20 @@ use Elcodi\Component\Currency\Entity\Money;
 class EmptyMoneyWrapper implements WrapperInterface
 {
     /**
-     * @var DefaultCurrencyWrapper
+     * @var CurrencyInterface
      *
-     * Default currency wrapper
+     * Default currency
      */
-    private $defaultCurrencyWrapper;
+    private $defaultCurrency;
 
     /**
      * Currency wrapper constructor.
      *
-     * @param DefaultCurrencyWrapper $defaultCurrencyWrapper Default currency wrapper
+     * @param CurrencyInterface $defaultCurrency
      */
-    public function __construct(DefaultCurrencyWrapper $defaultCurrencyWrapper)
+    public function __construct(CurrencyInterface $defaultCurrency)
     {
-        $this->defaultCurrencyWrapper = $defaultCurrencyWrapper;
+        $this->defaultCurrency = $defaultCurrency;
     }
 
     /**
@@ -52,19 +53,14 @@ class EmptyMoneyWrapper implements WrapperInterface
     {
         return Money::create(
             0,
-            $this
-                ->defaultCurrencyWrapper
-                ->get()
+            $this->defaultCurrency
         );
     }
 
     /**
      * Clean loaded object in order to reload it again.
-     *
-     * @return $this Self object
      */
     public function clean()
     {
-        return $this;
     }
 }

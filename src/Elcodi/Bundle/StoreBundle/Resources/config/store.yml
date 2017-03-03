@@ -3,6 +3,13 @@ services:
     #
     # Services
     #
+    elcodi.wrapper.store:
+        class: Elcodi\Component\Store\Wrapper\StoreWrapper
+        lazy: true
+        arguments:
+            - '@request_stack'
+            - '@elcodi.repository.store'
+
     elcodi.store:
         class: Elcodi\Component\Store\Entity\Interfaces\StoreInterface
         lazy: true
@@ -49,35 +56,3 @@ services:
         factory:
             - '@elcodi.store_template'
             - getBundleName
-
-    elcodi.store_default_language:
-        class: Elcodi\Component\Language\Entity\Interfaces\LanguageInterface
-        lazy: true
-        factory:
-            - '@elcodi.store'
-            - getDefaultLanguage
-
-    elcodi.store_default_language_iso:
-        class: StdClass
-        factory:
-            - '@elcodi.store_default_language'
-            - getIso
-
-    elcodi.store_routing_strategy:
-        class: StdClass
-        factory:
-            - '@elcodi.store'
-            - getRoutingStrategy
-
-    elcodi.store_default_currency:
-        class: Elcodi\Component\Language\Entity\Interfaces\CurrencyInterface
-        lazy: true
-        factory:
-            - '@elcodi.store'
-            - getDefaultCurrency
-
-    elcodi.store_default_currency_iso:
-        class: StdClass
-        factory:
-            - '@elcodi.store_default_currency'
-            - getIso

@@ -43,7 +43,7 @@ class CartSaver
     /**
      * Built method.
      *
-     * @param ObjectManager $cartObjectManager ObjectManager for Cart
+     * @param ObjectManager $cartObjectManager
      */
     public function __construct(ObjectManager $cartObjectManager)
     {
@@ -56,12 +56,27 @@ class CartSaver
      * We only persist it if have lines loaded inside, so empty carts will never
      * be persisted
      *
-     * @param CartInterface $cart Cart
+     * @param CartInterface $cart
      */
     public function saveCart(CartInterface $cart)
     {
-        if (!$cart->getCartLines()->isEmpty()) {
-            $this->cartObjectManager->persist($cart);
+        $cartIsEmpty = $cart
+            ->getCartLines()
+            ->isEmpty();
+
+        /**
+         * If the cart is empty and no id is assigned yet, means that the cart
+         * is just created empty, so no need to save anywhere
+         */
+        if (is_null($cart->getId())) {
+
+            if ($cartIsEmpty) {
+                return;
+            }
+
+            $this
+                ->cartObjectManager
+                ->persist($cart);
         }
 
         $this
