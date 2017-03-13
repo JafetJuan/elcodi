@@ -23,19 +23,19 @@ Elcodi\Component\Cart\Entity\OrderLine:
         height:
             column: height
             type: integer
-            nullable: false
+            nullable: true
         width:
             column: width
             type: integer
-            nullable: false
+            nullable: true
         depth:
             column: depth
             type: integer
-            nullable: false
+            nullable: true
         weight:
             column: weight
             type: integer
-            nullable: false
+            nullable: true
         quantity:
             column: quantity
             type: integer
