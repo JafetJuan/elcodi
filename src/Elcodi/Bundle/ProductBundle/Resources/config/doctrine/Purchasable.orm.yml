@@ -79,6 +79,11 @@ Elcodi\Component\Product\Entity\Purchasable:
             type: string
             length: 2048
             nullable: true
+        tags:
+            column: tags
+            type: string
+            length: 255
+            nullable: true
         metaTitle:
             column: meta_title
             type: string

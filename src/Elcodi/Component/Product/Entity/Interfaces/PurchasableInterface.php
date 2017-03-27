@@ -24,6 +24,7 @@ use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\ETaggableInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
+use Elcodi\Component\Core\Entity\Interfaces\TaggableInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImagesContainerWithPrincipalImageInterface;
 use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
 
@@ -48,7 +49,8 @@ interface PurchasableInterface extends
     ImagesContainerWithPrincipalImageInterface,
     EnabledInterface,
     PurchasablePriceInterface,
-    DimensionableInterface
+    DimensionableInterface,
+    TaggableInterface
 {
     /**
      * Gets the variant SKU.

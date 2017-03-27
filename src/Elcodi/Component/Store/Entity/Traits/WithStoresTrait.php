@@ -15,7 +15,7 @@ trait WithStoresTrait
      *
      * Stores
      */
-    private $stores;
+    protected $stores;
 
     /**
      * Get Stores

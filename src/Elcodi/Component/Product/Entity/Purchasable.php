@@ -24,6 +24,7 @@ use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\ETaggableTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
+use Elcodi\Component\Core\Entity\Traits\TaggableTrait;
 use Elcodi\Component\Media\Entity\Traits\ImagesContainerTrait;
 use Elcodi\Component\Media\Entity\Traits\PrincipalImageTrait;
 use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
@@ -46,7 +47,8 @@ abstract class Purchasable implements PurchasableInterface
         PrincipalImageTrait,
         EnabledTrait,
         DimensionsTrait,
-        PurchasablePriceTrait;
+        PurchasablePriceTrait,
+        TaggableTrait;
 
     /**
      * @var string
