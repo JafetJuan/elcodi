@@ -23,7 +23,10 @@ use DateTime;
 use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
+use Elcodi\Component\Core\Entity\Interfaces\TaggableInterface;
+use Elcodi\Component\Media\Entity\Interfaces\ImagesContainerWithPrincipalImageInterface;
 use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
+use Elcodi\Component\Store\Entity\Interfaces\WithStoresInterface;
 
 /**
  * Interface PageInterface.
@@ -37,7 +40,10 @@ interface PageInterface extends
     IdentifiableInterface,
     MetaDataInterface,
     DateTimeInterface,
-    EnabledInterface
+    EnabledInterface,
+    TaggableInterface,
+    WithStoresInterface,
+    ImagesContainerWithPrincipalImageInterface
 {
     /**
      * Get Name.

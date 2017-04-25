@@ -39,6 +39,11 @@ Elcodi\Component\Page\Entity\Page:
         persistent:
             column: persistent
             type: boolean
+        tags:
+            column: tags
+            type: string
+            length: 255
+            nullable: true
         metaTitle:
             column: meta_title
             type: string
@@ -54,6 +59,11 @@ Elcodi\Component\Page\Entity\Page:
             type: string
             length: 255
             nullable: true
+        imagesSort:
+            column: images_sort
+            type: string
+            length: 2048
+            nullable: true
         createdAt:
             column: created_at
             type: datetime
@@ -63,6 +73,42 @@ Elcodi\Component\Page\Entity\Page:
         enabled:
             column: enabled
             type: boolean
+
+    manyToOne:
+        principalImage:
+            targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            joinColumn:
+                onDelete: SET NULL
+                name: principal_image_id
+                referencedColumnName: id
+                nullable: true
+
+    manyToMany:
+
+        images:
+            targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            joinTable:
+                name: page_image
+                joinColumns:
+                    page_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    image_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+        stores:
+            targetEntity: Elcodi\Component\Store\Entity\Interfaces\StoreInterface
+            joinTable:
+                name: page_store
+                joinColumns:
+                    page_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    store_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]

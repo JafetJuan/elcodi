@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace Elcodi\Component\Page\Factory;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 use Elcodi\Component\Page\Entity\Interfaces\PageInterface;
 
@@ -52,6 +53,8 @@ class PageFactory extends AbstractFactory
         $page->setPublicationDate($now);
         $page->setCreatedAt($now);
         $page->setUpdatedAt($now);
+        $page->setImages(new ArrayCollection());
+        $page->setStores(new ArrayCollection());
 
         return $page;
     }

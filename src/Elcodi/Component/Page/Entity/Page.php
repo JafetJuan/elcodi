@@ -23,8 +23,12 @@ use DateTime;
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
+use Elcodi\Component\Core\Entity\Traits\TaggableTrait;
+use Elcodi\Component\Media\Entity\Traits\ImagesContainerTrait;
+use Elcodi\Component\Media\Entity\Traits\PrincipalImageTrait;
 use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
 use Elcodi\Component\Page\Entity\Interfaces\PageInterface;
+use Elcodi\Component\Store\Entity\Traits\WithStoresTrait;
 
 /**
  * Class Page.
@@ -39,7 +43,11 @@ class Page implements PageInterface
     use IdentifiableTrait,
         MetaDataTrait,
         DateTimeTrait,
-        EnabledTrait;
+        EnabledTrait,
+        WithStoresTrait,
+        TaggableTrait,
+        PrincipalImageTrait,
+        ImagesContainerTrait;
 
     /**
      * @var string
