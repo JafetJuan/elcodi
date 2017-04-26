@@ -25,6 +25,7 @@ use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\ETaggableTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Core\Entity\Traits\TaggableTrait;
+use Elcodi\Component\Core\Entity\Traits\WithSpecialWordsTrait;
 use Elcodi\Component\Media\Entity\Traits\ImagesContainerTrait;
 use Elcodi\Component\Media\Entity\Traits\PrincipalImageTrait;
 use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
@@ -48,7 +49,8 @@ abstract class Purchasable implements PurchasableInterface
         EnabledTrait,
         DimensionsTrait,
         PurchasablePriceTrait,
-        TaggableTrait;
+        TaggableTrait,
+        WithSpecialWordsTrait;
 
     /**
      * @var string
@@ -98,6 +100,13 @@ abstract class Purchasable implements PurchasableInterface
      * Product must show in home
      */
     protected $showInHome;
+
+    /**
+     * @var bool
+     *
+     * Product recommended
+     */
+    protected $recommended;
 
     /**
      * @var string
@@ -300,6 +309,26 @@ abstract class Purchasable implements PurchasableInterface
         $this->showInHome = $showInHome;
 
         return $this;
+    }
+
+    /**
+     * Get Recommended.
+     *
+     * @return bool Recommended
+     */
+    public function isRecommended() : bool
+    {
+        return $this->recommended;
+    }
+
+    /**
+     * Set Recommended.
+     *
+     * @param bool $recommended
+     */
+    public function setRecommended(bool $recommended)
+    {
+        $this->recommended = $recommended;
     }
 
     /**

@@ -25,6 +25,7 @@ use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\ETaggableInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Core\Entity\Interfaces\TaggableInterface;
+use Elcodi\Component\Core\Entity\Interfaces\WithSpecialWordsInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImagesContainerWithPrincipalImageInterface;
 use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
 
@@ -50,7 +51,8 @@ interface PurchasableInterface extends
     EnabledInterface,
     PurchasablePriceInterface,
     DimensionableInterface,
-    TaggableInterface
+    TaggableInterface,
+    WithSpecialWordsInterface
 {
     /**
      * Gets the variant SKU.
@@ -163,6 +165,20 @@ interface PurchasableInterface extends
      * @return $this Self object
      */
     public function setShowInHome($showInHome);
+
+    /**
+     * Get Recommended.
+     *
+     * @return bool Recommended
+     */
+    public function isRecommended() : bool;
+
+    /**
+     * Set Recommended.
+     *
+     * @param bool $recommended
+     */
+    public function setRecommended(bool $recommended);
 
     /**
      * Get Dimensions.

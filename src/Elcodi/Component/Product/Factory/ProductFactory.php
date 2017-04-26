@@ -76,6 +76,7 @@ class ProductFactory extends AbstractPurchasableFactory
         $product->setStock($stock);
         $product->setType(ElcodiProductTypes::TYPE_PRODUCT_PHYSICAL);
         $product->setShowInHome(true);
+        $product->setRecommended(false);
         $product->setPrice($zeroPrice);
         $product->setReducedPrice($zeroPrice);
         $product->setAttributes(new ArrayCollection());

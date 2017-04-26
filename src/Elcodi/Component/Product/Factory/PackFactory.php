@@ -51,6 +51,7 @@ class PackFactory extends AbstractPurchasableFactory
         $pack->setStock(0);
         $pack->setType(ElcodiProductTypes::TYPE_PRODUCT_PHYSICAL);
         $pack->setShowInHome(true);
+        $pack->setRecommended(false);
         $pack->setPrice($zeroPrice);
         $pack->setReducedPrice($zeroPrice);
         $pack->setPurchasables(new ArrayCollection());

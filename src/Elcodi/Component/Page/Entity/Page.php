@@ -24,6 +24,7 @@ use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Core\Entity\Traits\TaggableTrait;
+use Elcodi\Component\Core\Entity\Traits\WithSpecialWordsTrait;
 use Elcodi\Component\Media\Entity\Traits\ImagesContainerTrait;
 use Elcodi\Component\Media\Entity\Traits\PrincipalImageTrait;
 use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
@@ -46,6 +47,7 @@ class Page implements PageInterface
         EnabledTrait,
         WithStoresTrait,
         TaggableTrait,
+        WithSpecialWordsTrait,
         PrincipalImageTrait,
         ImagesContainerTrait;
 

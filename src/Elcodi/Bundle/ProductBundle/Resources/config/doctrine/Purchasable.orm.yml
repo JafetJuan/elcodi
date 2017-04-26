@@ -41,6 +41,11 @@ Elcodi\Component\Product\Entity\Purchasable:
             column: show_in_home
             type: boolean
             nullable: true
+        recommended:
+            column: recommended
+            type: boolean
+            nullable: false
+            default: false
         dimensions:
             column: dimensions
             type: string
@@ -81,6 +86,11 @@ Elcodi\Component\Product\Entity\Purchasable:
             nullable: true
         tags:
             column: tags
+            type: string
+            length: 255
+            nullable: true
+        specialWords:
+            column: special_words
             type: string
             length: 255
             nullable: true
