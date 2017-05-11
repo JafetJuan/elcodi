@@ -19,6 +19,9 @@ declare(strict_types=1);
 namespace Elcodi\Component\Plugin\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -54,7 +57,7 @@ class PluginType extends AbstractType
         foreach ($plugin->getFields() as $fieldName => $field) {
             $builder
                 ->remove($fieldName)
-                ->add($fieldName, $field['type'], array_merge([
+                ->add($fieldName, $this->mapFieldType($field['type']), array_merge([
                     'label' => $field['label'],
                     'data' => $field['data'],
                     'required' => $field['required'],
@@ -62,7 +65,31 @@ class PluginType extends AbstractType
                 ], $field['options']), $field);
         }
 
-        $builder->add('save', 'submit');
+        $builder->add('save', SubmitType::class);
+    }
+
+    /**
+     * Map field types
+     *
+     * @param string $fieldType
+     *
+     * @return string
+     */
+    private function mapFieldType(string $fieldType) : string
+    {
+        if ($fieldType == 'text') {
+            return TextType::class;
+        }
+
+        if ($fieldType == 'checkbox') {
+            return CheckboxType::class;
+        }
+
+        if ($fieldType == 'submit') {
+            return SubmitType::class;
+        }
+
+        return $fieldType;
     }
 
     /**

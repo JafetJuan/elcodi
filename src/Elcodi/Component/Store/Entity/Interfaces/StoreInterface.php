@@ -69,6 +69,20 @@ interface StoreInterface extends
     public function setLeitmotiv($leitmotiv);
 
     /**
+     * Get Code
+     *
+     * @return null|string
+     */
+    public function getCode() : ? string;
+
+    /**
+     * Set Code
+     *
+     * @param null|string $code
+     */
+    public function setCode(?string $code);
+
+    /**
      * Get Email.
      *
      * @return string Email

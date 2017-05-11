@@ -6,4 +6,4 @@ services:
     elcodi.form_type.plugin:
         class: Elcodi\Component\Plugin\Form\Type\PluginType
         tags:
-            - { name: form.type, alias: elcodi_form_type_plugin }
+            - { name: form.type }

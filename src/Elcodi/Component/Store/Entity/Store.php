@@ -55,6 +55,13 @@ class Store implements StoreInterface
     /**
      * @var string
      *
+     * Code
+     */
+    protected $code;
+
+    /**
+     * @var string
+     *
      * Email
      */
     protected $email;
@@ -203,6 +210,26 @@ class Store implements StoreInterface
         $this->leitmotiv = $leitmotiv;
 
         return $this;
+    }
+
+    /**
+     * Get Code
+     *
+     * @return null|string
+     */
+    public function getCode() : ? string
+    {
+        return $this->code;
+    }
+
+    /**
+     * Set Code
+     *
+     * @param null|string $code
+     */
+    public function setCode(?string $code)
+    {
+        $this->code = $code;
     }
 
     /**

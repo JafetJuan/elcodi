@@ -20,6 +20,11 @@ Elcodi\Component\Store\Entity\Store:
             type: string
             length: 255
             nullable: true
+        code:
+            column: code
+            type: string
+            length: 255
+            nullable: true
         email:
             column: email
             type: string
