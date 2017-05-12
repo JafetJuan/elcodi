@@ -100,13 +100,13 @@ trait PurchasableStockValidatorCollectorTrait
      * @param int                  $stockRequired Stock required
      * @param bool                 $useStock      Use stock
      *
-     * @return bool
+     * @return bool|int
      */
     protected function isValidByLoadedValidators(
         PurchasableInterface $purchasable,
         int $stockRequired,
         bool $useStock
-    ) : bool {
+    ) {
         foreach ($this->validators as $validator) {
             $stockUpdateNamespace = $validator->getPurchasableNamespace();
             if ($purchasable instanceof $stockUpdateNamespace) {
