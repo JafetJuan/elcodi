@@ -22,11 +22,12 @@ use Doctrine\Common\Collections\Collection;
 
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
+use Elcodi\Component\Store\Entity\Interfaces\WithStoresInterface;
 
 /**
  * Interface BannerZoneInterfaceInterface.
  */
-interface BannerZoneInterface extends IdentifiableInterface
+interface BannerZoneInterface extends IdentifiableInterface, WithStoresInterface
 {
     /**
      * Set banner name.

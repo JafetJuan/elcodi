@@ -24,6 +24,7 @@ use Elcodi\Component\Banner\Entity\Interfaces\BannerInterface;
 use Elcodi\Component\Banner\Entity\Interfaces\BannerZoneInterface;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
+use Elcodi\Component\Store\Entity\Traits\WithStoresTrait;
 
 /**
  * BannerZone.
@@ -31,6 +32,7 @@ use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 class BannerZone implements BannerZoneInterface
 {
     use IdentifiableTrait;
+    use WithStoresTrait;
 
     /**
      * @var string
