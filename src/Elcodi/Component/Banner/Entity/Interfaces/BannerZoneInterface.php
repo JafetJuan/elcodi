@@ -18,8 +18,11 @@ declare(strict_types=1);
 
 namespace Elcodi\Component\Banner\Entity\Interfaces;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
+use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
+use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\Store\Entity\Interfaces\WithStoresInterface;
@@ -27,7 +30,7 @@ use Elcodi\Component\Store\Entity\Interfaces\WithStoresInterface;
 /**
  * Interface BannerZoneInterfaceInterface.
  */
-interface BannerZoneInterface extends IdentifiableInterface, WithStoresInterface
+interface BannerZoneInterface extends IdentifiableInterface, WithStoresInterface, EnabledInterface, DateTimeInterface
 {
     /**
      * Set banner name.
@@ -100,6 +103,20 @@ interface BannerZoneInterface extends IdentifiableInterface, WithStoresInterface
     public function getBanners() : Collection;
 
     /**
+     * Get enabled banners.
+     *
+     * @return Collection
+     */
+    public function getEnabledBanners() : Collection;
+
+    /**
+     * Get sorted images.
+     *
+     * @return ArrayCollection
+     */
+    public function getSortedEnabledBanners() : ArrayCollection;
+
+    /**
      * Set the BannerZoneInterface height in pixels.
      *
      * @param int $height
@@ -126,4 +143,18 @@ interface BannerZoneInterface extends IdentifiableInterface, WithStoresInterface
      * @return int Width
      */
     public function getWidth() : ? int;
+
+    /**
+     * Get BannersSort.
+     *
+     * @return string|null
+     */
+    public function getBannersSort() : ? string;
+
+    /**
+     * Sets BannersSort.
+     *
+     * @param string|null $bannersSort
+     */
+    public function setBannersSort(?string $bannersSort);
 }

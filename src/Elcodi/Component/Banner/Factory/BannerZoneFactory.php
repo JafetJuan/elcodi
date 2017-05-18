@@ -43,6 +43,8 @@ class BannerZoneFactory extends AbstractFactory
         $classNamespace = $this->getEntityNamespace();
         $bannerZone = new $classNamespace();
         $bannerZone->setBanners(new ArrayCollection());
+        $bannerZone->setStores(new ArrayCollection());
+        $bannerZone->setCreatedAt($this->now());
 
         return $bannerZone;
     }

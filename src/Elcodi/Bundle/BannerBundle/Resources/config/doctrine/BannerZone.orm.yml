@@ -28,16 +28,31 @@ Elcodi\Component\Banner\Entity\BannerZone:
             type: integer
             length: 11
             nullable: false
-
-    manyToOne:
-        language:
-            targetEntity: Elcodi\Component\Language\Entity\Interfaces\LanguageInterface
-            joinColumn:
-                name: language_iso
-                referencedColumnName: iso
-                nullable: true
+        bannersSort:
+            column: banners_sort
+            type: string
+            length: 2048
+            nullable: true
+        createdAt:
+            column: created_at
+            type: datetime
+            nullable: false
+        updatedAt:
+            column: updated_at
+            type: datetime
+            nullable: false
+        enabled:
+            column: enabled
+            type: boolean
+            nullable: true
 
     manyToMany:
         banners:
             targetEntity: Elcodi\Component\Banner\Entity\Interfaces\BannerInterface
             mappedBy: bannerZones
+        stores:
+            targetEntity: Elcodi\Component\Store\Entity\Interfaces\StoreInterface
+
+    lifecycleCallbacks:
+        preUpdate: [loadUpdateAt]
+        prePersist: [loadUpdateAt]

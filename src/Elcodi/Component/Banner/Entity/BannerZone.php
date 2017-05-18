@@ -18,10 +18,13 @@ declare(strict_types=1);
 
 namespace Elcodi\Component\Banner\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
 use Elcodi\Component\Banner\Entity\Interfaces\BannerInterface;
 use Elcodi\Component\Banner\Entity\Interfaces\BannerZoneInterface;
+use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
+use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\Store\Entity\Traits\WithStoresTrait;
@@ -33,6 +36,8 @@ class BannerZone implements BannerZoneInterface
 {
     use IdentifiableTrait;
     use WithStoresTrait;
+    use EnabledTrait;
+    use DateTimeTrait;
 
     /**
      * @var string
@@ -75,6 +80,13 @@ class BannerZone implements BannerZoneInterface
      * Width of item in cm
      */
     protected $width;
+
+    /**
+     * @var string|null
+     *
+     * Banners sort
+     */
+    protected $bannersSort;
 
     /**
      * Set banner name.
@@ -188,6 +200,52 @@ class BannerZone implements BannerZoneInterface
     }
 
     /**
+     * Get enabled banners.
+     *
+     * @return Collection
+     */
+    public function getEnabledBanners() : Collection
+    {
+        return $this
+            ->banners
+            ->filter(function(BannerInterface $banner) {
+                return $banner->isEnabled();
+            });
+    }
+
+    /**
+     * Get sorted images.
+     *
+     * @return ArrayCollection
+     */
+    public function getSortedEnabledBanners() : ArrayCollection
+    {
+        $bannersSort = $this->getBannersSort() ?? '';
+        $bannersSort = explode(',', $bannersSort);
+        $orderCollection = array_reverse($bannersSort);
+        $bannersCollection = $this
+            ->getEnabledBanners()
+            ->toArray();
+
+        usort(
+            $bannersCollection,
+            function (
+                BannerInterface $a,
+                BannerInterface $b
+            ) use ($orderCollection) {
+                $aPos = array_search($a->getId(), $orderCollection);
+                $bPos = array_search($b->getId(), $orderCollection);
+
+                return ($aPos < $bPos)
+                    ? 1
+                    : -1;
+            }
+        );
+
+        return new ArrayCollection($bannersCollection);
+    }
+
+    /**
      * Set the BannerZoneInterface height in pixels.
      *
      * @param int $height
@@ -225,6 +283,26 @@ class BannerZone implements BannerZoneInterface
     public function getWidth() : ? int
     {
         return $this->width;
+    }
+
+    /**
+     * Get BannersSort.
+     *
+     * @return string|null
+     */
+    public function getBannersSort() : ? string
+    {
+        return $this->bannersSort;
+    }
+
+    /**
+     * Sets BannersSort.
+     *
+     * @param string|null $bannersSort
+     */
+    public function setBannersSort(?string $bannersSort)
+    {
+        $this->bannersSort = $bannersSort;
     }
 
     /**

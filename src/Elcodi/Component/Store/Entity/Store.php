@@ -485,7 +485,7 @@ class Store implements StoreInterface
      *
      * @return $this Self object
      */
-    public function setLogo(ImageInterface $logo)
+    public function setLogo(?ImageInterface $logo)
     {
         $this->logo = $logo;
 
@@ -509,7 +509,7 @@ class Store implements StoreInterface
      *
      * @return $this Self object
      */
-    public function setSecondaryLogo(ImageInterface $secondaryLogo)
+    public function setSecondaryLogo(?ImageInterface $secondaryLogo)
     {
         $this->secondaryLogo = $secondaryLogo;
 
@@ -533,7 +533,7 @@ class Store implements StoreInterface
      *
      * @return $this Self object
      */
-    public function setMobileLogo(ImageInterface $mobileLogo)
+    public function setMobileLogo(?ImageInterface $mobileLogo)
     {
         $this->mobileLogo = $mobileLogo;
 
@@ -557,7 +557,7 @@ class Store implements StoreInterface
      *
      * @return $this Self object
      */
-    public function setHeaderImage(ImageInterface $headerImage)
+    public function setHeaderImage(?ImageInterface $headerImage)
     {
         $this->headerImage = $headerImage;
 
@@ -581,7 +581,7 @@ class Store implements StoreInterface
      *
      * @return $this Self object
      */
-    public function setBackgroundImage(ImageInterface $backgroundImage)
+    public function setBackgroundImage(?ImageInterface $backgroundImage)
     {
         $this->backgroundImage = $backgroundImage;
 

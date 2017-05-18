@@ -55,23 +55,23 @@ class Banner implements BannerInterface
     /**
      * @var string
      *
+     * Extra
+     */
+    protected $extra;
+
+    /**
+     * @var string
+     *
      * Url
      */
     protected $url;
 
     /**
-     * @var int
+     * @var bool
      *
-     * Position
+     * Open in new tab
      */
-    protected $position;
-
-    /**
-     * @var ImageInterface
-     *
-     * Banner image
-     */
-    protected $image;
+    protected $newTab;
 
     /**
      * @var Collection
@@ -79,6 +79,13 @@ class Banner implements BannerInterface
      * Banner zones
      */
     protected $bannerZones;
+
+    /**
+     * @var ImageInterface|null
+     *
+     * Principal image
+     */
+    protected $mobileImage;
 
     /**
      * Set banner name.
@@ -121,6 +128,26 @@ class Banner implements BannerInterface
     }
 
     /**
+     * Set banner extra.
+     *
+     * @param string $extra
+     */
+    public function setExtra(string $extra)
+    {
+        $this->extra = $extra;
+    }
+
+    /**
+     * Get banner extra.
+     *
+     * @return string|null
+     */
+    public function getExtra() : ? string
+    {
+        return $this->extra;
+    }
+
+    /**
      * Set banner url.
      *
      * @param string $url
@@ -138,6 +165,26 @@ class Banner implements BannerInterface
     public function getUrl() : ? string
     {
         return $this->url;
+    }
+
+    /**
+     * Set banner new tab.
+     *
+     * @param bool $newTab
+     */
+    public function setNewTab(bool $newTab)
+    {
+        $this->newTab = $newTab;
+    }
+
+    /**
+     * Get banner new tab.
+     *
+     * @return bool|null
+     */
+    public function getNewTab() : ? bool
+    {
+        return $this->newTab;
     }
 
     /**
@@ -189,6 +236,26 @@ class Banner implements BannerInterface
         $this
             ->bannerZones
             ->removeElement($bannerZone);
+    }
+
+    /**
+     * Set the mobileImage.
+     *
+     * @param ImageInterface|null $mobileImage
+     */
+    public function setMobileImage(?ImageInterface $mobileImage = null)
+    {
+        $this->mobileImage = $mobileImage;
+    }
+
+    /**
+     * Get the mobileImage.
+     *
+     * @return ImageInterface|null
+     */
+    public function getMobileImage() : ? ImageInterface
+    {
+        return $this->mobileImage;
     }
 
     /**

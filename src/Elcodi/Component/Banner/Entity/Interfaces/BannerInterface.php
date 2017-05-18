@@ -23,6 +23,8 @@ use Doctrine\Common\Collections\Collection;
 use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
+use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
+use Elcodi\Component\Media\Entity\Interfaces\PrincipalImageInterface;
 
 /**
  * Interface BannerInterface.
@@ -30,6 +32,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 interface BannerInterface extends
     IdentifiableInterface,
     EnabledInterface,
+    PrincipalImageInterface,
     DateTimeInterface
 {
     /**
@@ -59,6 +62,20 @@ interface BannerInterface extends
      * @return string|null
      */
     public function getDescription() : ? string;
+
+    /**
+     * Set banner extra.
+     *
+     * @param string $extra
+     */
+    public function setExtra(string $extra);
+
+    /**
+     * Get banner extra.
+     *
+     * @return string|null
+     */
+    public function getExtra() : ? string;
 
     /**
      * Set banner url.
@@ -101,4 +118,18 @@ interface BannerInterface extends
      * @param BannerZoneInterface $bannerZone
      */
     public function removeBannerZone(BannerZoneInterface $bannerZone);
+
+    /**
+     * Set the mobileImage.
+     *
+     * @param ImageInterface|null $mobileImage
+     */
+    public function setMobileImage(?ImageInterface $mobileImage = null);
+
+    /**
+     * Get the mobileImage.
+     *
+     * @return ImageInterface|null
+     */
+    public function getMobileImage() : ? ImageInterface;
 }
