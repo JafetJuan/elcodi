@@ -117,9 +117,9 @@ class Banner implements BannerInterface
     /**
      * Set banner description.
      *
-     * @param string $description
+     * @param null|string $description
      */
-    public function setDescription(string $description)
+    public function setDescription(?string $description)
     {
         $this->description = $description;
     }
@@ -137,9 +137,9 @@ class Banner implements BannerInterface
     /**
      * Set banner extra.
      *
-     * @param string $extra
+     * @param null|string $extra
      */
-    public function setExtra(string $extra)
+    public function setExtra(?string $extra)
     {
         $this->extra = $extra;
     }
