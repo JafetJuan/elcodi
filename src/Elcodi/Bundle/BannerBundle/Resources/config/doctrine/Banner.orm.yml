@@ -27,12 +27,21 @@ Elcodi\Component\Banner\Entity\Banner:
             type: string
             length: 255
             nullable: false
+        buttonText:
+            column: button_text
+            type: string
+            length: 255
+            nullable: true
         newTab:
             column: new_tab
             type: boolean
             nullable: true
         fullWidth:
             column: full_width
+            type: boolean
+            nullable: true
+        special:
+            column: special
             type: boolean
             nullable: true
         enabled:

@@ -67,6 +67,13 @@ class Banner implements BannerInterface
     protected $url;
 
     /**
+     * @var string
+     *
+     * Button text
+     */
+    protected $buttonText;
+
+    /**
      * @var bool
      *
      * Open in new tab
@@ -79,6 +86,13 @@ class Banner implements BannerInterface
      * Full width
      */
     protected $fullWidth;
+
+    /**
+     * @var bool
+     *
+     * Special
+     */
+    protected $special;
 
     /**
      * @var Collection
@@ -175,6 +189,26 @@ class Banner implements BannerInterface
     }
 
     /**
+     * Get ButtonText
+     *
+     * @return null|string
+     */
+    public function getButtonText(): ?string
+    {
+        return $this->buttonText;
+    }
+
+    /**
+     * Set ButtonText
+     *
+     * @param null|string $buttonText
+     */
+    public function setButtonText(?string $buttonText)
+    {
+        $this->buttonText = $buttonText;
+    }
+
+    /**
      * Set banner new tab.
      *
      * @param null|bool $newTab
@@ -212,6 +246,26 @@ class Banner implements BannerInterface
     public function getFullWidth() : bool
     {
         return $this->fullWidth ?? false;
+    }
+
+    /**
+     * Get Special
+     *
+     * @return boolean
+     */
+    public function isSpecial(): bool
+    {
+        return $this->special ?? false;
+    }
+
+    /**
+     * Set Special
+     *
+     * @param null|boolean $special
+     */
+    public function setSpecial(?bool $special)
+    {
+        $this->special = $special;
     }
 
     /**

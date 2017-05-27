@@ -92,6 +92,20 @@ interface BannerInterface extends
     public function getUrl() : ? string;
 
     /**
+     * Get ButtonText
+     *
+     * @return null|string
+     */
+    public function getButtonText(): ?string;
+
+    /**
+     * Set ButtonText
+     *
+     * @param null|string $buttonText
+     */
+    public function setButtonText(?string $buttonText);
+
+    /**
      * Set banner new tab.
      *
      * @param bool|null $newTab
@@ -118,6 +132,20 @@ interface BannerInterface extends
      * @return bool
      */
     public function getFullWidth() : bool;
+
+    /**
+     * Get Special
+     *
+     * @return boolean
+     */
+    public function isSpecial(): bool;
+
+    /**
+     * Set Special
+     *
+     * @param null|boolean $special
+     */
+    public function setSpecial(?bool $special);
 
     /**
      * Set banner zones to banner.
