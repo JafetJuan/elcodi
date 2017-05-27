@@ -177,9 +177,9 @@ class Banner implements BannerInterface
     /**
      * Set banner new tab.
      *
-     * @param bool $newTab
+     * @param null|bool $newTab
      */
-    public function setNewTab(bool $newTab)
+    public function setNewTab(?bool $newTab)
     {
         $this->newTab = $newTab;
     }
@@ -187,19 +187,19 @@ class Banner implements BannerInterface
     /**
      * Get banner new tab.
      *
-     * @return bool|null
+     * @return bool
      */
-    public function getNewTab() : ? bool
+    public function getNewTab() : bool
     {
-        return $this->newTab;
+        return $this->newTab ?? false;
     }
 
     /**
      * Set banner new tab.
      *
-     * @param bool $fullWidth
+     * @param null|bool $fullWidth
      */
-    public function setFullWidth(bool $fullWidth)
+    public function setFullWidth(?bool $fullWidth)
     {
         $this->fullWidth = $fullWidth;
     }
@@ -207,11 +207,11 @@ class Banner implements BannerInterface
     /**
      * Get banner new tab.
      *
-     * @return bool|null
+     * @return bool
      */
-    public function getFullWidth() : ? bool
+    public function getFullWidth() : bool
     {
-        return $this->fullWidth;
+        return $this->fullWidth ?? false;
     }
 
     /**

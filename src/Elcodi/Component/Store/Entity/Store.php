@@ -27,6 +27,7 @@ use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\Language\Entity\Traits\WithLanguagesTrait;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
+use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
 use Elcodi\Component\Store\Entity\Interfaces\StoreInterface;
 
 /**
@@ -36,6 +37,7 @@ class Store implements StoreInterface
 {
     use IdentifiableTrait,
         DateTimeTrait,
+        MetaDataTrait,
         EnabledTrait;
 
     /**
@@ -51,6 +53,27 @@ class Store implements StoreInterface
      * Leitmotiv
      */
     protected $leitmotiv;
+
+    /**
+     * @var string
+     *
+     * Description
+     */
+    protected $description;
+
+    /**
+     * @var string
+     *
+     * Short Description
+     */
+    protected $shortDescription;
+
+    /**
+     * @var string
+     *
+     * Schedules
+     */
+    protected $schedules;
 
     /**
      * @var string
@@ -167,9 +190,9 @@ class Store implements StoreInterface
     /**
      * Get Name.
      *
-     * @return string Name
+     * @return null|string Name
      */
-    public function getName()
+    public function getName() : ? string
     {
         return $this->name;
     }
@@ -177,23 +200,19 @@ class Store implements StoreInterface
     /**
      * Sets Name.
      *
-     * @param string $name Name
-     *
-     * @return $this Self object
+     * @param null|string $name
      */
-    public function setName($name)
+    public function setName(?string $name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * Get Leitmotiv.
      *
-     * @return string Leitmotiv
+     * @return null|string Leitmotiv
      */
-    public function getLeitmotiv()
+    public function getLeitmotiv() : ? string
     {
         return $this->leitmotiv;
     }
@@ -201,15 +220,71 @@ class Store implements StoreInterface
     /**
      * Sets Leitmotiv.
      *
-     * @param string $leitmotiv Leitmotiv
-     *
-     * @return $this Self object
+     * @param null|string $leitmotiv
      */
-    public function setLeitmotiv($leitmotiv)
+    public function setLeitmotiv(?string $leitmotiv)
     {
         $this->leitmotiv = $leitmotiv;
+    }
 
-        return $this;
+    /**
+     * Get Description
+     *
+     * @return null|string
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set Description
+     *
+     * @param null|string $description
+     */
+    public function setDescription(?string $description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * Get ShortDescription
+     *
+     * @return null|string
+     */
+    public function getShortDescription(): ?string
+    {
+        return $this->shortDescription;
+    }
+
+    /**
+     * Set ShortDescription
+     *
+     * @param null|string $shortDescription
+     */
+    public function setShortDescription(?string $shortDescription)
+    {
+        $this->shortDescription = $shortDescription;
+    }
+
+    /**
+     * Get Schedules
+     *
+     * @return null|string
+     */
+    public function getSchedules(): ?string
+    {
+        return $this->schedules;
+    }
+
+    /**
+     * Set Schedules
+     *
+     * @param null|string $schedules
+     */
+    public function setSchedules(?string $schedules)
+    {
+        $this->schedules = $schedules;
     }
 
     /**
@@ -235,9 +310,9 @@ class Store implements StoreInterface
     /**
      * Get Email.
      *
-     * @return string Email
+     * @return null|string Email
      */
-    public function getEmail()
+    public function getEmail() : ? string
     {
         return $this->email;
     }
@@ -245,15 +320,11 @@ class Store implements StoreInterface
     /**
      * Sets Email.
      *
-     * @param string $email Email
-     *
-     * @return $this Self object
+     * @param null|string $email
      */
-    public function setEmail($email)
+    public function setEmail(?string $email)
     {
         $this->email = $email;
-
-        return $this;
     }
 
     /**
@@ -261,31 +332,27 @@ class Store implements StoreInterface
      *
      * @return bool IsCompany
      */
-    public function getIsCompany()
+    public function getIsCompany() : bool
     {
-        return $this->isCompany;
+        return $this->isCompany ?? false;
     }
 
     /**
      * Sets IsCompany.
      *
-     * @param bool $isCompany IsCompany
-     *
-     * @return $this Self object
+     * @param null|bool $isCompany
      */
-    public function setIsCompany($isCompany)
+    public function setIsCompany(?bool $isCompany)
     {
         $this->isCompany = $isCompany;
-
-        return $this;
     }
 
     /**
      * Get Cif.
      *
-     * @return string Cif
+     * @return null|string Cif
      */
-    public function getCif()
+    public function getCif() : ? string
     {
         return $this->cif;
     }
@@ -293,23 +360,19 @@ class Store implements StoreInterface
     /**
      * Sets Cif.
      *
-     * @param string $cif Cif
-     *
-     * @return $this Self object
+     * @param null|string $cif
      */
-    public function setCif($cif)
+    public function setCif(?string $cif)
     {
         $this->cif = $cif;
-
-        return $this;
     }
 
     /**
      * Get Tracker.
      *
-     * @return string Tracker
+     * @return null|string Tracker
      */
-    public function getTracker()
+    public function getTracker() : ? string
     {
         return $this->tracker;
     }
@@ -317,23 +380,19 @@ class Store implements StoreInterface
     /**
      * Sets Tracker.
      *
-     * @param string $tracker Tracker
-     *
-     * @return $this Self object
+     * @param null|string $tracker
      */
-    public function setTracker($tracker)
+    public function setTracker(?string $tracker)
     {
         $this->tracker = $tracker;
-
-        return $this;
     }
 
     /**
      * Get Template.
      *
-     * @return string Template
+     * @return null|string Template
      */
-    public function getTemplate()
+    public function getTemplate() : ? string
     {
         return $this->template;
     }
@@ -341,15 +400,11 @@ class Store implements StoreInterface
     /**
      * Sets Template.
      *
-     * @param string $template Template
-     *
-     * @return $this Self object
+     * @param null|string $template
      */
-    public function setTemplate($template)
+    public function setTemplate(?string $template)
     {
         $this->template = $template;
-
-        return $this;
     }
 
     /**
@@ -357,7 +412,7 @@ class Store implements StoreInterface
      *
      * @return bool UseStock
      */
-    public function getUseStock()
+    public function getUseStock() : bool
     {
         return $this->useStock;
     }
@@ -365,15 +420,11 @@ class Store implements StoreInterface
     /**
      * Sets UseStock.
      *
-     * @param bool $useStock UseStock
-     *
-     * @return $this Self object
+     * @param null|bool $useStock
      */
-    public function setUseStock($useStock)
+    public function setUseStock(?bool$useStock)
     {
         $this->useStock = $useStock;
-
-        return $this;
     }
 
     /**
@@ -389,7 +440,7 @@ class Store implements StoreInterface
     /**
      * Set domains
      *
-     * @param string $domains
+     * @param null|string $domains
      */
     public function setDomains(?string $domains)
     {
@@ -399,9 +450,9 @@ class Store implements StoreInterface
     /**
      * Get Address.
      *
-     * @return AddressInterface Address
+     * @return null|AddressInterface Address
      */
-    public function getAddress()
+    public function getAddress() :? AddressInterface
     {
         return $this->address;
     }
@@ -409,23 +460,19 @@ class Store implements StoreInterface
     /**
      * Sets Address.
      *
-     * @param AddressInterface $address Address
-     *
-     * @return $this Self object
+     * @param null|AddressInterface $address
      */
-    public function setAddress(AddressInterface $address)
+    public function setAddress(?AddressInterface $address)
     {
         $this->address = $address;
-
-        return $this;
     }
 
     /**
      * Get DefaultLanguage.
      *
-     * @return LanguageInterface DefaultLanguage
+     * @return null|LanguageInterface DefaultLanguage
      */
-    public function getDefaultLanguage()
+    public function getDefaultLanguage() :? LanguageInterface
     {
         return $this->defaultLanguage;
     }
@@ -433,23 +480,19 @@ class Store implements StoreInterface
     /**
      * Sets DefaultLanguage.
      *
-     * @param LanguageInterface $defaultLanguage DefaultLanguage
-     *
-     * @return $this Self object
+     * @param null|LanguageInterface $defaultLanguage
      */
-    public function setDefaultLanguage(LanguageInterface $defaultLanguage)
+    public function setDefaultLanguage(?LanguageInterface $defaultLanguage)
     {
         $this->defaultLanguage = $defaultLanguage;
-
-        return $this;
     }
 
     /**
      * Get DefaultCurrency.
      *
-     * @return CurrencyInterface DefaultCurrency
+     * @return null|CurrencyInterface DefaultCurrency
      */
-    public function getDefaultCurrency()
+    public function getDefaultCurrency() :? CurrencyInterface
     {
         return $this->defaultCurrency;
     }
@@ -457,23 +500,19 @@ class Store implements StoreInterface
     /**
      * Sets DefaultCurrency.
      *
-     * @param CurrencyInterface $defaultCurrency DefaultCurrency
-     *
-     * @return $this Self object
+     * @param null|CurrencyInterface $defaultCurrency
      */
     public function setDefaultCurrency(CurrencyInterface $defaultCurrency)
     {
         $this->defaultCurrency = $defaultCurrency;
-
-        return $this;
     }
 
     /**
      * Get Logo.
      *
-     * @return ImageInterface Logo
+     * @return null|ImageInterface Logo
      */
-    public function getLogo()
+    public function getLogo() :? ImageInterface
     {
         return $this->logo;
     }
@@ -481,23 +520,19 @@ class Store implements StoreInterface
     /**
      * Sets Logo.
      *
-     * @param ImageInterface $logo Logo
-     *
-     * @return $this Self object
+     * @param null|ImageInterface $logo
      */
     public function setLogo(?ImageInterface $logo)
     {
         $this->logo = $logo;
-
-        return $this;
     }
 
     /**
      * Get SecondaryLogo.
      *
-     * @return ImageInterface SecondaryLogo
+     * @return null|ImageInterface SecondaryLogo
      */
-    public function getSecondaryLogo()
+    public function getSecondaryLogo() :? ImageInterface
     {
         return $this->secondaryLogo;
     }
@@ -505,23 +540,19 @@ class Store implements StoreInterface
     /**
      * Sets SecondaryLogo.
      *
-     * @param ImageInterface $secondaryLogo SecondaryLogo
-     *
-     * @return $this Self object
+     * @param null|ImageInterface $secondaryLogo
      */
     public function setSecondaryLogo(?ImageInterface $secondaryLogo)
     {
         $this->secondaryLogo = $secondaryLogo;
-
-        return $this;
     }
 
     /**
      * Get MobileLogo.
      *
-     * @return ImageInterface MobileLogo
+     * @return null|ImageInterface MobileLogo
      */
-    public function getMobileLogo()
+    public function getMobileLogo() :? ImageInterface
     {
         return $this->mobileLogo;
     }
@@ -529,23 +560,19 @@ class Store implements StoreInterface
     /**
      * Sets MobileLogo.
      *
-     * @param ImageInterface $mobileLogo MobileLogo
-     *
-     * @return $this Self object
+     * @param null|ImageInterface $mobileLogo
      */
     public function setMobileLogo(?ImageInterface $mobileLogo)
     {
         $this->mobileLogo = $mobileLogo;
-
-        return $this;
     }
 
     /**
      * Get HeaderImage.
      *
-     * @return ImageInterface HeaderImage
+     * @return null|ImageInterface HeaderImage
      */
-    public function getHeaderImage()
+    public function getHeaderImage() :? ImageInterface
     {
         return $this->headerImage;
     }
@@ -553,23 +580,19 @@ class Store implements StoreInterface
     /**
      * Sets HeaderImage.
      *
-     * @param ImageInterface $headerImage HeaderImage
-     *
-     * @return $this Self object
+     * @param null|ImageInterface $headerImage
      */
     public function setHeaderImage(?ImageInterface $headerImage)
     {
         $this->headerImage = $headerImage;
-
-        return $this;
     }
 
     /**
      * Get BackgroundImage.
      *
-     * @return ImageInterface BackgroundImage
+     * @return null|ImageInterface BackgroundImage
      */
-    public function getBackgroundImage()
+    public function getBackgroundImage() :? ImageInterface
     {
         return $this->backgroundImage;
     }
@@ -577,14 +600,10 @@ class Store implements StoreInterface
     /**
      * Sets BackgroundImage.
      *
-     * @param ImageInterface $backgroundImage BackgroundImage
-     *
-     * @return $this Self object
+     * @param null|ImageInterface $backgroundImage
      */
     public function setBackgroundImage(?ImageInterface $backgroundImage)
     {
         $this->backgroundImage = $backgroundImage;
-
-        return $this;
     }
 }

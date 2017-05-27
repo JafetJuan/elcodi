@@ -27,6 +27,7 @@ use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\Language\Entity\Interfaces\WithLanguagesInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
+use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
 
 /**
  * Interface StoreInterface.
@@ -34,39 +35,77 @@ use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 interface StoreInterface extends
     IdentifiableInterface,
     DateTimeInterface,
+    MetaDataInterface,
     EnabledInterface
 {
     /**
      * Get Name.
      *
-     * @return string Name
+     * @return null|string Name
      */
-    public function getName();
+    public function getName() : ? string;
 
     /**
      * Sets Name.
      *
-     * @param string $name Name
-     *
-     * @return $this Self object
+     * @param null|string $name
      */
-    public function setName($name);
+    public function setName(?string $name);
 
     /**
      * Get Leitmotiv.
      *
-     * @return string Leitmotiv
+     * @return null|string Leitmotiv
      */
-    public function getLeitmotiv();
+    public function getLeitmotiv() : ? string;
 
     /**
      * Sets Leitmotiv.
      *
-     * @param string $leitmotiv Leitmotiv
-     *
-     * @return $this Self object
+     * @param null|string $leitmotiv
      */
-    public function setLeitmotiv($leitmotiv);
+    public function setLeitmotiv(?string $leitmotiv);
+
+    /**
+     * Get Description
+     *
+     * @return null|string
+     */
+    public function getDescription(): ?string;
+    /**
+     * Set Description
+     *
+     * @param null|string $description
+     */
+    public function setDescription(?string $description);
+
+    /**
+     * Get ShortDescription
+     *
+     * @return null|string
+     */
+    public function getShortDescription(): ?string;
+
+    /**
+     * Set ShortDescription
+     *
+     * @param null|string $shortDescription
+     */
+    public function setShortDescription(?string $shortDescription);
+
+    /**
+     * Get Schedules
+     *
+     * @return null|string
+     */
+    public function getSchedules(): ?string;
+
+    /**
+     * Set Schedules
+     *
+     * @param null|string $schedules
+     */
+    public function setSchedules(?string $schedules);
 
     /**
      * Get Code
@@ -85,98 +124,86 @@ interface StoreInterface extends
     /**
      * Get Email.
      *
-     * @return string Email
+     * @return null|string Email
      */
-    public function getEmail();
+    public function getEmail() : ? string;
 
     /**
      * Sets Email.
      *
-     * @param string $email Email
-     *
-     * @return $this Self object
+     * @param null|string $email
      */
-    public function setEmail($email);
+    public function setEmail(?string $email);
 
     /**
      * Get IsCompany.
      *
      * @return bool IsCompany
      */
-    public function getIsCompany();
+    public function getIsCompany() : bool;
 
     /**
      * Sets IsCompany.
      *
-     * @param bool $isCompany IsCompany
-     *
-     * @return $this Self object
+     * @param bool $isCompany
      */
-    public function setIsCompany($isCompany);
+    public function setIsCompany(?bool $isCompany);
 
     /**
      * Get Cif.
      *
-     * @return string Cif
+     * @return null|string Cif
      */
-    public function getCif();
+    public function getCif() : ? string;
 
     /**
      * Sets Cif.
      *
-     * @param string $cif Cif
-     *
-     * @return $this Self object
+     * @param string $cif
      */
-    public function setCif($cif);
+    public function setCif(?string $cif);
 
     /**
      * Get Tracker.
      *
-     * @return string Tracker
+     * @return null|string Tracker
      */
-    public function getTracker();
+    public function getTracker() : ? string;
 
     /**
      * Sets Tracker.
      *
-     * @param string $tracker Tracker
-     *
-     * @return $this Self object
+     * @param null|string $tracker
      */
-    public function setTracker($tracker);
+    public function setTracker(?string $tracker);
 
     /**
      * Get Template.
      *
-     * @return string Template
+     * @return null|string Template
      */
-    public function getTemplate();
+    public function getTemplate() : ? string;
 
     /**
      * Sets Template.
      *
-     * @param string $template Template
-     *
-     * @return $this Self object
+     * @param null|string $template
      */
-    public function setTemplate($template);
+    public function setTemplate(?string $template);
 
     /**
      * Get UseStock.
      *
      * @return bool UseStock
      */
-    public function getUseStock();
+    public function getUseStock() : bool;
 
     /**
      * Sets UseStock.
      *
-     * @param bool $useStock UseStock
-     *
-     * @return $this Self object
+     * @param bool $useStock
      */
-    public function setUseStock($useStock);
+    public function setUseStock(?bool $useStock);
 
     /**
      * Get the domains
@@ -188,103 +215,91 @@ interface StoreInterface extends
     /**
      * Set domains
      *
-     * @param string $domains
+     * @param null|string $domains
      */
     public function setDomains(?string $domains);
 
     /**
      * Get Address.
      *
-     * @return AddressInterface Address
+     * @return null|AddressInterface Address
      */
-    public function getAddress();
+    public function getAddress() : ? AddressInterface;
 
     /**
      * Sets Address.
      *
-     * @param AddressInterface $address Address
-     *
-     * @return $this Self object
+     * @param null|AddressInterface $address
      */
-    public function setAddress(AddressInterface $address);
+    public function setAddress(?AddressInterface $address);
 
     /**
      * Get Logo.
      *
-     * @return ImageInterface Logo
+     * @return null|ImageInterface Logo
      */
-    public function getLogo();
+    public function getLogo() : ? ImageInterface;
 
     /**
      * Sets Logo.
      *
-     * @param ImageInterface $logo Logo
-     *
-     * @return $this Self object
+     * @param null|ImageInterface $logo
      */
     public function setLogo(?ImageInterface $logo);
 
     /**
      * Get SecondaryLogo.
      *
-     * @return ImageInterface SecondaryLogo
+     * @return null|ImageInterface SecondaryLogo
      */
-    public function getSecondaryLogo();
+    public function getSecondaryLogo() : ? ImageInterface;
 
     /**
      * Sets SecondaryLogo.
      *
-     * @param ImageInterface $secondaryLogo SecondaryLogo
-     *
-     * @return $this Self object
+     * @param null|ImageInterface $secondaryLogo
      */
     public function setSecondaryLogo(?ImageInterface $secondaryLogo);
 
     /**
      * Get MobileLogo.
      *
-     * @return ImageInterface MobileLogo
+     * @return null|ImageInterface MobileLogo
      */
-    public function getMobileLogo();
+    public function getMobileLogo() : ? ImageInterface;
 
     /**
      * Sets MobileLogo.
      *
-     * @param ImageInterface $mobileLogo MobileLogo
-     *
-     * @return $this Self object
+     * @param null|ImageInterface $mobileLogo
      */
     public function setMobileLogo(?ImageInterface $mobileLogo);
 
     /**
      * Get HeaderImage.
      *
-     * @return ImageInterface HeaderImage
+     * @return null|ImageInterface HeaderImage
      */
-    public function getHeaderImage();
+    public function getHeaderImage() : ? ImageInterface;
 
     /**
      * Sets HeaderImage.
      *
-     * @param ImageInterface $headerImage HeaderImage
-     *
-     * @return $this Self object
+     * @param null|ImageInterface $headerImage
      */
     public function setHeaderImage(?ImageInterface $headerImage);
 
     /**
      * Get BackgroundImage.
      *
-     * @return ImageInterface BackgroundImage
+     * @return null|ImageInterface BackgroundImage
      */
-    public function getBackgroundImage();
+    public function getBackgroundImage() : ? ImageInterface;
 
     /**
      * Sets BackgroundImage.
      *
-     * @param ImageInterface $backgroundImage BackgroundImage
-     *
-     * @return $this Self object
+     * @param null|ImageInterface $backgroundImage
      */
     public function setBackgroundImage(?ImageInterface $backgroundImage);
 }
