@@ -55,6 +55,21 @@ Elcodi\Component\Store\Entity\Store:
             column: domains
             type: string
             nullable: true
+        metaTitle:
+            column: meta_title
+            type: string
+            length: 255
+            nullable: true
+        metaDescription:
+            column: meta_description
+            type: string
+            length: 255
+            nullable: true
+        metaKeywords:
+            column: meta_keywords
+            type: string
+            length: 255
+            nullable: true
         createdAt:
             column: created_at
             type: datetime

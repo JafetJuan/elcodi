@@ -414,7 +414,7 @@ class Store implements StoreInterface
      */
     public function getUseStock() : bool
     {
-        return $this->useStock;
+        return $this->useStock ?? true;
     }
 
     /**
