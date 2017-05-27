@@ -24,6 +24,7 @@ use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Core\Entity\Interfaces\ValidIntervalInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
 use Elcodi\Component\Rule\Entity\Interfaces\RuleInterface;
+use Elcodi\Component\Store\Entity\Interfaces\WithStoresInterface;
 
 /**
  * Interface CouponInterface.
@@ -32,7 +33,8 @@ interface CouponInterface extends
     IdentifiableInterface,
     DateTimeInterface,
     EnabledInterface,
-    ValidIntervalInterface
+    ValidIntervalInterface,
+    WithStoresInterface
 {
     /**
      * Set code.

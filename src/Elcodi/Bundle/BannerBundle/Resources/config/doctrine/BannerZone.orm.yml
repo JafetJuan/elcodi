@@ -13,21 +13,13 @@ Elcodi\Component\Banner\Entity\BannerZone:
             type: string
             length: 255
             nullable: false
+            unique: true
         code:
             column: code
             type: string
             length: 255
             nullable: false
-        height:
-            column: height
-            type: integer
-            length: 11
-            nullable: false
-        width:
-            column: width
-            type: integer
-            length: 11
-            nullable: false
+            unique: true
         bannersSort:
             column: banners_sort
             type: string
@@ -41,17 +33,11 @@ Elcodi\Component\Banner\Entity\BannerZone:
             column: updated_at
             type: datetime
             nullable: false
-        enabled:
-            column: enabled
-            type: boolean
-            nullable: true
 
     manyToMany:
         banners:
             targetEntity: Elcodi\Component\Banner\Entity\Interfaces\BannerInterface
             mappedBy: bannerZones
-        stores:
-            targetEntity: Elcodi\Component\Store\Entity\Interfaces\StoreInterface
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]

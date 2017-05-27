@@ -74,11 +74,18 @@ class Banner implements BannerInterface
     protected $newTab;
 
     /**
+     * @var bool
+     *
+     * Full width
+     */
+    protected $fullWidth;
+
+    /**
      * @var Collection
      *
      * Banner zones
      */
-    protected $bannerZones;
+    private $bannerZones;
 
     /**
      * @var ImageInterface|null
@@ -188,12 +195,36 @@ class Banner implements BannerInterface
     }
 
     /**
+     * Set banner new tab.
+     *
+     * @param bool $fullWidth
+     */
+    public function setFullWidth(bool $fullWidth)
+    {
+        $this->fullWidth = $fullWidth;
+    }
+
+    /**
+     * Get banner new tab.
+     *
+     * @return bool|null
+     */
+    public function getFullWidth() : ? bool
+    {
+        return $this->fullWidth;
+    }
+
+    /**
      * Set banner zones to banner.
      *
      * @param Collection $bannerZones
      */
     public function setBannerZones(Collection $bannerZones)
     {
+        $bannerZones
+            ->map(function(BannerZoneInterface $bannerZone) {
+                $bannerZone->addBanner($this);
+            });
         $this->bannerZones = $bannerZones;
     }
 
@@ -224,6 +255,8 @@ class Banner implements BannerInterface
         $this
             ->bannerZones
             ->add($bannerZone);
+
+        $bannerZone->addBanner($this);
     }
 
     /**
@@ -236,6 +269,8 @@ class Banner implements BannerInterface
         $this
             ->bannerZones
             ->removeElement($bannerZone);
+
+        $bannerZone->removeBanner($this);
     }
 
     /**

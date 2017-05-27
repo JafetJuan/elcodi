@@ -114,6 +114,16 @@ trait ImagesContainerTrait
     }
 
     /**
+     * Set sorted images.
+     *
+     * @param Collection $images
+     */
+    public function setSortedImages(Collection $images)
+    {
+        $this->setImages($images);
+    }
+
+    /**
      * Get ImagesSort.
      *
      * @return string|null

@@ -30,7 +30,7 @@ use Elcodi\Component\Store\Entity\Interfaces\WithStoresInterface;
 /**
  * Interface BannerZoneInterfaceInterface.
  */
-interface BannerZoneInterface extends IdentifiableInterface, WithStoresInterface, EnabledInterface, DateTimeInterface
+interface BannerZoneInterface extends IdentifiableInterface, EnabledInterface, DateTimeInterface
 {
     /**
      * Set banner name.
@@ -59,20 +59,6 @@ interface BannerZoneInterface extends IdentifiableInterface, WithStoresInterface
      * @return string|null
      */
     public function getCode() : ? string;
-
-    /**
-     * Set Language.
-     *
-     * @param LanguageInterface|null $language
-     */
-    public function setLanguage( ? LanguageInterface $language);
-
-    /**
-     * Get Language.
-     *
-     * @return LanguageInterface|null
-     */
-    public function getLanguage() : ? LanguageInterface;
 
     /**
      * Add banner into banner zone.
@@ -115,34 +101,6 @@ interface BannerZoneInterface extends IdentifiableInterface, WithStoresInterface
      * @return ArrayCollection
      */
     public function getSortedEnabledBanners() : ArrayCollection;
-
-    /**
-     * Set the BannerZoneInterface height in pixels.
-     *
-     * @param int $height
-     */
-    public function setHeight(int $height);
-
-    /**
-     * Get the BannerZoneInterface height in pixels.
-     *
-     * @return int
-     */
-    public function getHeight() : ? int;
-
-    /**
-     * Set the BannerZoneInterface width in pixels.
-     *
-     * @param int $width
-     */
-    public function setWidth(int $width);
-
-    /**
-     * Get the BannerZoneInterface width in pixels.
-     *
-     * @return int Width
-     */
-    public function getWidth() : ? int;
 
     /**
      * Get BannersSort.

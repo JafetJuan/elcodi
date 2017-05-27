@@ -31,6 +31,10 @@ Elcodi\Component\Banner\Entity\Banner:
             column: new_tab
             type: boolean
             nullable: true
+        fullWidth:
+            column: full_width
+            type: boolean
+            nullable: true
         enabled:
             column: enabled
             type: boolean

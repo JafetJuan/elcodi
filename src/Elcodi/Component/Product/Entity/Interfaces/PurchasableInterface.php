@@ -28,6 +28,7 @@ use Elcodi\Component\Core\Entity\Interfaces\TaggableInterface;
 use Elcodi\Component\Core\Entity\Interfaces\WithSpecialWordsInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImagesContainerWithPrincipalImageInterface;
 use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
+use Elcodi\Component\Store\Entity\Interfaces\WithStoresInterface;
 
 /**
  * Interface PurchasableInterface.
@@ -52,7 +53,8 @@ interface PurchasableInterface extends
     PurchasablePriceInterface,
     DimensionableInterface,
     TaggableInterface,
-    WithSpecialWordsInterface
+    WithSpecialWordsInterface,
+    WithStoresInterface
 {
     /**
      * Gets the variant SKU.

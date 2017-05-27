@@ -34,6 +34,7 @@ use Elcodi\Component\Product\Entity\Interfaces\ManufacturerInterface;
 use Elcodi\Component\Product\Entity\Interfaces\PurchasableInterface;
 use Elcodi\Component\Product\Entity\Traits\DimensionsTrait;
 use Elcodi\Component\Product\Entity\Traits\PurchasablePriceTrait;
+use Elcodi\Component\Store\Entity\Traits\WithStoresTrait;
 
 /**
  * Class Purchasable.
@@ -50,7 +51,8 @@ abstract class Purchasable implements PurchasableInterface
         DimensionsTrait,
         PurchasablePriceTrait,
         TaggableTrait,
-        WithSpecialWordsTrait;
+        WithSpecialWordsTrait,
+        WithStoresTrait;
 
     /**
      * @var string

@@ -35,7 +35,6 @@ use Elcodi\Component\Store\Entity\Traits\WithStoresTrait;
 class BannerZone implements BannerZoneInterface
 {
     use IdentifiableTrait;
-    use WithStoresTrait;
     use EnabledTrait;
     use DateTimeTrait;
 
@@ -54,32 +53,11 @@ class BannerZone implements BannerZoneInterface
     protected $code;
 
     /**
-     * @var LanguageInterface
-     *
-     * Language
-     */
-    protected $language;
-
-    /**
      * @var Collection
      *
      * Banners
      */
     protected $banners;
-
-    /**
-     * @var int
-     *
-     * Height of item in cm
-     */
-    protected $height;
-
-    /**
-     * @var int
-     *
-     * Width of item in cm
-     */
-    protected $width;
 
     /**
      * @var string|null
@@ -126,26 +104,6 @@ class BannerZone implements BannerZoneInterface
     public function getCode() : ? string
     {
         return $this->code;
-    }
-
-    /**
-     * Set Language.
-     *
-     * @param LanguageInterface $language
-     */
-    public function setLanguage( ? LanguageInterface $language)
-    {
-        $this->language = $language;
-    }
-
-    /**
-     * Get Language.
-     *
-     * @return LanguageInterface
-     */
-    public function getLanguage() : ? LanguageInterface
-    {
-        return $this->language;
     }
 
     /**
@@ -246,46 +204,6 @@ class BannerZone implements BannerZoneInterface
     }
 
     /**
-     * Set the BannerZoneInterface height in pixels.
-     *
-     * @param int $height
-     */
-    public function setHeight(int $height)
-    {
-        $this->height = $height;
-    }
-
-    /**
-     * Get the BannerZoneInterface height in pixels.
-     *
-     * @return int
-     */
-    public function getHeight() : ? int
-    {
-        return $this->height;
-    }
-
-    /**
-     * Set the BannerZoneInterface width in pixels.
-     *
-     * @param int $width
-     */
-    public function setWidth(int $width)
-    {
-        $this->width = $width;
-    }
-
-    /**
-     * Get the BannerZoneInterface width in pixels.
-     *
-     * @return int
-     */
-    public function getWidth() : ? int
-    {
-        return $this->width;
-    }
-
-    /**
      * Get BannersSort.
      *
      * @return string|null
@@ -312,12 +230,6 @@ class BannerZone implements BannerZoneInterface
      */
     public function __toString() : string
     {
-        $isoLang = 'all languages';
-
-        if ($this->getLanguage() instanceof LanguageInterface) {
-            $isoLang = $this->getLanguage()->getIso();
-        }
-
-        return $this->getName() . ' - ' . $isoLang;
+        return $this->getName();
     }
 }

@@ -61,6 +61,13 @@ interface ImagesContainerInterface
     public function getSortedImages() : Collection;
 
     /**
+     * Set sorted images.
+     *
+     * @param Collection $images
+     */
+    public function setSortedImages(Collection $images);
+
+    /**
      * Get ImagesSort.
      *
      * @return string|null

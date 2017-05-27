@@ -101,6 +101,20 @@ Elcodi\Component\Coupon\Entity\Coupon:
                 referencedColumnName: id
                 nullable: true
 
+    manyToMany:
+        stores:
+            targetEntity: Elcodi\Component\Store\Entity\Interfaces\StoreInterface
+            joinTable:
+                name: coupon_store
+                joinColumns:
+                    coupon_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    store_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]
         prePersist: [loadUpdateAt]

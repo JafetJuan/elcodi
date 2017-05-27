@@ -65,6 +65,7 @@ class PackFactory extends AbstractPurchasableFactory
         $pack->setImagesSort('');
         $pack->enable();
         $pack->setCreatedAt($this->now());
+        $pack->setStores(new ArrayCollection());
 
         return $pack;
     }

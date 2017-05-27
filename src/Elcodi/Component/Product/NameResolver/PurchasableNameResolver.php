@@ -75,6 +75,6 @@ class PurchasableNameResolver implements PurchasableNameResolverInterface
             }
         }
 
-        return false;
+        return $purchasable->getName();
     }
 }

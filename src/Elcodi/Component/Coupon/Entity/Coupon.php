@@ -27,6 +27,7 @@ use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
 use Elcodi\Component\Currency\Entity\Interfaces\MoneyInterface;
 use Elcodi\Component\Currency\Entity\Money;
 use Elcodi\Component\Rule\Entity\Interfaces\RuleInterface;
+use Elcodi\Component\Store\Entity\Traits\WithStoresTrait;
 
 /**
  * Class Coupon.
@@ -36,7 +37,8 @@ class Coupon implements CouponInterface
     use IdentifiableTrait,
         DateTimeTrait,
         EnabledTrait,
-        ValidIntervalTrait;
+        ValidIntervalTrait,
+        WithStoresTrait;
 
     /**
      * @var string
