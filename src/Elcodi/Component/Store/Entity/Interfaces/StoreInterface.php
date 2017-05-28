@@ -136,20 +136,6 @@ interface StoreInterface extends
     public function setEmail(?string $email);
 
     /**
-     * Get IsCompany.
-     *
-     * @return bool IsCompany
-     */
-    public function getIsCompany() : bool;
-
-    /**
-     * Sets IsCompany.
-     *
-     * @param bool $isCompany
-     */
-    public function setIsCompany(?bool $isCompany);
-
-    /**
      * Get Cif.
      *
      * @return null|string Cif

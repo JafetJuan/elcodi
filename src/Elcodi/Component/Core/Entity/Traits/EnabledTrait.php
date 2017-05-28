@@ -50,7 +50,9 @@ trait EnabledTrait
      */
     public function isEnabled() : bool
     {
-        return $this->enabled ?? false;
+        return is_null($this->enabled)
+            ? false
+            : $this->enabled;
     }
 
     /**

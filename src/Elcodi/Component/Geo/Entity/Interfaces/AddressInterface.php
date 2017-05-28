@@ -33,167 +33,224 @@ interface AddressInterface extends
     /**
      * Sets Address.
      *
-     * @param string $address Address
-     *
-     * @return $this Self object
+     * @param null|string $address
      */
-    public function setAddress($address);
+    public function setAddress(?string $address);
 
     /**
      * Get Address.
      *
-     * @return string Address
+     * @return null|string Address
      */
-    public function getAddress();
+    public function getAddress() : ? string;
 
     /**
      * Sets AddressMore.
      *
-     * @param string $addressMore AddressMore
-     *
-     * @return $this Self object
+     * @param null|string $addressMore
      */
-    public function setAddressMore($addressMore);
+    public function setAddressMore(?string $addressMore);
 
     /**
      * Get AddressMore.
      *
-     * @return string AddressMore
+     * @return null|string AddressMore
      */
-    public function getAddressMore();
+    public function getAddressMore() : ? string;
+
+    /**
+     * Get FormattedAddress
+     *
+     * @return null|string
+     */
+    public function getFormattedAddress() : ? string;
+
+    /**
+     * Set FormattedAddress
+     *
+     * @param null|string $formattedAddress
+     */
+    public function setFormattedAddress(?string $formattedAddress);
 
     /**
      * Sets Comments.
      *
-     * @param string $comments Comments
-     *
-     * @return $this Self object
+     * @param null|string $comments
      */
-    public function setComments($comments);
+    public function setComments(?string $comments);
 
     /**
      * Get Comments.
      *
-     * @return string Comments
+     * @return null|string Comments
      */
-    public function getComments();
+    public function getComments() : ? string;
 
     /**
      * Sets Mobile.
      *
-     * @param string $mobile Mobile
-     *
-     * @return $this Self object
+     * @param null|string $mobile
      */
-    public function setMobile($mobile);
+    public function setMobile(?string $mobile);
 
     /**
      * Get Mobile.
      *
-     * @return string Mobile
+     * @return null|string Mobile
      */
-    public function getMobile();
+    public function getMobile() : ? string;
 
     /**
      * Sets Name.
      *
-     * @param string $name Name
-     *
-     * @return $this Self object
+     * @param null|string $name
      */
-    public function setName($name);
+    public function setName(?string $name);
 
     /**
      * Get Name.
      *
-     * @return string Name
+     * @return null|string Name
      */
-    public function getName();
+    public function getName() : ? string;
 
     /**
      * Sets Phone.
      *
-     * @param string $phone Phone
-     *
-     * @return $this Self object
+     * @param null|string $phone
      */
-    public function setPhone($phone);
+    public function setPhone(?string $phone);
 
     /**
      * Get Phone.
      *
-     * @return string Phone
+     * @return null|string Phone
      */
-    public function getPhone();
+    public function getPhone() : ? string;
 
     /**
      * Sets RecipientName.
      *
-     * @param string $recipientName RecipientName
-     *
-     * @return $this Self object
+     * @param null|string $recipientName
      */
-    public function setRecipientName($recipientName);
+    public function setRecipientName(?string $recipientName);
 
     /**
      * Get RecipientName.
      *
-     * @return string RecipientName
+     * @return null|string RecipientName
      */
-    public function getRecipientName();
+    public function getRecipientName() : ? string;
 
     /**
      * Sets RecipientSurname.
      *
-     * @param string $recipientSurname RecipientSurname
-     *
-     * @return $this Self object
+     * @param null|string $recipientSurname
      */
-    public function setRecipientSurname($recipientSurname);
+    public function setRecipientSurname(?string $recipientSurname);
 
     /**
      * Get RecipientSurname.
      *
-     * @return string RecipientSurname
+     * @return null|string RecipientSurname
      */
-    public function getRecipientSurname();
+    public function getRecipientSurname() : ? string;
+
+    /**
+     * Get Country
+     *
+     * @return null|string
+     */
+    public function getCountry(): ?string;
+
+    /**
+     * Set Country
+     *
+     * @param null|string $country
+     */
+    public function setCountry(?string $country);
+
+    /**
+     * Get State
+     *
+     * @return null|string
+     */
+    public function getState(): ?string;
+
+    /**
+     * Set State
+     *
+     * @param null|string $state
+     */
+    public function setState(?string $state);
+
+    /**
+     * Get Province
+     *
+     * @return null|string
+     */
+    public function getProvince(): ?string;
+
+    /**
+     * Set Province
+     *
+     * @param null|string $province
+     */
+    public function setProvince(?string $province);
 
     /**
      * Sets City.
      *
-     * @param string $city City
-     *
-     * @return $this Self object
+     * @param null|string $city
      */
-    public function setCity($city);
+    public function setCity(?string $city);
 
     /**
      * Get City.
      *
-     * @return string City
+     * @return null|string City
      */
-    public function getCity();
+    public function getCity() : ? string;
 
     /**
      * Sets Postalcode.
      *
-     * @param string $postalCode Postalcode
-     *
-     * @return $this Self object
+     * @param null|string $postalCode
      */
-    public function setPostalcode($postalCode);
+    public function setPostalcode(?string $postalCode);
 
     /**
      * Get Postalcode.
      *
-     * @return string Postalcode
+     * @return null|string Postalcode
      */
-    public function getPostalcode();
+    public function getPostalcode() : ? string;
 
     /**
-     * Get full address name
+     * Get Longitude
      *
-     * @return string
+     * @return null|string
      */
-    public function fullAddress() : string;
+    public function getLongitude(): ?string;
+
+    /**
+     * Set Longitude
+     *
+     * @param null|string $longitude
+     */
+    public function setLongitude(?string $longitude);
+
+    /**
+     * Get Latitude
+     *
+     * @return null|string
+     */
+    public function getLatitude(): ?string;
+
+    /**
+     * Set Latitude
+     *
+     * @param null|string $latitude
+     */
+    public function setLatitude(?string $latitude);
 }

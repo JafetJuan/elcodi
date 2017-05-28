@@ -54,20 +54,6 @@ class Address implements AddressInterface
     /**
      * @var string
      *
-     * Address
-     */
-    protected $address;
-
-    /**
-     * @var string
-     *
-     * Address more
-     */
-    protected $addressMore;
-
-    /**
-     * @var string
-     *
      * Phone
      */
     protected $phone;
@@ -89,6 +75,27 @@ class Address implements AddressInterface
     /**
      * @var string
      *
+     * Country
+     */
+    protected $country;
+
+    /**
+     * @var string
+     *
+     * State
+     */
+    protected $state;
+
+    /**
+     * @var string
+     *
+     * Province
+     */
+    protected $province;
+
+    /**
+     * @var string
+     *
      * City
      */
     protected $city;
@@ -101,25 +108,56 @@ class Address implements AddressInterface
     protected $postalCode;
 
     /**
+     * @var string
+     *
+     * Address
+     */
+    protected $address;
+
+    /**
+     * @var string
+     *
+     * Address more
+     */
+    protected $addressMore;
+
+    /**
+     * @var string
+     *
+     * Formatted address
+     */
+    protected $formattedAddress;
+
+    /**
+     * @var string
+     *
+     * Longitude
+     */
+    protected $longitude;
+
+    /**
+     * @var string
+     *
+     * Latitude
+     */
+    protected $latitude;
+
+    /**
      * Sets Address.
      *
-     * @param string $address Address
-     *
-     * @return $this Self object
+     * @param null|string $address
      */
-    public function setAddress($address)
+    public function setAddress(?string $address)
     {
         $this->address = $address;
-
-        return $this;
     }
 
     /**
      * Get Address.
      *
-     * @return string Address
+     * @return null|string Address
      */
-    public function getAddress()
+    public function getAddress() : ? string
     {
         return $this->address;
     }
@@ -127,47 +165,59 @@ class Address implements AddressInterface
     /**
      * Sets AddressMore.
      *
-     * @param string $addressMore AddressMore
-     *
-     * @return $this Self object
+     * @param null|string $addressMore
      */
-    public function setAddressMore($addressMore)
+    public function setAddressMore(?string $addressMore)
     {
         $this->addressMore = $addressMore;
-
-        return $this;
     }
 
     /**
      * Get AddressMore.
      *
-     * @return string AddressMore
+     * @return null|string AddressMore
      */
-    public function getAddressMore()
+    public function getAddressMore() : ? string
     {
         return $this->addressMore;
     }
 
     /**
+     * Get FormattedAddress
+     *
+     * @return null|string
+     */
+    public function getFormattedAddress() : ? string
+    {
+        return $this->formattedAddress;
+    }
+
+    /**
+     * Set FormattedAddress
+     *
+     * @param null|string $formattedAddress
+     */
+    public function setFormattedAddress(?string $formattedAddress)
+    {
+        $this->formattedAddress = $formattedAddress;
+    }
+
+    /**
      * Sets Comments.
      *
-     * @param string $comments Comments
-     *
-     * @return $this Self object
+     * @param null|string $comments
      */
-    public function setComments($comments)
+    public function setComments(?string $comments)
     {
         $this->comments = $comments;
-
-        return $this;
     }
 
     /**
      * Get Comments.
      *
-     * @return string Comments
+     * @return null|string Comments
      */
-    public function getComments()
+    public function getComments() : ? string
     {
         return $this->comments;
     }
@@ -175,23 +225,19 @@ class Address implements AddressInterface
     /**
      * Sets Mobile.
      *
-     * @param string $mobile Mobile
-     *
-     * @return $this Self object
+     * @param null|string $mobile
      */
-    public function setMobile($mobile)
+    public function setMobile(?string $mobile)
     {
         $this->mobile = $mobile;
-
-        return $this;
     }
 
     /**
      * Get Mobile.
      *
-     * @return string Mobile
+     * @return null|string Mobile
      */
-    public function getMobile()
+    public function getMobile() : ? string
     {
         return $this->mobile;
     }
@@ -199,23 +245,19 @@ class Address implements AddressInterface
     /**
      * Sets Name.
      *
-     * @param string $name Name
-     *
-     * @return $this Self object
+     * @param null|string $name
      */
-    public function setName($name)
+    public function setName(?string $name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * Get Name.
      *
-     * @return string Name
+     * @return null|string Name
      */
-    public function getName()
+    public function getName() : ? string
     {
         return $this->name;
     }
@@ -223,23 +265,19 @@ class Address implements AddressInterface
     /**
      * Sets Phone.
      *
-     * @param string $phone Phone
-     *
-     * @return $this Self object
+     * @param null|string $phone
      */
-    public function setPhone($phone)
+    public function setPhone(?string $phone)
     {
         $this->phone = $phone;
-
-        return $this;
     }
 
     /**
      * Get Phone.
      *
-     * @return string Phone
+     * @return null|string Phone
      */
-    public function getPhone()
+    public function getPhone() : ? string
     {
         return $this->phone;
     }
@@ -247,23 +285,19 @@ class Address implements AddressInterface
     /**
      * Sets RecipientName.
      *
-     * @param string $recipientName RecipientName
-     *
-     * @return $this Self object
+     * @param null|string $recipientName
      */
-    public function setRecipientName($recipientName)
+    public function setRecipientName(?string $recipientName)
     {
         $this->recipientName = $recipientName;
-
-        return $this;
     }
 
     /**
      * Get RecipientName.
      *
-     * @return string RecipientName
+     * @return null|string RecipientName
      */
-    public function getRecipientName()
+    public function getRecipientName() : ? string
     {
         return $this->recipientName;
     }
@@ -271,47 +305,99 @@ class Address implements AddressInterface
     /**
      * Sets RecipientSurname.
      *
-     * @param string $recipientSurname RecipientSurname
-     *
-     * @return $this Self object
+     * @param null|string $recipientSurname
      */
-    public function setRecipientSurname($recipientSurname)
+    public function setRecipientSurname(?string $recipientSurname)
     {
         $this->recipientSurname = $recipientSurname;
-
-        return $this;
     }
 
     /**
      * Get RecipientSurname.
      *
-     * @return string RecipientSurname
+     * @return null|string RecipientSurname
      */
-    public function getRecipientSurname()
+    public function getRecipientSurname() : ? string
     {
         return $this->recipientSurname;
     }
 
     /**
+     * Get Country
+     *
+     * @return null|string
+     */
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set Country
+     *
+     * @param null|string $country
+     */
+    public function setCountry(?string $country)
+    {
+        $this->country = $country;
+    }
+
+    /**
+     * Get State
+     *
+     * @return null|string
+     */
+    public function getState(): ?string
+    {
+        return $this->state;
+    }
+
+    /**
+     * Set State
+     *
+     * @param null|string $state
+     */
+    public function setState(?string $state)
+    {
+        $this->state = $state;
+    }
+
+    /**
+     * Get Province
+     *
+     * @return null|string
+     */
+    public function getProvince(): ?string
+    {
+        return $this->province;
+    }
+
+    /**
+     * Set Province
+     *
+     * @param null|string $province
+     */
+    public function setProvince(?string $province)
+    {
+        $this->province = $province;
+    }
+
+    /**
      * Sets City.
      *
-     * @param string $city City
-     *
-     * @return $this Self object
+     * @param null|string $city
      */
-    public function setCity($city)
+    public function setCity(?string $city)
     {
         $this->city = $city;
-
-        return $this;
     }
 
     /**
      * Get City.
      *
-     * @return string City
+     * @return null|string City
      */
-    public function getCity()
+    public function getCity() : ? string
     {
         return $this->city;
     }
@@ -319,37 +405,60 @@ class Address implements AddressInterface
     /**
      * Sets Postalcode.
      *
-     * @param string $postalCode Postalcode
-     *
-     * @return $this Self object
+     * @param null|string $postalCode
      */
-    public function setPostalcode($postalCode)
+    public function setPostalcode(?string $postalCode)
     {
         $this->postalCode = $postalCode;
-
-        return $this;
     }
 
     /**
      * Get Postalcode.
      *
-     * @return string Postalcode
+     * @return null|string Postalcode
      */
-    public function getPostalcode()
+    public function getPostalcode() : ? string
     {
         return $this->postalCode;
     }
 
     /**
-     * Get full address name
+     * Get Longitude
      *
-     * @return string
+     * @return null|string
      */
-    public function fullAddress() : string
+    public function getLongitude(): ?string
     {
-        return
-            $this->address . ' ' .
-            $this->addressMore . ', ' .
-            $this->postalCode;
+        return $this->longitude;
+    }
+
+    /**
+     * Set Longitude
+     *
+     * @param null|string $longitude
+     */
+    public function setLongitude(?string $longitude)
+    {
+        $this->longitude = $longitude;
+    }
+
+    /**
+     * Get Latitude
+     *
+     * @return null|string
+     */
+    public function getLatitude(): ?string
+    {
+        return $this->latitude;
+    }
+
+    /**
+     * Set Latitude
+     *
+     * @param null|string $latitude
+     */
+    public function setLatitude(?string $latitude)
+    {
+        $this->latitude = $latitude;
     }
 }

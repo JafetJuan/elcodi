@@ -23,23 +23,53 @@ Elcodi\Component\Geo\Entity\Address:
             type: string
             length: 255
             nullable: true
+        country:
+            column: country
+            type: string
+            length: 255
+            nullable: true
+        state:
+            column: state
+            type: string
+            length: 255
+            nullable: true
+        province:
+            column: province
+            type: string
+            length: 255
+            nullable: true
         city:
             column: city
             type: string
-            length: 64
-            nullable: false
+            length: 255
+            nullable: true
         postalCode:
             column: postal_code
             type: string
-            length: 64
-            nullable: false
+            length: 255
+            nullable: true
         address:
             column: address
             type: string
             length: 255
-            nullable: false
+            nullable: true
         addressMore:
             column: address_more
+            type: string
+            length: 255
+            nullable: true
+        formattedAddress:
+            column: formatted_address
+            type: string
+            length: 255
+            nullable: true
+        longitude:
+            column: longitude
+            type: string
+            length: 255
+            nullable: true
+        latitude:
+            column: latitude
             type: string
             length: 255
             nullable: true
@@ -47,7 +77,7 @@ Elcodi\Component\Geo\Entity\Address:
             column: phone
             type: string
             length: 255
-            nullable: false
+            nullable: true
         mobile:
             column: mobile
             type: string

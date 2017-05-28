@@ -205,6 +205,9 @@ class Store implements StoreInterface
     public function setName(?string $name)
     {
         $this->name = $name;
+        $this
+            ->address
+            ->setName($name);
     }
 
     /**
@@ -328,26 +331,6 @@ class Store implements StoreInterface
     }
 
     /**
-     * Get IsCompany.
-     *
-     * @return bool IsCompany
-     */
-    public function getIsCompany() : bool
-    {
-        return $this->isCompany ?? false;
-    }
-
-    /**
-     * Sets IsCompany.
-     *
-     * @param null|bool $isCompany
-     */
-    public function setIsCompany(?bool $isCompany)
-    {
-        $this->isCompany = $isCompany;
-    }
-
-    /**
      * Get Cif.
      *
      * @return null|string Cif
@@ -414,7 +397,9 @@ class Store implements StoreInterface
      */
     public function getUseStock() : bool
     {
-        return $this->useStock ?? true;
+        return is_null($this->useStock)
+            ? false
+            : $this->useStock;
     }
 
     /**
@@ -422,7 +407,7 @@ class Store implements StoreInterface
      *
      * @param null|bool $useStock
      */
-    public function setUseStock(?bool$useStock)
+    public function setUseStock(?bool $useStock)
     {
         $this->useStock = $useStock;
     }

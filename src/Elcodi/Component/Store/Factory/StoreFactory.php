@@ -27,6 +27,23 @@ use Elcodi\Component\Store\Entity\Interfaces\StoreInterface;
 class StoreFactory extends AbstractFactory
 {
     /**
+     * @var AbstractFactory
+     *
+     * Address factory
+     */
+    private $addressFactory;
+
+    /**
+     * StoreFactory constructor.
+     *
+     * @param AbstractFactory $addressFactory
+     */
+    public function __construct(AbstractFactory $addressFactory)
+    {
+        $this->addressFactory = $addressFactory;
+    }
+
+    /**
      * Creates an instance of an entity.
      *
      * This method must return always an empty instance
@@ -40,9 +57,12 @@ class StoreFactory extends AbstractFactory
          */
         $classNamespace = $this->getEntityNamespace();
         $store = new $classNamespace();
-        $store->setIsCompany(true);
         $store->enable();
         $store->setCreatedAt($this->now());
+        $store->setAddress($this
+            ->addressFactory
+            ->create()
+        );
 
         return $store;
     }
