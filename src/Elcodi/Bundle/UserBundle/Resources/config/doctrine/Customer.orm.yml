@@ -21,11 +21,11 @@ Elcodi\Component\User\Entity\Customer:
         guest:
             column: guest
             type: boolean
-            nullable: false
+            nullable: true
         newsletter:
             column: newsletter
             type: boolean
-            nullable: false
+            nullable: true
 
     oneToMany:
         carts:

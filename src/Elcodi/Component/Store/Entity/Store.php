@@ -50,6 +50,13 @@ class Store implements StoreInterface
     /**
      * @var string
      *
+     * Slug
+     */
+    protected $slug;
+
+    /**
+     * @var string
+     *
      * Leitmotiv
      */
     protected $leitmotiv;
@@ -208,6 +215,26 @@ class Store implements StoreInterface
         $this
             ->address
             ->setName($name);
+    }
+
+    /**
+     * Get Slug.
+     *
+     * @return null|string Slug
+     */
+    public function getSlug() : ? string
+    {
+        return $this->slug;
+    }
+
+    /**
+     * Sets Slug.
+     *
+     * @param null|string $slug
+     */
+    public function setSlug(?string $slug)
+    {
+        $this->slug = $slug;
     }
 
     /**

@@ -159,7 +159,7 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Get Firstname.
      *
-     * @return string|null Firstname
+     * @return string|null
      */
     public function getFirstname() : ? string
     {
@@ -179,7 +179,7 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Get Lastname.
      *
-     * @return string|null Lastname
+     * @return string|null
      */
     public function getLastname() : ? string
     {
@@ -189,11 +189,14 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Set gender, if the gender is allowed.
      *
-     * @param int $gender
+     * @param null|int $gender
      */
-    public function setGender(int $gender)
+    public function setGender(?int $gender)
     {
-        if (!in_array($gender, self::$genders, true)) {
+        if (
+            !is_null($gender) &&
+            !in_array($gender, self::$genders, true)
+        ) {
             return;
         }
 
@@ -203,9 +206,9 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Get gender.
      *
-     * @return int
+     * @return null|int
      */
-    public function getGender() : int
+    public function getGender() : ? int
     {
         return $this->gender;
     }
@@ -233,9 +236,9 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Get Token.
      *
-     * @return string
+     * @return null|string
      */
-    public function getToken() : string
+    public function getToken() : ? string
     {
         return $this->token;
     }
@@ -243,9 +246,9 @@ abstract class AbstractUser implements AbstractUserInterface
     /**
      * Sets Token.
      *
-     * @param string $token
+     * @param null|string $token
      */
-    public function setToken(string $token)
+    public function setToken(? string $token)
     {
         $this->token = $token;
     }
@@ -309,7 +312,7 @@ abstract class AbstractUser implements AbstractUserInterface
      */
     public function getFullName() : string
     {
-        return trim($this->firstname . ' ' . $this->lastname);
+        return (string) trim($this->firstname . ' ' . $this->lastname);
     }
 
     /**

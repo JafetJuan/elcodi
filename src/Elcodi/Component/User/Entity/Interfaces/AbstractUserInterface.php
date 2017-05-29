@@ -95,16 +95,16 @@ interface AbstractUserInterface extends
     /**
      * Set gender.
      *
-     * @param int $gender
+     * @param null|int $gender
      */
-    public function setGender(int $gender);
+    public function setGender(?int $gender);
 
     /**
      * Get gender.
      *
-     * @return int
+     * @return null|int
      */
-    public function getGender() : int;
+    public function getGender() : ? int;
 
     /**
      * Set email.
@@ -153,14 +153,14 @@ interface AbstractUserInterface extends
     /**
      * Sets Token.
      *
-     * @param string $token
+     * @param null|string $token
      */
-    public function setToken(string $token);
+    public function setToken(?string $token);
 
     /**
      * Get Token.
      *
-     * @return string Token
+     * @return null|string Token
      */
-    public function getToken() : string;
+    public function getToken() : ? string;
 }

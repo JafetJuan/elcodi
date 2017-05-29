@@ -53,6 +53,20 @@ interface StoreInterface extends
     public function setName(?string $name);
 
     /**
+     * Get Slug.
+     *
+     * @return null|string Slug
+     */
+    public function getSlug() : ? string;
+
+    /**
+     * Sets Slug.
+     *
+     * @param null|string $slug
+     */
+    public function setSlug(?string $slug);
+
+    /**
      * Get Leitmotiv.
      *
      * @return null|string Leitmotiv
