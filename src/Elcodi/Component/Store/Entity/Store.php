@@ -27,6 +27,7 @@ use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\Language\Entity\Traits\WithLanguagesTrait;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
+use Elcodi\Component\Media\Entity\Traits\ImagesContainerTrait;
 use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
 use Elcodi\Component\Store\Entity\Interfaces\StoreInterface;
 
@@ -38,6 +39,7 @@ class Store implements StoreInterface
     use IdentifiableTrait,
         DateTimeTrait,
         MetaDataTrait,
+        ImagesContainerTrait,
         EnabledTrait;
 
     /**

@@ -27,6 +27,7 @@ use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
 use Elcodi\Component\Language\Entity\Interfaces\WithLanguagesInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
+use Elcodi\Component\Media\Entity\Interfaces\ImagesContainerInterface;
 use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
 
 /**
@@ -36,6 +37,7 @@ interface StoreInterface extends
     IdentifiableInterface,
     DateTimeInterface,
     MetaDataInterface,
+    ImagesContainerInterface,
     EnabledInterface
 {
     /**

@@ -98,9 +98,9 @@ interface BannerZoneInterface extends IdentifiableInterface, EnabledInterface, D
     /**
      * Get sorted images.
      *
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getSortedEnabledBanners() : ArrayCollection;
+    public function getSortedEnabledBanners() : Collection;
 
     /**
      * Get BannersSort.

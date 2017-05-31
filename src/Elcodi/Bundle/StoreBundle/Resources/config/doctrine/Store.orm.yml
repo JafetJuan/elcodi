@@ -58,6 +58,11 @@ Elcodi\Component\Store\Entity\Store:
             column: domains
             type: string
             nullable: true
+        imagesSort:
+            column: images_sort
+            type: string
+            length: 2048
+            nullable: true
         metaTitle:
             column: meta_title
             type: string
@@ -126,6 +131,20 @@ Elcodi\Component\Store\Entity\Store:
                 name: background_image_id
                 referencedColumnName: id
                 nullable: true
+
+    manyToMany:
+        images:
+            targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            joinTable:
+                name: store_image
+                joinColumns:
+                    sture_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
+                inverseJoinColumns:
+                    image_id:
+                        referencedColumnName: id
+                        onDelete: "CASCADE"
 
     lifecycleCallbacks:
         preUpdate: [loadUpdateAt]

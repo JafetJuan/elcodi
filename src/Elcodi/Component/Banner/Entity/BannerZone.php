@@ -174,11 +174,16 @@ class BannerZone implements BannerZoneInterface
     /**
      * Get sorted images.
      *
-     * @return ArrayCollection
+     * @return Collection
      */
-    public function getSortedEnabledBanners() : ArrayCollection
+    public function getSortedEnabledBanners() : Collection
     {
         $bannersSort = $this->getBannersSort() ?? '';
+        if (empty($bannersSort)) {
+            return $this->getEnabledBanners();
+        }
+
+
         $bannersSort = explode(',', $bannersSort);
         $orderCollection = array_reverse($bannersSort);
         $bannersCollection = $this
