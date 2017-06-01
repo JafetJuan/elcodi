@@ -30,14 +30,10 @@ use Elcodi\Component\Media\Entity\Traits\PrincipalImageTrait;
 use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
 use Elcodi\Component\Page\Entity\Interfaces\PageInterface;
 use Elcodi\Component\Store\Entity\Traits\WithStoresTrait;
+use Elcodi\Component\User\Entity\Interfaces\AdminUserInterface;
 
 /**
  * Class Page.
- *
- * @author Cayetano Soriano <neoshadybeat@gmail.com>
- * @author Jordi Grados <planetzombies@gmail.com>
- * @author Damien Gavard <damien.gavard@gmail.com>
- * @author Berny Cantos <be@rny.cc>
  */
 class Page implements PageInterface
 {
@@ -101,6 +97,20 @@ class Page implements PageInterface
     protected $persistent;
 
     /**
+     * @var AdminUserInterface
+     *
+     * Created by
+     */
+    protected $createdBy;
+
+    /**
+     * @var AdminUserInterface
+     *
+     * Updated by
+     */
+    protected $updatedBy;
+
+    /**
      * Get Name.
      *
      * @return string Name
@@ -113,15 +123,11 @@ class Page implements PageInterface
     /**
      * Sets Name.
      *
-     * @param string $name Name
-     *
-     * @return $this Self object
+     * @param string $name
      */
     public function setName($name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
@@ -137,15 +143,11 @@ class Page implements PageInterface
     /**
      * Set the path.
      *
-     * @param string $path The path
-     *
-     * @return $this Self object
+     * @param string $path
      */
     public function setPath($path)
     {
         $this->path = $path;
-
-        return $this;
     }
 
     /**
@@ -161,15 +163,11 @@ class Page implements PageInterface
     /**
      * Set the title.
      *
-     * @param string $title The title
-     *
-     * @return $this Self object
+     * @param string $title
      */
     public function setTitle($title)
     {
         $this->title = $title;
-
-        return $this;
     }
 
     /**
@@ -185,15 +183,11 @@ class Page implements PageInterface
     /**
      * Set the content.
      *
-     * @param string $content The content
-     *
-     * @return $this Self object
+     * @param string $content
      */
     public function setContent($content)
     {
         $this->content = $content;
-
-        return $this;
     }
 
     /**
@@ -209,15 +203,11 @@ class Page implements PageInterface
     /**
      * Sets Type.
      *
-     * @param int $type Type
-     *
-     * @return $this Self object
+     * @param int $type
      */
     public function setType($type)
     {
         $this->type = $type;
-
-        return $this;
     }
 
     /**
@@ -233,38 +223,70 @@ class Page implements PageInterface
     /**
      * Sets PublicationDate.
      *
-     * @param DateTime $publicationDate PublicationDate
-     *
-     * @return $this Self object
+     * @param DateTime $publicationDate
      */
     public function setPublicationDate(DateTime $publicationDate)
     {
         $this->publicationDate = $publicationDate;
-
-        return $this;
     }
 
     /**
      * Sets the persistence property.
      *
-     * @param bool $persistent If the page can't be removed
-     *
-     * @return $this Self object
+     * @param bool $persistent
      */
     public function setPersistent($persistent)
     {
         $this->persistent = $persistent;
-
-        return $this;
     }
 
     /**
      * Gets the page persistence.
      *
-     * @return bool If the page is persistent
+     * @return bool
      */
     public function isPersistent()
     {
         return $this->persistent;
+    }
+
+    /**
+     * Set created by
+     *
+     * @param null|AdminUserInterface $adminUser
+     */
+    public function setCreatedBy(?AdminUserInterface $adminUser)
+    {
+        $this->createdBy = $adminUser;
+    }
+
+    /**
+     * Get created by
+     *
+     * @return null|AdminUserInterface
+     */
+    public function getCreatedBy() : ?AdminUserInterface
+    {
+        return $this->createdBy;
+    }
+
+    /**
+     * Set updated by
+     *
+     * @param null|AdminUserInterface $adminUser
+     */
+    public function setUpdatedBy(?AdminUserInterface $adminUser)
+    {
+        $this->updatedBy = $adminUser;
+    }
+
+    /**
+     * Get updated by
+     *
+     * @return null|AdminUserInterface
+     */
+    public function getUpdatedBy() : ?AdminUserInterface
+    {
+        return $this->updatedBy;
     }
 }

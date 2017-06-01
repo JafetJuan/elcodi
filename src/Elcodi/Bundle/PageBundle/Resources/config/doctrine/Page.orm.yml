@@ -87,6 +87,20 @@ Elcodi\Component\Page\Entity\Page:
                 name: principal_image_id
                 referencedColumnName: id
                 nullable: true
+        createdBy:
+            targetEntity: Elcodi\Component\User\Entity\Interfaces\AdminUserInterface
+            joinColumn:
+                onDelete: SET NULL
+                name: created_by_admin_user_id
+                referencedColumnName: id
+                nullable: true
+        updatedBy:
+            targetEntity: Elcodi\Component\User\Entity\Interfaces\AdminUserInterface
+            joinColumn:
+                onDelete: SET NULL
+                name: updated_by_admin_user_id
+                referencedColumnName: id
+                nullable: true
 
     manyToMany:
 

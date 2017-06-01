@@ -24,17 +24,14 @@ use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Core\Entity\Interfaces\TaggableInterface;
+use Elcodi\Component\Core\Entity\Interfaces\WithSpecialWordsInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImagesContainerWithPrincipalImageInterface;
 use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
 use Elcodi\Component\Store\Entity\Interfaces\WithStoresInterface;
+use Elcodi\Component\User\Entity\Interfaces\AdminUserInterface;
 
 /**
  * Interface PageInterface.
- *
- * @author Cayetano Soriano <neoshadybeat@gmail.com>
- * @author Jordi Grados <planetzombies@gmail.com>
- * @author Damien Gavard <damien.gavard@gmail.com>
- * @author Berny Cantos <be@rny.cc>
  */
 interface PageInterface extends
     IdentifiableInterface,
@@ -42,6 +39,7 @@ interface PageInterface extends
     DateTimeInterface,
     EnabledInterface,
     TaggableInterface,
+    WithSpecialWordsInterface,
     WithStoresInterface,
     ImagesContainerWithPrincipalImageInterface
 {
@@ -55,9 +53,7 @@ interface PageInterface extends
     /**
      * Sets Name.
      *
-     * @param string $name Name
-     *
-     * @return $this Self object
+     * @param string $name
      */
     public function setName($name);
 
@@ -71,9 +67,7 @@ interface PageInterface extends
     /**
      * Set the path.
      *
-     * @param string $path The path
-     *
-     * @return $this Self object
+     * @param string $path
      */
     public function setPath($path);
 
@@ -87,9 +81,7 @@ interface PageInterface extends
     /**
      * Set the title.
      *
-     * @param string $title The title
-     *
-     * @return $this Self object
+     * @param string $title
      */
     public function setTitle($title);
 
@@ -103,9 +95,7 @@ interface PageInterface extends
     /**
      * Set the content.
      *
-     * @param string $content The content
-     *
-     * @return $this Self object
+     * @param string $content
      */
     public function setContent($content);
 
@@ -119,9 +109,7 @@ interface PageInterface extends
     /**
      * Sets Type.
      *
-     * @param int $type Type
-     *
-     * @return $this Self object
+     * @param int $type
      */
     public function setType($type);
 
@@ -135,25 +123,49 @@ interface PageInterface extends
     /**
      * Sets PublicationDate.
      *
-     * @param DateTime $publicationDate PublicationDate
-     *
-     * @return $this Self object
+     * @param DateTime $publicationDate
      */
     public function setPublicationDate(DateTime $publicationDate);
 
     /**
      * Sets the persistence property.
      *
-     * @param bool $persistent If the page can't be removed
-     *
-     * @return $this Self object
+     * @param bool $persistent
      */
     public function setPersistent($persistent);
 
     /**
      * Gets the page persistence.
      *
-     * @return bool If the page is persistent
+     * @return bool
      */
     public function isPersistent();
+
+    /**
+     * Set created by
+     *
+     * @param null|AdminUserInterface $adminUser
+     */
+    public function setCreatedBy(?AdminUserInterface $adminUser);
+
+    /**
+     * Get created by
+     *
+     * @return null|AdminUserInterface
+     */
+    public function getCreatedBy() : ? AdminUserInterface;
+
+    /**
+     * Set updated by
+     *
+     * @param null|AdminUserInterface $adminUser
+     */
+    public function setUpdatedBy(?AdminUserInterface $adminUser);
+
+    /**
+     * Get updated by
+     *
+     * @return null|AdminUserInterface
+     */
+    public function getUpdatedBy() : ? AdminUserInterface;
 }
