@@ -42,9 +42,9 @@ trait ValidIntervalTrait
     /**
      * Set valid from.
      *
-     * @param DateTime $validFrom Valid from
+     * @param DateTime|null $validFrom
      */
-    public function setValidFrom(DateTime $validFrom)
+    public function setValidFrom(? DateTime $validFrom)
     {
         $this->validFrom = $validFrom;
     }
@@ -52,9 +52,9 @@ trait ValidIntervalTrait
     /**
      * Get valid from.
      *
-     * @return DateTime
+     * @return DateTime|null
      */
-    public function getValidFrom() : DateTime
+    public function getValidFrom() : ? DateTime
     {
         return $this->validFrom;
     }

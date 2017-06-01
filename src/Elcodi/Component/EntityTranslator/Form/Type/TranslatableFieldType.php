@@ -72,6 +72,7 @@ class TranslatableFieldType extends AbstractType
                 'mapped' => false,
                 'label' => $fieldOptions['label'],
                 'data' => $translationData,
+                'attr' => $fieldOptions['attr'] ?? [],
                 'constraints' => $fieldOptions['constraints'],
             ]);
         }
