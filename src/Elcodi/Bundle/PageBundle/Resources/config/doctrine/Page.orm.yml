@@ -39,6 +39,11 @@ Elcodi\Component\Page\Entity\Page:
         persistent:
             column: persistent
             type: boolean
+        author:
+            column: author
+            type: string
+            length: 255
+            nullable: true
         tags:
             column: tags
             type: string
@@ -56,11 +61,6 @@ Elcodi\Component\Page\Entity\Page:
             nullable: true
         metaDescription:
             column: meta_description
-            type: string
-            length: 255
-            nullable: true
-        metaKeywords:
-            column: meta_keywords
             type: string
             length: 255
             nullable: true

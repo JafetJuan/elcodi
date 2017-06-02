@@ -104,11 +104,6 @@ Elcodi\Component\Product\Entity\Purchasable:
             type: string
             length: 255
             nullable: true
-        metaKeywords:
-            column: meta_keywords
-            type: string
-            length: 255
-            nullable: true
         createdAt:
             column: created_at
             type: datetime

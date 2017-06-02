@@ -36,11 +36,6 @@ Elcodi\Component\Product\Entity\Category:
             type: string
             length: 255
             nullable: true
-        metaKeywords:
-            column: meta_keywords
-            type: string
-            length: 255
-            nullable: true
         createdAt:
             column: created_at
             type: datetime

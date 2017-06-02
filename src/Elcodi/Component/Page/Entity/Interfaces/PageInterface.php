@@ -168,4 +168,18 @@ interface PageInterface extends
      * @return null|AdminUserInterface
      */
     public function getUpdatedBy() : ? AdminUserInterface;
+
+    /**
+     * Get Author
+     *
+     * @return null|string
+     */
+    public function getAuthor() : ? string;
+
+    /**
+     * Set Author
+     *
+     * @param null|string $author
+     */
+    public function setAuthor(?string $author);
 }

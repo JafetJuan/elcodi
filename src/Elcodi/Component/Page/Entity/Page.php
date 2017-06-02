@@ -111,6 +111,13 @@ class Page implements PageInterface
     protected $updatedBy;
 
     /**
+     * @var string
+     *
+     * Author
+     */
+    protected $author;
+
+    /**
      * Get Name.
      *
      * @return string Name
@@ -288,5 +295,25 @@ class Page implements PageInterface
     public function getUpdatedBy() : ?AdminUserInterface
     {
         return $this->updatedBy;
+    }
+
+    /**
+     * Get Author
+     *
+     * @return null|string
+     */
+    public function getAuthor() : ? string
+    {
+        return $this->author;
+    }
+
+    /**
+     * Set Author
+     *
+     * @param null|string $author
+     */
+    public function setAuthor(?string $author)
+    {
+        $this->author = $author;
     }
 }
