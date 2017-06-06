@@ -182,4 +182,18 @@ interface PageInterface extends
      * @param null|string $author
      */
     public function setAuthor(?string $author);
+
+    /**
+     * Set alternative urls
+     *
+     * @param string[]
+     */
+    public function setAlternativeUrls(array $urls);
+
+    /**
+     * Get alternative urls
+     *
+     * @return string[]
+     */
+    public function getAlternativeUrls() : array;
 }

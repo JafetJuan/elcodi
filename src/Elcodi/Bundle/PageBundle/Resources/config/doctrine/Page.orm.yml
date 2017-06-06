@@ -44,6 +44,10 @@ Elcodi\Component\Page\Entity\Page:
             type: string
             length: 255
             nullable: true
+        alternativeUrls:
+            column: alternative_urls
+            type: array
+            nullable: false
         tags:
             column: tags
             type: string

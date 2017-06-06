@@ -18,6 +18,7 @@ declare(strict_types=1);
 
 namespace Elcodi\Component\Store\Factory;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Elcodi\Component\Core\Factory\Abstracts\AbstractFactory;
 use Elcodi\Component\Store\Entity\Interfaces\StoreInterface;
 
@@ -59,6 +60,7 @@ class StoreFactory extends AbstractFactory
         $store = new $classNamespace();
         $store->enable();
         $store->setCreatedAt($this->now());
+        $store->setImages(new ArrayCollection());
         $store->setAddress($this
             ->addressFactory
             ->create()

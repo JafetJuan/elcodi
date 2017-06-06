@@ -118,6 +118,13 @@ class Page implements PageInterface
     protected $author;
 
     /**
+     * @var string[]
+     *
+     * Alternative urls
+     */
+    protected $alternativeUrls = [];
+
+    /**
      * Get Name.
      *
      * @return string Name
@@ -315,5 +322,25 @@ class Page implements PageInterface
     public function setAuthor(?string $author)
     {
         $this->author = $author;
+    }
+
+    /**
+     * Set alternative urls
+     *
+     * @param string[]
+     */
+    public function setAlternativeUrls(array $urls)
+    {
+        $this->alternativeUrls = $urls;
+    }
+
+    /**
+     * Get alternative urls
+     *
+     * @return string[]
+     */
+    public function getAlternativeUrls() : array
+    {
+        return $this->alternativeUrls;
     }
 }

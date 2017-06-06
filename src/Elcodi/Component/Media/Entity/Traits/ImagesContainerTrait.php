@@ -48,7 +48,9 @@ trait ImagesContainerTrait
      */
     public function addImage(ImageInterface $image)
     {
-        $this->images->add($image);
+        $this
+            ->images
+            ->add($image);
     }
 
     /**
@@ -58,7 +60,9 @@ trait ImagesContainerTrait
      */
     public function removeImage(ImageInterface $image)
     {
-        $this->images->removeElement($image);
+        $this
+            ->images
+            ->removeElement($image);
     }
 
     /**

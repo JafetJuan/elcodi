@@ -27,6 +27,7 @@ use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
+use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 use Elcodi\Component\Store\Entity\Traits\WithStoresTrait;
 
 /**
@@ -167,7 +168,9 @@ class BannerZone implements BannerZoneInterface
         return $this
             ->banners
             ->filter(function(BannerInterface $banner) {
-                return $banner->isEnabled();
+                return
+                    $banner->isEnabled() &&
+                    $banner->getPrincipalImage() instanceof ImageInterface;
             });
     }
 
