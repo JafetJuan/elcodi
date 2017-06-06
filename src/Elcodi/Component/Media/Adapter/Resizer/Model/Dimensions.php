@@ -240,7 +240,7 @@ class Dimensions
      */
     public function getOriginalWidth() : int
     {
-        return $this->originalWidth;
+        return (int) $this->originalWidth;
     }
 
     /**
@@ -250,7 +250,7 @@ class Dimensions
      */
     public function getOriginalHeight() : int
     {
-        return $this->originalHeight;
+        return (int) $this->originalHeight;
     }
 
     /**
@@ -260,7 +260,7 @@ class Dimensions
      */
     public function getOriginalAspectRatio() : float
     {
-        return $this->originalAspectRatio;
+        return (float) $this->originalAspectRatio;
     }
 
     /**
@@ -270,7 +270,7 @@ class Dimensions
      */
     public function getSrcY() : int
     {
-        return $this->srcY;
+        return (int) $this->srcY;
     }
 
     /**
@@ -280,7 +280,7 @@ class Dimensions
      */
     public function getSrcX() : int
     {
-        return $this->srcX;
+        return (int) $this->srcX;
     }
 
     /**
@@ -290,7 +290,7 @@ class Dimensions
      */
     public function getSrcWidth() : int
     {
-        return $this->srcWidth;
+        return (int) $this->srcWidth;
     }
 
     /**
@@ -300,7 +300,7 @@ class Dimensions
      */
     public function getSrcHeight() : int
     {
-        return $this->srcHeight;
+        return (int) $this->srcHeight;
     }
 
     /**
@@ -310,7 +310,7 @@ class Dimensions
      */
     public function getDstY() : int
     {
-        return $this->dstY;
+        return (int) $this->dstY;
     }
 
     /**
@@ -320,7 +320,7 @@ class Dimensions
      */
     public function getDstX() : int
     {
-        return $this->dstX;
+        return (int) $this->dstX;
     }
 
     /**
@@ -330,7 +330,7 @@ class Dimensions
      */
     public function getDstWidth() : int
     {
-        return $this->dstWidth;
+        return (int) $this->dstWidth;
     }
 
     /**
@@ -340,7 +340,7 @@ class Dimensions
      */
     public function getDstHeight() : int
     {
-        return $this->dstHeight;
+        return (int) $this->dstHeight;
     }
 
     /**
@@ -350,7 +350,7 @@ class Dimensions
      */
     public function getDstFrameX() : int
     {
-        return $this->dstFrameX;
+        return (int) $this->dstFrameX;
     }
 
     /**
@@ -360,7 +360,7 @@ class Dimensions
      */
     public function getDstFrameY() : int
     {
-        return $this->dstFrameY;
+        return (int) $this->dstFrameY;
     }
 
     /**
