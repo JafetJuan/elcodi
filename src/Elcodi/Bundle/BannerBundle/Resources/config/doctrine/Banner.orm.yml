@@ -26,7 +26,7 @@ Elcodi\Component\Banner\Entity\Banner:
             column: url
             type: string
             length: 255
-            nullable: false
+            nullable: true
         buttonText:
             column: button_text
             type: string
