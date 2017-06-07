@@ -171,9 +171,9 @@ class Banner implements BannerInterface
     /**
      * Set banner url.
      *
-     * @param string $url
+     * @param null|string $url
      */
-    public function setUrl(string $url)
+    public function setUrl(?string $url)
     {
         $this->url = $url;
     }
