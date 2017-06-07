@@ -65,12 +65,14 @@ Elcodi\Component\Banner\Entity\Banner:
     manyToOne:
         principalImage:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinColumn:
                 name: principal_image_id
                 referencedColumnName: id
                 nullable: true
         mobileImage:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinColumn:
                 name: mobile_image_id
                 referencedColumnName: id

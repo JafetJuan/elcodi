@@ -109,30 +109,35 @@ Elcodi\Component\Store\Entity\Store:
     oneToOne:
         logo:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinColumn:
                 name: logo_id
                 referencedColumnName: id
                 nullable: true
         secondaryLogo:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinColumn:
                 name: secondary_logo_id
                 referencedColumnName: id
                 nullable: true
         mobileLogo:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinColumn:
                 name: mobile_logo_id
                 referencedColumnName: id
                 nullable: true
         headerImage:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinColumn:
                 name: header_image_id
                 referencedColumnName: id
                 nullable: true
         backgroundImage:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinColumn:
                 name: background_image_id
                 referencedColumnName: id
@@ -141,6 +146,7 @@ Elcodi\Component\Store\Entity\Store:
     manyToMany:
         images:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinTable:
                 name: store_image
                 joinColumns:

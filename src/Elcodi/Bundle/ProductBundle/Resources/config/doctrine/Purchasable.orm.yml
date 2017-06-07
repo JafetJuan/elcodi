@@ -127,6 +127,7 @@ Elcodi\Component\Product\Entity\Purchasable:
                 onDelete: "SET NULL"
         principalImage:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinColumn:
                 onDelete: SET NULL
                 name: principal_image_id
@@ -156,6 +157,7 @@ Elcodi\Component\Product\Entity\Purchasable:
     manyToMany:
         images:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinTable:
                 name: purchasable_image
                 joinColumns:

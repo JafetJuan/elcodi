@@ -86,6 +86,7 @@ Elcodi\Component\Page\Entity\Page:
     manyToOne:
         principalImage:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinColumn:
                 onDelete: SET NULL
                 name: principal_image_id
@@ -110,6 +111,7 @@ Elcodi\Component\Page\Entity\Page:
 
         images:
             targetEntity: Elcodi\Component\Media\Entity\Interfaces\ImageInterface
+            cascade: ["remove"]
             joinTable:
                 name: page_image
                 joinColumns:
