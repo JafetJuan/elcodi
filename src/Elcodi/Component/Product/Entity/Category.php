@@ -268,6 +268,31 @@ class Category implements CategoryInterface
     }
 
     /**
+     * Get level.
+     *
+     * @return int
+     */
+    public function getLevel() : int
+    {
+        if ($this->isRoot()) {
+            return 1;
+        }
+
+        $level = 2;
+        $maxIterations = 10;
+        $parent = $this->getParent();
+        while (
+            !$parent->isRoot() &&
+            $maxIterations < $level
+        ) {
+            $level++;
+            $parent = $parent->getParent();
+        }
+
+        return $level;
+    }
+
+    /**
      * Get purchasables.
      *
      * @return Collection

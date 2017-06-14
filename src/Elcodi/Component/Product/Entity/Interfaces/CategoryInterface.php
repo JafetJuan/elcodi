@@ -147,4 +147,11 @@ interface CategoryInterface extends
      * @return int Category relative position
      */
     public function getPosition();
+
+    /**
+     * Get category level
+     *
+     * @return int
+     */
+    public function getLevel();
 }

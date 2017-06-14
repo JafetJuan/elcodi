@@ -249,6 +249,13 @@ interface PurchasableInterface extends
     public function getPrincipalCategory();
 
     /**
+     * Get principal category tree
+     *
+     * @return CategoryInterface[]
+     */
+    public function getPrincipalCategoryTree() : array;
+
+    /**
      * Product manufacturer.
      *
      * @return ManufacturerInterface Manufacturer

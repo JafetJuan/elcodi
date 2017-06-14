@@ -380,11 +380,32 @@ abstract class Purchasable implements PurchasableInterface
     /**
      * Get the principalCategory.
      *
-     * @return CategoryInterface Principal category
+     * @return CategoryInterface
      */
     public function getPrincipalCategory()
     {
         return $this->principalCategory;
+    }
+
+    /**
+     * Get principal category tree
+     *
+     * @return CategoryInterface[]
+     */
+    public function getPrincipalCategoryTree() : array
+    {
+        $category = $this->getPrincipalCategory();
+        if (!$category instanceof CategoryInterface) {
+            return [];
+        }
+
+        $categories = [$category];
+        while ($category->getParent() instanceof CategoryInterface) {
+            $category = $category->getParent();
+            $categories[] = $category;
+        }
+
+        return $categories;
     }
 
     /**
