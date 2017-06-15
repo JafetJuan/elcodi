@@ -30,9 +30,7 @@ interface PurchasablePriceInterface
     /**
      * Set price.
      *
-     * @param MoneyInterface $amount Price
-     *
-     * @return $this Self object
+     * @param MoneyInterface $amount
      */
     public function setPrice(MoneyInterface $amount);
 
@@ -46,23 +44,21 @@ interface PurchasablePriceInterface
     /**
      * Set price.
      *
-     * @param MoneyInterface $amount Reduced Price
-     *
-     * @return $this Self object
+     * @param MoneyInterface $amount
      */
     public function setReducedPrice(MoneyInterface $amount);
 
     /**
      * Get price.
      *
-     * @return MoneyInterface Reduced Price
+     * @return MoneyInterface
      */
     public function getReducedPrice();
 
     /**
      * Is in offer.
      *
-     * @return bool Purchasable is in offer
+     * @return bool
      */
     public function inOffer();
 

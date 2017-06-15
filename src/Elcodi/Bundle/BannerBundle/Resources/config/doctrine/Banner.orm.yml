@@ -48,6 +48,14 @@ Elcodi\Component\Banner\Entity\Banner:
             column: enabled
             type: boolean
             nullable: true
+        createdAt:
+            column: created_at
+            type: datetime
+            nullable: false
+        updatedAt:
+            column: updated_at
+            type: datetime
+            nullable: false
 
     manyToMany:
         bannerZones:
@@ -77,3 +85,7 @@ Elcodi\Component\Banner\Entity\Banner:
                 name: mobile_image_id
                 referencedColumnName: id
                 nullable: true
+
+    lifecycleCallbacks:
+        preUpdate: [loadUpdateAt]
+        prePersist: [loadUpdateAt]
