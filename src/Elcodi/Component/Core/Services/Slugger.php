@@ -17,7 +17,7 @@ class Slugger
      *
      * @return string
      */
-    public function createSlugByText(?string $text) : string
+    public static function createSlugByText(?string $text) : string
     {
         // replace non letter or digits by -
         $text = preg_replace('~[^\pL\d]+~u', '-', $text);
