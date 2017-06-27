@@ -186,7 +186,6 @@ class BannerZone implements BannerZoneInterface
             return $this->getEnabledBanners();
         }
 
-
         $bannersSort = explode(',', $bannersSort);
         $orderCollection = array_reverse($bannersSort);
         $bannersCollection = $this

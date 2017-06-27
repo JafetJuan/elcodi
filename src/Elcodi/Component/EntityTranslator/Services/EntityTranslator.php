@@ -91,6 +91,17 @@ class EntityTranslator implements EntityTranslatorInterface
             $entityId = $object->$idGetter();
 
             foreach ($configuration['fields'] as $fieldName => $fieldConfiguration) {
+
+                if ($fieldConfiguration['isObject'] === true) {
+                    $getter = $fieldConfiguration['getter'];
+                    $this->translate(
+                        $object->$getter(),
+                        $locale
+                    );
+                    continue;
+                }
+
+
                 $setter = $fieldConfiguration['setter'];
                 $translation = $this
                     ->entityTranslationProvider
