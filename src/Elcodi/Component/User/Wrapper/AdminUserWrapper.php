@@ -80,7 +80,7 @@ class AdminUserWrapper
      *
      * @return AdminUserInterface|null
      */
-    public function get() : ? AdminUserInterface
+    public function get()
     {
         if ($this->adminUser instanceof AdminUserInterface) {
             return $this->adminUser;
