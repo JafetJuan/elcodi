@@ -53,11 +53,11 @@ class AddressFormatter
      */
     public function toArray(AddressInterface $address)
     {
-        $cityLocationId = $address->getCity();
-        $cityHierarchy = $this
+        $locationId = $address->getProvince() ?: $address->getCountry();
+        $hierarchy = $this
             ->locationProvider
-            ->getHierarchy($cityLocationId);
-        $cityHierarchyAsc = array_reverse($cityHierarchy);
+            ->getHierarchy($locationId);
+        $hierarchyAsc = array_reverse($hierarchy);
 
         $addressArray = [
             'id' => $address->getId(),
@@ -72,18 +72,18 @@ class AddressFormatter
             'comment' => $address->getComments(),
         ];
 
-        foreach ($cityHierarchyAsc as $cityLocationNode) {
+        foreach ($hierarchyAsc as $locationNode) {
             /**
              * @var LocationData $cityLocationNode
              */
-            $addressArray['city'][$cityLocationNode->getType()]
-                = $cityLocationNode->getName();
+            $addressArray['location'][$locationNode->getType()]
+                = $locationNode->getName();
         }
 
         $addressArray['fullAddress'] =
             $this->buildFullAddressString(
                 $address,
-                $addressArray['city']
+                $addressArray['location']
             );
 
         return $addressArray;
@@ -93,21 +93,21 @@ class AddressFormatter
      * Builds a full address string.
      *
      * @param AddressInterface $address       The address
-     * @param array            $cityHierarchy The full city hierarchy
+     * @param array            $location The full location hierarchy
      *
      * @return string
      */
     private function buildFullAddressString(
         AddressInterface $address,
-        array $cityHierarchy
+        array $location
     ) {
-        $cityString = implode(', ', $cityHierarchy);
+        $locationString = implode(', ', $location);
 
         return sprintf(
             '%s %s, %s %s',
             $address->getAddress(),
             $address->getAddressMore(),
-            $cityString,
+            $locationString,
             $address->getPostalcode()
         );
     }

@@ -140,4 +140,14 @@ interface LocationInterface extends IdentifiableInterface
      * @return $this Self object
      */
     public function addChildren(LocationInterface $location);
+
+    /**
+     * Get complete description
+     */
+    public function getCompleteName();
+
+    /**
+     * Get complete description
+     */
+    public function getCompleteParentsName();
 }

@@ -107,7 +107,6 @@ class ElcodiGeoExtension extends BaseExtension implements EntitiesOverridableExt
             'eventDispatchers',
             'formatters',
             'adapters',
-            'validator',
             'twig',
         ];
     }

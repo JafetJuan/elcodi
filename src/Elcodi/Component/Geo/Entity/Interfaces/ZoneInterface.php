@@ -60,13 +60,6 @@ interface ZoneInterface extends IdentifiableInterface, DateTimeInterface, Enable
     public function setCode($code);
 
     /**
-     * Get Locations.
-     *
-     * @return mixed Locations
-     */
-    public function getLocations();
-
-    /**
      * Sets Locations.
      *
      * @param array $locations Locations
@@ -74,6 +67,13 @@ interface ZoneInterface extends IdentifiableInterface, DateTimeInterface, Enable
      * @return $this Self object
      */
     public function setLocations(array $locations);
+
+    /**
+     * Get Locations.
+     *
+     * @return array Locations
+     */
+    public function getLocations();
 
     /**
      * Add location.

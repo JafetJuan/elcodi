@@ -1,4 +1,0 @@
-Elcodi\Component\Geo\Entity\Address:
-    properties:
-        city:
-            - Elcodi\Component\Geo\Validator\Constraints\CityExists: ~
