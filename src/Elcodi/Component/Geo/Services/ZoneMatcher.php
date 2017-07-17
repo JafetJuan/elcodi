@@ -61,13 +61,13 @@ class ZoneMatcher
         ZoneInterface $zone
     ) {
         $locations = $zone->getLocations();
-        $cityId = $address->getCity();
+        $provinceId = $address->getProvince();
         $found = false;
 
         try {
             $found = $this
                 ->locationProvider
-                ->in($cityId, $locations);
+                ->in($provinceId, $locations);
         } catch (Exception $e) {
 
             // Silent pass

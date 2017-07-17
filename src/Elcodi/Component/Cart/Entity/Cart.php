@@ -32,7 +32,7 @@ use Elcodi\Component\User\Entity\Interfaces\CustomerInterface;
 /**
  * Cart.
  */
-class Cart implements CartInterface
+class   Cart implements CartInterface
 {
     use IdentifiableTrait, DateTimeTrait;
 
