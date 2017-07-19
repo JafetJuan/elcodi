@@ -49,6 +49,9 @@ class CategoryIntegrityFixer
     {
         $principalCategory = $categorizable->getPrincipalCategory();
         $categories = $categorizable->getCategories();
+        if (is_null($categories)) {
+            return;
+        }
 
         if ($principalCategory instanceof CategoryInterface) {
             /**

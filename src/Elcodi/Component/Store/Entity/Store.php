@@ -21,11 +21,10 @@ namespace Elcodi\Component\Store\Entity;
 use Elcodi\Component\Core\Entity\Traits\DateTimeTrait;
 use Elcodi\Component\Core\Entity\Traits\EnabledTrait;
 use Elcodi\Component\Core\Entity\Traits\IdentifiableTrait;
+use Elcodi\Component\Core\Entity\Traits\SocialTrait;
 use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
-use Elcodi\Component\Currency\Entity\Traits\WithCurrenciesTrait;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
-use Elcodi\Component\Language\Entity\Traits\WithLanguagesTrait;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 use Elcodi\Component\Media\Entity\Traits\ImagesContainerTrait;
 use Elcodi\Component\MetaData\Entity\Traits\MetaDataTrait;
@@ -40,6 +39,7 @@ class Store implements StoreInterface
         DateTimeTrait,
         MetaDataTrait,
         ImagesContainerTrait,
+        SocialTrait,
         EnabledTrait;
 
     /**

@@ -85,6 +85,26 @@ Elcodi\Component\Store\Entity\Store:
             type: string
             length: 255
             nullable: true
+        urlFacebook:
+            column: url_facebook
+            type: string
+            length: 255
+            nullable: true
+        urlTwitter:
+            column: url_twitter
+            type: string
+            length: 255
+            nullable: true
+        urlPinterest:
+            column: url_pinterest
+            type: string
+            length: 255
+            nullable: true
+        urlInstagram:
+            column: url_instagram
+            type: string
+            length: 255
+            nullable: true
         createdAt:
             column: created_at
             type: datetime

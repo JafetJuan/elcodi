@@ -21,11 +21,8 @@ namespace Elcodi\Component\Store\Entity\Interfaces;
 use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
-use Elcodi\Component\Currency\Entity\Interfaces\CurrencyInterface;
-use Elcodi\Component\Currency\Entity\Interfaces\WithCurrenciesInterface;
+use Elcodi\Component\Core\Entity\Interfaces\SocialInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
-use Elcodi\Component\Language\Entity\Interfaces\LanguageInterface;
-use Elcodi\Component\Language\Entity\Interfaces\WithLanguagesInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImagesContainerInterface;
 use Elcodi\Component\MetaData\Entity\Interfaces\MetaDataInterface;
@@ -38,6 +35,7 @@ interface StoreInterface extends
     DateTimeInterface,
     MetaDataInterface,
     ImagesContainerInterface,
+    SocialInterface,
     EnabledInterface
 {
     /**
