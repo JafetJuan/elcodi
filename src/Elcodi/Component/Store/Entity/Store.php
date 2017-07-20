@@ -197,6 +197,13 @@ class Store implements StoreInterface
     protected $backgroundImage;
 
     /**
+     * @var int
+     *
+     * Position
+     */
+    protected $position;
+
+    /**
      * Get Name.
      *
      * @return null|string Name
@@ -619,5 +626,25 @@ class Store implements StoreInterface
     public function setBackgroundImage(?ImageInterface $backgroundImage)
     {
         $this->backgroundImage = $backgroundImage;
+    }
+
+    /**
+     * Get Position
+     *
+     * @return null|int
+     */
+    public function getPosition() : ? int
+    {
+        return $this->position;
+    }
+
+    /**
+     * Set Position
+     *
+     * @param null|int $position
+     */
+    public function setPosition(?int $position)
+    {
+        $this->position = $position;
     }
 }

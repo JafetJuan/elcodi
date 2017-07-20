@@ -302,4 +302,18 @@ interface StoreInterface extends
      * @param null|ImageInterface $backgroundImage
      */
     public function setBackgroundImage(?ImageInterface $backgroundImage);
+
+    /**
+     * Get Position
+     *
+     * @return null|int
+     */
+    public function getPosition() : ? int;
+
+    /**
+     * Set Position
+     *
+     * @param null|int $position
+     */
+    public function setPosition(?int $position);
 }
