@@ -22,6 +22,7 @@ use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Core\Entity\Interfaces\SocialInterface;
+use Elcodi\Component\Core\Entity\Interfaces\TaggableInterface;
 use Elcodi\Component\Geo\Entity\Interfaces\AddressInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImageInterface;
 use Elcodi\Component\Media\Entity\Interfaces\ImagesContainerInterface;
@@ -36,6 +37,7 @@ interface StoreInterface extends
     MetaDataInterface,
     ImagesContainerInterface,
     SocialInterface,
+    TaggableInterface,
     EnabledInterface
 {
     /**
