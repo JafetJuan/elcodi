@@ -23,6 +23,7 @@ use Doctrine\Common\Collections\Collection;
 use Elcodi\Component\Core\Entity\Interfaces\DateTimeInterface;
 use Elcodi\Component\Core\Entity\Interfaces\EnabledInterface;
 use Elcodi\Component\Core\Entity\Interfaces\ETaggableInterface;
+use Elcodi\Component\Core\Entity\Interfaces\FlagsInterface;
 use Elcodi\Component\Core\Entity\Interfaces\IdentifiableInterface;
 use Elcodi\Component\Core\Entity\Interfaces\TaggableInterface;
 use Elcodi\Component\Core\Entity\Interfaces\WithSpecialWordsInterface;
@@ -54,7 +55,8 @@ interface PurchasableInterface extends
     DimensionableInterface,
     TaggableInterface,
     WithSpecialWordsInterface,
-    WithStoresInterface
+    WithStoresInterface,
+    FlagsInterface
 {
     /**
      * Gets the variant SKU.
@@ -167,20 +169,6 @@ interface PurchasableInterface extends
      * @return $this Self object
      */
     public function setShowInHome($showInHome);
-
-    /**
-     * Get Recommended.
-     *
-     * @return bool Recommended
-     */
-    public function isRecommended() : bool;
-
-    /**
-     * Set Recommended.
-     *
-     * @param bool $recommended
-     */
-    public function setRecommended(bool $recommended);
 
     /**
      * Get Dimensions.
